@@ -7,41 +7,47 @@ import {
     Message,
     Segment
 } from "semantic-ui-react";
-import { connect } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
-import { authSignup } from "../store/actions/auth";
+import {connect} from "react-redux";
+import {NavLink, Redirect} from "react-router-dom";
+import {authSignup, dealerAuthSignup} from "../store/actions/auth";
 
 class DealerSignup extends React.Component {
     state = {
         username: "",
-        email: "",
+        code: "",
+        shop_name:"",
+        address:"",
+        phone:"",
+        city:"",
+        area:"",
+        category:"",
         password1: "",
         password2: ""
     };
 
     handleSubmit = e => {
         e.preventDefault();
-        const { username, email, password1, password2 } = this.state;
-        this.props.signup(username, email, password1, password2);
+        const {username, code,shop_name,address, phone,city, area,category, password1, password2} = this.state;
+        this.props.signup(username, code, shop_name, address, phone, city, area, category, password1, password2);
     };
 
     handleChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({[e.target.name]: e.target.value});
     };
 
     render() {
-        const { username, email, password1, password2 } = this.state;
-        const { error, loading, token } = this.props;
+        const {username, code,shop_name,address, phone,city, area,category, password1, password2} = this.state;
+        const {error, loading, token} = this.props;
         if (token) {
-            return <Redirect to="/" />;
+            return <Redirect to="/"/>;
         }
         return (
             <Grid
                 textAlign="center"
-                style={{ height: "100vh" }}
+                style={{height: "100vh"}}
                 verticalAlign="middle"
             >
-                <Grid.Column style={{ maxWidth: 450 }}>
+                <Grid.Column style={{maxWidth: 450}}>
                     <Header as="h2" color="teal" textAlign="center">
                         Signup to your account
                     </Header>
@@ -61,12 +67,66 @@ class DealerSignup extends React.Component {
                                 />
                                 <Form.Input
                                     onChange={this.handleChange}
-                                    value={email}
-                                    name="email"
+                                    value={code}
+                                    name="code"
                                     fluid
-                                    icon="mail"
+                                    icon="user"
                                     iconPosition="left"
-                                    placeholder="E-mail address"
+                                    placeholder="code"
+                                />
+                                <Form.Input
+                                    onChange={this.handleChange}
+                                    value={shop_name}
+                                    name="shop_name"
+                                    fluid
+                                    icon="user"
+                                    iconPosition="left"
+                                    placeholder="shop_name"
+                                />
+                                <Form.Input
+                                    onChange={this.handleChange}
+                                    value={address}
+                                    name="address"
+                                    fluid
+                                    icon="user"
+                                    iconPosition="left"
+                                    placeholder="address"
+                                />
+                                <Form.Input
+                                    onChange={this.handleChange}
+                                    value={phone}
+                                    name="phone"
+                                    fluid
+                                    icon="user"
+                                    iconPosition="left"
+                                    placeholder="phone"
+                                />
+                                <Form.Input
+                                    onChange={this.handleChange}
+                                    value={city}
+                                    name="city"
+                                    fluid
+                                    icon="user"
+                                    iconPosition="left"
+                                    placeholder="city"
+                                />
+                                <Form.Input
+                                    onChange={this.handleChange}
+                                    value={area}
+                                    name="area"
+                                    fluid
+                                    icon="user"
+                                    iconPosition="left"
+                                    placeholder="area"
+                                />
+                                <Form.Input
+                                    onChange={this.handleChange}
+                                    value={category}
+                                    name="category"
+                                    fluid
+                                    icon="user"
+                                    iconPosition="left"
+                                    placeholder="category"
                                 />
                                 <Form.Input
                                     onChange={this.handleChange}
@@ -120,8 +180,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        signup: (username, email, password1, password2) =>
-            dispatch(authSignup(username, email, password1, password2))
+        signup: (username, code, shop_name, address, phone, city, area, category, password1, password2) =>
+            dispatch(dealerAuthSignup(username, code, shop_name, address, phone, city, area, category, password1, password2))
     };
 };
 

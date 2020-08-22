@@ -9,7 +9,7 @@ import {
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
-import { authLogin } from "../store/actions/auth";
+import {authLogin, dealerAuthLogin} from "../store/actions/auth";
 
 class DealerLogin extends React.Component {
     state = {
@@ -99,7 +99,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: (username, password) => dispatch(authLogin(username, password))
+        login: (username, password) => dispatch(dealerAuthLogin(username, password))
     };
 };
 
