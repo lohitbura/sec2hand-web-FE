@@ -6,7 +6,7 @@ import Tab from "semantic-ui-react/dist/commonjs/modules/Tab";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import axios from "axios";
-import {getUserProfileURL} from "../store/constants";
+import {getUserProfileIdURL, getUserProfileURL} from "../store/constants";
 import {Link, withRouter} from "react-router-dom";
 
 
@@ -14,16 +14,13 @@ class Profile extends React.Component {
     state = {
         profile: {},
         loader: false,
-        message: ''
+        message: '',
     }
 
     componentDidMount() {
-        let headers = {
-            Authorization: `Token ${localStorage.getItem('token')}`
-        };
+        const {username} = this.props.match.params;
         this.setState({loader: true})
-        axios.get(getUserProfileURL, {headers: headers}).then(res => {
-            console.log(res.data)
+        axios.get(getUserProfileURL(username)).then(res => {
             this.setState({loader: false, profile: res.data})
         })
             .catch(err => {
@@ -41,7 +38,7 @@ class Profile extends React.Component {
                     <Link to="/product-create">
                         <Button style={{marginBottom: "50px"}} primary>Create product</Button>
                     </Link>
-                    <Grid>
+                    <Grid container columns={3}>
                         {
                             profile.products && profile.products.map(product => {
                                 return (
@@ -70,7 +67,7 @@ class Profile extends React.Component {
                     <Link to="/post-create">
                         <Button style={{marginBottom: "50px"}} primary>Create post</Button>
                     </Link>
-                    <Grid>
+                    <Grid container columns={3}>
                         {
                             profile.posts && profile.posts.map(post => {
                                 return (
@@ -116,10 +113,10 @@ class Profile extends React.Component {
                                src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
                                size='medium' circular/>
                         <h2 style={{textAlign: "center"}}>{profile.shop_name}</h2>
-
                     </Grid.Column>
                     <Grid.Column style={{marginTop: "20px"}}>
                         <h3>Code: {profile.code}</h3>
+                        <h3>Username: {profile.user}</h3>
                         <p style={{fontSize: "18px"}}>Address: {profile.address}</p>
                         <p style={{fontSize: "18px"}}>Phone: {profile.phone}</p>
                         <p style={{fontSize: "18px"}}>City: {profile.city}</p>

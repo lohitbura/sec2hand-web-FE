@@ -15,6 +15,8 @@ import {
     Sidebar,
     Visibility
 } from "semantic-ui-react";
+import {Link, withRouter} from "react-router-dom";
+
 
 import {CarouselProvider, Slider, Slide, ButtonBack, ButtonNext} from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -72,21 +74,28 @@ class HomepageLayout extends React.Component {
                 <Grid style={{marginTop: '100px'}} container columns={3}>
                     {
                         products.map(product => {
-                            return(
+                            return (
                                 <Grid.Column>
-                                    <Card>
-                                        <Image
-                                            src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
-                                            wrapped ui={false}/>
-                                        <Card.Content>
-                                            <Card.Header>{product.model}</Card.Header>
-                                            <Card.Meta>Joined in 2016</Card.Meta>
-                                            <Card.Description>
-                                                ₹ {product.price}
-                                            </Card.Description>
-                                        </Card.Content>
-                                    </Card>
+                                    <Link to={`/product/${product.id}`}>
+                                        <Card>
+                                            <Image
+                                                src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
+                                                wrapped ui={false}/>
+                                            <Card.Content>
+                                                <Card.Header>
+                                                    <Link to={`/product/${product.id}`}>
+                                                        {product.model}
+                                                    </Link>
+                                                </Card.Header>
+                                                <Card.Meta>Joined in 2016</Card.Meta>
+                                                <Card.Description>
+                                                    ₹ {product.price}
+                                                </Card.Description>
+                                            </Card.Content>
+                                        </Card>
+                                    </Link>
                                 </Grid.Column>
+
                             )
                         })
                     }

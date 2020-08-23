@@ -13,6 +13,8 @@ import Profile from "./containers/profile";
 import CreateProduct from "./containers/createProduct";
 import CreatePost from "./containers/createPost";
 import EditProfile from "./containers/editProfile";
+import ProductDetail from "./containers/productDetail";
+import PostDetail from "./containers/postDetail";
 
 const BaseRouter = () => (
   <Hoc>
@@ -22,10 +24,12 @@ const BaseRouter = () => (
     <Route path="/dealer-signup" component={DealerSignup} />
     <Route path="/review" component={Review} />
     <Route path="/dealer" component={Dealer} />
-    <Route path="/profile" component={Profile} />
+    <Route path="/profile/:username" component={Profile} />
     <Route path="/product-create" component={CreateProduct} />
     <Route path="/post-create" component={CreatePost} />
     <Route path="/profile-edit" component={EditProfile} />
+    <Route path="/product/:id" component={ProductDetail} />
+    <Route path="/post/:id" component={PostDetail} />
     <Route exact path="/" component={HomepageLayout} />
   </Hoc>
 );

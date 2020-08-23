@@ -15,6 +15,8 @@ import {
     Sidebar,
     Visibility
 } from "semantic-ui-react";
+import {Link, withRouter} from "react-router-dom";
+
 
 import {CarouselProvider, Slider, Slide, ButtonBack, ButtonNext} from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -47,30 +49,33 @@ class Review extends React.Component {
                         posts.map(post => {
                             return (
                                 <Grid.Column>
-                                    <Card>
-                                        <Image
-                                            src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
-                                            wrapped ui={false}/>
-                                        <Card.Content>
-                                            {/*<Card.Header>Daniel</Card.Header>*/}
-                                            {/*<Card.Meta>Joined in 2016</Card.Meta>*/}
-                                            <Card.Description>
-                                                {post.description}
-                                            </Card.Description>
-                                        </Card.Content>
-                                        <Card.Content>
-                                            <Grid columns={2}>
-                                                <Grid.Column>
-                                                    <Icon name='heart outline'/>
-                                                    26 likes
-                                                </Grid.Column>
-                                                <Grid.Column>
-                                                    <Icon name='comments'/>
-                                                    50 comments
-                                                </Grid.Column>
-                                            </Grid>
-                                        </Card.Content>
-                                    </Card>
+                                    <Link to={`/post/${post.id}`} style={{decoration:'none'}}>
+                                        <Card>
+                                            <Image
+                                                src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
+                                                wrapped ui={false}/>
+                                            <Card.Content>
+                                                {/*<Card.Header>Daniel</Card.Header>*/}
+                                                {/*<Card.Meta>Joined in 2016</Card.Meta>*/}
+                                                <Card.Description>
+                                                    {post.description}
+                                                </Card.Description>
+                                            </Card.Content>
+                                            <Card.Content>
+                                                <Grid columns={2}>
+                                                    <Grid.Column>
+                                                        <Icon name='heart outline'/>
+                                                        26 likes
+                                                    </Grid.Column>
+                                                    <Grid.Column>
+                                                        <Icon name='comments'/>
+                                                        50 comments
+                                                    </Grid.Column>
+                                                </Grid>
+                                            </Card.Content>
+                                        </Card>
+                                    </Link>
+
                                 </Grid.Column>
                             )
                         })

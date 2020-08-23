@@ -13,10 +13,29 @@ import {
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {logout} from "../store/actions/auth";
+import axios from "axios";
+import {getUserProfileIdURL} from "../store/constants";
 
 class CustomLayout extends React.Component {
+    state = {
+        username: '',
+        token: ''
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.token !== this.props.token){
+            let headers = {
+                Authorization: `Token ${localStorage.getItem('token')}`
+            };
+            axios.get(getUserProfileIdURL, {headers: headers}).then(res => {
+                this.setState({username: res.data.user})
+            })
+        }
+    }
+
     render() {
         const {authenticated} = this.props;
+        const {username} = this.state;
         return (
             <div>
                 <Menu inverted>
@@ -32,7 +51,7 @@ class CustomLayout extends React.Component {
                         {authenticated ? (
                             <Menu.Menu position="right">
                                 <Menu.Item header>
-                                    <Link to="/profile">
+                                    <Link to={`/profile/${username}`}>
                                         Profile
                                     </Link>
                                 </Menu.Item>
@@ -132,7 +151,8 @@ class CustomLayout extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        authenticated: state.auth.token !== null
+        authenticated: state.auth.token !== null,
+        token:state.auth.token
     };
 };
 

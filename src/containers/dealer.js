@@ -15,6 +15,8 @@ import {
     Sidebar,
     Visibility
 } from "semantic-ui-react";
+import {Link, withRouter} from "react-router-dom";
+
 
 import {CarouselProvider, Slider, Slide, ButtonBack, ButtonNext} from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -68,7 +70,11 @@ class Dealer extends React.Component {
                                             src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
                                             wrapped ui={false}/>
                                         <Card.Content>
-                                            <Card.Header>{dealer.shop_name}</Card.Header>
+                                            <Card.Header>
+                                                <Link to={`/profile/${dealer.user}`}>
+                                                    {dealer.shop_name}
+                                                </Link>
+                                            </Card.Header>
                                             <Card.Meta>Joined in 2016</Card.Meta>
                                             <Card.Description>
                                                 {dealer.city}
