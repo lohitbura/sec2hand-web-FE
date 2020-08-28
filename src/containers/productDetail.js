@@ -14,6 +14,7 @@ class ProductDetail extends React.Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         const {id} = this.props.match.params;
         const token = localStorage.getItem('token')
 

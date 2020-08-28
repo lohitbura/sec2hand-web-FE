@@ -19,7 +19,8 @@ import {getUserProfileIdURL} from "../store/constants";
 class CustomLayout extends React.Component {
     state = {
         username: '',
-        token: ''
+        token: '',
+        active: 1
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -35,7 +36,7 @@ class CustomLayout extends React.Component {
 
     render() {
         const {authenticated} = this.props;
-        const {username} = this.state;
+        const {username, active} = this.state;
         return (
             <div>
                 <div id="preloader">
@@ -57,40 +58,53 @@ class CustomLayout extends React.Component {
                             </button>
                             <div className="collapse navbar-collapse" id="navbarResponsive">
                                 <ul className="navbar-nav ml-auto">
-                                    <li className="nav-item active">
+                                    <li onClick={() => this.setState({active: 1})}
+                                        className={active === 1 ? "active nav-item" : 'nav-item'}>
                                         <Link className="nav-link" to="/">
                                             Home
                                         </Link>
-                                        <span className="sr-only">(current)</span>
                                     </li>
 
-                                    <li className="nav-item">
+                                    <li onClick={() => this.setState({active: 2})}
+                                        className={active === 2 ? "active nav-item" : 'nav-item'}>
                                         <Link className="nav-link" to="/review">
                                             Review
                                         </Link>
                                     </li>
-                                    <li className="nav-item">
+                                    <li onClick={() => this.setState({active: 3})}
+                                        className={active === 3 ? "active nav-item" : 'nav-item'}>
                                         <Link className="nav-link" to="/dealer">
                                             Find dealer
                                         </Link>
                                     </li>
 
 
-                                    <li className="nav-item"><a className="nav-link" href="about-us.html">About Us</a>
+                                    <li onClick={() => this.setState({active: 4})}
+                                        className={active === 4 ? "active nav-item" : 'nav-item'}>
+                                        <Link className="nav-link" to={`/about`}>
+                                            About Us
+                                        </Link>
                                     </li>
 
-                                    <li className="nav-item"><a className="nav-link" href="contact.html">Contact Us</a>
+                                    <li onClick={() => this.setState({active: 5})}
+                                        className={active === 5 ? "active nav-item" : 'nav-item'}>
+                                        <Link className="nav-link" to={`/contact`}>
+                                            Contact Us
+                                        </Link>
                                     </li>
                                     {authenticated ? (
-                                        <li className="nav-item">
+                                        <li onClick={() => this.setState({active: 6})}
+                                            className={active === 6 ? "active nav-item" : 'nav-item'}>
                                             <Link className="nav-link" to={`/profile/${username}`}>
                                                 My account
                                             </Link>
                                         </li>
                                     ) : ''}
                                     {
-                                        authenticated ? <li className="nav-item">
-                                            <a className="nav-link" onClick={() => this.props.logout()}>
+                                        authenticated ? <li onClick={() => this.setState({active: 7})}
+                                                            className={active === 7 ? "active nav-item" : 'nav-item'}>
+                                            <a style={{cursor: "pointer"}} className="nav-link"
+                                               onClick={() => this.props.logout()}>
                                                 Logout
                                             </a>
                                         </li> : <li className="nav-item dropdown">
@@ -164,67 +178,20 @@ class CustomLayout extends React.Component {
                 {/*</Menu>*/}
                 {this.props.children}
 
-                <Segment
-                    inverted
-                    vertical
-                    style={{margin: "5em 0em 0em", padding: "5em 0em"}}
-                >
-                    <Container textAlign="center">
-                        <Grid divided inverted stackable>
-                            <Grid.Column width={3}>
-                                <Header inverted as="h4" content="Group 1"/>
-                                <List link inverted>
-                                    <List.Item as="a">Link One</List.Item>
-                                    <List.Item as="a">Link Two</List.Item>
-                                    <List.Item as="a">Link Three</List.Item>
-                                    <List.Item as="a">Link Four</List.Item>
-                                </List>
-                            </Grid.Column>
-                            <Grid.Column width={3}>
-                                <Header inverted as="h4" content="Group 2"/>
-                                <List link inverted>
-                                    <List.Item as="a">Link One</List.Item>
-                                    <List.Item as="a">Link Two</List.Item>
-                                    <List.Item as="a">Link Three</List.Item>
-                                    <List.Item as="a">Link Four</List.Item>
-                                </List>
-                            </Grid.Column>
-                            <Grid.Column width={3}>
-                                <Header inverted as="h4" content="Group 3"/>
-                                <List link inverted>
-                                    <List.Item as="a">Link One</List.Item>
-                                    <List.Item as="a">Link Two</List.Item>
-                                    <List.Item as="a">Link Three</List.Item>
-                                    <List.Item as="a">Link Four</List.Item>
-                                </List>
-                            </Grid.Column>
-                            <Grid.Column width={7}>
-                                <Header inverted as="h4" content="Footer Header"/>
-                                <p>
-                                    Extra space for a call to action inside the footer that could
-                                    help re-engage users.
-                                </p>
-                            </Grid.Column>
-                        </Grid>
 
-                        <Divider inverted section/>
-                        <Image centered size="mini" src="/logo.png"/>
-                        <List horizontal inverted divided link size="small">
-                            <List.Item as="a" href="#">
-                                Site Map
-                            </List.Item>
-                            <List.Item as="a" href="#">
-                                Contact Us
-                            </List.Item>
-                            <List.Item as="a" href="#">
-                                Terms and Conditions
-                            </List.Item>
-                            <List.Item as="a" href="#">
-                                Privacy Policy
-                            </List.Item>
-                        </List>
-                    </Container>
-                </Segment>
+                <footer style={{background: "black", marginTop: "50px"}}>
+
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="inner-content">
+                                <p style={{color: "white"}}>Copyright © 2020 Company Name : <a
+                                    href="">Sec2 Hand</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </footer>
+
             </div>
         );
     }

@@ -20,6 +20,10 @@ class RegistrationForm extends React.Component {
         city: ""
     };
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         const {username, password1, password2, city, phone} = this.state;

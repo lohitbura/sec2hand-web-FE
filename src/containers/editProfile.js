@@ -3,6 +3,7 @@ import {Container} from "semantic-ui-react";
 import {Button, Checkbox, Form, TextArea} from 'semantic-ui-react'
 import axios from "axios";
 import {
+    customerProfileEditURL,
     dealerProfileEditURL,
     getUserProfileIdURL,
     getUserProfileURL,
@@ -28,7 +29,8 @@ class EditProfile extends React.Component {
         loader: false,
         message: '',
         error: '',
-        username:''
+        username: '',
+        is_dealer: false
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -43,6 +45,7 @@ class EditProfile extends React.Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         const {username} = this.state;
         let headers = {
             Authorization: `Token ${localStorage.getItem('token')}`
@@ -51,8 +54,13 @@ class EditProfile extends React.Component {
         axios.get(getUserProfileURL(username), {headers: headers}).then(res => {
             console.log(res.data)
             this.setState({
-                loader: false, address: res.data.address,
-                phone: res.data.phone, city: res.data.city, area: res.data.area, category: res.data.category
+                loader: false,
+                address: res.data.address,
+                phone: res.data.phone,
+                city: res.data.city,
+                area: res.data.area,
+                category: res.data.category,
+                is_dealer: res.data.is_dealer
             })
         })
             .catch(err => {
@@ -68,29 +76,52 @@ class EditProfile extends React.Component {
             city,
             area,
             category,
-            image
+            image,
+            is_dealer
         } = this.state;
         let form_data = new FormData();
-        if (image){
-            form_data.append('image', image, image.name);
-        }
-        form_data.append('address', address);
-        form_data.append('phone', phone);
-        form_data.append('city', city);
-        form_data.append('area', area);
-        form_data.append('category', category);
-        let headers = {
-            Authorization: `Token ${localStorage.getItem('token')}`
-        };
-        this.setState({loader: true})
-        axios.post(dealerProfileEditURL, form_data, {headers: headers}).then(res => {
-            console.log(res.data)
-            this.setState({loader: false, message: res.data.message})
-        })
-            .catch(err => {
-                console.log(err)
-                this.setState({loader: false, error: err.data.message})
+        if (is_dealer) {
+
+            if (image) {
+                form_data.append('image', image, image.name);
+            }
+            form_data.append('address', address);
+            form_data.append('phone', phone);
+            form_data.append('city', city);
+            form_data.append('area', area);
+            form_data.append('category', category);
+            let headers = {
+                Authorization: `Token ${localStorage.getItem('token')}`
+            };
+            this.setState({loader: true})
+            axios.post(dealerProfileEditURL, form_data, {headers: headers}).then(res => {
+                console.log(res.data)
+                this.setState({loader: false, message: res.data.message})
             })
+                .catch(err => {
+                    console.log(err)
+                    this.setState({loader: false, error: err.data.message})
+                })
+        } else {
+            if (image) {
+                form_data.append('image', image, image.name);
+            }
+            form_data.append('phone', phone);
+            form_data.append('city', city);
+            let headers = {
+                Authorization: `Token ${localStorage.getItem('token')}`
+            };
+            this.setState({loader: true})
+            axios.post(customerProfileEditURL, form_data, {headers: headers}).then(res => {
+                console.log(res.data)
+                this.setState({loader: false, message: res.data.message})
+            })
+                .catch(err => {
+                    console.log(err)
+                    this.setState({loader: false, error: err.data.message})
+                })
+        }
+
     };
 
     handleChange = (e) => {
@@ -109,7 +140,8 @@ class EditProfile extends React.Component {
             phone,
             city,
             area,
-            category
+            category,
+            is_dealer
         } = this.state;
         if (loader) {
             return (
@@ -139,11 +171,15 @@ class EditProfile extends React.Component {
                     message ?
                         <Message color='green'>Profile updated successful!</Message> : ''
                 }
-                <Form style={{marginTop:"100px"}} onSubmit={this.submit}>
-                    <Form.Field>
-                        <label>Address</label>
-                        <TextArea value={address} name='address' onChange={this.handleChange} placeholder='Address' required/>
-                    </Form.Field>
+                <Form style={{marginTop: "100px"}} onSubmit={this.submit}>
+                    {
+                        is_dealer ? <Form.Field>
+                            <label>Address</label>
+                            <TextArea value={address} name='address' onChange={this.handleChange} placeholder='Address'
+                                      required/>
+                        </Form.Field> : ''
+                    }
+
                     <Form.Field>
                         <label>Phone</label>
                         <Input value={phone} name='phone' onChange={this.handleChange} placeholder='Phone' required/>
@@ -152,14 +188,20 @@ class EditProfile extends React.Component {
                         <label>City</label>
                         <Input value={city} name='city' onChange={this.handleChange} placeholder='city' required/>
                     </Form.Field>
-                    <Form.Field>
-                        <label>Area</label>
-                        <Input value={area} name='area' onChange={this.handleChange} placeholder='Area' required/>
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Category</label>
-                        <Input value={category} name='category' onChange={this.handleChange} placeholder='Category' required/>
-                    </Form.Field>
+                    {
+                        is_dealer ? <Form.Field>
+                            <label>Area</label>
+                            <Input value={area} name='area' onChange={this.handleChange} placeholder='Area' required/>
+                        </Form.Field> : ''
+                    }
+
+                    {
+                        is_dealer ? <Form.Field>
+                            <label>Category</label>
+                            <Input value={category} name='category' onChange={this.handleChange} placeholder='Category'
+                                   required/>
+                        </Form.Field> : ''
+                    }
                     <Form.Field>
                         <label>Image</label>
                         <input type='file' name='image' onChange={this.handleImage}/>

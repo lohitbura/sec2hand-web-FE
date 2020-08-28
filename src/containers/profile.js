@@ -6,7 +6,7 @@ import Tab from "semantic-ui-react/dist/commonjs/modules/Tab";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import axios from "axios";
-import {getUserProfileIdURL, getUserProfileURL, URL} from "../store/constants";
+import {getUserProfileIdURL, getUserProfileURL, postLikeURL, URL} from "../store/constants";
 import {Link, withRouter} from "react-router-dom";
 import Header from "semantic-ui-react/dist/commonjs/elements/Header";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
@@ -17,10 +17,25 @@ class Profile extends React.Component {
         profile: {},
         loader: false,
         message: '',
-        username: ''
+        username: '',
+        posts:[]
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
+        this.fetchProfile()
+        const token = localStorage.getItem('token')
+
+        let header = {
+            Authorization: `Token ${token}`
+        };
+
+        axios.get(getUserProfileIdURL, {headers: header}).then(res => {
+            this.setState({username: res.data.user})
+        })
+    }
+
+    fetchProfile = () => {
         const {username} = this.props.match.params;
         const token = localStorage.getItem('token')
         let headers;
@@ -33,20 +48,42 @@ class Profile extends React.Component {
         }
         this.setState({loader: true})
         axios.get(getUserProfileURL(username), {headers: headers}).then(res => {
-            this.setState({loader: false, profile: res.data})
+            this.setState({loader: false, profile: res.data, posts:res.data.posts})
         })
             .catch(err => {
                 console.log(err)
                 this.setState({loader: false})
             })
 
-        let header = {
-            Authorization: `Token ${token}`
-        };
-        axios.get(getUserProfileIdURL, {headers: header}).then(res => {
-            this.setState({username: res.data.user})
-        })
     }
+
+    likes = (id) => {
+        const {posts} = this.state;
+
+        posts.map(post => {
+            if (post.id === id) {
+                if (post.is_like && post.is_like) {
+                    this.likesHandle("unlike", post.id)
+                } else {
+                    this.likesHandle("like", post.id)
+                }
+            }
+        })
+    };
+
+    likesHandle = (value, id) => {
+        // const id = this.state.post.id;
+        let headers = {
+            Authorization: `Token ${localStorage.getItem('token')}`
+        };
+        this.setState({action: value}, () => {
+            axios.post(postLikeURL, {"post_id": id, "action": this.state.action}, {headers: headers})
+                .then(res => {
+                    this.setState({post: res.data})
+                    this.fetchProfile()
+                })
+        })
+    };
 
     render() {
         const {profile, username} = this.state;
@@ -140,14 +177,28 @@ class Profile extends React.Component {
                                                         alt=""/>
                                                 </Link>
                                                 <div className="down-content">
-                                                    <a href="car-details.html"><h4>
-                                                        <Link to={`/post/${post.id}`}>
+                                                    <a href="car-details.html"><h5 style={{marginBottom:"5px"}}>
+                                                        <Link style={{color:'black'}} to={`/post/${post.id}`}>
                                                             {post.description}
                                                         </Link>
-                                                    </h4></a>
+                                                    </h5></a>
+                                                    <strong><i>Author:</i>
+                                                        <Link to={`/profile/${post.user}`}>
+                                                            {post.user}
+                                                        </Link>
+                                                    </strong>
+                                                    <br/>
+                                                    <br/>
                                                     <Grid columns={2}>
-                                                        <Grid.Column>
-                                                            <Icon name='heart outline'/>
+                                                        <Grid.Column style={{color:"red"}}>
+                                                            {
+                                                                post.is_like && post.is_like ?
+                                                                    <Icon onClick={() => this.likes(post.id)}
+                                                                          name='heart' size="large"/>
+                                                                    :
+                                                                    <Icon size="large" onClick={() => this.likes(post.id)} name='heart outline'/>
+
+                                                            }
                                                             {post.likes_count} likes
                                                         </Grid.Column>
                                                         <Grid.Column>
@@ -235,20 +286,26 @@ class Profile extends React.Component {
                                                     <strong className="pull-right">{profile.user}</strong>
                                                 </div>
                                             </li>
-                                            <li className="list-group-item">
-                                                <div className="clearfix">
-                                                    <span className="pull-left"> Shop code</span>
+                                            {
+                                                profile.is_dealer ? <li className="list-group-item">
+                                                    <div className="clearfix">
+                                                        <span className="pull-left"> Shop code</span>
 
-                                                    <strong className="pull-right">{profile.code}</strong>
-                                                </div>
-                                            </li>
-                                            <li className="list-group-item">
-                                                <div className="clearfix">
-                                                    <span className="pull-left"> Address</span>
+                                                        <strong className="pull-right">{profile.code}</strong>
+                                                    </div>
+                                                </li> : ''
+                                            }
 
-                                                    <strong className="pull-right">{profile.address}</strong>
-                                                </div>
-                                            </li>
+                                            {
+                                                profile.is_dealer ? <li className="list-group-item">
+                                                    <div className="clearfix">
+                                                        <span className="pull-left"> Address</span>
+
+                                                        <strong className="pull-right">{profile.address}</strong>
+                                                    </div>
+                                                </li> : ''
+                                            }
+
                                             <li className="list-group-item">
                                                 <div className="clearfix">
                                                     <span className="pull-left"> Phone</span>
@@ -263,13 +320,15 @@ class Profile extends React.Component {
                                                     <strong className="pull-right">{profile.city}</strong>
                                                 </div>
                                             </li>
-                                            <li className="list-group-item">
-                                                <div className="clearfix">
-                                                    <span className="pull-left"> Area</span>
+                                            {
+                                                profile.is_dealer ? <li className="list-group-item">
+                                                    <div className="clearfix">
+                                                        <span className="pull-left"> Area</span>
 
-                                                    <strong className="pull-right">{profile.area}</strong>
-                                                </div>
-                                            </li>
+                                                        <strong className="pull-right">{profile.area}</strong>
+                                                    </div>
+                                                </li> : ''
+                                            }
                                         </ul>
                                         <br/>
                                         {
@@ -305,7 +364,10 @@ class Profile extends React.Component {
                 {/*        </Link>*/}
                 {/*    </Grid.Column>*/}
                 {/*</Grid>*/}
-                <Tab style={{marginTop: "50px"}} panes={panes}/>
+                {
+                    profile.is_dealer ? <Tab style={{marginTop: "50px"}} panes={panes}/> : ''
+                }
+
             </Container>
         )
 

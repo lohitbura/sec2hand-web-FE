@@ -25,6 +25,10 @@ class DealerSignup extends React.Component {
         password2: ""
     };
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         const {username, code,shop_name,address, phone,city, area,category, password1, password2} = this.state;

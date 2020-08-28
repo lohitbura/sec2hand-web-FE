@@ -25,16 +25,20 @@ import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import axios from 'axios';
 
 import {productListURL} from "../store/constants";
+// import Loader from "semantic-ui-react/dist/commonjs/elements/Loader";
+import Loader from 'react-loader-spinner';
 
 class HomepageLayout extends React.Component {
 
     state = {
-        products: []
+        products: [],
+        loading: false
     }
 
     componentDidMount() {
+        this.setState({loading: true})
         axios.get(productListURL).then(res => {
-            this.setState({products: res.data})
+            this.setState({products: res.data, loading: false})
         })
             .catch(err => {
                 console.log(err)
@@ -42,7 +46,17 @@ class HomepageLayout extends React.Component {
     }
 
     render() {
-        const {products} = this.state;
+        const {products, loading} = this.state;
+        // if (loading){
+        //     return <Loader
+        //         style={{marginTop:"100px"}}
+        //         type="Puff"
+        //         color="#00BFFF"
+        //         height={100}
+        //         width={100}
+        //         timeout={3000} //3 secs
+        //     />
+        // }
         return (
             <div>
                 <div>
@@ -59,12 +73,13 @@ class HomepageLayout extends React.Component {
                         </div>
                     </div>
                 </div>
-                <CarouselProvider style={{marginTop:"35px"}}
-                    naturalSlideWidth={110}
-                    naturalSlideHeight={50}
-                    totalSlides={3}
-                    isPlaying={true}
-                    interval={3000}
+
+                <CarouselProvider style={{marginTop: "35px"}}
+                                  naturalSlideWidth={110}
+                                  naturalSlideHeight={50}
+                                  totalSlides={3}
+                                  isPlaying={true}
+                                  interval={3000}
                 >
                     <Slider>
                         <Slide index={1}><img
@@ -84,39 +99,27 @@ class HomepageLayout extends React.Component {
                         }
                     </Slider>
                 </CarouselProvider>
-                {/*<div className="banner header-text">*/}
-                {/*    <div className="owl-banner owl-carousel">*/}
-                {/*        <div className="banner-item-01">*/}
-                {/*            <div className="text-content">*/}
-                {/*                <h4>Find your car today!</h4>*/}
-                {/*                <h2>Lorem ipsum dolor sit amet</h2>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*        <div className="banner-item-02">*/}
-                {/*            <div className="text-content">*/}
-                {/*                <h4>Fugiat Aspernatur</h4>*/}
-                {/*                <h2>Laboriosam reprehenderit ducimus</h2>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*        <div className="banner-item-03">*/}
-                {/*            <div className="text-content">*/}
-                {/*                <h4>Saepe Omnis</h4>*/}
-                {/*                <h2>Quaerat suscipit unde minus dicta</h2>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-
 
                 <div className="latest-products">
                     <div className="container">
+
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="section-heading">
                                     <h2>Featured Products</h2>
                                     <a href="cars.html">view more <i className="fa fa-angle-right"></i></a>
                                 </div>
+                                {
+                                    loading ? <Loader
+                                        style={{marginTop:"100px", textAlign:'center'}}
+                                        type="Rings"
+                                        color="red"
+                                        height={100}
+                                        width={100}
+                                    /> : ''
+                                }
                             </div>
+
                             {
                                 products.map(product => {
                                     return (

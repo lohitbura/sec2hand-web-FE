@@ -47,7 +47,7 @@ export const authLogin = (username, password) => {
                 password: password
             })
             .then(res => {
-                const token = res.data;
+                const token = res.data.token;
                 const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
                 localStorage.setItem("token", token);
                 localStorage.setItem("expirationDate", expirationDate);
@@ -73,7 +73,7 @@ export const authSignup = (username, password1, password2, phone, city) => {
                 city: city
             })
             .then(res => {
-                const token = res.data;
+                const token = res.data.token;
                 const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
                 localStorage.setItem("token", token);
                 localStorage.setItem("expirationDate", expirationDate);
@@ -103,7 +103,7 @@ export const dealerAuthSignup = (username, code, shopname, address, phone, city,
                 password2: password2,
             })
             .then(res => {
-                const token = res.data;
+                const token = res.data.token;
                 const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
                 localStorage.setItem("token", token);
                 localStorage.setItem("expirationDate", expirationDate);

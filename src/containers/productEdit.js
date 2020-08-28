@@ -21,6 +21,7 @@ class ProductEdit extends React.Component {
     };
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         const {id} = this.props.match.params;
 
         axios.get(productDetailURL(id)).then(res => {

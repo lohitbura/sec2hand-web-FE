@@ -1,6 +1,6 @@
-// export const URL = "http://hosting123.pythonanywhere.com";
+export const URL = "http://hosting123.pythonanywhere.com";
 // export const URL = "http://127.0.0.1:8000";
-export const URL = " http://192.168.43.162:8000";
+// export const URL = " http://192.168.43.162:8000";
 
 const apiURL = '/api';
 
@@ -28,3 +28,4 @@ export const dealerListURL = `${endpoint}/dealer-filter`;
 export const getUserProfileURL = (username) => `${endpoint}/profile?username=${username}`;
 export const getUserProfileIdURL = `${endpoint}/profile`;
 export const dealerProfileEditURL = `${endpoint}/profile-edit`;
+export const customerProfileEditURL = `${endpoint}/customer-profile-edit`;

@@ -23,36 +23,74 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import axios from 'axios';
-import {postsListURL} from "../store/constants";
+import {postLikeURL, postsListURL} from "../store/constants";
+import Loader from 'react-loader-spinner'
 
 
 class Review extends React.Component {
     state = {
-        posts: []
+        posts: [],
+        loading: false
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
+        this.fetchPosts()
+    }
+
+    fetchPosts = () => {
         const token = localStorage.getItem('token')
         let headers;
-        if (token){
+        if (token) {
             headers = {
                 Authorization: `Token ${token}`
             };
         } else {
             headers = {}
         }
-        axios.get(postsListURL, {headers:headers}).then(res => {
-            this.setState({posts: res.data})
+        this.setState({loading: true})
+        axios.get(postsListURL, {headers: headers}).then(res => {
+            this.setState({posts: res.data, loading: false})
         })
             .catch(err => {
                 console.log(err)
             })
     }
 
-    render() {
+    likes = (id) => {
         const {posts} = this.state;
+
+        posts.map(post => {
+            if (post.id === id) {
+                if (post.is_like && post.is_like) {
+                    this.likesHandle("unlike", post.id)
+                } else {
+                    this.likesHandle("like", post.id)
+                }
+            }
+        })
+
+
+    };
+
+    likesHandle = (value, id) => {
+        // const id = this.state.post.id;
+        let headers = {
+            Authorization: `Token ${localStorage.getItem('token')}`
+        };
+        this.setState({action: value}, () => {
+            axios.post(postLikeURL, {"post_id": id, "action": this.state.action}, {headers: headers})
+                .then(res => {
+                    this.setState({post: res.data})
+                    this.fetchPosts()
+                })
+        })
+    };
+
+    render() {
+        const {posts, loading} = this.state;
         return (
-            <div className="container" >
+            <div className="container">
                 <div>
                     <div className="container">
                         <div className="row">
@@ -67,26 +105,50 @@ class Review extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="row" style={{marginTop:"100px"}}>
+                {
+                    loading ? <Loader
+                        style={{marginTop:"100px", textAlign:'center'}}
+                        type="Rings"
+                        color="red"
+                        height={100}
+                        width={100}
+                    /> : ''
+                }
+                <div className="row" style={{marginTop: "100px"}}>
+
                     {
                         posts.map(post => {
                             return (
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product-item">
-                                        <Link to={`/post/${post.id}`} style={{decoration:'none'}}>
+                                        <Link to={`/post/${post.id}`} style={{decoration: 'none'}}>
                                             <img
-                                            src={`${post.image}`}
-                                            alt=""/>
+                                                src={`${post.image}`}
+                                                alt=""/>
                                         </Link>
                                         <div className="down-content">
-                                            <a href="car-details.html"><h4>
-                                                <Link to={`/post/${post.id}`}>
+                                            <a href="car-details.html"><h5 style={{marginBottom:"5px"}}>
+                                                <Link style={{color:'black'}} to={`/post/${post.id}`}>
                                                     {post.description}
                                                 </Link>
-                                            </h4></a>
+                                            </h5></a>
+                                            <strong><i>Author:</i>
+                                                <Link to={`/profile/${post.user}`}>
+                                                    {post.user}
+                                                </Link>
+                                            </strong>
+                                            <br/>
+                                            <br/>
                                             <Grid columns={2}>
-                                                <Grid.Column>
-                                                    <Icon name='heart outline'/>
+                                                <Grid.Column style={{color:"red"}}>
+                                                    {
+                                                        post.is_like && post.is_like ?
+                                                            <Icon onClick={() => this.likes(post.id)}
+                                                                  name='heart' size="large"/>
+                                                            :
+                                                            <Icon size="large" onClick={() => this.likes(post.id)} name='heart outline'/>
+
+                                                    }
                                                     {post.likes_count} likes
                                                 </Grid.Column>
                                                 <Grid.Column>

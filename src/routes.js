@@ -17,6 +17,8 @@ import ProductDetail from "./containers/productDetail";
 import PostDetail from "./containers/postDetail";
 import ProductEdit from "./containers/productEdit";
 import PostEdit from "./containers/postEdit";
+import AboutUs from "./containers/aboutUs";
+import ContactUs from "./containers/contactUs";
 
 const BaseRouter = () => (
   <Hoc>
@@ -34,6 +36,8 @@ const BaseRouter = () => (
     <Route path="/productEdit/:id" component={ProductEdit} />
     <Route path="/postEdit/:id" component={PostEdit} />
     <Route path="/post/:id" component={PostDetail} />
+    <Route path="/about" component={AboutUs} />
+    <Route path="/contact" component={ContactUs} />
     <Route exact path="/" component={HomepageLayout} />
   </Hoc>
 );

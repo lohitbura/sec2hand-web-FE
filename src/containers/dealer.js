@@ -26,15 +26,19 @@ import Dropdown from "semantic-ui-react/dist/commonjs/modules/Dropdown";
 import Input from "semantic-ui-react/dist/commonjs/elements/Input";
 import axios from 'axios';
 import {dealerListURL, URL} from "../store/constants";
+import Loader from "react-loader-spinner";
 
 class Dealer extends React.Component {
     state = {
-        dealers: []
+        dealers: [],
+        loading: false
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
+        this.setState({loading: true})
         axios.post(dealerListURL, {}).then(res => {
-            this.setState({dealers: res.data})
+            this.setState({dealers: res.data, loading:false})
         })
             .catch(err => {
                 console.log(err)
@@ -42,7 +46,7 @@ class Dealer extends React.Component {
     }
 
     render() {
-        const {dealers} = this.state;
+        const {dealers, loading} = this.state;
         const options = [
             {key: 1, text: 'Choice 1', value: 1},
             {key: 2, text: 'Choice 2', value: 2},
@@ -94,6 +98,15 @@ class Dealer extends React.Component {
                             </div>
 
                             <div className="col-md-9">
+                                {
+                                    loading ? <Loader
+                                        style={{marginTop:"100px", textAlign:'center'}}
+                                        type="Rings"
+                                        color="red"
+                                        height={100}
+                                        width={100}
+                                    /> : ''
+                                }
                                 <div className="row">
                                     {dealers.map(dealer => {
                                         return (
