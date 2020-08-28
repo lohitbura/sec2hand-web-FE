@@ -57,6 +57,20 @@ class CreatePost extends React.Component {
         }
         return (
             <Container style={{'width': '40%'}}>
+                <div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="text-content">
+                                    <h4>
+                                        <del></del>
+                                        <strong className="text-primary"></strong></h4>
+                                    <h2></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {
                     error ? <Message color='red'>Failed to create Post</Message> : ''
                 }
@@ -64,7 +78,7 @@ class CreatePost extends React.Component {
                     message ?
                         <Message color='green'>Post create successful!</Message> : ''
                 }
-                <Form onSubmit={this.submit}>
+                <Form style={{marginTop:"100px"}} onSubmit={this.submit}>
                     <Form.Field>
                         <label>Description</label>
                         <TextArea name='description' onChange={this.handleChange} placeholder='Description' required/>

@@ -32,7 +32,16 @@ class Review extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(postsListURL).then(res => {
+        const token = localStorage.getItem('token')
+        let headers;
+        if (token){
+            headers = {
+                Authorization: `Token ${token}`
+            };
+        } else {
+            headers = {}
+        }
+        axios.get(postsListURL, {headers:headers}).then(res => {
             this.setState({posts: res.data})
         })
             .catch(err => {
@@ -43,45 +52,74 @@ class Review extends React.Component {
     render() {
         const {posts} = this.state;
         return (
-            <Container>
-                <Grid style={{marginTop: '50px'}} container columns={3}>
+            <div className="container" >
+                <div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="text-content">
+                                    <h4>
+                                        <del></del>
+                                        <strong className="text-primary"></strong></h4>
+                                    <h2></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="row" style={{marginTop:"100px"}}>
                     {
                         posts.map(post => {
                             return (
-                                <Grid.Column>
-                                    <Link to={`/post/${post.id}`} style={{decoration:'none'}}>
-                                        <Card>
-                                            <Image
-                                                src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
-                                                wrapped ui={false}/>
-                                            <Card.Content>
-                                                {/*<Card.Header>Daniel</Card.Header>*/}
-                                                {/*<Card.Meta>Joined in 2016</Card.Meta>*/}
-                                                <Card.Description>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="product-item">
+                                        <Link to={`/post/${post.id}`} style={{decoration:'none'}}>
+                                            <img
+                                            src={`${post.image}`}
+                                            alt=""/>
+                                        </Link>
+                                        <div className="down-content">
+                                            <a href="car-details.html"><h4>
+                                                <Link to={`/post/${post.id}`}>
                                                     {post.description}
-                                                </Card.Description>
-                                            </Card.Content>
-                                            <Card.Content>
-                                                <Grid columns={2}>
-                                                    <Grid.Column>
-                                                        <Icon name='heart outline'/>
-                                                        26 likes
-                                                    </Grid.Column>
-                                                    <Grid.Column>
-                                                        <Icon name='comments'/>
-                                                        50 comments
-                                                    </Grid.Column>
-                                                </Grid>
-                                            </Card.Content>
-                                        </Card>
-                                    </Link>
+                                                </Link>
+                                            </h4></a>
+                                            <Grid columns={2}>
+                                                <Grid.Column>
+                                                    <Icon name='heart outline'/>
+                                                    {post.likes_count} likes
+                                                </Grid.Column>
+                                                <Grid.Column>
+                                                    <Icon name='comments'/>
+                                                    {post.comments_counts} comments
+                                                </Grid.Column>
+                                            </Grid>
+                                            {/*<h6><small>*/}
+                                            {/*    <del> ₹ {product.price}</del>*/}
+                                            {/*</small> ₹ {product.price}*/}
+                                            {/*</h6>*/}
 
-                                </Grid.Column>
+                                            {/*<p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used*/}
+                                            {/*    vehicle</p>*/}
+
+                                            {/*<small>*/}
+                                            {/*    <strong title="Author"><i className="fa fa-dashboard"></i>*/}
+                                            {/*        {product.km}km*/}
+                                            {/*    </strong> &nbsp;&nbsp;&nbsp;&nbsp;*/}
+                                            {/*    <strong title="Author"><i*/}
+                                            {/*        className="fa fa-cube"></i> {product.color}*/}
+                                            {/*    </strong>&nbsp;&nbsp;&nbsp;&nbsp;*/}
+                                            {/*    <strong title="Views"><i*/}
+                                            {/*        className="fa fa-cog"></i> Manual</strong>*/}
+                                            {/*</small>*/}
+                                        </div>
+                                    </div>
+                                </div>
                             )
                         })
                     }
 
-                </Grid>
+                </div>
                 <div style={{textAlign: "center", marginTop: "50px"}}>
                     <Pagination
                         boundaryRange={0}
@@ -93,8 +131,7 @@ class Review extends React.Component {
                         totalPages={10}
                     />
                 </div>
-
-            </Container>
+            </div>
         )
     }
 }

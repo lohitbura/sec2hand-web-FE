@@ -1,5 +1,6 @@
 // export const URL = "http://hosting123.pythonanywhere.com";
-export const URL = "http://127.0.0.1:8000";
+// export const URL = "http://127.0.0.1:8000";
+export const URL = " http://192.168.43.162:8000";
 
 const apiURL = '/api';
 
@@ -19,6 +20,7 @@ export const postsListURL = `${endpoint}/post-list`;
 export const postCreateURL = `${endpoint}/post-create`;
 export const postDetailURL = (id) => `${endpoint}/post-detail/${id}`;
 export const postLikeURL = `${endpoint}/post-like`;
+export const postCommentURl = `${endpoint}/post-comment-create`;
 
 
 export const dealerListURL = `${endpoint}/dealer-filter`;

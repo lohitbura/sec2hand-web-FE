@@ -45,29 +45,67 @@ class HomepageLayout extends React.Component {
         const {products} = this.state;
         return (
             <div>
-
-                <div className="banner header-text">
-                    <div className="owl-banner owl-carousel">
-                        <div className="banner-item-01">
-                            <div className="text-content">
-                                <h4>Find your car today!</h4>
-                                <h2>Lorem ipsum dolor sit amet</h2>
-                            </div>
-                        </div>
-                        <div className="banner-item-02">
-                            <div className="text-content">
-                                <h4>Fugiat Aspernatur</h4>
-                                <h2>Laboriosam reprehenderit ducimus</h2>
-                            </div>
-                        </div>
-                        <div className="banner-item-03">
-                            <div className="text-content">
-                                <h4>Saepe Omnis</h4>
-                                <h2>Quaerat suscipit unde minus dicta</h2>
+                <div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="text-content">
+                                    <h4>
+                                        <del></del>
+                                        <strong className="text-primary"></strong></h4>
+                                    <h2></h2>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <CarouselProvider style={{marginTop:"35px"}}
+                    naturalSlideWidth={110}
+                    naturalSlideHeight={50}
+                    totalSlides={3}
+                    isPlaying={true}
+                    interval={3000}
+                >
+                    <Slider>
+                        <Slide index={1}><img
+                            style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
+                            src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
+                            alt="First slide"/></Slide>
+                        }
+                        <Slide index={2}><img
+                            style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
+                            src='https://bd.gaadicdn.com/processedimages/revolt-motors/rv-400/source/m_rv-400_11560855440.jpg?tr=w-360'
+                            alt="First slide"/></Slide>
+                        }
+                        <Slide index={3}><img
+                            style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
+                            src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
+                            alt="First slide"/></Slide>
+                        }
+                    </Slider>
+                </CarouselProvider>
+                {/*<div className="banner header-text">*/}
+                {/*    <div className="owl-banner owl-carousel">*/}
+                {/*        <div className="banner-item-01">*/}
+                {/*            <div className="text-content">*/}
+                {/*                <h4>Find your car today!</h4>*/}
+                {/*                <h2>Lorem ipsum dolor sit amet</h2>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*        <div className="banner-item-02">*/}
+                {/*            <div className="text-content">*/}
+                {/*                <h4>Fugiat Aspernatur</h4>*/}
+                {/*                <h2>Laboriosam reprehenderit ducimus</h2>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*        <div className="banner-item-03">*/}
+                {/*            <div className="text-content">*/}
+                {/*                <h4>Saepe Omnis</h4>*/}
+                {/*                <h2>Quaerat suscipit unde minus dicta</h2>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
 
 
                 <div className="latest-products">
@@ -84,15 +122,17 @@ class HomepageLayout extends React.Component {
                                     return (
                                         <div className="col-lg-4 col-md-6">
                                             <div className="product-item">
-                                                <a href="car-details.html"><img
-                                                    src={`${product.image}`}
-                                                    alt=""/></a>
+                                                <Link to={`/product/${product.id}`}>
+                                                    <img
+                                                        src={`${product.image}`}
+                                                        alt=""/>
+                                                </Link>
                                                 <div className="down-content">
-                                                    <a href="car-details.html"><h4>
+                                                    <h4>
                                                         <Link to={`/product/${product.id}`}>
                                                             {product.model}
                                                         </Link>
-                                                    </h4></a>
+                                                    </h4>
 
                                                     <h6><small>
                                                         <del> ₹ {product.price}</del>

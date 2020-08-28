@@ -44,7 +44,7 @@ class DealerSignup extends React.Component {
         return (
             <Grid
                 textAlign="center"
-                style={{height: "100vh"}}
+                style={{height: "100%"}}
                 verticalAlign="middle"
             >
                 <Grid.Column style={{maxWidth: 450}}>
@@ -54,7 +54,7 @@ class DealerSignup extends React.Component {
                     {error && <p>{this.props.error.message}</p>}
 
                     <React.Fragment>
-                        <Form size="large" onSubmit={this.handleSubmit}>
+                        <Form style={{marginTop:"55px"}} size="large" onSubmit={this.handleSubmit}>
                             <Segment stacked>
                                 <Form.Input
                                     onChange={this.handleChange}

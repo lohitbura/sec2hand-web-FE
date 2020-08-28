@@ -69,24 +69,46 @@ class CustomLayout extends React.Component {
                                             Review
                                         </Link>
                                     </li>
-
-                                    <li className="nav-item dropdown">
-                                        <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                                           role="button" aria-haspopup="true" aria-expanded="false">More</a>
-
-                                        <div className="dropdown-menu">
-                                            <a className="dropdown-item" href="blog.html">Blog</a>
-                                            <a className="dropdown-item" href="team.html">Team</a>
-                                            <a className="dropdown-item" href="testimonials.html">Testimonials</a>
-                                            <a className="dropdown-item" href="terms.html">Terms</a>
-                                        </div>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/dealer">
+                                            Find dealer
+                                        </Link>
                                     </li>
+
 
                                     <li className="nav-item"><a className="nav-link" href="about-us.html">About Us</a>
                                     </li>
 
                                     <li className="nav-item"><a className="nav-link" href="contact.html">Contact Us</a>
                                     </li>
+                                    {authenticated ? (
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to={`/profile/${username}`}>
+                                                My account
+                                            </Link>
+                                        </li>
+                                    ) : ''}
+                                    {
+                                        authenticated ? <li className="nav-item">
+                                            <a className="nav-link" onClick={() => this.props.logout()}>
+                                                Logout
+                                            </a>
+                                        </li> : <li className="nav-item dropdown">
+                                            <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+                                               role="button" aria-haspopup="true" aria-expanded="false">Login</a>
+
+                                            <div className="dropdown-menu">
+                                                {/*<a  href="blog.html">Blog</a>*/}
+                                                <Link className="dropdown-item" to="/dealer-login">
+                                                    Dealer
+                                                </Link>
+                                                <Link className="dropdown-item" to="/login">
+                                                    Customer
+                                                </Link>
+                                            </div>
+                                        </li>
+                                    }
+
                                 </ul>
                             </div>
                         </div>
@@ -99,20 +121,21 @@ class CustomLayout extends React.Component {
                 {/*        </Link>*/}
                 {/*        <Link to="/review">*/}
                 {/*            <Menu.Item header>Review</Menu.Item>*/}
-                {/*        </Link><Link to="/dealer">*/}
+                {/*        </Link>*/}
+                {/*<Link to="/dealer">*/}
                 {/*        <Menu.Item header>Find dealer</Menu.Item>*/}
                 {/*    </Link>*/}
-                {/*        {authenticated ? (*/}
-                {/*            <Menu.Menu position="right">*/}
-                {/*                <Menu.Item header>*/}
-                {/*                    <Link to={`/profile/${username}`}>*/}
-                {/*                        Profile*/}
-                {/*                    </Link>*/}
-                {/*                </Menu.Item>*/}
-                {/*            </Menu.Menu>*/}
+                {/*{authenticated ? (*/}
+                {/*    <Menu.Menu position="right">*/}
+                {/*        <Menu.Item header>*/}
+                {/*            <Link to={`/profile/${username}`}>*/}
+                {/*                Profile*/}
+                {/*            </Link>*/}
+                {/*        </Menu.Item>*/}
+                {/*    </Menu.Menu>*/}
 
-                {/*        ) : ''*/}
-                {/*        }*/}
+                {/*) : ''*/}
+                {/*}*/}
                 {/*        {authenticated ? (*/}
                 {/*            <Menu.Item header onClick={() => this.props.logout()}>*/}
                 {/*                Logout*/}
@@ -122,12 +145,16 @@ class CustomLayout extends React.Component {
                 {/*                <Menu.Menu position="right">*/}
                 {/*                    <Dropdown item text='Login'>*/}
                 {/*                        <Dropdown.Menu style={{color: 'black'}}>*/}
-                {/*                            <Dropdown.Item><Link style={{color: "black"}} to="/login">*/}
+                {/*                            <Dropdown.Item>
+                <Link style={{color: "black"}} to="/login">*/}
                 {/*                                Customer*/}
-                {/*                            </Link></Dropdown.Item>*/}
-                {/*                            <Dropdown.Item><Link style={{color: "black"}} to="/dealer-login">*/}
+                {/*                            </Link>
+                </Dropdown.Item>*/}
+                {/*                            <Dropdown.Item>
+                <Link style={{color: "black"}} to="/dealer-login">*/}
                 {/*                                Dealer*/}
-                {/*                            </Link></Dropdown.Item>*/}
+                {/*                            </Link>
+                </Dropdown.Item>*/}
                 {/*                        </Dropdown.Menu>*/}
                 {/*                    </Dropdown>*/}
                 {/*                </Menu.Menu>*/}
@@ -199,26 +226,26 @@ class CustomLayout extends React.Component {
                     </Container>
                 </Segment>
             </div>
-    );
+        );
     }
-    }
+}
 
-    const mapStateToProps = state => {
-        return {
+const mapStateToProps = state => {
+    return {
         authenticated: state.auth.token !== null,
         token: state.auth.token
     };
-    };
+};
 
-    const mapDispatchToProps = dispatch => {
-        return {
+const mapDispatchToProps = dispatch => {
+    return {
         logout: () => dispatch(logout())
     };
-    };
+};
 
-    export default withRouter(
+export default withRouter(
     connect(
-    mapStateToProps,
-    mapDispatchToProps
+        mapStateToProps,
+        mapDispatchToProps
     )(CustomLayout)
-    );
+);

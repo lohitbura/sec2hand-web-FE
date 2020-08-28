@@ -2,10 +2,19 @@ import React from 'react';
 import {Container} from "semantic-ui-react";
 import {Button, Checkbox, Form, TextArea} from 'semantic-ui-react'
 import axios from "axios";
-import {dealerProfileEditURL, getUserProfileURL, postCreateURL, productCreateURL} from "../store/constants";
+import {
+    dealerProfileEditURL,
+    getUserProfileIdURL,
+    getUserProfileURL,
+    postCreateURL,
+    productCreateURL
+} from "../store/constants";
 import Loader from "semantic-ui-react/dist/commonjs/elements/Loader";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import Input from "semantic-ui-react/dist/commonjs/elements/Input";
+import {logout} from "../store/actions/auth";
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
 
 
 class EditProfile extends React.Component {
@@ -18,15 +27,28 @@ class EditProfile extends React.Component {
         category: '',
         loader: false,
         message: '',
-        error: ''
+        error: '',
+        username:''
     };
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.token !== this.props.token) {
+            let headers = {
+                Authorization: `Token ${localStorage.getItem('token')}`
+            };
+            axios.get(getUserProfileIdURL, {headers: headers}).then(res => {
+                this.setState({username: res.data.user})
+            })
+        }
+    }
+
     componentDidMount() {
+        const {username} = this.state;
         let headers = {
             Authorization: `Token ${localStorage.getItem('token')}`
         };
         this.setState({loader: true})
-        axios.get(getUserProfileURL, {headers: headers}).then(res => {
+        axios.get(getUserProfileURL(username), {headers: headers}).then(res => {
             console.log(res.data)
             this.setState({
                 loader: false, address: res.data.address,
@@ -96,6 +118,20 @@ class EditProfile extends React.Component {
         }
         return (
             <Container style={{'width': '40%'}}>
+                <div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="text-content">
+                                    <h4>
+                                        <del></del>
+                                        <strong className="text-primary"></strong></h4>
+                                    <h2></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {
                     error ? <Message color='red'>Failed to create Post</Message> : ''
                 }
@@ -103,7 +139,7 @@ class EditProfile extends React.Component {
                     message ?
                         <Message color='green'>Profile updated successful!</Message> : ''
                 }
-                <Form onSubmit={this.submit}>
+                <Form style={{marginTop:"100px"}} onSubmit={this.submit}>
                     <Form.Field>
                         <label>Address</label>
                         <TextArea value={address} name='address' onChange={this.handleChange} placeholder='Address' required/>
@@ -135,4 +171,22 @@ class EditProfile extends React.Component {
     }
 }
 
-export default EditProfile;
+const mapStateToProps = state => {
+    return {
+        authenticated: state.auth.token !== null,
+        token: state.auth.token
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout())
+    };
+};
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(EditProfile)
+);
