@@ -10,6 +10,8 @@ import {getUserProfileIdURL, getUserProfileURL, postLikeURL, URL} from "../store
 import {Link, withRouter} from "react-router-dom";
 import Header from "semantic-ui-react/dist/commonjs/elements/Header";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
+import Loader from 'react-loader-spinner';
+
 
 
 class Profile extends React.Component {
@@ -86,7 +88,7 @@ class Profile extends React.Component {
     };
 
     render() {
-        const {profile, username} = this.state;
+        const {profile, username, loader} = this.state;
         const panes = [
             {
                 menuItem: 'Products',
@@ -105,7 +107,10 @@ class Profile extends React.Component {
                                         <div className="col-lg-4 col-md-6">
                                             <div className="product-item">
                                                 <Link to={`/product/${product.id}`}>
-                                                    <img
+                                                    <img style={{
+                                                        height: '232px',
+                                                        objectFit: 'cover'
+                                                    }}
                                                         src={`${URL}${product.image}`}
                                                         alt=""/>
                                                 </Link>
@@ -143,15 +148,15 @@ class Profile extends React.Component {
 
                         </div>
                         <div style={{textAlign: "center"}}>
-                            <Pagination
-                                boundaryRange={0}
-                                defaultActivePage={1}
-                                ellipsisItem={null}
-                                firstItem={null}
-                                lastItem={null}
-                                siblingRange={1}
-                                totalPages={10}
-                            />
+                            {/*<Pagination*/}
+                            {/*    boundaryRange={0}*/}
+                            {/*    defaultActivePage={1}*/}
+                            {/*    ellipsisItem={null}*/}
+                            {/*    firstItem={null}*/}
+                            {/*    lastItem={null}*/}
+                            {/*    siblingRange={1}*/}
+                            {/*    totalPages={10}*/}
+                            {/*/>*/}
                         </div>
                     </div>
                 </Tab.Pane>,
@@ -172,7 +177,10 @@ class Profile extends React.Component {
                                         <div className="col-lg-4 col-md-6">
                                             <div className="product-item">
                                                 <Link to={`/post/${post.id}`} style={{decoration: 'none'}}>
-                                                    <img
+                                                    <img style={{
+                                                        height: '232px',
+                                                        objectFit: 'cover'
+                                                    }}
                                                         src={`${post.image}`}
                                                         alt=""/>
                                                 </Link>
@@ -233,15 +241,15 @@ class Profile extends React.Component {
 
                         </div>
                         <div style={{textAlign: "center"}}>
-                            <Pagination
-                                boundaryRange={0}
-                                defaultActivePage={1}
-                                ellipsisItem={null}
-                                firstItem={null}
-                                lastItem={null}
-                                siblingRange={1}
-                                totalPages={10}
-                            />
+                            {/*<Pagination*/}
+                            {/*    boundaryRange={0}*/}
+                            {/*    defaultActivePage={1}*/}
+                            {/*    ellipsisItem={null}*/}
+                            {/*    firstItem={null}*/}
+                            {/*    lastItem={null}*/}
+                            {/*    siblingRange={1}*/}
+                            {/*    totalPages={10}*/}
+                            {/*/>*/}
                         </div>
                     </Container>
                 </Tab.Pane>
@@ -264,6 +272,14 @@ class Profile extends React.Component {
                             </div>
                         </div>
                     </div>
+                    {
+                        loader ? <Loader
+                            style={{marginTop: "100px", textAlign: 'center', height:'100vh'}}
+                            type="Rings"
+                            color="red"
+                            height={100}
+                            width={100}
+                        /> :
 
                     <div className="products">
                         <div className="container">
@@ -343,6 +359,7 @@ class Profile extends React.Component {
                             </div>
                         </div>
                     </div>
+                    }
                 </div>
                 {/*<Grid columns={3}>*/}
                 {/*    <Grid.Column>*/}
@@ -365,9 +382,9 @@ class Profile extends React.Component {
                 {/*    </Grid.Column>*/}
                 {/*</Grid>*/}
                 {
-                    profile.is_dealer ? <Tab style={{marginTop: "50px"}} panes={panes}/> : ''
+                    profile.is_dealer ? (
+                            loader ? '': <Tab style={{marginTop: "50px"}} panes={panes}/>) : ''
                 }
-
             </Container>
         )
 

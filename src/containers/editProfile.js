@@ -10,12 +10,14 @@ import {
     postCreateURL,
     productCreateURL
 } from "../store/constants";
-import Loader from "semantic-ui-react/dist/commonjs/elements/Loader";
+import Loader from 'react-loader-spinner';
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import Input from "semantic-ui-react/dist/commonjs/elements/Input";
 import {logout} from "../store/actions/auth";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 class EditProfile extends React.Component {
@@ -97,10 +99,15 @@ class EditProfile extends React.Component {
             axios.post(dealerProfileEditURL, form_data, {headers: headers}).then(res => {
                 console.log(res.data)
                 this.setState({loader: false, message: res.data.message})
+                toast.success("Profile update successful!")
+                setTimeout(() => {
+                    this.props.history.goBack()
+                }, 1000)
             })
                 .catch(err => {
                     console.log(err)
-                    this.setState({loader: false, error: err.data.message})
+                    this.setState({loader: false})
+                    toast.error("Profile update failed!")
                 })
         } else {
             if (image) {
@@ -143,11 +150,6 @@ class EditProfile extends React.Component {
             category,
             is_dealer
         } = this.state;
-        if (loader) {
-            return (
-                <Loader active inline='centered'/>
-            )
-        }
         return (
             <Container style={{'width': '40%'}}>
                 <div>
@@ -164,50 +166,58 @@ class EditProfile extends React.Component {
                         </div>
                     </div>
                 </div>
+                <ToastContainer position="bottom-right"/>
                 {
-                    error ? <Message color='red'>Failed to create Post</Message> : ''
-                }
-                {
-                    message ?
-                        <Message color='green'>Profile updated successful!</Message> : ''
-                }
-                <Form style={{marginTop: "100px"}} onSubmit={this.submit}>
-                    {
-                        is_dealer ? <Form.Field>
-                            <label>Address</label>
-                            <TextArea value={address} name='address' onChange={this.handleChange} placeholder='Address'
-                                      required/>
-                        </Form.Field> : ''
-                    }
+                    loader ? <Loader
+                            style={{marginTop: "100px", textAlign: 'center', height:'100vh'}}
+                            type="Rings"
+                            color="red"
+                            height={100}
+                            width={100}
+                        /> :
+                        <Form style={{marginTop: "100px", height: '100vh'}} onSubmit={this.submit}>
+                            {
+                                is_dealer ? <Form.Field>
+                                    <label>Address</label>
+                                    <TextArea value={address} name='address' onChange={this.handleChange}
+                                              placeholder='Address'
+                                              required/>
+                                </Form.Field> : ''
+                            }
 
-                    <Form.Field>
-                        <label>Phone</label>
-                        <Input value={phone} name='phone' onChange={this.handleChange} placeholder='Phone' required/>
-                    </Form.Field>
-                    <Form.Field>
-                        <label>City</label>
-                        <Input value={city} name='city' onChange={this.handleChange} placeholder='city' required/>
-                    </Form.Field>
-                    {
-                        is_dealer ? <Form.Field>
-                            <label>Area</label>
-                            <Input value={area} name='area' onChange={this.handleChange} placeholder='Area' required/>
-                        </Form.Field> : ''
-                    }
+                            <Form.Field>
+                                <label>Phone</label>
+                                <Input value={phone} name='phone' onChange={this.handleChange} placeholder='Phone'
+                                       required/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>City</label>
+                                <Input value={city} name='city' onChange={this.handleChange} placeholder='city'
+                                       required/>
+                            </Form.Field>
+                            {
+                                is_dealer ? <Form.Field>
+                                    <label>Area</label>
+                                    <Input value={area} name='area' onChange={this.handleChange} placeholder='Area'
+                                           required/>
+                                </Form.Field> : ''
+                            }
 
-                    {
-                        is_dealer ? <Form.Field>
-                            <label>Category</label>
-                            <Input value={category} name='category' onChange={this.handleChange} placeholder='Category'
-                                   required/>
-                        </Form.Field> : ''
-                    }
-                    <Form.Field>
-                        <label>Image</label>
-                        <input type='file' name='image' onChange={this.handleImage}/>
-                    </Form.Field>
-                    <Button type='submit'>Submit</Button>
-                </Form>
+                            {
+                                is_dealer ? <Form.Field>
+                                    <label>Category</label>
+                                    <Input value={category} name='category' onChange={this.handleChange}
+                                           placeholder='Category'
+                                           required/>
+                                </Form.Field> : ''
+                            }
+                            <Form.Field>
+                                <label>Image</label>
+                                <input type='file' name='image' onChange={this.handleImage}/>
+                            </Form.Field>
+                            <Button type='submit'>Submit</Button>
+                        </Form>
+                }
             </Container>
         )
     }

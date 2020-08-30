@@ -195,7 +195,10 @@ class Dealer extends React.Component {
                                             <div className="col-md-4">
                                                 <div className="product-item">
                                                     <Link to={`/profile/${dealer.user}`}>
-                                                        <img src={`${URL}${dealer.image}`}
+                                                        <img style={{
+                                                            height: '232px',
+                                                            objectFit: 'cover'
+                                                        }} src={`${URL}${dealer.image}`}
                                                              alt=""/>
                                                     </Link>
 

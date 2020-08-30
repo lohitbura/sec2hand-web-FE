@@ -145,7 +145,10 @@ class HomepageLayout extends React.Component {
                                         <div className="col-lg-4 col-md-6">
                                             <div className="product-item">
                                                 <Link to={`/product/${product.id}`}>
-                                                    <img
+                                                    <img style={{
+                                                        height: '232px',
+                                                        objectFit: 'cover'
+                                                    }}
                                                         src={`${URL}${product.image}`}
                                                         alt=""/>
                                                 </Link>

@@ -36,6 +36,9 @@ class CreatePost extends React.Component {
             console.log(res.data)
             this.setState({loader: false, message: res.data.message})
             toast.success("Post create successful!")
+            setTimeout(() => {
+                this.props.history.goBack()
+            }, 1000)
         })
             .catch(err => {
                 console.log(err)

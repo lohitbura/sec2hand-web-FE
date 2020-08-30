@@ -48,12 +48,12 @@ class DealerSignup extends React.Component {
         return (
             <Grid
                 textAlign="center"
-                style={{height: "100%"}}
+                style={{height: "100%", marginTop:"100px"}}
                 verticalAlign="middle"
             >
                 <Grid.Column style={{maxWidth: 450}}>
                     <Header as="h2" color="teal" textAlign="center">
-                        Signup to your account
+                        Signup as dealer
                     </Header>
                     {error && <p>{this.props.error.message}</p>}
 

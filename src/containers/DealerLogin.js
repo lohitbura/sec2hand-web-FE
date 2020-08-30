@@ -45,7 +45,7 @@ class DealerLogin extends React.Component {
             >
                 <Grid.Column style={{ maxWidth: 450 }}>
                     <Header as="h2" color="teal" textAlign="center">
-                        Log-in to your account
+                        Log-in as dealer
                     </Header>
                     {error && <p>{this.props.error.message}</p>}
 

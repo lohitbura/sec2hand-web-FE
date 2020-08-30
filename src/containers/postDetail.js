@@ -1,7 +1,7 @@
 import React from 'react';
 import {CarouselProvider, Slide, Slider} from "pure-react-carousel";
 import {Link, withRouter} from "react-router-dom";
-import {Container, Comment, Form, Button} from "semantic-ui-react";
+import {Container, Comment, Form, Button, Icon, Grid} from "semantic-ui-react";
 import axios from 'axios';
 import {
     getUserProfileIdURL,
@@ -14,6 +14,9 @@ import {
 import Header from "semantic-ui-react/dist/commonjs/elements/Header";
 import {logout} from "../store/actions/auth";
 import {connect} from "react-redux";
+import Loader from "react-loader-spinner";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class PostDetail extends React.Component {
     state = {
@@ -22,7 +25,8 @@ class PostDetail extends React.Component {
         comments: [],
         limit: 5,
         offset: 0,
-        has_more: true
+        has_more: true,
+        loading: false
     }
 
     componentDidMount() {
@@ -51,8 +55,9 @@ class PostDetail extends React.Component {
         } else {
             headers = {}
         }
+        this.setState({loading: true})
         axios.get(postDetailURL(id), {headers: headers}).then(res => {
-            this.setState({post: res.data})
+            this.setState({post: res.data, loading: false})
         })
 
     }
@@ -96,7 +101,7 @@ class PostDetail extends React.Component {
         setTimeout(() => {
             this.fetchComments2()
             this.getPostDetail()
-        },100)
+        }, 100)
     };
 
     commentChange = (e) => {
@@ -106,7 +111,10 @@ class PostDetail extends React.Component {
     postDelete = (id) => {
         axios.delete(postDetailURL(id)).then(res => {
             console.log(res.data)
-            this.props.history.push('/review')
+            toast.success("Post has been deleted!")
+            setTimeout(() => {
+                this.props.history.push('/review')
+            }, 2000)
         })
             .catch(err => {
                 console.log(err)
@@ -140,7 +148,7 @@ class PostDetail extends React.Component {
     }
 
     render() {
-        const {post, username, comments, has_more} = this.state;
+        const {post, username, comments, has_more, loading} = this.state;
         // if (loading) {
         //     return <Loader active inline='centered'/>
         // }
@@ -149,6 +157,7 @@ class PostDetail extends React.Component {
                 <div className="page-heading about-heading header-text"
                      style={{'backgroundImage': `url(${post.image})`}}>
                     <div className="container">
+                        <ToastContainer position="bottom-right"/>
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="text-content">
@@ -161,112 +170,113 @@ class PostDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-
-                <div className="products">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div>
-                                    <img src={`${post.image}`} alt=""
-                                         className="img-fluid wc-image"/>
-                                </div>
-                                <br/>
-                            </div>
-
-                            <div className="col-md-6">
-                                <form action="#" method="post" className="form">
-                                    <ul className="list-group list-group-flush">
-
-
-                                        <strong className="pull-left"> Description</strong>
-
-                                        <span className="pull-right">{post.description}</span>
+                {
+                    loading ? <Loader
+                            style={{marginTop: "100px", textAlign: 'center', height: '100vh'}}
+                            type="Rings"
+                            color="red"
+                            height={100}
+                            width={100}
+                        /> :
+                        <div className="products">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div>
+                                            <img src={`${post.image}`} alt=""
+                                                 className="img-fluid wc-image"/>
+                                        </div>
                                         <br/>
-                                        <strong><i>Author:</i>
-                                            <Link to={`/profile/${post.user}`}>
-                                                {post.user}
-                                            </Link>
-                                        </strong>
-                                    </ul>
-                                </form>
-                                <br/>
-                                {
-                                    post.user === username ? <div>
-                                        {/*<Link to={`/postEdit/${post.id}`}>*/}
-                                        {/*    <Button content='Edit' color="green"/>*/}
-                                        {/*</Link>*/}
-                                        <Button onClick={() => this.postDelete(post.id)} content='Delete' color="red"/>
-                                    </div> : ''
-                                }
+                                    </div>
 
-                                <br/>
-                                <br/>
-                                {
-                                    this.props.authenticated && this.props.authenticated ?
-                                        post.is_like && post.is_like ?
-                                            <div className="ui labeled button">
-                                                <button className="ui red button" tabIndex="0" onClick={this.likes}>
-                                                    <i aria-hidden="true" className="heart icon"/>
-                                                    Unlike
-                                                </button>
-                                                <div
-                                                    className="ui red left pointing basic label">{post.likes_count}</div>
-                                            </div>
-                                            :
-                                            <div className="ui labeled button">
-                                                <button className="ui red button" tabIndex="0" onClick={this.likes}>
-                                                    <i aria-hidden="true" className="heart icon"/>
-                                                    Like
-                                                </button>
-                                                <div
-                                                    className="ui red left pointing basic label">{post.likes_count}</div>
-                                            </div>
-                                        : ''
-                                }
+                                    <div className="col-md-6">
+                                        <form action="#" method="post" className="form">
+                                            <ul className="list-group list-group-flush">
 
 
-                                <Comment.Group>
-                                    <Header as='h3'>
-                                        Comments({post.comments_counts && post.comments_counts})
-                                    </Header>
-                                    {
-                                        this.props.authenticated && this.props.authenticated ?
-                                            <Form onSubmit={this.commentSubmit}>
-                                                <Form.TextArea onChange={this.commentChange}
-                                                               value={this.state.comment}/>
-                                                <Button content='Add comment' secondary/>
-                                            </Form> : ''
-                                    }
+                                                <strong className="pull-left"> Description</strong>
 
-                                    {comments && comments.map(comment => {
-                                        return (
-                                            <Comment key={comment.id}>
-                                                {/*<Comment.Avatar src={`${URL}/media/${comment.profile_pic}`}/>*/}
-                                                <Comment.Content>
-                                                    <Comment.Author as='a'>
-                                                        <Link to={`/profile/${comment.user}`}>
-                                                            {comment.user}
-                                                        </Link>
-                                                    </Comment.Author>
-                                                    <Comment.Metadata>
-                                                        <div>Today at 5:42PM</div>
-                                                    </Comment.Metadata>
-                                                    <Comment.Text>{comment.comment}</Comment.Text>
-                                                </Comment.Content>
-                                            </Comment>
-                                        )
-                                    })}
-                                    {
-                                        has_more ?
-                                            <Button size={"mini"} primary onClick={() => this.fetchComments()}>see more
-                                                comments</Button> : 'No more comments left'
+                                                <span className="pull-right">{post.description}</span>
+                                                <br/>
+                                                <strong><i>Author:</i>
+                                                    <Link to={`/profile/${post.user}`}>
+                                                        {post.user}
+                                                    </Link>
+                                                </strong>
+                                            </ul>
+                                        </form>
+                                        <br/>
+                                        {
+                                            post.user === username ? <div>
+                                                {/*<Link to={`/postEdit/${post.id}`}>*/}
+                                                {/*    <Button content='Edit' color="green"/>*/}
+                                                {/*</Link>*/}
+                                                <Button onClick={() => this.postDelete(post.id)} content='Delete'
+                                                        color="red"/>
+                                            </div> : ''
+                                        }
 
-                                    }
-                                </Comment.Group>
+                                        <br/>
+                                        <br/>
+                                        {
+                                            this.props.authenticated && this.props.authenticated ?
+
+                                                post.is_like && post.is_like ?
+                                                    <Icon onClick={() => this.likes(post.id)}
+                                                          name='heart' size="big" color="red"/>
+                                                    :
+                                                    <Icon onClick={() => this.likes(post.id)}
+                                                          name='heart outline' size="big" color="red"/>
+                                                : ''
+                                        }
+
+                                        {post.likes_count} likes
+
+                                        <Comment.Group>
+                                            <Header as='h3'>
+                                                Comments({post.comments_counts && post.comments_counts})
+                                            </Header>
+                                            {
+                                                this.props.authenticated && this.props.authenticated ?
+                                                    <Form onSubmit={this.commentSubmit}>
+                                                        <Form.TextArea onChange={this.commentChange}
+                                                                       value={this.state.comment}/>
+                                                        <Button content='Add comment' secondary/>
+                                                    </Form> : ''
+                                            }
+
+                                            {comments && comments.map(comment => {
+                                                return (
+                                                    <Comment key={comment.id}>
+                                                        {/*<Comment.Avatar src={`${URL}/media/${comment.profile_pic}`}/>*/}
+                                                        <Comment.Content>
+                                                            <Comment.Author as='a'>
+                                                                <Link to={`/profile/${comment.user}`}>
+                                                                    {comment.user}
+                                                                </Link>
+                                                            </Comment.Author>
+                                                            <Comment.Metadata>
+                                                                <div>Today at 5:42PM</div>
+                                                            </Comment.Metadata>
+                                                            <Comment.Text>{comment.comment}</Comment.Text>
+                                                        </Comment.Content>
+                                                    </Comment>
+                                                )
+                                            })}
+                                            {
+                                                has_more ?
+                                                    <Button size={"mini"} primary onClick={() => this.fetchComments()}>see
+                                                        more
+                                                        comments</Button> : 'No more comments left'
+
+                                            }
+                                        </Comment.Group>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                }
+
             </div>
             // <Container>
             //     <CarouselProvider

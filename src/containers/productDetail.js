@@ -5,6 +5,8 @@ import {Link, withRouter} from "react-router-dom";
 import axios from 'axios';
 import {getUserProfileIdURL, productDetailURL} from "../store/constants";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 class ProductDetail extends React.Component {
@@ -39,7 +41,10 @@ class ProductDetail extends React.Component {
         };
         axios.delete(productDetailURL(id), {headers: headers}).then(res => {
             console.log(res.data)
-            this.props.history.push('/')
+            toast.success("Product has been deleted!")
+            setTimeout(() => {
+                this.props.history.push('/')
+            },2000)
         })
             .catch(err => {
                 console.log(err)
@@ -67,6 +72,7 @@ class ProductDetail extends React.Component {
                 </div>
 
                 <div className="products">
+                    <ToastContainer position="bottom-right"/>
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6">
@@ -75,15 +81,15 @@ class ProductDetail extends React.Component {
                                          className="img-fluid wc-image"/>
                                 </div>
                                 <br/>
-                                <div className="row">
-                                    <div className="col-sm-4 col-6">
-                                        <div>
-                                            <img src="assets/images/product-1-370x270.jpg" alt=""
-                                                 className="img-fluid"/>
-                                        </div>
-                                        <br/>
-                                    </div>
-                                </div>
+                                {/*<div className="row">*/}
+                                {/*    <div className="col-sm-4 col-6">*/}
+                                {/*        <div>*/}
+                                {/*            <img src="assets/images/product-1-370x270.jpg" alt=""*/}
+                                {/*                 className="img-fluid"/>*/}
+                                {/*        </div>*/}
+                                {/*        <br/>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                             </div>
 
                             <div className="col-md-6">
@@ -125,6 +131,14 @@ class ProductDetail extends React.Component {
                                                 <span className="pull-left">Price</span>
 
                                                 <strong className="pull-right">₹{product.price}</strong>
+                                            </div>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <div className="clearfix">
+                                                <span className="pull-left">Dealer profile</span>
+                                                <Link to={`/profile/${product.user}`}>
+                                                    <strong className="pull-right">{product.user}</strong>
+                                                </Link>
                                             </div>
                                         </li>
                                     </ul>
@@ -181,57 +195,57 @@ class ProductDetail extends React.Component {
                 {/*    </div>*/}
                 {/*</div>*/}
 
-                <div className="section">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="section-heading">
-                                    <h2>Contact Details</h2>
-                                </div>
+                {/*<div className="section">*/}
+                {/*    <div className="container">*/}
+                {/*        <div className="row">*/}
+                {/*            <div className="col-md-6">*/}
+                {/*                <div className="section-heading">*/}
+                {/*                    <h2>Contact Details</h2>*/}
+                {/*                </div>*/}
 
-                                <div className="left-content">
-                                    <p>
-                                        <span>Name</span>
+                {/*                <div className="left-content">*/}
+                {/*                    <p>*/}
+                {/*                        <span>Name</span>*/}
 
-                                        <br/>
+                {/*                        <br/>*/}
 
-                                        <strong>John Smith</strong>
-                                    </p>
+                {/*                        <strong>John Smith</strong>*/}
+                {/*                    </p>*/}
 
-                                    <p>
-                                        <span>Phone</span>
+                {/*                    <p>*/}
+                {/*                        <span>Phone</span>*/}
 
-                                        <br/>
+                {/*                        <br/>*/}
 
-                                        <strong>
-                                            <a href="tel:123-456-789">123-456-789</a>
-                                        </strong>
-                                    </p>
+                {/*                        <strong>*/}
+                {/*                            <a href="tel:123-456-789">123-456-789</a>*/}
+                {/*                        </strong>*/}
+                {/*                    </p>*/}
 
-                                    <p>
-                                        <span>Mobile phone</span>
+                {/*                    <p>*/}
+                {/*                        <span>Mobile phone</span>*/}
 
-                                        <br/>
+                {/*                        <br/>*/}
 
-                                        <strong>
-                                            <a href="tel:456789123">456789123</a>
-                                        </strong>
-                                    </p>
+                {/*                        <strong>*/}
+                {/*                            <a href="tel:456789123">456789123</a>*/}
+                {/*                        </strong>*/}
+                {/*                    </p>*/}
 
-                                    <p>
-                                        <span>Email</span>
+                {/*                    <p>*/}
+                {/*                        <span>Email</span>*/}
 
-                                        <br/>
+                {/*                        <br/>*/}
 
-                                        <strong>
-                                            <a href="mailto:john@carsales.com">john@carsales.com</a>
-                                        </strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {/*                        <strong>*/}
+                {/*                            <a href="mailto:john@carsales.com">john@carsales.com</a>*/}
+                {/*                        </strong>*/}
+                {/*                    </p>*/}
+                {/*                </div>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
                 {/*<CarouselProvider*/}
                 {/*    naturalSlideWidth={110}*/}
                 {/*    naturalSlideHeight={50}*/}

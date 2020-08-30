@@ -26,6 +26,11 @@ import axios from 'axios';
 import {postLikeURL, postsListURL, URL} from "../store/constants";
 import Loader from 'react-loader-spinner'
 
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {logout} from "../store/actions/auth";
+import {connect} from "react-redux";
+
 
 class Review extends React.Component {
     state = {
@@ -102,29 +107,36 @@ class Review extends React.Component {
 
     likesHandle = (value, id) => {
         // const id = this.state.post.id;
-        let headers = {
-            Authorization: `Token ${localStorage.getItem('token')}`
-        };
-        this.setState({action: value}, () => {
-            axios.post(postLikeURL, {"post_id": id, "action": this.state.action}, {headers: headers})
-                .then(res => {
-                    console.log(res.data)
-                    const elementsIndex = this.state.posts.findIndex(element => element.id == res.data.id)
-                    let newArray = [...this.state.posts]
-                    newArray[elementsIndex] = {
-                        ...newArray[elementsIndex],
-                        is_like: res.data.is_like,
-                        likes_count: res.data.likes_count
-                    }
-                    this.setState({posts: newArray})
-                })
-        })
+        if (!this.props.authenticated) {
+            toast.error("You are not logged in!")
+        } else {
+
+            let headers = {
+                Authorization: `Token ${localStorage.getItem('token')}`
+            };
+            this.setState({action: value}, () => {
+                axios.post(postLikeURL, {"post_id": id, "action": this.state.action}, {headers: headers})
+                    .then(res => {
+                        console.log(res.data)
+                        const elementsIndex = this.state.posts.findIndex(element => element.id == res.data.id)
+                        let newArray = [...this.state.posts]
+                        newArray[elementsIndex] = {
+                            ...newArray[elementsIndex],
+                            is_like: res.data.is_like,
+                            likes_count: res.data.likes_count
+                        }
+                        this.setState({posts: newArray})
+                    })
+            })
+        }
     };
 
     render() {
         const {posts, loading, has_more} = this.state;
         return (
             <div className="container">
+                <ToastContainer position="bottom-right"/>
+
                 <div>
                     <div className="container">
                         <div className="row">
@@ -155,9 +167,12 @@ class Review extends React.Component {
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product-item">
                                         <Link to={`/post/${post.id}`} style={{decoration: 'none'}}>
-                                            <img
-                                                src={`${post.image}`}
-                                                alt=""/>
+                                            <img style={{
+                                                height: '232px',
+                                                objectFit: 'cover'
+                                            }}
+                                                 src={`${post.image}`}
+                                                 alt=""/>
                                         </Link>
                                         <div className="down-content">
                                             <a href="car-details.html"><h5 style={{marginBottom: "5px"}}>
@@ -219,7 +234,7 @@ class Review extends React.Component {
                 <div style={{textAlign: "center", marginTop: "50px"}}>
                     {
                         loading ? <Loader
-                            style={{marginTop: "100px", textAlign: 'center'}}
+                            style={{marginTop: "100px", textAlign: 'center', height: '100vh'}}
                             type="Rings"
                             color="red"
                             height={100}
@@ -235,4 +250,22 @@ class Review extends React.Component {
     }
 }
 
-export default Review;
+const mapStateToProps = state => {
+    return {
+        authenticated: state.auth.token !== null,
+        token: state.auth.token
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout())
+    };
+};
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Review)
+);
