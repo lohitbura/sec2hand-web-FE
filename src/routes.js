@@ -15,6 +15,10 @@ import CreatePost from "./containers/createPost";
 import EditProfile from "./containers/editProfile";
 import ProductDetail from "./containers/productDetail";
 import PostDetail from "./containers/postDetail";
+import ProductEdit from "./containers/productEdit";
+import PostEdit from "./containers/postEdit";
+import AboutUs from "./containers/aboutUs";
+import ContactUs from "./containers/contactUs";
 
 const BaseRouter = () => (
   <Hoc>
@@ -29,7 +33,11 @@ const BaseRouter = () => (
     <Route path="/post-create" component={CreatePost} />
     <Route path="/profile-edit" component={EditProfile} />
     <Route path="/product/:id" component={ProductDetail} />
+    <Route path="/productEdit/:id" component={ProductEdit} />
+    <Route path="/postEdit/:id" component={PostEdit} />
     <Route path="/post/:id" component={PostDetail} />
+    <Route path="/about" component={AboutUs} />
+    <Route path="/contact" component={ContactUs} />
     <Route exact path="/" component={HomepageLayout} />
   </Hoc>
 );

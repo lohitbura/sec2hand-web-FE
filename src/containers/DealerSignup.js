@@ -25,6 +25,10 @@ class DealerSignup extends React.Component {
         password2: ""
     };
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         const {username, code,shop_name,address, phone,city, area,category, password1, password2} = this.state;
@@ -44,17 +48,17 @@ class DealerSignup extends React.Component {
         return (
             <Grid
                 textAlign="center"
-                style={{height: "100vh"}}
+                style={{height: "100%", marginTop:"100px"}}
                 verticalAlign="middle"
             >
                 <Grid.Column style={{maxWidth: 450}}>
                     <Header as="h2" color="teal" textAlign="center">
-                        Signup to your account
+                        Signup as dealer
                     </Header>
                     {error && <p>{this.props.error.message}</p>}
 
                     <React.Fragment>
-                        <Form size="large" onSubmit={this.handleSubmit}>
+                        <Form style={{marginTop:"55px"}} size="large" onSubmit={this.handleSubmit}>
                             <Segment stacked>
                                 <Form.Input
                                     onChange={this.handleChange}

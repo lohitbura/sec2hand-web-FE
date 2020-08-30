@@ -3,8 +3,11 @@ import {Container} from "semantic-ui-react";
 import {Button, Checkbox, Form, TextArea} from 'semantic-ui-react'
 import axios from "axios";
 import {postCreateURL, productCreateURL} from "../store/constants";
-import Loader from "semantic-ui-react/dist/commonjs/elements/Loader";
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
+import Loader from 'react-loader-spinner';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 class CreatePost extends React.Component {
@@ -17,6 +20,7 @@ class CreatePost extends React.Component {
     };
 
     componentDidMount() {
+        window.scrollTo(0, 0);
     }
 
     submit = () => {
@@ -31,9 +35,14 @@ class CreatePost extends React.Component {
         axios.post(postCreateURL, form_data, {headers: headers}).then(res => {
             console.log(res.data)
             this.setState({loader: false, message: res.data.message})
+            toast.success("Post create successful!")
+            setTimeout(() => {
+                this.props.history.goBack()
+            }, 1000)
         })
             .catch(err => {
                 console.log(err)
+                toast.error("Post create failed!")
                 this.setState({loader: false, error: err.data.message})
             })
     };
@@ -50,31 +59,44 @@ class CreatePost extends React.Component {
 
     render() {
         const {loader, error, message} = this.state;
-        if (loader) {
-            return (
-                <Loader active inline='centered'/>
-            )
-        }
         return (
-            <Container style={{'width': '40%'}}>
+            <Container style={{width: '40%', height:"100vh"}}>
+                <ToastContainer position="bottom-right" />
+                <div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="text-content">
+                                    <h4>
+                                        <del></del>
+                                        <strong className="text-primary"></strong></h4>
+                                    <h2></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {
-                    error ? <Message color='red'>Failed to create Post</Message> : ''
+                    loader ? <Loader
+                        style={{marginTop: "100px", textAlign: 'center'}}
+                        type="Rings"
+                        color="red"
+                        height={100}
+                        width={100}
+                    /> : <Form style={{marginTop: "100px"}} onSubmit={this.submit}>
+                        <Form.Field>
+                            <label>Description</label>
+                            <TextArea name='description' onChange={this.handleChange} placeholder='Description'
+                                      required/>
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Image</label>
+                            <input type='file' name='image' onChange={this.handleImage} required/>
+                        </Form.Field>
+                        <Button type='submit'>Submit</Button>
+                    </Form>
                 }
-                {
-                    message ?
-                        <Message color='green'>Post create successful!</Message> : ''
-                }
-                <Form onSubmit={this.submit}>
-                    <Form.Field>
-                        <label>Description</label>
-                        <TextArea name='description' onChange={this.handleChange} placeholder='Description' required/>
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Image</label>
-                        <input type='file' name='image' onChange={this.handleImage} required/>
-                    </Form.Field>
-                    <Button type='submit'>Submit</Button>
-                </Form>
+
             </Container>
         )
     }
