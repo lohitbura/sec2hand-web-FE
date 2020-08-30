@@ -93,7 +93,7 @@ class CreateProduct extends React.Component {
                     </Form.Field>
                     <Form.Field>
                         <label>Price</label>
-                        <TextArea name='price' onChange={this.handleChange} placeholder='Price' required/>
+                        <input type="number" name='price' onChange={this.handleChange} placeholder='Price' required/>
                     </Form.Field>
                     <Form.Field>
                         <label>Km</label>

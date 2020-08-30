@@ -3,7 +3,14 @@ import {CarouselProvider, Slide, Slider} from "pure-react-carousel";
 import {Link, withRouter} from "react-router-dom";
 import {Container, Comment, Form, Button} from "semantic-ui-react";
 import axios from 'axios';
-import {getUserProfileIdURL, postCommentURl, postDetailURL, postLikeURL, productDetailURL} from "../store/constants";
+import {
+    getUserProfileIdURL,
+    postCommentListURl,
+    postCommentURl,
+    postDetailURL,
+    postLikeURL,
+    productDetailURL
+} from "../store/constants";
 import Header from "semantic-ui-react/dist/commonjs/elements/Header";
 import {logout} from "../store/actions/auth";
 import {connect} from "react-redux";
@@ -11,7 +18,11 @@ import {connect} from "react-redux";
 class PostDetail extends React.Component {
     state = {
         post: {},
-        username: ''
+        username: '',
+        comments: [],
+        limit: 5,
+        offset: 0,
+        has_more: true
     }
 
     componentDidMount() {
@@ -25,6 +36,8 @@ class PostDetail extends React.Component {
         axios.get(getUserProfileIdURL, {headers: header}).then(res => {
             this.setState({username: res.data.user})
         })
+        this.fetchComments()
+
     }
 
     getPostDetail = () => {
@@ -41,6 +54,7 @@ class PostDetail extends React.Component {
         axios.get(postDetailURL(id), {headers: headers}).then(res => {
             this.setState({post: res.data})
         })
+
     }
 
     likes = () => {
@@ -79,8 +93,10 @@ class PostDetail extends React.Component {
         axios.post(postCommentURl, data, {headers: headers}).then(res => {
             this.setState({comment: ""})
         })
-
-        this.getPostDetail()
+        setTimeout(() => {
+            this.fetchComments2()
+            this.getPostDetail()
+        },100)
     };
 
     commentChange = (e) => {
@@ -98,8 +114,33 @@ class PostDetail extends React.Component {
             })
     }
 
+    fetchComments = () => {
+        const {id} = this.props.match.params;
+        const {limit, offset, comments} = this.state;
+
+        axios.post(postCommentListURl, {post_id: id, limit: limit, offset: offset}).then(res => {
+            this.setState({
+                comments: [...comments, ...res.data.comments],
+                offset: limit + offset,
+                has_more: res.data.has_more
+            })
+        })
+    }
+
+    fetchComments2 = () => {
+        const {id} = this.props.match.params;
+        const {limit, offset, comments} = this.state;
+
+        axios.post(postCommentListURl, {post_id: id, limit: 2, offset: 0}).then(res => {
+            this.setState({
+                comments: res.data.comments,
+                has_more: res.data.has_more
+            })
+        })
+    }
+
     render() {
-        const {post, username} = this.state;
+        const {post, username, comments, has_more} = this.state;
         // if (loading) {
         //     return <Loader active inline='centered'/>
         // }
@@ -151,10 +192,10 @@ class PostDetail extends React.Component {
                                 <br/>
                                 {
                                     post.user === username ? <div>
-                                        <Link to={`/postEdit/${post.id}`}>
-                                            <Button content='Edit' color="green"/>
-                                        </Link>
-                                            <Button onClick={() => this.postDelete(post.id)} content='Delete' color="red"/>
+                                        {/*<Link to={`/postEdit/${post.id}`}>*/}
+                                        {/*    <Button content='Edit' color="green"/>*/}
+                                        {/*</Link>*/}
+                                        <Button onClick={() => this.postDelete(post.id)} content='Delete' color="red"/>
                                     </div> : ''
                                 }
 
@@ -186,7 +227,7 @@ class PostDetail extends React.Component {
 
                                 <Comment.Group>
                                     <Header as='h3'>
-                                        Comments({post.comments && post.comments.length})
+                                        Comments({post.comments_counts && post.comments_counts})
                                     </Header>
                                     {
                                         this.props.authenticated && this.props.authenticated ?
@@ -197,7 +238,7 @@ class PostDetail extends React.Component {
                                             </Form> : ''
                                     }
 
-                                    {post.comments && post.comments.map(comment => {
+                                    {comments && comments.map(comment => {
                                         return (
                                             <Comment key={comment.id}>
                                                 {/*<Comment.Avatar src={`${URL}/media/${comment.profile_pic}`}/>*/}
@@ -215,6 +256,12 @@ class PostDetail extends React.Component {
                                             </Comment>
                                         )
                                     })}
+                                    {
+                                        has_more ?
+                                            <Button size={"mini"} primary onClick={() => this.fetchComments()}>see more
+                                                comments</Button> : 'No more comments left'
+
+                                    }
                                 </Comment.Group>
                             </div>
                         </div>

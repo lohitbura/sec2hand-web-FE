@@ -31,14 +31,102 @@ import Loader from "react-loader-spinner";
 class Dealer extends React.Component {
     state = {
         dealers: [],
-        loading: false
+        loading: false,
+        limit: 6,
+        limit1: 6,
+        offset: 0,
+        offset1: 0,
+        has_more: true,
+        city: '',
+        area: '',
+        category: ''
+    }
+
+    constructor(props) {
+        super(props);
+
+        window.onscroll = () => {
+            const {
+                state: {has_more, loading, error}
+            } = this;
+
+            if (!has_more) return;
+            if ((document.documentElement.scrollHeight - document.documentElement.scrollTop - 200) <= document.documentElement.clientHeight) {
+                this.loadDealers()
+            }
+        }
+    }
+
+    componentWillMount() {
+        this.loadDealers()
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);
+    }
+
+    loadDealers = () => {
+        const {limit, offset, dealers} = this.state;
         this.setState({loading: true})
-        axios.post(dealerListURL, {}).then(res => {
-            this.setState({dealers: res.data, loading:false})
+        axios.post(dealerListURL, {limit: limit, offset: offset}).then(res => {
+            this.setState({
+                dealers: [...dealers, ...res.data.dealers],
+                loading: false,
+                offset: limit + offset,
+                has_more: res.data.has_more
+            })
+        })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    onChange = (e) => {
+        console.log(e.target.name + ":" + e.target.value)
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault()
+        const {dealers, city, area, category, limit1, offset1} = this.state;
+
+
+        let form_data = new FormData();
+        form_data.append('limit', limit1)
+        form_data.append('offset', offset1)
+        if (city) {
+            form_data.append('city', city)
+        }
+        if (area) {
+            form_data.append('area', area)
+        }
+        if (category) {
+            form_data.append('category', category)
+        }
+        if (category && city && area) {
+            form_data.append('category', category)
+            form_data.append('area', area)
+            form_data.append('city', city)
+        }
+
+        this.setState({loading: true})
+        axios.post(dealerListURL, form_data).then(res => {
+            if (offset1 === 0) {
+                console.log(res.data.dealers)
+                this.setState({
+                    dealers: res.data.dealers,
+                    loading: false,
+                    has_more: res.data.has_more
+                })
+            } else {
+                this.setState({
+                    dealers: [...dealers, ...res.data.dealers],
+                    loading: false,
+                    offset: limit1 + offset1,
+                    has_more: res.data.has_more
+                })
+            }
+
         })
             .catch(err => {
                 console.log(err)
@@ -46,7 +134,7 @@ class Dealer extends React.Component {
     }
 
     render() {
-        const {dealers, loading} = this.state;
+        const {dealers, loading, has_more} = this.state;
         const options = [
             {key: 1, text: 'Choice 1', value: 1},
             {key: 2, text: 'Choice 2', value: 2},
@@ -74,39 +162,33 @@ class Dealer extends React.Component {
                             <div className="col-md-3">
                                 <div className="contact-form">
                                     <form action="#">
-                                        <label>State:</label>
+                                        <label>City:</label>
 
-                                        <select className="form-control">
-                                            <option value="">All</option>
-                                            <option value="new">New vehicle</option>
-                                            <option value="used">Used vehicle</option>
-                                        </select>
+                                        <input onChange={this.onChange} name="city" className="form-control" type="text"
+                                               placeholder="search city"/>
 
                                         <label>Area:</label>
 
-                                        <select className="form-control">
-                                            <option value="">--All --</option>
-                                            <option value="">--All --</option>
-                                            <option value="">--All --</option>
-                                            <option value="">--All --</option>
-                                            <option value="">--All --</option>
+                                        <input onChange={this.onChange} name="area" className="form-control" type="text"
+                                               placeholder="search area"/>
+                                        <label>Category:</label>
+
+                                        <select onChange={this.onChange} name="category" className="form-control">
+                                            <option>All</option>
+                                            <option value="car">Car</option>
+                                            <option value="bike">Bike</option>
+                                            <option value="mobile">Mobile</option>
                                         </select>
 
-                                        <button type="submit" className="filled-button btn-block">Search</button>
+                                        <button onClick={(e) => this.onSubmit(e)}
+                                                className="filled-button btn-block">Search
+                                        </button>
                                     </form>
                                 </div>
                             </div>
 
                             <div className="col-md-9">
-                                {
-                                    loading ? <Loader
-                                        style={{marginTop:"100px", textAlign:'center'}}
-                                        type="Rings"
-                                        color="red"
-                                        height={100}
-                                        width={100}
-                                    /> : ''
-                                }
+
                                 <div className="row">
                                     {dealers.map(dealer => {
                                         return (
@@ -131,13 +213,13 @@ class Dealer extends React.Component {
 
                                                         <small>
                                                             <strong title="Author"><i
-                                                                className="fa fa-dashboard"/> {dealer.city}
+                                                                className="fa fa-home"/> {dealer.city}
                                                             </strong> &nbsp;&nbsp;&nbsp;&nbsp;
                                                             <strong title="Author"><i
-                                                                className="fa fa-cube"/> {dealer.area}
+                                                                className="fa fa-home"/> {dealer.area}
                                                             </strong>&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <strong title="Views"><i
-                                                                className="fa fa-cog"/> Manual</strong>
+                                                                className="fa fa-cubes"/> {dealer.category}</strong>
                                                         </small>
                                                     </div>
                                                 </div>
@@ -154,16 +236,19 @@ class Dealer extends React.Component {
                                         {/*    <li><a href="#">4</a></li>*/}
                                         {/*    <li><a href="#"><i className="fa fa-angle-double-right"></i></a></li>*/}
                                         {/*</ul>*/}
-                                        <div style={{textAlign: "center", marginTop: "50px"}}>
-                                            <Pagination className="pages"
-                                                        boundaryRange={0}
-                                                        defaultActivePage={1}
-                                                        ellipsisItem={null}
-                                                        firstItem={null}
-                                                        lastItem={null}
-                                                        siblingRange={1}
-                                                        totalPages={10}
-                                            />
+                                        <div style={{textAlign: "center", marginTop: "10px"}}>
+                                            {
+                                                loading ? <Loader
+                                                    style={{marginTop: "100px", textAlign: 'center'}}
+                                                    type="Rings"
+                                                    color="red"
+                                                    height={100}
+                                                    width={100}
+                                                /> : ''
+                                            }
+                                            {
+                                                !has_more ? "No more dealers" : ''
+                                            }
                                         </div>
                                     </div>
                                 </div>

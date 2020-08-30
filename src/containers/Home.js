@@ -24,7 +24,7 @@ import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import axios from 'axios';
 
-import {productListURL} from "../store/constants";
+import {productListURL, URL} from "../store/constants";
 // import Loader from "semantic-ui-react/dist/commonjs/elements/Loader";
 import Loader from 'react-loader-spinner';
 
@@ -32,13 +32,42 @@ class HomepageLayout extends React.Component {
 
     state = {
         products: [],
-        loading: false
+        limit: 6,
+        offset: 0,
+        loading: false,
+        error: false,
+        has_more: true
     }
 
-    componentDidMount() {
+    constructor(props) {
+        super(props);
+
+        window.onscroll = () => {
+            const {
+                state: {has_more, loading, error}
+            } = this;
+
+            if (!has_more) return;
+            if ((document.documentElement.scrollHeight - document.documentElement.scrollTop - 200) <= document.documentElement.clientHeight) {
+                this.loadProducts()
+            }
+        }
+    }
+
+    componentWillMount() {
+        this.loadProducts()
+    }
+
+    loadProducts = () => {
+        const {limit, offset, products} = this.state;
         this.setState({loading: true})
-        axios.get(productListURL).then(res => {
-            this.setState({products: res.data, loading: false})
+        axios.get(productListURL(limit, offset)).then(res => {
+            this.setState({
+                products: [...products, ...res.data.products],
+                loading: false,
+                offset: limit + offset,
+                has_more: res.data.has_more
+            })
         })
             .catch(err => {
                 console.log(err)
@@ -46,17 +75,7 @@ class HomepageLayout extends React.Component {
     }
 
     render() {
-        const {products, loading} = this.state;
-        // if (loading){
-        //     return <Loader
-        //         style={{marginTop:"100px"}}
-        //         type="Puff"
-        //         color="#00BFFF"
-        //         height={100}
-        //         width={100}
-        //         timeout={3000} //3 secs
-        //     />
-        // }
+        const {products, loading, has_more} = this.state;
         return (
             <div>
                 <div>
@@ -111,7 +130,7 @@ class HomepageLayout extends React.Component {
                                 </div>
                                 {
                                     loading ? <Loader
-                                        style={{marginTop:"100px", textAlign:'center'}}
+                                        style={{marginTop: "100px", textAlign: 'center'}}
                                         type="Rings"
                                         color="red"
                                         height={100}
@@ -127,7 +146,7 @@ class HomepageLayout extends React.Component {
                                             <div className="product-item">
                                                 <Link to={`/product/${product.id}`}>
                                                     <img
-                                                        src={`${product.image}`}
+                                                        src={`${URL}${product.image}`}
                                                         alt=""/>
                                                 </Link>
                                                 <div className="down-content">
@@ -164,89 +183,14 @@ class HomepageLayout extends React.Component {
 
                         </div>
                         <div style={{textAlign: "center", marginTop: "50px"}}>
-                            <Pagination
-                                boundaryRange={0}
-                                defaultActivePage={1}
-                                ellipsisItem={null}
-                                firstItem={null}
-                                lastItem={null}
-                                siblingRange={1}
-                                totalPages={10}
-                            />
+                            {
+                                !has_more ? "No more products" : ''
+                            }
+
                         </div>
                     </div>
                 </div>
             </div>
-
-            // <Container>
-            //     <CarouselProvider
-            //         naturalSlideWidth={110}
-            //         naturalSlideHeight={50}
-            //         totalSlides={3}
-            //         isPlaying={true}
-            //         interval={3000}
-            //     >
-            //         <Slider>
-            //             <Slide index={1}><img
-            //                 style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
-            //                 src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
-            //                 alt="First slide"/></Slide>
-            //             }
-            //             <Slide index={2}><img
-            //                 style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
-            //                 src='https://bd.gaadicdn.com/processedimages/revolt-motors/rv-400/source/m_rv-400_11560855440.jpg?tr=w-360'
-            //                 alt="First slide"/></Slide>
-            //             }
-            //             <Slide index={3}><img
-            //                 style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
-            //                 src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
-            //                 alt="First slide"/></Slide>
-            //             }
-            //         </Slider>
-            //     </CarouselProvider>
-            //
-            //     <Grid style={{marginTop: '100px'}} container columns={3}>
-            //         {
-            //             products.map(product => {
-            //                 return (
-            //                     <Grid.Column>
-            //                         <Link to={`/product/${product.id}`}>
-            //                             <Card>
-            //                                 <Image
-            //                                     src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
-            //                                     wrapped ui={false}/>
-            //                                 <Card.Content>
-            //                                     <Card.Header>
-            //                                         <Link to={`/product/${product.id}`}>
-            //                                             {product.model}
-            //                                         </Link>
-            //                                     </Card.Header>
-            //                                     <Card.Meta>Joined in 2016</Card.Meta>
-            //                                     <Card.Description>
-            //                                         ₹ {product.price}
-            //                                     </Card.Description>
-            //                                 </Card.Content>
-            //                             </Card>
-            //                         </Link>
-            //                     </Grid.Column>
-            //
-            //                 )
-            //             })
-            //         }
-            //
-            //     </Grid>
-            //     <div style={{textAlign: "center", marginTop: "50px"}}>
-            //         <Pagination
-            //             boundaryRange={0}
-            //             defaultActivePage={1}
-            //             ellipsisItem={null}
-            //             firstItem={null}
-            //             lastItem={null}
-            //             siblingRange={1}
-            //             totalPages={10}
-            //         />
-            //     </div>
-            // </Container>
         )
     }
 }

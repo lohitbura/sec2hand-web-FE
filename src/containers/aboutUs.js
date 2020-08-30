@@ -28,24 +28,25 @@ class AboutUs extends React.Component {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="section-heading">
-                                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing</h2>
+                                    <h2>About Sec2 hand</h2>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="right-image">
-                                    <img src="assets/images/about-1-570x350.jpg" alt=""/>
+                                    <img src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="left-content">
-                                    <h4>Lorem ipsum dolor sit amet.</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate nihil eum
-                                        consectetur similique? Consectetur, quod, incidunt, harum nisi dolores delectus
-                                        reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/><br/>Lorem ipsum
-                                            dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi
-                                            mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium
-                                            quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis.</p>
+                                    <h4>About us</h4>
+                                    <p>Sec2Hand is a leading e-commerce platform. which offers you the service to buy and sell second hand Bikes, Cars and Mobiles with trusted Dealers.
+                                        Sec2hand works in C2B & B2C Market place.</p>
+                                </div>
+                                <br/>
+                                <div className="left-content">
+                                    <h4>Vision & Mission</h4>
+                                    <p>We provide you with quality Second hand products.
+                                        We are with you 24*7.</p>
                                     <ul className="social-icons">
                                         <li><a href="#"><i className="fa fa-facebook"></i></a></li>
                                         <li><a href="#"><i className="fa fa-twitter"></i></a></li>
@@ -59,35 +60,22 @@ class AboutUs extends React.Component {
                 </div>
 
 
-                <div className="team-members">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="section-heading">
-                                    <h2>Lorem ipsum dolor sit amet.</h2>
-                                </div>
+                {/*<div className="team-members">*/}
+                {/*    <div className="container">*/}
+                {/*        <div className="row">*/}
+                {/*            <div className="col-md-12">*/}
+                {/*                <div className="section-heading">*/}
+                {/*                    <h2></h2>*/}
+                {/*                </div>*/}
 
-                                <h5>Lorem ipsum dolor sit amet.</h5>
+                {/*                <h5>Lorem ipsum dolor sit amet.</h5>*/}
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate nihil eum
-                                    consectetur similique? Consectetur, quod, incidunt, harum nisi dolores delectus
-                                    reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat. Lorem
-                                    ipsum dolor sit amet, consectetur adipisicing elit.<br/><br/>Lorem ipsum dolor sit
-                                        amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis
-                                        ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum
-                                        facere corrupti necessitatibus perspiciatis quis.</p>
+                {/*                <p></p>*/}
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo quae eveniet tempora
-                                    reprehenderit quo, necessitatibus vel sit laboriosam, sunt obcaecati quisquam
-                                    explicabo voluptatibus earum facilis quidem fuga maiores. Quasi,
-                                    obcaecati? <br/><br/> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi,
-                                        est officiis. Ipsam quas consequuntur adipisci quis, fuga pariatur eius eveniet
-                                        qui similique nulla inventore accusantium, suscipit asperiores quibusdam culpa
-                                        iure!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         )
     }

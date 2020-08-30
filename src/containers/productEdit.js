@@ -111,7 +111,7 @@ class ProductEdit extends React.Component {
                     </Form.Field>
                     <Form.Field>
                         <label>Price</label>
-                        <TextArea value={price} name='price' onChange={this.handleChange} placeholder='Price' required/>
+                        <input type="number" value={price} name='price' onChange={this.handleChange} placeholder='Price' required/>
                     </Form.Field>
                     <Form.Field>
                         <label>Km</label>

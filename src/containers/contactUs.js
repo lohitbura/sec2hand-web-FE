@@ -14,7 +14,7 @@ class ContactUs extends React.Component {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="text-content">
-                                    <h4>Lorem ipsum dolor</h4>
+                                    <h4>Sec2 Hand</h4>
                                     <h2>Contact Us</h2>
                                 </div>
                             </div>
@@ -42,10 +42,10 @@ class ContactUs extends React.Component {
                             <div className="col-md-4">
                                 <div className="left-content">
                                     <h4>About our office</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisic elit. Sed voluptate nihil
-                                        eumester consectetur similiqu consectetur.<br/><br/>Lorem ipsum dolor sit amet,
-                                            consectetur adipisic elit. Et, consequuntur, modi mollitia corporis ipsa
-                                            voluptate corrupti.</p>
+                                    <p> Jodhpur <br/>
+                                        Rajasthan
+                                        <br/>
+                                        Email - support@sec2hand.com</p>
                                     <ul className="social-icons">
                                         <li><a href="#"><i className="fa fa-facebook"></i></a></li>
                                         <li><a href="#"><i className="fa fa-twitter"></i></a></li>
@@ -108,9 +108,7 @@ class ContactUs extends React.Component {
                                 </div>
                             </div>
                             <div className="col-md-4">
-                                <img src="assets/images/team_01.jpg" className="img-fluid" alt=""/>
-
-                                    <h5 className="text-center" style={{marginTop: '15px'}}>John Doe</h5>
+                                <img src="/assets/images/Sec2Hand_Logo_3.png" className="img-fluid" alt=""/>
                             </div>
                         </div>
                     </div>

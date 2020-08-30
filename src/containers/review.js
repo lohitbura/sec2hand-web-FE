@@ -23,22 +23,44 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import axios from 'axios';
-import {postLikeURL, postsListURL} from "../store/constants";
+import {postLikeURL, postsListURL, URL} from "../store/constants";
 import Loader from 'react-loader-spinner'
 
 
 class Review extends React.Component {
     state = {
         posts: [],
-        loading: false
+        loading: false,
+        limit: 6,
+        offset: 0,
+        has_more: true
+    }
+
+    constructor(props) {
+        super(props);
+
+        window.onscroll = () => {
+            const {
+                state: {has_more, loading, error}
+            } = this;
+
+            if (!has_more) return;
+            if ((document.documentElement.scrollHeight - document.documentElement.scrollTop - 200) <= document.documentElement.clientHeight) {
+                this.fetchPosts()
+            }
+        }
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);
+    }
+
+    componentWillMount() {
         this.fetchPosts()
     }
 
     fetchPosts = () => {
+        const {limit, offset, posts} = this.state;
         const token = localStorage.getItem('token')
         let headers;
         if (token) {
@@ -49,8 +71,13 @@ class Review extends React.Component {
             headers = {}
         }
         this.setState({loading: true})
-        axios.get(postsListURL, {headers: headers}).then(res => {
-            this.setState({posts: res.data, loading: false})
+        axios.get(postsListURL(limit, offset), {headers: headers}).then(res => {
+            this.setState({
+                posts: [...posts, ...res.data.posts],
+                loading: false,
+                has_more: res.data.has_more,
+                offset: limit + offset
+            })
         })
             .catch(err => {
                 console.log(err)
@@ -81,14 +108,21 @@ class Review extends React.Component {
         this.setState({action: value}, () => {
             axios.post(postLikeURL, {"post_id": id, "action": this.state.action}, {headers: headers})
                 .then(res => {
-                    this.setState({post: res.data})
-                    this.fetchPosts()
+                    console.log(res.data)
+                    const elementsIndex = this.state.posts.findIndex(element => element.id == res.data.id)
+                    let newArray = [...this.state.posts]
+                    newArray[elementsIndex] = {
+                        ...newArray[elementsIndex],
+                        is_like: res.data.is_like,
+                        likes_count: res.data.likes_count
+                    }
+                    this.setState({posts: newArray})
                 })
         })
     };
 
     render() {
-        const {posts, loading} = this.state;
+        const {posts, loading, has_more} = this.state;
         return (
             <div className="container">
                 <div>
@@ -105,17 +139,16 @@ class Review extends React.Component {
                         </div>
                     </div>
                 </div>
-                {
-                    loading ? <Loader
-                        style={{marginTop:"100px", textAlign:'center'}}
-                        type="Rings"
-                        color="red"
-                        height={100}
-                        width={100}
-                    /> : ''
-                }
+                {/*{*/}
+                {/*    loading ? <Loader*/}
+                {/*        style={{marginTop: "100px", textAlign: 'center'}}*/}
+                {/*        type="Rings"*/}
+                {/*        color="red"*/}
+                {/*        height={100}*/}
+                {/*        width={100}*/}
+                {/*    /> : ''*/}
+                {/*}*/}
                 <div className="row" style={{marginTop: "100px"}}>
-
                     {
                         posts.map(post => {
                             return (
@@ -127,8 +160,8 @@ class Review extends React.Component {
                                                 alt=""/>
                                         </Link>
                                         <div className="down-content">
-                                            <a href="car-details.html"><h5 style={{marginBottom:"5px"}}>
-                                                <Link style={{color:'black'}} to={`/post/${post.id}`}>
+                                            <a href="car-details.html"><h5 style={{marginBottom: "5px"}}>
+                                                <Link style={{color: 'black'}} to={`/post/${post.id}`}>
                                                     {post.description}
                                                 </Link>
                                             </h5></a>
@@ -140,13 +173,14 @@ class Review extends React.Component {
                                             <br/>
                                             <br/>
                                             <Grid columns={2}>
-                                                <Grid.Column style={{color:"red"}}>
+                                                <Grid.Column style={{color: "red"}}>
                                                     {
                                                         post.is_like && post.is_like ?
                                                             <Icon onClick={() => this.likes(post.id)}
                                                                   name='heart' size="large"/>
                                                             :
-                                                            <Icon size="large" onClick={() => this.likes(post.id)} name='heart outline'/>
+                                                            <Icon size="large" onClick={() => this.likes(post.id)}
+                                                                  name='heart outline'/>
 
                                                     }
                                                     {post.likes_count} likes
@@ -183,15 +217,18 @@ class Review extends React.Component {
 
                 </div>
                 <div style={{textAlign: "center", marginTop: "50px"}}>
-                    <Pagination
-                        boundaryRange={0}
-                        defaultActivePage={1}
-                        ellipsisItem={null}
-                        firstItem={null}
-                        lastItem={null}
-                        siblingRange={1}
-                        totalPages={10}
-                    />
+                    {
+                        loading ? <Loader
+                            style={{marginTop: "100px", textAlign: 'center'}}
+                            type="Rings"
+                            color="red"
+                            height={100}
+                            width={100}
+                        /> : ''
+                    }
+                    {
+                        !has_more ? "No more posts" : ''
+                    }
                 </div>
             </div>
         )

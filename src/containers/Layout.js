@@ -50,7 +50,10 @@ class CustomLayout extends React.Component {
                 <header className="">
                     <nav className="navbar navbar-expand-lg">
                         <div className="container">
-                            <a className="navbar-brand" href="index.html"><h2>Sec2 <em>Hand</em></h2></a>
+                                <Link className="nav-link" to="/">
+                                    <img style={{width: '69px',
+                                        marginTop: '-21px'}} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
+                                </Link>
                             <button className="navbar-toggler" type="button" data-toggle="collapse"
                                     data-target="#navbarResponsive" aria-controls="navbarResponsive"
                                     aria-expanded="false" aria-label="Toggle navigation">

@@ -132,9 +132,9 @@ class ProductDetail extends React.Component {
                                 <br/>
                                 {
                                     product.user === username ? <div>
-                                        <Link to={`/productEdit/${product.id}`}>
-                                            <Button content='Edit' color="green"/>
-                                        </Link>
+                                        {/*<Link to={`/productEdit/${product.id}`}>*/}
+                                        {/*    <Button content='Edit' color="green"/>*/}
+                                        {/*</Link>*/}
                                         <Button onClick={() => this.deleteProduct(product.id)} content='Delete' color="red"/>
                                     </div> : ''
                                 }
