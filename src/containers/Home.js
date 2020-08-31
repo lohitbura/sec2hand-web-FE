@@ -126,7 +126,7 @@ class HomepageLayout extends React.Component {
                             <div className="col-md-12">
                                 <div className="section-heading">
                                     <h2>Featured Products</h2>
-                                    <a href="cars.html">view more <i className="fa fa-angle-right"></i></a>
+                                    {/*<a href="cars.html">view more <i className="fa fa-angle-right"></i></a>*/}
                                 </div>
                                 {
                                     loading ? <Loader
@@ -160,7 +160,6 @@ class HomepageLayout extends React.Component {
                                                     </h4>
 
                                                     <h6><small>
-                                                        <del> ₹ {product.price}</del>
                                                     </small> ₹ {product.price}
                                                     </h6>
 
@@ -174,8 +173,8 @@ class HomepageLayout extends React.Component {
                                                         <strong title="Author"><i
                                                             className="fa fa-cube"></i> {product.color}
                                                         </strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <strong title="Views"><i
-                                                            className="fa fa-cog"></i> Manual</strong>
+                                                        {/*<strong title="Views"><i*/}
+                                                        {/*    className="fa fa-cog"></i> Manual</strong>*/}
                                                     </small>
                                                 </div>
                                             </div>

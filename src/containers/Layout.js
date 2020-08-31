@@ -50,10 +50,12 @@ class CustomLayout extends React.Component {
                 <header className="">
                     <nav className="navbar navbar-expand-lg">
                         <div className="container">
-                                <Link className="nav-link" to="/">
-                                    <img style={{width: '69px',
-                                        marginTop: '-21px'}} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
-                                </Link>
+                            <Link className="nav-link" to="/">
+                                <img style={{
+                                    width: '69px',
+                                    marginTop: '-21px'
+                                }} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
+                            </Link>
                             <button className="navbar-toggler" type="button" data-toggle="collapse"
                                     data-target="#navbarResponsive" aria-controls="navbarResponsive"
                                     aria-expanded="false" aria-label="Toggle navigation">
@@ -104,14 +106,14 @@ class CustomLayout extends React.Component {
                                         </li>
                                     ) : ''}
                                     {
-                                        authenticated ? <li onClick={() => this.setState({active: 7})}
-                                                            className={active === 7 ? "active nav-item" : 'nav-item'}>
-                                            <a style={{cursor: "pointer"}} className="nav-link"
+                                        authenticated ? <li
+                                            className='nav-item'>
+                                            <Link to="" style={{cursor: "pointer"}} className="nav-link"
                                                onClick={() => this.props.logout()}>
                                                 Logout
-                                            </a>
+                                            </Link>
                                         </li> : <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+                                            <a style={{cursor: "pointer"}} className="nav-link dropdown-toggle" data-toggle="dropdown"
                                                role="button" aria-haspopup="true" aria-expanded="false">Login</a>
 
                                             <div className="dropdown-menu">

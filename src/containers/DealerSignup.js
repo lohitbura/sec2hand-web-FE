@@ -15,14 +15,14 @@ class DealerSignup extends React.Component {
     state = {
         username: "",
         code: "",
-        shop_name:"",
-        address:"",
-        phone:"",
-        city:"",
-        area:"",
-        category:"",
+        shop_name: "",
+        address: "",
+        phone: "",
+        city: "",
+        area: "",
+        category: "",
         password1: "",
-        password2: ""
+        password2: "",
     };
 
     componentDidMount() {
@@ -31,7 +31,7 @@ class DealerSignup extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const {username, code,shop_name,address, phone,city, area,category, password1, password2} = this.state;
+        const {username, code, shop_name, address, phone, city, area, category, password1, password2} = this.state;
         this.props.signup(username, code, shop_name, address, phone, city, area, category, password1, password2);
     };
 
@@ -40,7 +40,7 @@ class DealerSignup extends React.Component {
     };
 
     render() {
-        const {username, code,shop_name,address, phone,city, area,category, password1, password2} = this.state;
+        const {username, code, shop_name, address, phone, city, area, category, password1, password2} = this.state;
         const {error, loading, token} = this.props;
         if (token) {
             return <Redirect to="/"/>;
@@ -48,7 +48,7 @@ class DealerSignup extends React.Component {
         return (
             <Grid
                 textAlign="center"
-                style={{height: "100%", marginTop:"100px"}}
+                style={{height: "100%", marginTop: "100px"}}
                 verticalAlign="middle"
             >
                 <Grid.Column style={{maxWidth: 450}}>
@@ -58,7 +58,7 @@ class DealerSignup extends React.Component {
                     {error && <p>{this.props.error.message}</p>}
 
                     <React.Fragment>
-                        <Form style={{marginTop:"55px"}} size="large" onSubmit={this.handleSubmit}>
+                        <Form style={{marginTop: "55px"}} size="large" onSubmit={this.handleSubmit}>
                             <Segment stacked>
                                 <Form.Input
                                     onChange={this.handleChange}
@@ -123,15 +123,23 @@ class DealerSignup extends React.Component {
                                     iconPosition="left"
                                     placeholder="area"
                                 />
-                                <Form.Input
-                                    onChange={this.handleChange}
-                                    value={category}
-                                    name="category"
-                                    fluid
-                                    icon="user"
-                                    iconPosition="left"
-                                    placeholder="category"
-                                />
+                                {/*<Form.Input*/}
+                                {/*    onChange={this.handleChange}*/}
+                                {/*    value={category}*/}
+                                {/*    name="category"*/}
+                                {/*    fluid*/}
+                                {/*    icon="user"*/}
+                                {/*    iconPosition="left"*/}
+                                {/*    placeholder="category"*/}
+                                {/*/>*/}
+                                <select onChange={this.handleChange}
+                                        name="category" className="form-control">
+                                    <option>Select category</option>
+                                    <option value="car">Car</option>
+                                    <option value="bike">Bike</option>
+                                    <option value="mobile">Mobile</option>
+                                </select>
+                                <br/>
                                 <Form.Input
                                     onChange={this.handleChange}
                                     fluid
