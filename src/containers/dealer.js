@@ -58,7 +58,14 @@ class Dealer extends React.Component {
     }
 
     componentWillMount() {
-        this.loadDealers()
+        const city = localStorage.getItem('city')
+        const category = localStorage.getItem('category')
+        if (city) {
+            this.setState({city: city, category: category})
+            this.fetchSearchDealers()
+        } else {
+            this.loadDealers()
+        }
     }
 
     componentDidMount() {
@@ -133,13 +140,55 @@ class Dealer extends React.Component {
             })
     }
 
+
+    fetchSearchDealers = () => {
+        const {dealers, city, area, category, limit1, offset1} = this.state;
+
+
+        let form_data = new FormData();
+        form_data.append('limit', limit1)
+        form_data.append('offset', offset1)
+        if (city) {
+            form_data.append('city', city)
+        }
+        if (area) {
+            form_data.append('area', area)
+        }
+        if (category) {
+            form_data.append('category', category)
+        }
+        if (category && city && area) {
+            form_data.append('category', category)
+            form_data.append('area', area)
+            form_data.append('city', city)
+        }
+
+        this.setState({loading: true})
+        axios.post(dealerListURL, form_data).then(res => {
+            if (offset1 === 0) {
+                console.log(res.data.dealers)
+                this.setState({
+                    dealers: res.data.dealers,
+                    loading: false,
+                    has_more: res.data.has_more
+                })
+            } else {
+                this.setState({
+                    dealers: [...dealers, ...res.data.dealers],
+                    loading: false,
+                    offset: limit1 + offset1,
+                    has_more: res.data.has_more
+                })
+            }
+
+        })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     render() {
         const {dealers, loading, has_more} = this.state;
-        const options = [
-            {key: 1, text: 'Choice 1', value: 1},
-            {key: 2, text: 'Choice 2', value: 2},
-            {key: 3, text: 'Choice 3', value: 3},
-        ]
         return (
             <div>
                 <div className="page-heading about-heading header-text"
@@ -167,10 +216,10 @@ class Dealer extends React.Component {
                                         <input onChange={this.onChange} name="city" className="form-control" type="text"
                                                placeholder="search city"/>
 
-                                        <label>Area:</label>
+                                        {/*<label>Area:</label>*/}
 
-                                        <input onChange={this.onChange} name="area" className="form-control" type="text"
-                                               placeholder="search area"/>
+                                        {/*<input onChange={this.onChange} name="area" className="form-control" type="text"*/}
+                                        {/*       placeholder="search area"/>*/}
                                         <label>Category:</label>
 
                                         <select onChange={this.onChange} name="category" className="form-control">
@@ -195,11 +244,19 @@ class Dealer extends React.Component {
                                             <div className="col-md-4">
                                                 <div className="product-item">
                                                     <Link to={`/profile/${dealer.user}`}>
-                                                        <img style={{
-                                                            height: '232px',
-                                                            objectFit: 'cover'
-                                                        }} src={`${URL}${dealer.image}`}
-                                                             alt=""/>
+
+                                                        {
+                                                            dealer.image ? <img style={{
+                                                                    height: '232px',
+                                                                    objectFit: 'cover'
+                                                                }} src={`${URL}${dealer.image}`}
+                                                                                alt=""/> :
+                                                                <img style={{
+                                                                    height: '232px',
+                                                                    objectFit: 'cover'
+                                                                }} src="/assets/images/profile-placeholder.png" alt=""
+                                                                     className="img-fluid wc-image"/>
+                                                        }
                                                     </Link>
 
                                                     <div className="down-content">
@@ -218,9 +275,9 @@ class Dealer extends React.Component {
                                                             <strong title="Author"><i
                                                                 className="fa fa-home"/> {dealer.city}
                                                             </strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <strong title="Author"><i
-                                                                className="fa fa-home"/> {dealer.area}
-                                                            </strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            {/*<strong title="Author"><i*/}
+                                                            {/*    className="fa fa-home"/> {dealer.area}*/}
+                                                            {/*</strong>&nbsp;&nbsp;&nbsp;&nbsp;*/}
                                                             <strong title="Views"><i
                                                                 className="fa fa-cubes"/> {dealer.category}</strong>
                                                         </small>

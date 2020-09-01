@@ -86,16 +86,16 @@ class CustomLayout extends React.Component {
 
                                     <li onClick={() => this.setState({active: 4})}
                                         className={active === 4 ? "active nav-item" : 'nav-item'}>
-                                        <Link className="nav-link" to={`/about`}>
+                                        <a className="nav-link" href="#about">
                                             About Us
-                                        </Link>
+                                        </a>
                                     </li>
 
                                     <li onClick={() => this.setState({active: 5})}
                                         className={active === 5 ? "active nav-item" : 'nav-item'}>
-                                        <Link className="nav-link" to={`/contact`}>
+                                        <a href="#contact" className="nav-link" >
                                             Contact Us
-                                        </Link>
+                                        </a>
                                     </li>
                                     {authenticated ? (
                                         <li onClick={() => this.setState({active: 6})}
@@ -189,6 +189,11 @@ class CustomLayout extends React.Component {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="inner-content">
+                                <p>About our office</p>
+                                <p> Jodhpur <br/>
+                                    Rajasthan
+                                    <br/>
+                                    Email - support@sec2hand.com</p>
                                 <p style={{color: "white"}}>Copyright © 2020 Company Name : <a
                                     href="">Sec2 Hand</a></p>
                             </div>

@@ -7,10 +7,12 @@ import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import axios from "axios";
 import {getUserProfileIdURL, getUserProfileURL, postLikeURL, URL} from "../store/constants";
-import {Link, withRouter} from "react-router-dom";
+import {Link, Redirect, withRouter} from "react-router-dom";
 import Header from "semantic-ui-react/dist/commonjs/elements/Header";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import Loader from 'react-loader-spinner';
+import {logout} from "../store/actions/auth";
+import {connect} from "react-redux";
 
 
 class Profile extends React.Component {
@@ -23,6 +25,10 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
+        if (!this.props.authenticated) {
+            console.log('working')
+            this.props.history.push('/login');
+        }
         window.scrollTo(0, 0);
         this.fetchProfile()
         const token = localStorage.getItem('token')
@@ -50,6 +56,7 @@ class Profile extends React.Component {
         this.setState({loader: true})
         axios.get(getUserProfileURL(username), {headers: headers}).then(res => {
             this.setState({loader: false, profile: res.data, posts: res.data.posts})
+            localStorage.setItem('category', res.data.category)
         })
             .catch(err => {
                 console.log(err)
@@ -110,7 +117,7 @@ class Profile extends React.Component {
                                                         height: '232px',
                                                         objectFit: 'cover'
                                                     }}
-                                                         src={`${URL}${product.image}`}
+                                                         src={`${URL}${product.images[0].image}`}
                                                          alt=""/>
                                                 </Link>
                                                 <div className="down-content">
@@ -128,14 +135,18 @@ class Profile extends React.Component {
                                                     {/*    vehicle</p>*/}
 
                                                     <small>
-                                                        <strong title="Author"><i className="fa fa-dashboard"></i>
-                                                            {product.km}km
-                                                        </strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        {
+                                                            product.km === null ? '' : <strong title="Author"><i
+                                                                className="fa fa-dashboard"></i>
+                                                                {product.km}km
+                                                            </strong>
+                                                        }
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
                                                         <strong title="Author"><i
                                                             className="fa fa-cube"></i> {product.color}
                                                         </strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <strong title="Views"><i
-                                                            className="fa fa-cog"></i> Manual</strong>
+                                                        {/*<strong title="Views"><i*/}
+                                                        {/*    className="fa fa-cog"></i> Manual</strong>*/}
                                                     </small>
                                                 </div>
                                             </div>
@@ -396,4 +407,22 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+const mapStateToProps = state => {
+    return {
+        authenticated: state.auth.token !== null,
+        token: state.auth.token
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout())
+    };
+};
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Profile)
+);

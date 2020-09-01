@@ -13,7 +13,7 @@ class CreateProduct extends React.Component {
     state = {
         price: '',
         model: '',
-        image: '',
+        image: [],
         km: '',
         color: '',
         loader: false,
@@ -26,11 +26,14 @@ class CreateProduct extends React.Component {
     }
 
     submit = () => {
-        const {price, model, image, km, color} = this.state;
+        const {price, model, images, km, color} = this.state;
         let form_data = new FormData();
         form_data.append('price', price);
         form_data.append('model', model);
-        form_data.append('image', image, image.name);
+
+        for (let i = 0; i < images.length; i++) {
+            form_data.append('images', images[i])
+        }
         form_data.append('km', km);
         form_data.append('color', color);
         let headers = {
@@ -55,13 +58,19 @@ class CreateProduct extends React.Component {
     };
 
     handleImage = (e) => {
+        const file = e.target.files;
+        let product_images = []
+        for (let i = 0; i < file.length; i++) {
+            product_images.push(e.target.files[i])
+        }
         this.setState({
-            image: e.target.files[0]
+            images: e.target.files
         })
     };
 
     render() {
         const {loader, error, message} = this.state;
+        const category = localStorage.getItem('category')
         return (
             <Container style={{'width': '40%', height: "100vh"}}>
                 <ToastContainer position="bottom-right"/>
@@ -87,7 +96,7 @@ class CreateProduct extends React.Component {
                             height={100}
                             width={100}
                         /> :
-                        <Form style={{marginTop: "100px"}} onSubmit={this.submit}>
+                        <Form enctype="multipart/form-data" style={{marginTop: "100px"}} onSubmit={this.submit}>
                             <Form.Field>
                                 <label>Model</label>
                                 <input name='model' onChange={this.handleChange} placeholder='Model' required/>
@@ -97,17 +106,20 @@ class CreateProduct extends React.Component {
                                 <input type="number" name='price' onChange={this.handleChange} placeholder='Price'
                                        required/>
                             </Form.Field>
-                            <Form.Field>
-                                <label>Km</label>
-                                <input name='km' onChange={this.handleChange} placeholder='km' required/>
-                            </Form.Field>
+                            {
+                                category !== "mobile" ? <Form.Field>
+                                    <label>Km</label>
+                                    <input name='km' onChange={this.handleChange} placeholder='km' required/>
+                                </Form.Field> : ''
+                            }
+
                             <Form.Field>
                                 <label>Color</label>
                                 <input name='color' onChange={this.handleChange} placeholder='Color' required/>
                             </Form.Field>
                             <Form.Field>
                                 <label>Image</label>
-                                <input type='file' name='image' onChange={this.handleImage} required/>
+                                <input type='file' name='image' multiple onChange={this.handleImage} required/>
                             </Form.Field>
                             <Button type='submit'>Submit</Button>
                         </Form>
