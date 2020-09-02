@@ -122,10 +122,15 @@ class EditProfile extends React.Component {
             axios.post(customerProfileEditURL, form_data, {headers: headers}).then(res => {
                 console.log(res.data)
                 this.setState({loader: false, message: res.data.message})
+                toast.success("Profile update successful!")
+                setTimeout(() => {
+                    this.props.history.goBack()
+                }, 1000)
             })
                 .catch(err => {
                     console.log(err)
                     this.setState({loader: false, error: err.data.message})
+                    toast.error("Profile update failed!")
                 })
         }
 
@@ -169,7 +174,7 @@ class EditProfile extends React.Component {
                 <ToastContainer position="bottom-right"/>
                 {
                     loader ? <Loader
-                            style={{marginTop: "100px", textAlign: 'center', height:'100vh'}}
+                            style={{marginTop: "100px", textAlign: 'center', height: '100vh'}}
                             type="Rings"
                             color="red"
                             height={100}
@@ -206,9 +211,16 @@ class EditProfile extends React.Component {
                             {
                                 is_dealer ? <Form.Field>
                                     <label>Category</label>
-                                    <Input value={category} name='category' onChange={this.handleChange}
-                                           placeholder='Category'
-                                           required/>
+                                    {/*<Input value={category} name='category' onChange={this.handleChange}*/}
+                                    {/*       placeholder='Category'*/}
+                                    {/*       required/>*/}
+                                    <select value={category} onChange={this.handleChange}
+                                            name="category" className="form-control">
+                                        <option>Select category</option>
+                                        <option value="car">Car</option>
+                                        <option value="bike">Bike</option>
+                                        <option value="mobile">Mobile</option>
+                                    </select>
                                 </Form.Field> : ''
                             }
                             <Form.Field>

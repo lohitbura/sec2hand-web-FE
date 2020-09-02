@@ -50,10 +50,12 @@ class CustomLayout extends React.Component {
                 <header className="">
                     <nav className="navbar navbar-expand-lg">
                         <div className="container">
-                                <Link className="nav-link" to="/">
-                                    <img style={{width: '69px',
-                                        marginTop: '-21px'}} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
-                                </Link>
+                            <Link className="nav-link" to="/">
+                                <img style={{
+                                    width: '69px',
+                                    marginTop: '-21px'
+                                }} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
+                            </Link>
                             <button className="navbar-toggler" type="button" data-toggle="collapse"
                                     data-target="#navbarResponsive" aria-controls="navbarResponsive"
                                     aria-expanded="false" aria-label="Toggle navigation">
@@ -84,16 +86,16 @@ class CustomLayout extends React.Component {
 
                                     <li onClick={() => this.setState({active: 4})}
                                         className={active === 4 ? "active nav-item" : 'nav-item'}>
-                                        <Link className="nav-link" to={`/about`}>
+                                        <a className="nav-link" href="#about">
                                             About Us
-                                        </Link>
+                                        </a>
                                     </li>
 
                                     <li onClick={() => this.setState({active: 5})}
                                         className={active === 5 ? "active nav-item" : 'nav-item'}>
-                                        <Link className="nav-link" to={`/contact`}>
+                                        <a href="#contact" className="nav-link" >
                                             Contact Us
-                                        </Link>
+                                        </a>
                                     </li>
                                     {authenticated ? (
                                         <li onClick={() => this.setState({active: 6})}
@@ -104,14 +106,14 @@ class CustomLayout extends React.Component {
                                         </li>
                                     ) : ''}
                                     {
-                                        authenticated ? <li onClick={() => this.setState({active: 7})}
-                                                            className={active === 7 ? "active nav-item" : 'nav-item'}>
-                                            <a style={{cursor: "pointer"}} className="nav-link"
+                                        authenticated ? <li
+                                            className='nav-item'>
+                                            <Link to="" style={{cursor: "pointer"}} className="nav-link"
                                                onClick={() => this.props.logout()}>
                                                 Logout
-                                            </a>
+                                            </Link>
                                         </li> : <li className="nav-item dropdown">
-                                            <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+                                            <a style={{cursor: "pointer"}} className="nav-link dropdown-toggle" data-toggle="dropdown"
                                                role="button" aria-haspopup="true" aria-expanded="false">Login</a>
 
                                             <div className="dropdown-menu">
@@ -187,6 +189,11 @@ class CustomLayout extends React.Component {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="inner-content">
+                                <p>About our office</p>
+                                <p> Jodhpur <br/>
+                                    Rajasthan
+                                    <br/>
+                                    Email - support@sec2hand.com</p>
                                 <p style={{color: "white"}}>Copyright © 2020 Company Name : <a
                                     href="">Sec2 Hand</a></p>
                             </div>

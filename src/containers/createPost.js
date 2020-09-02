@@ -26,7 +26,7 @@ class CreatePost extends React.Component {
     submit = () => {
         const {description, image} = this.state;
         let form_data = new FormData();
-        form_data.append('image', image, image.name);
+        form_data.append('image', image);
         form_data.append('description', description);
         let headers = {
             Authorization: `Token ${localStorage.getItem('token')}`

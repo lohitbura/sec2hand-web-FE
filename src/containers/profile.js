@@ -7,11 +7,12 @@ import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import axios from "axios";
 import {getUserProfileIdURL, getUserProfileURL, postLikeURL, URL} from "../store/constants";
-import {Link, withRouter} from "react-router-dom";
+import {Link, Redirect, withRouter} from "react-router-dom";
 import Header from "semantic-ui-react/dist/commonjs/elements/Header";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import Loader from 'react-loader-spinner';
-
+import {logout} from "../store/actions/auth";
+import {connect} from "react-redux";
 
 
 class Profile extends React.Component {
@@ -20,10 +21,14 @@ class Profile extends React.Component {
         loader: false,
         message: '',
         username: '',
-        posts:[]
+        posts: []
     }
 
     componentDidMount() {
+        if (!this.props.authenticated) {
+            console.log('working')
+            this.props.history.push('/login');
+        }
         window.scrollTo(0, 0);
         this.fetchProfile()
         const token = localStorage.getItem('token')
@@ -50,7 +55,8 @@ class Profile extends React.Component {
         }
         this.setState({loader: true})
         axios.get(getUserProfileURL(username), {headers: headers}).then(res => {
-            this.setState({loader: false, profile: res.data, posts:res.data.posts})
+            this.setState({loader: false, profile: res.data, posts: res.data.posts})
+            localStorage.setItem('category', res.data.category)
         })
             .catch(err => {
                 console.log(err)
@@ -111,8 +117,8 @@ class Profile extends React.Component {
                                                         height: '232px',
                                                         objectFit: 'cover'
                                                     }}
-                                                        src={`${URL}${product.image}`}
-                                                        alt=""/>
+                                                         src={`${URL}${product.images[0].image}`}
+                                                         alt=""/>
                                                 </Link>
                                                 <div className="down-content">
                                                     <h4>
@@ -122,7 +128,6 @@ class Profile extends React.Component {
                                                     </h4>
 
                                                     <h6><small>
-                                                        <del> ₹ {product.price}</del>
                                                     </small> ₹ {product.price}
                                                     </h6>
 
@@ -130,14 +135,18 @@ class Profile extends React.Component {
                                                     {/*    vehicle</p>*/}
 
                                                     <small>
-                                                        <strong title="Author"><i className="fa fa-dashboard"></i>
-                                                            {product.km}km
-                                                        </strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        {
+                                                            product.km === null ? '' : <strong title="Author"><i
+                                                                className="fa fa-dashboard"></i>
+                                                                {product.km}km
+                                                            </strong>
+                                                        }
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
                                                         <strong title="Author"><i
                                                             className="fa fa-cube"></i> {product.color}
                                                         </strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <strong title="Views"><i
-                                                            className="fa fa-cog"></i> Manual</strong>
+                                                        {/*<strong title="Views"><i*/}
+                                                        {/*    className="fa fa-cog"></i> Manual</strong>*/}
                                                     </small>
                                                 </div>
                                             </div>
@@ -181,12 +190,12 @@ class Profile extends React.Component {
                                                         height: '232px',
                                                         objectFit: 'cover'
                                                     }}
-                                                        src={`${post.image}`}
-                                                        alt=""/>
+                                                         src={`${post.image}`}
+                                                         alt=""/>
                                                 </Link>
                                                 <div className="down-content">
-                                                    <a href="car-details.html"><h5 style={{marginBottom:"5px"}}>
-                                                        <Link style={{color:'black'}} to={`/post/${post.id}`}>
+                                                    <a href="car-details.html"><h5 style={{marginBottom: "5px"}}>
+                                                        <Link style={{color: 'black'}} to={`/post/${post.id}`}>
                                                             {post.description}
                                                         </Link>
                                                     </h5></a>
@@ -198,13 +207,15 @@ class Profile extends React.Component {
                                                     <br/>
                                                     <br/>
                                                     <Grid columns={2}>
-                                                        <Grid.Column style={{color:"red"}}>
+                                                        <Grid.Column style={{color: "red"}}>
                                                             {
                                                                 post.is_like && post.is_like ?
                                                                     <Icon onClick={() => this.likes(post.id)}
                                                                           name='heart' size="large"/>
                                                                     :
-                                                                    <Icon size="large" onClick={() => this.likes(post.id)} name='heart outline'/>
+                                                                    <Icon size="large"
+                                                                          onClick={() => this.likes(post.id)}
+                                                                          name='heart outline'/>
 
                                                             }
                                                             {post.likes_count} likes
@@ -274,91 +285,96 @@ class Profile extends React.Component {
                     </div>
                     {
                         loader ? <Loader
-                            style={{marginTop: "100px", textAlign: 'center', height:'100vh'}}
-                            type="Rings"
-                            color="red"
-                            height={100}
-                            width={100}
-                        /> :
+                                style={{marginTop: "100px", textAlign: 'center', height: '100vh'}}
+                                type="Rings"
+                                color="red"
+                                height={100}
+                                width={100}
+                            /> :
 
-                    <div className="products">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div>
-                                        <img src={`${profile.image}`} alt=""
-                                             className="img-fluid wc-image"/>
+                            <div className="products">
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div>
+                                                {
+                                                    profile.image ? <img src={`${profile.image}`} alt=""
+                                                                         className="img-fluid wc-image"/> :
+                                                        <img src="/assets/images/profile-placeholder.png" alt=""
+                                                             className="img-fluid wc-image"/>
+                                                }
+                                            </div>
+                                            <br/>
+                                        </div>
+
+                                        <div className="col-md-6">
+                                            <form action="#" method="post" className="form">
+                                                <ul className="list-group list-group-flush">
+                                                    <li className="list-group-item">
+                                                        <div className="clearfix">
+                                                            <span className="pull-left"> Username</span>
+
+                                                            <strong className="pull-right">{profile.user}</strong>
+                                                        </div>
+                                                    </li>
+                                                    {
+                                                        profile.is_dealer ? <li className="list-group-item">
+                                                            <div className="clearfix">
+                                                                <span className="pull-left"> Shop code</span>
+
+                                                                <strong className="pull-right">{profile.code}</strong>
+                                                            </div>
+                                                        </li> : ''
+                                                    }
+
+                                                    {
+                                                        profile.is_dealer ? <li className="list-group-item">
+                                                            <div className="clearfix">
+                                                                <span className="pull-left"> Address</span>
+
+                                                                <strong
+                                                                    className="pull-right">{profile.address}</strong>
+                                                            </div>
+                                                        </li> : ''
+                                                    }
+
+                                                    <li className="list-group-item">
+                                                        <div className="clearfix">
+                                                            <span className="pull-left"> Phone</span>
+
+                                                            <strong className="pull-right">{profile.phone}</strong>
+                                                        </div>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        <div className="clearfix">
+                                                            <span className="pull-left"> City</span>
+
+                                                            <strong className="pull-right">{profile.city}</strong>
+                                                        </div>
+                                                    </li>
+                                                    {
+                                                        profile.is_dealer ? <li className="list-group-item">
+                                                            <div className="clearfix">
+                                                                <span className="pull-left"> Area</span>
+
+                                                                <strong className="pull-right">{profile.area}</strong>
+                                                            </div>
+                                                        </li> : ''
+                                                    }
+                                                </ul>
+                                                <br/>
+                                                {
+                                                    profile.user === username ? <Link to="/profile-edit">
+                                                        <Button content='Edit' color="red"/>
+                                                    </Link> : ''
+                                                }
+
+                                            </form>
+                                            <br/>
+                                        </div>
                                     </div>
-                                    <br/>
-                                </div>
-
-                                <div className="col-md-6">
-                                    <form action="#" method="post" className="form">
-                                        <ul className="list-group list-group-flush">
-                                            <li className="list-group-item">
-                                                <div className="clearfix">
-                                                    <span className="pull-left"> Username</span>
-
-                                                    <strong className="pull-right">{profile.user}</strong>
-                                                </div>
-                                            </li>
-                                            {
-                                                profile.is_dealer ? <li className="list-group-item">
-                                                    <div className="clearfix">
-                                                        <span className="pull-left"> Shop code</span>
-
-                                                        <strong className="pull-right">{profile.code}</strong>
-                                                    </div>
-                                                </li> : ''
-                                            }
-
-                                            {
-                                                profile.is_dealer ? <li className="list-group-item">
-                                                    <div className="clearfix">
-                                                        <span className="pull-left"> Address</span>
-
-                                                        <strong className="pull-right">{profile.address}</strong>
-                                                    </div>
-                                                </li> : ''
-                                            }
-
-                                            <li className="list-group-item">
-                                                <div className="clearfix">
-                                                    <span className="pull-left"> Phone</span>
-
-                                                    <strong className="pull-right">{profile.phone}</strong>
-                                                </div>
-                                            </li>
-                                            <li className="list-group-item">
-                                                <div className="clearfix">
-                                                    <span className="pull-left"> City</span>
-
-                                                    <strong className="pull-right">{profile.city}</strong>
-                                                </div>
-                                            </li>
-                                            {
-                                                profile.is_dealer ? <li className="list-group-item">
-                                                    <div className="clearfix">
-                                                        <span className="pull-left"> Area</span>
-
-                                                        <strong className="pull-right">{profile.area}</strong>
-                                                    </div>
-                                                </li> : ''
-                                            }
-                                        </ul>
-                                        <br/>
-                                        {
-                                            profile.user === username ? <Link to="/profile-edit">
-                                                <Button content='Edit' color="red"/>
-                                            </Link> : ''
-                                        }
-
-                                    </form>
-                                    <br/>
                                 </div>
                             </div>
-                        </div>
-                    </div>
                     }
                 </div>
                 {/*<Grid columns={3}>*/}
@@ -383,7 +399,7 @@ class Profile extends React.Component {
                 {/*</Grid>*/}
                 {
                     profile.is_dealer ? (
-                            loader ? '': <Tab style={{marginTop: "50px"}} panes={panes}/>) : ''
+                        loader ? '' : <Tab style={{marginTop: "50px"}} panes={panes}/>) : ''
                 }
             </Container>
         )
@@ -391,4 +407,22 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+const mapStateToProps = state => {
+    return {
+        authenticated: state.auth.token !== null,
+        token: state.auth.token
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout())
+    };
+};
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Profile)
+);

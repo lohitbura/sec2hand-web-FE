@@ -1,9 +1,19 @@
 import React from 'react';
 import {Container} from "semantic-ui-react";
-import {CarouselProvider, Slide, Slider} from "pure-react-carousel";
+import {
+    ButtonBack,
+    ButtonFirst,
+    ButtonLast,
+    ButtonNext,
+    CarouselProvider, DotGroup,
+    ImageWithZoom,
+    Slide,
+    Slider
+} from "pure-react-carousel";
+import 'pure-react-carousel/dist/react-carousel.es.css';
 import {Link, withRouter} from "react-router-dom";
 import axios from 'axios';
-import {getUserProfileIdURL, productDetailURL} from "../store/constants";
+import {getUserProfileIdURL, productDetailURL, URL} from "../store/constants";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,7 +54,7 @@ class ProductDetail extends React.Component {
             toast.success("Product has been deleted!")
             setTimeout(() => {
                 this.props.history.push('/')
-            },2000)
+            }, 2000)
         })
             .catch(err => {
                 console.log(err)
@@ -56,7 +66,7 @@ class ProductDetail extends React.Component {
         return (
             <div>
                 <div className="page-heading about-heading header-text"
-                     style={{'backgroundImage': `url(${product.image})`}}>
+                     style={{'backgroundImage': `url(${URL}${product.images && product.images[0].image})`}}>
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12">
@@ -76,10 +86,10 @@ class ProductDetail extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6">
-                                <div>
-                                    <img src={`${product.image}`} alt=""
-                                         className="img-fluid wc-image"/>
-                                </div>
+                                {/*<div>*/}
+                                {/*    <img src={`${URL}${product.images && product.images[0].image}`} alt=""*/}
+                                {/*         className="img-fluid wc-image"/>*/}
+                                {/*</div>*/}
                                 <br/>
                                 {/*<div className="row">*/}
                                 {/*    <div className="col-sm-4 col-6">*/}
@@ -90,6 +100,31 @@ class ProductDetail extends React.Component {
                                 {/*        <br/>*/}
                                 {/*    </div>*/}
                                 {/*</div>*/}
+                                <CarouselProvider
+                                    visibleSlides={1}
+                                    totalSlides={product.images && product.images.length}
+                                    step={1}
+                                    dragStep={2}
+                                    naturalSlideWidth={400}
+                                    naturalSlideHeight={300}
+                                    hasMasterSpinner
+                                >
+                                    <Slider style={{maxWidth: '800px'}}>
+                                        {
+                                            product.images && product.images.map(image => {
+                                                return (
+                                                    <Slide index={image.id}>
+                                                        <ImageWithZoom
+                                                            src={`${URL}${image.image}`}/>
+                                                    </Slide>
+                                                )
+
+                                            })
+                                        }
+                                    </Slider>
+                                    <ButtonBack primary>Back</ButtonBack>
+                                    <ButtonNext>Next</ButtonNext>
+                                </CarouselProvider>
                             </div>
 
                             <div className="col-md-6">
@@ -112,11 +147,14 @@ class ProductDetail extends React.Component {
                                         </li>
 
                                         <li className="list-group-item">
-                                            <div className="clearfix">
-                                                <span className="pull-left">Mileage</span>
+                                            {
+                                                product.km === null ? '' : <div className="clearfix">
+                                                    <span className="pull-left">Distance</span>
 
-                                                <strong className="pull-right">{product.km} km</strong>
-                                            </div>
+                                                    <strong className="pull-right">{product.km} km</strong>
+                                                </div>
+                                            }
+
                                         </li>
 
                                         <li className="list-group-item">
@@ -149,7 +187,8 @@ class ProductDetail extends React.Component {
                                         {/*<Link to={`/productEdit/${product.id}`}>*/}
                                         {/*    <Button content='Edit' color="green"/>*/}
                                         {/*</Link>*/}
-                                        <Button onClick={() => this.deleteProduct(product.id)} content='Delete' color="red"/>
+                                        <Button onClick={() => this.deleteProduct(product.id)} content='Delete'
+                                                color="red"/>
                                     </div> : ''
                                 }
 

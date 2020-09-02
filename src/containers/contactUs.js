@@ -26,20 +26,20 @@ class ContactUs extends React.Component {
                 <div className="find-us">
                     <div className="container">
                         <div className="row">
+                            {/*<div className="col-md-12">*/}
+                            {/*    <div className="section-heading">*/}
+                            {/*        <h2>Our Location on Maps</h2>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-md-8">*/}
+                            {/*    <div id="map">*/}
+                            {/*        <iframe*/}
+                            {/*            src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"*/}
+                            {/*            width="100%" height="330px" frameBorder="0" style={{border:0}}*/}
+                            {/*            allowFullScreen/>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                             <div className="col-md-12">
-                                <div className="section-heading">
-                                    <h2>Our Location on Maps</h2>
-                                </div>
-                            </div>
-                            <div className="col-md-8">
-                                <div id="map">
-                                    <iframe
-                                        src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                        width="100%" height="330px" frameBorder="0" style={{border:0}}
-                                        allowFullScreen/>
-                                </div>
-                            </div>
-                            <div className="col-md-4">
                                 <div className="left-content">
                                     <h4>About our office</h4>
                                     <p> Jodhpur <br/>
@@ -47,10 +47,9 @@ class ContactUs extends React.Component {
                                         <br/>
                                         Email - support@sec2hand.com</p>
                                     <ul className="social-icons">
-                                        <li><a href="#"><i className="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i className="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i className="fa fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i className="fa fa-behance"></i></a></li>
+                                        <li><a href="https://www.facebook.com/Sec2Hand-360972987823797/"><i className="fa fa-facebook"></i></a></li>
+                                        <li><a href="https://www.instagram.com/invites/contact/?i=14qq181cy3b1b&utm_content=eghzw47 "><i className="fa fa-instagram"></i></a></li>
+                                        <li><a href="https://www.youtube.com/c/Sec2hand"><i className="fa fa-youtube"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
