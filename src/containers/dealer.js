@@ -58,14 +58,7 @@ class Dealer extends React.Component {
     }
 
     componentWillMount() {
-        const city = localStorage.getItem('city')
-        const category = localStorage.getItem('category')
-        if (city) {
-            this.setState({city: city, category: category})
-            this.fetchSearchDealers()
-        } else {
-            this.loadDealers()
-        }
+        this.loadDealers()
     }
 
     componentDidMount() {
@@ -129,7 +122,7 @@ class Dealer extends React.Component {
                 this.setState({
                     dealers: [...dealers, ...res.data.dealers],
                     loading: false,
-                    offset: limit1 + offset1,
+                    offset1: limit1 + offset1,
                     has_more: res.data.has_more
                 })
             }
@@ -140,52 +133,6 @@ class Dealer extends React.Component {
             })
     }
 
-
-    fetchSearchDealers = () => {
-        const {dealers, city, area, category, limit1, offset1} = this.state;
-
-
-        let form_data = new FormData();
-        form_data.append('limit', limit1)
-        form_data.append('offset', offset1)
-        if (city) {
-            form_data.append('city', city)
-        }
-        if (area) {
-            form_data.append('area', area)
-        }
-        if (category) {
-            form_data.append('category', category)
-        }
-        if (category && city && area) {
-            form_data.append('category', category)
-            form_data.append('area', area)
-            form_data.append('city', city)
-        }
-
-        this.setState({loading: true})
-        axios.post(dealerListURL, form_data).then(res => {
-            if (offset1 === 0) {
-                console.log(res.data.dealers)
-                this.setState({
-                    dealers: res.data.dealers,
-                    loading: false,
-                    has_more: res.data.has_more
-                })
-            } else {
-                this.setState({
-                    dealers: [...dealers, ...res.data.dealers],
-                    loading: false,
-                    offset: limit1 + offset1,
-                    has_more: res.data.has_more
-                })
-            }
-
-        })
-            .catch(err => {
-                console.log(err)
-            })
-    }
 
     render() {
         const {dealers, loading, has_more} = this.state;
@@ -198,7 +145,7 @@ class Dealer extends React.Component {
                             <div className="col-md-12">
                                 <div className="text-content">
                                     <h4>Find dealer</h4>
-                                    <h2>Cars/Bike</h2>
+                                    <h2>Car/Bike/Mobile</h2>
                                 </div>
                             </div>
                         </div>

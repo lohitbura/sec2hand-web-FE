@@ -195,7 +195,7 @@ class CustomLayout extends React.Component {
                                     <br/>
                                     Email - support@sec2hand.com</p>
                                 <p style={{color: "white"}}>Copyright © 2020 Company Name : <a
-                                    href="">Sec2 Hand</a></p>
+                                    href="">Sec2Hand</a></p>
                             </div>
                         </div>
                     </div>
