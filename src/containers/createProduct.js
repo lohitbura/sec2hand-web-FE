@@ -27,6 +27,9 @@ class CreateProduct extends React.Component {
 
     submit = () => {
         const {price, model, images, km, color} = this.state;
+        if (images.length > 10) {
+            return toast.error("You can not select more 10 images")
+        }
         let form_data = new FormData();
         form_data.append('price', price);
         form_data.append('model', model);
@@ -59,6 +62,9 @@ class CreateProduct extends React.Component {
 
     handleImage = (e) => {
         const file = e.target.files;
+        if (file.length > 10) {
+            toast.error("You can not select more then 10 images")
+        }
         let product_images = []
         for (let i = 0; i < file.length; i++) {
             product_images.push(e.target.files[i])
@@ -118,7 +124,7 @@ class CreateProduct extends React.Component {
                                 <input name='color' onChange={this.handleChange} placeholder='Color' required/>
                             </Form.Field>
                             <Form.Field>
-                                <label>Image</label>
+                                <label>Image(limit upto 10 images)</label>
                                 <input type='file' name='image' multiple onChange={this.handleImage} required/>
                             </Form.Field>
                             <Button type='submit'>Submit</Button>

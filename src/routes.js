@@ -19,6 +19,7 @@ import ProductEdit from "./containers/productEdit";
 import PostEdit from "./containers/postEdit";
 import AboutUs from "./containers/aboutUs";
 import ContactUs from "./containers/contactUs";
+import Privacy from "./containers/privacy";
 
 const BaseRouter = () => (
   <Hoc>
@@ -38,6 +39,7 @@ const BaseRouter = () => (
     <Route path="/post/:id" component={PostDetail} />
     <Route path="/about" component={AboutUs} />
     <Route path="/contact" component={ContactUs} />
+    <Route path="/privacy" component={Privacy} />
     <Route exact path="/" component={HomepageLayout} />
   </Hoc>
 );
