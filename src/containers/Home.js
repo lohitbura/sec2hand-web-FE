@@ -40,6 +40,7 @@ class HomepageLayout extends React.Component {
         limit2: 6,
         limit1: 6,
         offset: 0,
+        offset2: 0,
         offset1: 0,
         has_more: true,
         city: '',
@@ -128,13 +129,13 @@ class HomepageLayout extends React.Component {
     }
 
     loadDealers = () => {
-        const {limit2, offset, dealers} = this.state;
+        const {limit2, offset2, dealers} = this.state;
         this.setState({loading: true})
-        axios.post(dealerListURL, {limit: limit2, offset: offset}).then(res => {
+        axios.post(dealerListURL, {limit: limit2, offset: offset2}).then(res => {
             this.setState({
                 dealers: [...dealers, ...res.data.dealers],
                 loading: false,
-                offset: limit2 + offset,
+                offset2: limit2 + offset2,
                 has_more: res.data.has_more
             })
         })
@@ -178,7 +179,7 @@ class HomepageLayout extends React.Component {
                 this.setState({
                     dealers: [...dealers, ...res.data.dealers],
                     loading: false,
-                    offset: limit1 + offset1,
+                    offset1: limit1 + offset1,
                     has_more: res.data.has_more
                 })
             }
@@ -233,6 +234,33 @@ class HomepageLayout extends React.Component {
                         }
                     </Slider>
                 </CarouselProvider>
+                <br/>
+                <br/>
+                <div className="container" style={{marginTop:"50px"}}>
+                    <div className="row">
+                        <div className="col-sm-4" style={{margin:'auto'}}>
+                            <div className="card">
+                                <img className="card-img-top" src="/assets/images/customer3.jpg" alt="Card image cap"/>
+                                    <div className="card-body">
+                                        <h5 className="card-title">We Know our customer need.</h5>
+                                        {/*<p className="card-text">We Know our customer need.</p>*/}
+                                        {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                                    </div>
+                            </div>
+                        </div>
+                        <div className="col-sm-4" style={{margin:'auto'}}>
+                            <div className="card">
+                                <img className="card-img-top" src="/assets/images/customer-satisfaction.jpg" alt="Card image cap"/>
+                                    <div className="card-body">
+                                        <h5 className="card-title">Customer satisfaction is our top priority.</h5>
+                                        {/*<p className="card-text">Customer satisfaction is our top priority.</p>*/}
+                                        {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {
                     !this.props.authenticated ?
                         <div className="latest-products">
@@ -450,15 +478,14 @@ class HomepageLayout extends React.Component {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="section-heading">
-                                    <h2 id="about">About Sec2 hand</h2>
+                                    <h2 id="about">About Sec2hand</h2>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="right-image">
                                     <img style={{
                                         marginTop: '-61px',
-                                        width: '402px',
-                                        marginLeft: '85px'
+                                        // width: '402px',
                                     }} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
                                 </div>
                             </div>
@@ -539,9 +566,9 @@ class HomepageLayout extends React.Component {
                                         </form>
                                     </div>
                                 </div>
-                                <div className="col-md-4">
-                                    <img src="/assets/images/Sec2Hand_Logo_3.png" className="img-fluid" alt=""/>
-                                </div>
+                                {/*<div className="col-md-4">*/}
+                                {/*    <img src="/assets/images/Sec2Hand_Logo_3.png" className="img-fluid" alt=""/>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     </div>

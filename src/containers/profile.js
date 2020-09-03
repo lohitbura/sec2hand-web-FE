@@ -317,15 +317,6 @@ class Profile extends React.Component {
                                                             <strong className="pull-right">{profile.user}</strong>
                                                         </div>
                                                     </li>
-                                                    {
-                                                        profile.is_dealer ? <li className="list-group-item">
-                                                            <div className="clearfix">
-                                                                <span className="pull-left"> Shop code</span>
-
-                                                                <strong className="pull-right">{profile.code}</strong>
-                                                            </div>
-                                                        </li> : ''
-                                                    }
 
                                                     {
                                                         profile.is_dealer ? <li className="list-group-item">
