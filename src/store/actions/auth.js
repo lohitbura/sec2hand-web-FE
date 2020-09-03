@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import {customerRegisterURL, customerLoginURL, dealerRegisterURL, dealerLoginURL} from "../constants";
+import {toast} from "react-toastify";
 
 export const authStart = () => {
     return {
@@ -49,12 +50,16 @@ export const authLogin = (username, password) => {
             .then(res => {
                 const token = res.data.token;
                 const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+                toast.success("Logged in successfully")
                 localStorage.setItem("token", token);
                 localStorage.setItem("expirationDate", expirationDate);
                 dispatch(authSuccess(token));
                 dispatch(checkAuthTimeout(3600));
             })
             .catch(err => {
+                if (err.response.status === 400) {
+                    toast.error(err.response.data.message)
+                }
                 dispatch(authFail(err));
             });
     };
@@ -75,12 +80,16 @@ export const authSignup = (username, password1, password2, phone, city) => {
             .then(res => {
                 const token = res.data.token;
                 const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+                toast.success("Customer registered successfully")
                 localStorage.setItem("token", token);
                 localStorage.setItem("expirationDate", expirationDate);
                 dispatch(authSuccess(token));
                 dispatch(checkAuthTimeout(3600));
             })
             .catch(err => {
+                if (err.response.status === 400) {
+                    toast.error(err.response.data.message)
+                }
                 dispatch(authFail(err));
             });
     };
@@ -103,14 +112,20 @@ export const dealerAuthSignup = (username, code, shopname, address, phone, city,
                 password2: password2,
             })
             .then(res => {
+
                 const token = res.data.token;
                 const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+                toast.success("Dealer registered successfully")
                 localStorage.setItem("token", token);
                 localStorage.setItem("expirationDate", expirationDate);
                 dispatch(authSuccess(token));
                 dispatch(checkAuthTimeout(3600));
             })
             .catch(err => {
+                console.log(err.response)
+                if (err.response.status == 400) {
+                    toast.error(err.response.data.message)
+                }
                 dispatch(authFail(err));
             });
     };
@@ -127,12 +142,16 @@ export const dealerAuthLogin = (username, password) => {
             .then(res => {
                 const token = res.data.token;
                 const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+                toast.success("Logged in successfully")
                 localStorage.setItem("token", token);
                 localStorage.setItem("expirationDate", expirationDate);
                 dispatch(authSuccess(token));
                 dispatch(checkAuthTimeout(3600));
             })
             .catch(err => {
+                if (err.response.status === 400) {
+                    toast.error(err.response.data.message)
+                }
                 dispatch(authFail(err));
             });
     };

@@ -10,6 +10,7 @@ import {
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {authSignup} from "../store/actions/auth";
+import {ToastContainer} from "react-toastify";
 
 class RegistrationForm extends React.Component {
     state = {
@@ -42,6 +43,8 @@ class RegistrationForm extends React.Component {
         }
         return (
             <div>
+                <ToastContainer position="bottom-right"/>
+
                 <Grid
                     textAlign="center"
                     style={{height: "100vh"}}
@@ -53,7 +56,7 @@ class RegistrationForm extends React.Component {
                         </Header>
                         {error && <p>{this.props.error.message}</p>}
 
-                        <React.Fragment >
+                        <React.Fragment>
                             <Form size="large" onSubmit={this.handleSubmit}>
                                 <Segment stacked>
                                     <Form.Input
