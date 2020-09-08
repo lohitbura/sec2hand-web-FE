@@ -423,9 +423,9 @@ class HomepageLayout extends React.Component {
                                                                     <strong title="Author"><i
                                                                         className="fa fa-home"/> {dealer.city}
                                                                     </strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    <strong title="Author"><i
-                                                                        className="fa fa-home"/> {dealer.area}
-                                                                    </strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    {/*<strong title="Author"><i*/}
+                                                                    {/*    className="fa fa-home"/> {dealer.area}*/}
+                                                                    {/*</strong>&nbsp;&nbsp;&nbsp;&nbsp;*/}
                                                                     <strong title="Views"><i
                                                                         className="fa fa-cubes"/> {dealer.category}</strong>
                                                                 </small>

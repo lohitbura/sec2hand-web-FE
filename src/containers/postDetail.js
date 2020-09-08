@@ -255,9 +255,9 @@ class PostDetail extends React.Component {
                                                                     {comment.user}
                                                                 </Link>
                                                             </Comment.Author>
-                                                            <Comment.Metadata>
-                                                                <div>Today at 5:42PM</div>
-                                                            </Comment.Metadata>
+                                                            {/*<Comment.Metadata>*/}
+                                                            {/*    <div>Today at 5:42PM</div>*/}
+                                                            {/*</Comment.Metadata>*/}
                                                             <Comment.Text>{comment.comment}</Comment.Text>
                                                         </Comment.Content>
                                                     </Comment>
