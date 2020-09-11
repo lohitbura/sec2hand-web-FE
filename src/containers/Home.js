@@ -219,17 +219,17 @@ class HomepageLayout extends React.Component {
                     <Slider>
                         <Slide index={1}><img
                             style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
-                            src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
+                            src="/assets/images/slider1.jpg"
                             alt="First slide"/></Slide>
                         }
                         <Slide index={2}><img
                             style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
-                            src='https://bd.gaadicdn.com/processedimages/revolt-motors/rv-400/source/m_rv-400_11560855440.jpg?tr=w-360'
+                            src="/assets/images/slider2.jpg"
                             alt="First slide"/></Slide>
                         }
                         <Slide index={3}><img
                             style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
-                            src='https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
+                            src="/assets/images/slider3.jpg"
                             alt="First slide"/></Slide>
                         }
                     </Slider>
