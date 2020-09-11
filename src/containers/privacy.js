@@ -19,92 +19,83 @@ class Privacy extends React.Component {
                 </div>
                 <div className="container" style={{marginTop:"50px"}}>
                     <h1 style={{textAlign:"center"}}>Privacy policy</h1>
-                    <p>
-                        This Privacy Policy governs the manner in which sec2hand.com collects, uses, maintains and discloses information collected from users (each, a “User”) of the sec2hand.com website (“Site”). This privacy policy applies to the Site and all products and services offered by sec2hand.com.
-                        <br/>
-                        Personal identification information
-                        <br/>
-                        We may collect personal identification information from Users in a variety of ways, including, but not limited to, when Users visit our site, register on the site, place an order, subscribe to the newsletter, and in connection with other activities, services, features or resources we make available on our Site. Users may be asked for, as appropriate, name, email address. We will collect personal identification information from Users only if they voluntarily submit such information to us. Users can always refuse to supply personally identification information, except that it may prevent them from engaging in certain Site related activities.
-                        <br/>
+                    <h1>Privacy Policy for sec2hand</h1>
 
-                        Non-personal identification information
-                        <br/>
+                    <p>At sec2hand, accessible from https://sec2hand.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by sec2hand and how we use it.</p>
 
-                        We may collect non-personal identification information about Users whenever they interact with our Site. Non-personal identification information may include the browser name, the type of computer and technical information about Users means of connection to our Site, such as the operating system and the Internet service providers utilized and other similar information.
-                        <br/>
+                    <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
 
-                        Web browser cookies
-                        <br/>
+                    <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in sec2hand. This policy is not applicable to any information collected offline or via channels other than this website. Our Privacy Policy was created with the help of the <a href="https://www.privacypolicygenerator.info">Privacy Policy Generator</a> and the <a href="https://www.privacypolicyonline.com/privacy-policy-generator/">Free Privacy Policy Generator</a>.</p>
 
-                        Our Site may use “cookies” to enhance User experience. User’s web browser places cookies on their hard drive for record-keeping purposes and sometimes to track information about them. User may choose to set their web browser to refuse cookies, or to alert you when cookies are being sent. If they do so, note that some parts of the Site may not function properly.
-                        <br/>
+                    <h2>Consent</h2>
 
-                        How we use collected information
-                        <br/>
+                    <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
 
-                        sec2hand.com may collect and use Users personal information for the following purposes:
-                        <br/>
+                    <h2>Information we collect</h2>
 
-                        – To improve customer service
-                        Information you provide helps us respond to your customer service requests and support needs more efficiently.
-                        – To personalize user experience
-                        We may use information in the aggregate to understand how our Users as a group use the services and resources provided on our Site.
-                        – To improve our Site
-                        We may use feedback you provide to improve our products and services.
-                        – To send periodic emails
-                        We may use the email address to send User information and updates pertaining to their order. It may also be used to respond to their inquiries, questions, and/or other requests. If User decides to opt-in to our mailing list, they will receive emails that may include company news, updates, related product or service information, etc. If at any time the User would like to unsubscribe from receiving future emails, we include detailed unsubscribe instructions at the bottom of each email.
-                        <br/>
+                    <p>The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.</p>
+                    <p>If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.</p>
+                    <p>When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.</p>
 
-                        How we protect your information
-                        <br/>
+                    <h2>How we use your information</h2>
 
-                        We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site.
-                        <br/>
+                    <p>We use the information we collect in various ways, including to:</p>
 
-                        Our Site is in compliance with PCI vulnerability standards in order to create as secure of an environment as possible for Users.
-                        <br/>
+                    <ul>
+                        <li>Provide, operate, and maintain our webste</li>
+                        <li>Improve, personalize, and expand our webste</li>
+                        <li>Understand and analyze how you use our webste</li>
+                        <li>Develop new products, services, features, and functionality</li>
+                        <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the webste, and for marketing and promotional purposes</li>
+                        <li>Send you emails</li>
+                        <li>Find and prevent fraud</li>
+                    </ul>
 
-                        Sharing your personal information
-                        <br/>
+                    <h2>Log Files</h2>
 
-                        We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates and advertisers for the purposes outlined above.We may use third party service providers to help us operate our business and the Site or administer activities on our behalf, such as sending out newsletters or surveys. We may share your information with these third parties for those limited purposes provided that you have given us your permission.
-                        <br/>
+                    <p>sec2hand follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
 
-                        Advertising
-                        <br/>
 
-                        Ads appearing on our site may be delivered to Users by advertising partners, who may set cookies. These cookies allow the ad server to recognize your computer each time they send you an online advertisement to compile non personal identification information about you or others who use your computer. This information allows ad networks to, among other things, deliver targeted advertisements that they believe will be of most interest to you. This privacy policy does not cover the use of cookies by any advertisers.
-                        <br/>
 
-                        Google Adsense
-                        <br/>
 
-                        Some of the ads may be served by Google. Google’s use of the DART cookie enables it to serve ads to Users based on their visit to our Site and other sites on the Internet. DART uses “non personally identifiable information” and does NOT track personal information about you, such as your name, email address, physical address, etc. You may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy at http://www.google.com/privacy_ads.html
-                        <br/>
+                    <h2>Advertising Partners Privacy Policies</h2>
 
-                        Changes to this privacy policy
-                        <br/>
+                    <p>You may consult this list to find the Privacy Policy for each of the advertising partners of sec2hand.</p>
 
-                        sec2hand.com has the discretion to update this privacy policy at any time. When we do, we will revise the updated date at the bottom of this page and send you an email. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect. You acknowledge and agree that it is your responsibility to review this privacy policy periodically and become aware of modifications.
-                        <br/>
+                    <p>Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on sec2hand, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</p>
 
-                        Your acceptance of these terms
-                        <br/>
+                    <p>Note that sec2hand has no access to or control over these cookies that are used by third-party advertisers.</p>
 
-                        By using this Site, you signify your acceptance of this policy and terms of service. If you do not agree to this policy, please do not use our Site. Your continued use of the Site following the posting of changes to this policy will be deemed your acceptance of those changes.
-                        <br/>
+                    <h2>Third Party Privacy Policies</h2>
 
-                        Contacting us
-                        <br/>
+                    <p>sec2hand's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options. </p>
 
-                        If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at:
-                        sec2hand.com
-                        26-2-291,G-1,
-                        support@sec2hand.com
-                        <br/>
+                    <p>You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers' respective websites.</p>
 
-                        This document was last updated on September 3, 2020
-                    </p>
+                    <h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
+
+                    <p>Under the CCPA, among other rights, California consumers have the right to:</p>
+                    <p>Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</p>
+                    <p>Request that a business delete any personal data about the consumer that a business has collected.</p>
+                    <p>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</p>
+                    <p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
+
+                    <h2>GDPR Data Protection Rights</h2>
+
+                    <p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
+                    <p>The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.</p>
+                    <p>The right to rectification – You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete the information you believe is incomplete.</p>
+                    <p>The right to erasure – You have the right to request that we erase your personal data, under certain conditions.</p>
+                    <p>The right to restrict processing – You have the right to request that we restrict the processing of your personal data, under certain conditions.</p>
+                    <p>The right to object to processing – You have the right to object to our processing of your personal data, under certain conditions.</p>
+                    <p>The right to data portability – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</p>
+                    <p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
+
+                    <h2>Children's Information</h2>
+
+                    <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
+
+                    <p>sec2hand does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
                 </div>
             </div>
 

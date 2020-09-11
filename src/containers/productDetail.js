@@ -72,7 +72,7 @@ class ProductDetail extends React.Component {
                             <div className="col-md-12">
                                 <div className="text-content">
                                     <h4>
-                                        <del>₹{product.price}</del>
+                                        {/*<del>₹{product.price}</del>*/}
                                         <strong className="text-primary">₹{product.price}</strong></h4>
                                     <h2>{product.model}</h2>
                                 </div>
