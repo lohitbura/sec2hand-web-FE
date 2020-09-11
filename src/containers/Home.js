@@ -221,41 +221,42 @@ class HomepageLayout extends React.Component {
                             style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
                             src="/assets/images/slider1.jpg"
                             alt="First slide"/></Slide>
-                        }
+
                         <Slide index={2}><img
                             style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
                             src="/assets/images/slider2.jpg"
                             alt="First slide"/></Slide>
-                        }
+
                         <Slide index={3}><img
                             style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
                             src="/assets/images/slider3.jpg"
                             alt="First slide"/></Slide>
-                        }
+                        
                     </Slider>
                 </CarouselProvider>
                 <br/>
                 <br/>
-                <div className="container" style={{marginTop:"50px"}}>
+                <div className="container" style={{marginTop: "50px"}}>
                     <div className="row">
-                        <div className="col-sm-4" style={{margin:'auto'}}>
+                        <div className="col-sm-4" style={{margin: 'auto'}}>
                             <div className="card">
                                 <img className="card-img-top" src="/assets/images/customer3.jpg" alt="Card image cap"/>
-                                    <div className="card-body">
-                                        <h5 className="card-title">We Know our customer need.</h5>
-                                        {/*<p className="card-text">We Know our customer need.</p>*/}
-                                        {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
-                                    </div>
+                                <div className="card-body">
+                                    <h5 className="card-title">We Know our customer need.</h5>
+                                    {/*<p className="card-text">We Know our customer need.</p>*/}
+                                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                                </div>
                             </div>
                         </div>
-                        <div className="col-sm-4" style={{margin:'auto'}}>
+                        <div className="col-sm-4" style={{margin: 'auto'}}>
                             <div className="card">
-                                <img className="card-img-top" src="/assets/images/customer-satisfaction.jpg" alt="Card image cap"/>
-                                    <div className="card-body">
-                                        <h5 className="card-title">Customer satisfaction is our top priority.</h5>
-                                        {/*<p className="card-text">Customer satisfaction is our top priority.</p>*/}
-                                        {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
-                                    </div>
+                                <img className="card-img-top" src="/assets/images/customer-satisfaction.jpg"
+                                     alt="Card image cap"/>
+                                <div className="card-body">
+                                    <h5 className="card-title">Customer satisfaction is our top priority.</h5>
+                                    {/*<p className="card-text">Customer satisfaction is our top priority.</p>*/}
+                                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -459,7 +460,8 @@ class HomepageLayout extends React.Component {
                                                     }
                                                     <div className="row">
                                                         <div className="col-md-4" style={{margin: 'auto'}}>
-                                                            <Button onClick={() => this.loadDealers()} color="red" disabled={!has_more}>
+                                                            <Button onClick={() => this.loadDealers()} color="red"
+                                                                    disabled={!has_more}>
                                                                 View more
                                                             </Button>
                                                         </div>
