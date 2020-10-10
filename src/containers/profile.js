@@ -25,10 +25,10 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.props.authenticated) {
-            console.log('working')
-            this.props.history.push('/login');
-        }
+        // if (!this.props.authenticated) {
+        //     console.log('working')
+        //     this.props.history.push('/login');
+        // }
         window.scrollTo(0, 0);
         this.fetchProfile()
         const token = localStorage.getItem('token')
