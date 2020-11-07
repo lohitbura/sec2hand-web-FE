@@ -2,7 +2,7 @@ import React from 'react';
 import {Container} from "semantic-ui-react";
 import {Button, Checkbox, Form, TextArea} from 'semantic-ui-react'
 import axios from "axios";
-import {productCreateURL} from "../store/constants";
+import {bikeCreateURL, carCreateURL, mobileCreateURL, productCreateURL} from "../store/constants";
 import Loader from 'react-loader-spinner';
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import {Link, withRouter} from "react-router-dom";
@@ -18,32 +18,42 @@ class CreateProduct extends React.Component {
         color: '',
         loader: false,
         message: '',
-        error: ''
+        error: '',
+        type:'',
+        fuel_type:''
     };
 
     componentDidMount() {
         window.scrollTo(0, 0);
     }
 
-    submit = () => {
-        const {price, model, images, km, color} = this.state;
+    createProduct = (url, category) => {
+        const {price, model, images, km, color , fuel_type, type} = this.state;
+
         if (images.length > 10) {
             return toast.error("You can not select more 10 images")
         }
         let form_data = new FormData();
         form_data.append('price', price);
         form_data.append('model', model);
+        form_data.append('color', color);
+        if(category === "car"){
+            form_data.append('fuel_type', fuel_type);
+            form_data.append('km', km);
+        } else if (category === "bike"){
+            form_data.append('type', type);
+            form_data.append('km', km);
+        }
 
         for (let i = 0; i < images.length; i++) {
             form_data.append('images', images[i])
         }
-        form_data.append('km', km);
-        form_data.append('color', color);
+
         let headers = {
             Authorization: `Token ${localStorage.getItem('token')}`
         };
         this.setState({loader: true})
-        axios.post(productCreateURL, form_data, {headers: headers}).then(res => {
+        axios.post(url, form_data, {headers: headers}).then(res => {
             this.setState({loader: false, message: res.data.message})
             toast.success("Product create successful!")
             setTimeout(() => {
@@ -54,6 +64,17 @@ class CreateProduct extends React.Component {
                 this.setState({loader: false, error: err.data.message})
                 toast.error("Product create failed!")
             })
+    }
+
+    submit = () => {
+        const category = localStorage.getItem('category')
+        if(category === "car"){
+            this.createProduct(carCreateURL, category)
+        } else if (category === " mobile"){
+            this.createProduct(mobileCreateURL, category)
+        } else {
+            this.createProduct(bikeCreateURL, category)
+        }
     };
 
     handleChange = (e) => {
@@ -116,6 +137,26 @@ class CreateProduct extends React.Component {
                                 category !== "mobile" ? <Form.Field>
                                     <label>Km</label>
                                     <input name='km' onChange={this.handleChange} placeholder='km' required/>
+                                </Form.Field> : ''
+                            }
+                            {
+                                category === "bike" ? <Form.Field>
+                                    <label>Vehicle Type</label>
+                                    <select onChange={this.handleChange} name="type"
+                                            className="form-control">
+                                        <option value="scooter">Scooter</option>
+                                        <option value="motorcycle">Motorcycles</option>
+                                    </select>
+                                </Form.Field> : ''
+                            }
+                            {
+                                category === "car" ? <Form.Field>
+                                    <label>Fuel type</label>
+                                    <select onChange={this.handleChange} name="fuel_type"
+                                            className="form-control">
+                                        <option value="petrol">Petrol</option>
+                                        <option value="diesel">Diesel</option>
+                                    </select>
                                 </Form.Field> : ''
                             }
 

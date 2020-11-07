@@ -45,29 +45,18 @@ class HomepageLayout extends React.Component {
         has_more: true,
         city: '',
         area: '',
-        category: ''
+        category: '',
+
+        productCity: '',
+        productType: 'car'
     }
 
-    componentWillMount() {
-        this.loadProducts()
+    componentDidMount() {
+        this.loadProduct()
         this.loadDealers()
     }
 
-    loadProducts = () => {
-        const {limit, offset, products} = this.state;
-        this.setState({loading: true})
-        axios.get(productListURL(limit, offset)).then(res => {
-            this.setState({
-                products: [...products, ...res.data.products],
-                loading: false,
-                offset: offset,
-                has_more: res.data.has_more
-            })
-        })
-            .catch(err => {
-                console.log(err)
-            })
-    }
+
 
     check = () => {
         if (!this.props.authenticated) {
@@ -80,6 +69,8 @@ class HomepageLayout extends React.Component {
         localStorage.setItem(e.target.name, e.target.value)
         this.setState({[e.target.name]: e.target.value})
     }
+
+
 
     onSubmit = (e) => {
         e.preventDefault()
@@ -190,6 +181,45 @@ class HomepageLayout extends React.Component {
             })
     }
 
+    productFilterSubmit = (e) => {
+        e.preventDefault();
+        const {limit, offset, products, productType, productCity} = this.state;
+        this.setState({loading: true})
+        axios.get(productListURL(limit, offset, productType, productCity)).then(res => {
+            this.setState({
+                products: res.data.products,
+                loading: false,
+                offset: offset,
+                has_more: res.data.has_more
+            })
+        })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    loadProduct = () => {
+        const {limit, offset, products, productType, productCity} = this.state;
+        this.setState({loading: true})
+        axios.get(productListURL(limit, offset, productType, productCity)).then(res => {
+            this.setState({
+                products: [...products, ...res.data.products],
+                loading: false,
+                offset: offset,
+                has_more: res.data.has_more
+            })
+        })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    onProductTypeChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
     render() {
         const {products, dealers, loading, has_more} = this.state;
         return (
@@ -236,38 +266,88 @@ class HomepageLayout extends React.Component {
                 </CarouselProvider>
                 <br/>
                 <br/>
-                <div className="container" style={{marginTop:"50px"}}>
+                <div className="container" style={{marginTop: "50px"}}>
                     <div className="row">
-                        <div className="col-sm-4" style={{margin:'auto'}}>
+                        <div className="col-sm-4" style={{margin: 'auto'}}>
                             <div className="card">
                                 <img className="card-img-top" src="/assets/images/customer3.jpg" alt="Card image cap"/>
-                                    <div className="card-body">
-                                        <h5 className="card-title">We Know our customer need.</h5>
-                                        {/*<p className="card-text">We Know our customer need.</p>*/}
-                                        {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
-                                    </div>
+                                <div className="card-body">
+                                    <h5 className="card-title">We Know our customer need.</h5>
+                                    {/*<p className="card-text">We Know our customer need.</p>*/}
+                                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                                </div>
                             </div>
                         </div>
-                        <div className="col-sm-4" style={{margin:'auto'}}>
+                        <div className="col-sm-4" style={{margin: 'auto'}}>
                             <div className="card">
-                                <img className="card-img-top" src="/assets/images/customer-satisfaction.jpg" alt="Card image cap"/>
-                                    <div className="card-body">
-                                        <h5 className="card-title">Customer satisfaction is our top priority.</h5>
-                                        {/*<p className="card-text">Customer satisfaction is our top priority.</p>*/}
-                                        {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
-                                    </div>
+                                <img className="card-img-top" src="/assets/images/customer-satisfaction.jpg"
+                                     alt="Card image cap"/>
+                                <div className="card-body">
+                                    <h5 className="card-title">Customer satisfaction is our top priority.</h5>
+                                    {/*<p className="card-text">Customer satisfaction is our top priority.</p>*/}
+                                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {
-                    !this.props.authenticated ?
+                    this.props.authenticated ?
                         <div className="latest-products">
                             <div className="container">
 
                                 <div className="row">
+
                                     <div className="col-md-12">
+                                        <div className="contact-form">
+                                            <form action="#">
+                                                <div className="row">
+                                                    <div className="col-md-4">
+                                                        <label>City:</label>
+                                                        <input onChange={this.onProductTypeChange} name="productCity"
+                                                               className="form-control" type="text"
+                                                               placeholder="search city"/>
+                                                    </div>
+                                                    <div className="col-md-4">
+                                                        <label>Category:</label>
+
+                                                        <select onChange={this.onProductTypeChange} name="productType"
+                                                                className="form-control">
+                                                            <option value="car">Car</option>
+                                                            <option value="motorcycle">Motorcycles</option>
+                                                            <option value="scooter">Scooter</option>
+                                                            <option value="mobile">Mobile</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                {/*<input onChange={this.onChange} name="city" className="form-control" type="text"*/}
+                                                {/*       placeholder="search city"/>*/}
+
+                                                {/*<label>Area:</label>*/}
+
+                                                {/*<input onChange={this.onChange} name="area" className="form-control" type="text"*/}
+                                                {/*       placeholder="search area"/>*/}
+                                                {/*<label>Category:</label>*/}
+
+                                                {/*<select onChange={this.onChange} name="category" className="form-control">*/}
+                                                {/*    <option>All</option>*/}
+                                                {/*    <option value="car">Car</option>*/}
+                                                {/*    <option value="bike">Bike</option>*/}
+                                                {/*    <option value="mobile">Mobile</option>*/}
+                                                {/*</select>*/}
+                                                <div style={{width: "30%", margin: "auto"}}>
+                                                    <button onClick={(e) => this.productFilterSubmit(e)}
+                                                            className="filled-button btn-block">Search
+                                                    </button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <br/>
+                                    <div className="col-md-12" style={{"marginTop": "40px"}}>
                                         <div className="section-heading">
                                             <h2>Featured Products</h2>
                                             {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
@@ -283,19 +363,22 @@ class HomepageLayout extends React.Component {
                                             /> : ''
                                         }
                                     </div>
-
                                     {
                                         products.map(product => {
                                             return (
                                                 <div className="col-lg-4 col-md-6">
                                                     <div className="product-item">
-                                                        <Link to={`/product/${product.id}`}>
-                                                            <img style={{
-                                                                height: '232px',
-                                                                objectFit: 'cover'
-                                                            }}
-                                                                 src={`${URL}${product.images && product.images[0].image}`}
-                                                                 alt=""/>
+                                                        <Link to={`/product/${product.slug}`}>
+                                                            {
+                                                                product.images && product.images[0] !== undefined ?
+                                                                    <img style={{
+                                                                        height: '232px',
+                                                                        objectFit: 'cover'
+                                                                    }}
+                                                                         src={`${URL}${product.images && product.images[0].image}`}
+                                                                         alt=""/> : ''
+                                                            }
+
                                                         </Link>
                                                         <div className="down-content">
                                                             <h4>
@@ -459,7 +542,8 @@ class HomepageLayout extends React.Component {
                                                     }
                                                     <div className="row">
                                                         <div className="col-md-4" style={{margin: 'auto'}}>
-                                                            <Button onClick={() => this.loadDealers()} color="red" disabled={!has_more}>
+                                                            <Button onClick={() => this.loadDealers()} color="red"
+                                                                    disabled={!has_more}>
                                                                 View more
                                                             </Button>
                                                         </div>

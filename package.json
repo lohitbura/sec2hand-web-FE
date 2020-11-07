@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start-local": "react-scripts start",
-    "start": "set HOST=192.168.43.162&& react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

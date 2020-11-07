@@ -1,6 +1,6 @@
 // export const URL = "https://backend.sec2hand.com";
-export const URL = "https://hosting123.pythonanywhere.com";
-// export const URL = "http://127.0.0.1:8000";
+// export const URL = "https://hosting123.pythonanywhere.com";
+export const URL = "http://127.0.0.1:8000";
 // export const URL = " http://192.168.43.162:8000";
 
 const apiURL = '/api';
@@ -13,9 +13,13 @@ export const customerLoginURL = `${endpoint}/customer-login`;
 export const dealerLoginURL = `${endpoint}/dealer-login`;
 
 
-export const productListURL = (limit, offset) => `${endpoint}/product-list?limit=${limit}&offset=${offset}`;
+export const productListURL = (limit, offset, type, city) => `${endpoint}/product-list?limit=${limit}&offset=${offset}&category=${type}&city=${city}`;
 export const productCreateURL = `${endpoint}/product-create`;
-export const productDetailURL = (id) => `${endpoint}/product-detail/${id}`;
+
+export const carCreateURL = `${endpoint}/car-create`;
+export const bikeCreateURL = `${endpoint}/bike-create`;
+export const mobileCreateURL = `${endpoint}/mobile-create`;
+export const productDetailURL = (id) => `${endpoint}/item-detail/${id}`;
 
 export const postsListURL = (limit, offset) => `${endpoint}/post-list?limit=${limit}&offset=${offset}`;
 export const postCreateURL = `${endpoint}/post-create`;

@@ -112,7 +112,7 @@ class Profile extends React.Component {
                                     return (
                                         <div className="col-lg-4 col-md-6">
                                             <div className="product-item">
-                                                <Link to={`/product/${product.id}`}>
+                                                <Link to={`/product/${product.slug}`}>
                                                     <img style={{
                                                         height: '232px',
                                                         objectFit: 'cover'
