@@ -36,7 +36,7 @@ class HomepageLayout extends React.Component {
         products: [],
         dealers: [],
         loading: false,
-        limit: 27,
+        limit: 6,
         limit2: 6,
         limit1: 6,
         offset: 0,
@@ -53,7 +53,6 @@ class HomepageLayout extends React.Component {
 
     componentDidMount() {
         this.loadProduct()
-        this.loadDealers()
     }
 
 
@@ -183,13 +182,12 @@ class HomepageLayout extends React.Component {
 
     productFilterSubmit = (e) => {
         e.preventDefault();
-        const {limit, offset, products, productType, productCity} = this.state;
+        const {limit, offset2, products, productType, productCity} = this.state;
         this.setState({loading: true})
-        axios.get(productListURL(limit, offset, productType, productCity)).then(res => {
+        axios.get(productListURL(limit, offset2, productType, productCity)).then(res => {
             this.setState({
                 products: res.data.products,
                 loading: false,
-                offset: offset,
                 has_more: res.data.has_more
             })
         })
@@ -205,7 +203,7 @@ class HomepageLayout extends React.Component {
             this.setState({
                 products: [...products, ...res.data.products],
                 loading: false,
-                offset: offset,
+                offset: limit + offset,
                 has_more: res.data.has_more
             })
         })
@@ -291,9 +289,6 @@ class HomepageLayout extends React.Component {
                         </div>
                     </div>
                 </div>
-
-                {
-                    this.props.authenticated ?
                         <div className="latest-products">
                             <div className="container">
 
@@ -418,145 +413,15 @@ class HomepageLayout extends React.Component {
                                 </div>
                                 <div style={{textAlign: "center", marginTop: "50px"}}>
                                     {
-                                        !has_more ? "No more products" : ''
+                                        !has_more ? "No more products" : <Button onClick={() => this.loadProduct()} color="red"
+                                        >View more</Button>
                                     }
-                                    <Button onClick={() => this.check()} color="red"
-                                    >View more</Button>
 
-                                </div>
-                            </div>
-                        </div> : <div className="latest-products">
-                            <div className="container">
-
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <div className="section-heading">
-                                            <h2>Find a dealer</h2>
-                                            {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
-                                            {/*    className="fa fa-angle-right"></i></p>*/}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6" style={{margin: 'auto'}}>
-
-                                        <div className="contact-form">
-                                            <form action="#">
-                                                <label>City:</label>
-
-                                                <input onChange={this.onChange} name="city" className="form-control"
-                                                       type="text"
-                                                       placeholder="search city"/>
-
-                                                {/*<label>Area:</label>*/}
-
-                                                {/*<input onChange={this.onChange} name="area" className="form-control"*/}
-                                                {/*       type="text"*/}
-                                                {/*       placeholder="search area"/>*/}
-                                                <label>Category:</label>
-
-                                                <select onChange={this.onChange} name="category" className="form-control">
-                                                    <option>All</option>
-                                                    <option value="car">Car</option>
-                                                    <option value="bike">Bike</option>
-                                                    <option value="mobile">Mobile</option>
-                                                </select>
-
-                                                <button onClick={(e) => this.onSubmit(e)}
-                                                        className="filled-button btn-block">Search
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div style={{marginTop: '50px'}} className="col-md-12">
-
-                                        <div className="row">
-                                            {dealers.map(dealer => {
-                                                return (
-                                                    <div className="col-md-4">
-                                                        <div className="product-item">
-                                                            <Link to={`/profile/${dealer.user}`}>
-
-                                                                {
-                                                                    dealer.image ? <img style={{
-                                                                            height: '232px',
-                                                                            objectFit: 'cover'
-                                                                        }} src={`${URL}${dealer.image}`}
-                                                                                        alt=""/> :
-                                                                        <img style={{
-                                                                            height: '232px',
-                                                                            objectFit: 'cover'
-                                                                        }} src="/assets/images/profile-placeholder.png"
-                                                                             alt=""
-                                                                             className="img-fluid wc-image"/>
-                                                                }
-                                                            </Link>
-
-                                                            <div className="down-content">
-                                                                <Link to={`/profile/${dealer.user}`}>
-                                                                    <h4>{dealer.shop_name}</h4>
-                                                                </Link>
-
-                                                                {/*<h6><small>*/}
-                                                                {/*    <del> $11199.00</del>*/}
-                                                                {/*</small> $11179.00*/}
-                                                                {/*</h6>*/}
-
-                                                                <p>Dealer:{dealer.user}</p>
-
-                                                                <small>
-                                                                    <strong title="Author"><i
-                                                                        className="fa fa-home"/> {dealer.city}
-                                                                    </strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    {/*<strong title="Author"><i*/}
-                                                                    {/*    className="fa fa-home"/> {dealer.area}*/}
-                                                                    {/*</strong>&nbsp;&nbsp;&nbsp;&nbsp;*/}
-                                                                    <strong title="Views"><i
-                                                                        className="fa fa-cubes"/> {dealer.category}</strong>
-                                                                </small>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                )
-                                            })}
-
-                                            <div className="col-md-12">
-                                                {/*<ul className="pages">*/}
-                                                {/*    <li><a href="#">1</a></li>*/}
-                                                {/*    <li className="active"><a href="#">2</a></li>*/}
-                                                {/*    <li><a href="#">3</a></li>*/}
-                                                {/*    <li><a href="#">4</a></li>*/}
-                                                {/*    <li><a href="#"><i className="fa fa-angle-double-right"></i></a></li>*/}
-                                                {/*</ul>*/}
-                                                <div style={{textAlign: "center", marginTop: "10px"}}>
-                                                    {
-                                                        loading ? <Loader
-                                                            style={{marginTop: "100px", textAlign: 'center'}}
-                                                            type="Rings"
-                                                            color="red"
-                                                            height={100}
-                                                            width={100}
-                                                        /> : ''
-                                                    }
-                                                    {
-                                                        !has_more ? "No more dealers" : ''
-                                                    }
-                                                    <div className="row">
-                                                        <div className="col-md-4" style={{margin: 'auto'}}>
-                                                            <Button onClick={() => this.loadDealers()} color="red"
-                                                                    disabled={!has_more}>
-                                                                View more
-                                                            </Button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
                             </div>
                         </div>
-                }
+
                 <div className="best-features about-features">
                     <div className="container">
                         <div className="row">
