@@ -35,3 +35,5 @@ export const getUserProfileURL = (username) => `${endpoint}/profile?username=${u
 export const getUserProfileIdURL = `${endpoint}/profile`;
 export const dealerProfileEditURL = `${endpoint}/profile-edit`;
 export const customerProfileEditURL = `${endpoint}/customer-profile-edit`;
+
+export const cityListURL = `${endpoint}/city-list`;

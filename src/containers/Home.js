@@ -29,6 +29,7 @@ import {dealerListURL, productListURL, URL} from "../store/constants";
 import Loader from 'react-loader-spinner';
 import {logout} from "../store/actions/auth";
 import {connect} from "react-redux";
+import {fetchCity} from "../store/actions/cityList";
 
 class HomepageLayout extends React.Component {
 
@@ -53,6 +54,7 @@ class HomepageLayout extends React.Component {
 
     componentDidMount() {
         this.loadProduct()
+        this.props.fetchCityList();
     }
 
 
@@ -300,9 +302,16 @@ class HomepageLayout extends React.Component {
                                                 <div className="row">
                                                     <div className="col-md-4">
                                                         <label>City:</label>
-                                                        <input onChange={this.onProductTypeChange} name="productCity"
-                                                               className="form-control" type="text"
-                                                               placeholder="search city"/>
+                                                        <select onChange={this.onProductTypeChange} name="productCity"
+                                                                className="form-control">
+                                                            <option>Select city</option>
+
+                                                            {
+                                                                this.props.cityData && this.props.cityData.map(city => {
+                                                                    return <option value={city.name}>{city.name}</option>
+                                                                })
+                                                            }
+                                                        </select>
                                                     </div>
                                                     <div className="col-md-4">
                                                         <label>Category:</label>
@@ -530,13 +539,15 @@ class HomepageLayout extends React.Component {
 const mapStateToProps = state => {
     return {
         authenticated: state.auth.token !== null,
-        token: state.auth.token
+        token: state.auth.token,
+        cityData:state.cityList.data
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        logout: () => dispatch(logout())
+        logout: () => dispatch(logout()),
+        fetchCityList: () => dispatch(fetchCity())
     };
 };
 

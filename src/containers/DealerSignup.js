@@ -12,6 +12,8 @@ import {NavLink, Redirect} from "react-router-dom";
 import {authSignup, dealerAuthSignup} from "../store/actions/auth";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {fetchCity} from "../store/actions/cityList";
+import csc from 'country-state-city'
 
 class DealerSignup extends React.Component {
     state = {
@@ -20,15 +22,22 @@ class DealerSignup extends React.Component {
         shop_name: "",
         address: "",
         phone: "",
-        city: "",
         area: "",
         category: "",
         password1: "",
         password2: "",
+
+        stateData: [],
+        stateId: '',
+        cityData: [],
+        city: "",
     };
 
     componentDidMount() {
         window.scrollTo(0, 0);
+        this.setState({
+            stateData: csc.getStatesOfCountry("101")
+        })
     }
 
     handleSubmit = e => {
@@ -38,6 +47,11 @@ class DealerSignup extends React.Component {
     };
 
     handleChange = e => {
+        if(e.target.name == "state"){
+            this.setState({
+                cityData: csc.getCitiesOfState(e.target.value)
+            })
+        }
         this.setState({[e.target.name]: e.target.value});
     };
 
@@ -111,15 +125,26 @@ class DealerSignup extends React.Component {
                                         iconPosition="left"
                                         placeholder="phone"
                                     />
-                                    <Form.Input
-                                        onChange={this.handleChange}
-                                        value={city}
-                                        name="city"
-                                        fluid
-                                        icon="user"
-                                        iconPosition="left"
-                                        placeholder="city"
-                                    />
+                                    <select onChange={this.handleChange}
+                                            name="state" className="form-control">
+                                        <option>Select State</option>
+                                        {
+                                            this.state.stateData.map(state => {
+                                                return <option value={state.id}>{state.name}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <br/>
+                                    <select onChange={this.handleChange}
+                                            name="city" className="form-control">
+                                        <option>Select city</option>
+                                        {
+                                            this.state.cityData.map(state => {
+                                                return <option value={state.name}>{state.name}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <br/>
                                     <Form.Input
                                         onChange={this.handleChange}
                                         value={area}
@@ -194,14 +219,15 @@ const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
         error: state.auth.error,
-        token: state.auth.token
+        token: state.auth.token,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         signup: (username, code, shop_name, address, phone, city, area, category, password1, password2) =>
-            dispatch(dealerAuthSignup(username, code, shop_name, address, phone, city, area, category, password1, password2))
+            dispatch(dealerAuthSignup(username, code, shop_name, address, phone, city, area, category, password1, password2)),
+        fetchCityList: () => dispatch(fetchCity())
     };
 };
 
