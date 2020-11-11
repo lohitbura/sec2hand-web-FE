@@ -20,7 +20,8 @@ class CreateProduct extends React.Component {
         message: '',
         error: '',
         type:'',
-        fuel_type:''
+        fuel_type:'',
+        year:''
     };
 
     componentDidMount() {
@@ -28,7 +29,7 @@ class CreateProduct extends React.Component {
     }
 
     createProduct = (url, category) => {
-        const {price, model, images, km, color , fuel_type, type} = this.state;
+        const {price, model, images, km, color , fuel_type, type, year} = this.state;
 
         if (images.length > 10) {
             return toast.error("You can not select more 10 images")
@@ -37,6 +38,7 @@ class CreateProduct extends React.Component {
         form_data.append('price', price);
         form_data.append('model', model);
         form_data.append('color', color);
+        form_data.append('year', year);
         if(category === "car"){
             form_data.append('fuel_type', fuel_type);
             form_data.append('km', km);
@@ -131,6 +133,11 @@ class CreateProduct extends React.Component {
                             <Form.Field>
                                 <label>Price</label>
                                 <input type="number" name='price' onChange={this.handleChange} placeholder='Price'
+                                       required/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Year</label>
+                                <input type="number" name='year' onChange={this.handleChange} placeholder='Year'
                                        required/>
                             </Form.Field>
                             {

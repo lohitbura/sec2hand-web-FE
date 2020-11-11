@@ -166,6 +166,13 @@ class ProductDetail extends React.Component {
                                         </li>
                                         <li className="list-group-item">
                                             <div className="clearfix">
+                                                <span className="pull-left">Year</span>
+
+                                                <strong className="pull-right">{product.year}</strong>
+                                            </div>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <div className="clearfix">
                                                 <span className="pull-left">Price</span>
 
                                                 <strong className="pull-right">₹{product.price}</strong>
