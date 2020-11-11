@@ -88,6 +88,9 @@ class DealerLogin extends React.Component {
                                 </Segment>
                             </Form>
                             <Message>
+                                Have you forgot you password? <NavLink to="/send-otp">Forgot Password</NavLink>
+                            </Message>
+                            <Message>
                                 New to us? <NavLink to="/dealer-signup">Sign Up</NavLink>
                             </Message>
                         </React.Fragment>

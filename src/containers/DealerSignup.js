@@ -203,9 +203,11 @@ class DealerSignup extends React.Component {
                                     </Button>
                                 </Segment>
                             </Form>
+
                             <Message>
                                 Already have an account? <NavLink to="/login">Login</NavLink>
                             </Message>
+
                         </React.Fragment>
                     </Grid.Column>
                 </Grid>

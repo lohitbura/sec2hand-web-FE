@@ -20,9 +20,15 @@ import PostEdit from "./containers/postEdit";
 import AboutUs from "./containers/aboutUs";
 import ContactUs from "./containers/contactUs";
 import Privacy from "./containers/privacy";
+import ReactToast from "./containers/toast";
+import CustomerVerifyOtp from "./containers/customerVerifyOtp";
+import SendOtp from "./containers/Forgot password/sendOtp";
+import VerifyOtp from "./containers/Forgot password/verifyOtp";
+import ChangePassword from "./containers/Forgot password/changePassword";
 
 const BaseRouter = () => (
   <Hoc>
+      <ReactToast/>
     <Route path="/login" component={Login} />
     <Route path="/signup" component={Signup} />
     <Route path="/dealer-login" component={DealerLogin} />
@@ -41,6 +47,10 @@ const BaseRouter = () => (
     <Route path="/contact" component={ContactUs} />
     <Route path="/privacy" component={Privacy} />
     <Route exact path="/" component={HomepageLayout} />
+    <Route exact path="/customer-verify-otp" component={CustomerVerifyOtp} />
+    <Route exact path="/send-otp" component={SendOtp} />
+    <Route exact path="/verify-otp" component={VerifyOtp} />
+    <Route exact path="/change-password" component={ChangePassword} />
   </Hoc>
 );
 

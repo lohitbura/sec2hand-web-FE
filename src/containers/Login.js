@@ -28,8 +28,8 @@ class LoginForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const {username, password} = this.state;
-        this.props.login(username, password);
+        const {username} = this.state;
+        this.props.login(username, this.props.history);
     };
 
     render() {
@@ -63,19 +63,10 @@ class LoginForm extends React.Component {
                                         fluid
                                         icon="user"
                                         iconPosition="left"
-                                        placeholder="Username"
+                                        type="number" onInput={(e) => e.target.value = e.target.value.slice(0, 10)}
+                                        placeholder="Enter 10 digit mobile number"
+                                        required
                                     />
-                                    <Form.Input
-                                        onChange={this.handleChange}
-                                        fluid
-                                        value={password}
-                                        name="password"
-                                        icon="lock"
-                                        iconPosition="left"
-                                        placeholder="Password"
-                                        type="password"
-                                    />
-
                                     <Button
                                         color="teal"
                                         fluid
@@ -108,7 +99,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: (username, password) => dispatch(authLogin(username, password))
+        login: (username, history) => dispatch(authLogin(username, history))
     };
 };
 

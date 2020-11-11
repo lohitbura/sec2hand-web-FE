@@ -1,13 +1,14 @@
 // export const URL = "https://backend.sec2hand.com";
-// export const URL = "https://hosting123.pythonanywhere.com";
-export const URL = "http://127.0.0.1:8000";
-// export const URL = " http://192.168.43.162:8000";
+export const URL = "https://hosting123.pythonanywhere.com";
+// export const URL = "http://127.0.0.1:8000";
 
 const apiURL = '/api';
 
 export const endpoint = `${URL}${apiURL}`;
 
 export const customerRegisterURL = `${endpoint}/customer-register`;
+export const customerVerifyOtpURL = `${endpoint}/customer-verify-otp`;
+
 export const dealerRegisterURL = `${endpoint}/dealer-register`;
 export const customerLoginURL = `${endpoint}/customer-login`;
 export const dealerLoginURL = `${endpoint}/dealer-login`;
@@ -35,5 +36,9 @@ export const getUserProfileURL = (username) => `${endpoint}/profile?username=${u
 export const getUserProfileIdURL = `${endpoint}/profile`;
 export const dealerProfileEditURL = `${endpoint}/profile-edit`;
 export const customerProfileEditURL = `${endpoint}/customer-profile-edit`;
+
+export const requestOtp = `${endpoint}/send-otp`;
+export const verifyOtp = `${endpoint}/verify-otp`;
+export const changePassword = `${endpoint}/change-password`;
 
 export const cityListURL = `${endpoint}/city-list`;

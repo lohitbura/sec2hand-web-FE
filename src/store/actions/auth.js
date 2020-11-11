@@ -1,7 +1,14 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
-import {customerRegisterURL, customerLoginURL, dealerRegisterURL, dealerLoginURL} from "../constants";
+import {
+    customerRegisterURL,
+    customerLoginURL,
+    dealerRegisterURL,
+    dealerLoginURL,
+    customerVerifyOtpURL
+} from "../constants";
 import {toast} from "react-toastify";
+import customerVerifyOtp from "../../containers/customerVerifyOtp";
 
 export const authStart = () => {
     return {
@@ -39,22 +46,53 @@ export const checkAuthTimeout = expirationTime => {
     };
 };
 
-export const authLogin = (username, password) => {
+let phone = ''
+let session_id = ''
+
+export const verifyOtp = (otp, history) => {
+    return dispatch => {
+        axios.post(`${customerVerifyOtpURL}`, {otp, session_id,}).then(res => {
+            console.log(res.data)
+            if (res.data.status == true) {
+                const token = res.data.token;
+                localStorage.setItem("token", token);
+
+                const expirationDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+                localStorage.setItem("expirationDate", expirationDate);
+                dispatch(checkAuthTimeout(24 * 60 * 60));
+
+                toast.success("OTP verified successful.")
+                dispatch(authSuccess(token));
+                history.push("/");
+            } else {
+                console.log(res.data.status)
+                toast.error(res.data.detail)
+            }
+        })
+            .catch(err => {
+                dispatch(authFail(err))
+            })
+    }
+}
+
+export const authLogin = (username, history) => {
     return dispatch => {
         dispatch(authStart());
         axios
             .post(`${customerLoginURL}`, {
-                username: username,
-                password: password
+                phone: username,
             })
             .then(res => {
-                const token = res.data.token;
-                const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
-                toast.success("Logged in successfully")
-                localStorage.setItem("token", token);
-                localStorage.setItem("expirationDate", expirationDate);
-                dispatch(authSuccess(token));
-                dispatch(checkAuthTimeout(3600));
+                console.log(res.data.status)
+                if (res.data.status == true) {
+                    phone = res.data.phone;
+                    session_id = res.data.session_id;
+                    toast.success("OTP sent to your registered number")
+                    history.push('/customer-verify-otp')
+                } else {
+                    dispatch(authFail(res));
+                    toast.error(res.data.details)
+                }
             })
             .catch(err => {
                 if (err.response.status === 400) {
@@ -66,25 +104,24 @@ export const authLogin = (username, password) => {
 };
 
 
-export const authSignup = (username, password1, password2, phone, city) => {
+export const authSignup = (username, phone, history) => {
     return dispatch => {
         dispatch(authStart());
         axios
             .post(`${customerRegisterURL}`, {
                 username: username,
-                password1: password1,
-                password2: password2,
                 phone: phone,
-                city: city
             })
             .then(res => {
-                const token = res.data.token;
-                const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
-                toast.success("Customer registered successfully")
-                localStorage.setItem("token", token);
-                localStorage.setItem("expirationDate", expirationDate);
-                dispatch(authSuccess(token));
-                dispatch(checkAuthTimeout(3600));
+                if (res.data.status == true) {
+                    phone = res.data.phone;
+                    session_id = res.data.session_id;
+                    toast.success("OTP sent to your registered number")
+                    history.push('/customer-verify-otp')
+                } else {
+                    dispatch(authFail(res));
+                    toast.error(res.data.details)
+                }
             })
             .catch(err => {
                 if (err.response.status === 400) {
