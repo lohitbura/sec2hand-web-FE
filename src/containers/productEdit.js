@@ -17,7 +17,8 @@ class ProductEdit extends React.Component {
         color: '',
         loader: false,
         message: '',
-        error: ''
+        error: '',
+        year:''
     };
 
     componentDidMount() {
@@ -30,6 +31,7 @@ class ProductEdit extends React.Component {
                 model: res.data.model,
                 km: res.data.km,
                 color: res.data.color,
+                year: res.data.year,
             })
         })
             .catch(err => {
@@ -38,7 +40,7 @@ class ProductEdit extends React.Component {
     }
 
     submit = () => {
-        const {price, model, image, km, color} = this.state;
+        const {price, model, image, km, color,year} = this.state;
         const {id} = this.props.match.params;
 
         let form_data = new FormData();
@@ -50,6 +52,7 @@ class ProductEdit extends React.Component {
         }
         form_data.append('km', km);
         form_data.append('color', color);
+        form_data.append('year', year);
         let headers = {
             Authorization: `Token ${localStorage.getItem('token')}`
         };
@@ -75,7 +78,7 @@ class ProductEdit extends React.Component {
     };
 
     render() {
-        const {loader, error, message, price, model, km, color, image} = this.state;
+        const {loader, error, message, price, model, km, color, image,year} = this.state;
         if (loader) {
             return (
                 <Loader active inline='centered'/>
@@ -120,6 +123,10 @@ class ProductEdit extends React.Component {
                     <Form.Field>
                         <label>Color</label>
                         <input value={color} name='color' onChange={this.handleChange} placeholder='Color' required/>
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Year</label>
+                        <input value={year} name='year' onChange={this.handleChange} placeholder='Year' required/>
                     </Form.Field>
                     <Form.Field>
                         <label>Image</label>

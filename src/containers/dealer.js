@@ -27,6 +27,9 @@ import Input from "semantic-ui-react/dist/commonjs/elements/Input";
 import axios from 'axios';
 import {dealerListURL, URL} from "../store/constants";
 import Loader from "react-loader-spinner";
+import {logout} from "../store/actions/auth";
+import {fetchCity} from "../store/actions/cityList";
+import {connect} from "react-redux";
 
 class Dealer extends React.Component {
     state = {
@@ -59,6 +62,7 @@ class Dealer extends React.Component {
 
     componentWillMount() {
         this.loadDealers()
+        this.props.fetchCityList();
     }
 
     componentDidMount() {
@@ -159,10 +163,16 @@ class Dealer extends React.Component {
                                 <div className="contact-form">
                                     <form action="#">
                                         <label>City:</label>
+                                        <select onChange={this.onChange} name="city"
+                                                className="form-control">
+                                            <option>Select city</option>
 
-                                        <input onChange={this.onChange} name="city" className="form-control" type="text"
-                                               placeholder="search city"/>
-
+                                            {
+                                                this.props.cityData && this.props.cityData.map(city => {
+                                                    return <option value={city.name}>{city.name}</option>
+                                                })
+                                            }
+                                        </select>
                                         {/*<label>Area:</label>*/}
 
                                         {/*<input onChange={this.onChange} name="area" className="form-control" type="text"*/}
@@ -317,5 +327,24 @@ class Dealer extends React.Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return {
+        authenticated: state.auth.token !== null,
+        token: state.auth.token,
+        cityData:state.cityList.data
+    };
+};
 
-export default Dealer;
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout()),
+        fetchCityList: () => dispatch(fetchCity())
+    };
+};
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Dealer)
+);

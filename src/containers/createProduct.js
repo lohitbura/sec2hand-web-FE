@@ -19,7 +19,7 @@ class CreateProduct extends React.Component {
         loader: false,
         message: '',
         error: '',
-        type:'',
+        type:'scooter',
         fuel_type:'',
         year:''
     };
@@ -152,7 +152,7 @@ class CreateProduct extends React.Component {
                                     <select onChange={this.handleChange} name="type"
                                             className="form-control">
                                         <option value="scooter">Scooter</option>
-                                        <option value="motorcycle">Motorcycles</option>
+                                        <option value="motorcycle">Motorcycle</option>
                                     </select>
                                 </Form.Field> : ''
                             }
