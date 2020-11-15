@@ -42,3 +42,4 @@ export const verifyOtp = `${endpoint}/verify-otp`;
 export const changePassword = `${endpoint}/change-password`;
 
 export const cityListURL = `${endpoint}/city-list`;
+export const brandListURL = `${endpoint}/brand-list`;

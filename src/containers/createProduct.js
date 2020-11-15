@@ -2,7 +2,7 @@ import React from 'react';
 import {Container} from "semantic-ui-react";
 import {Button, Checkbox, Form, TextArea} from 'semantic-ui-react'
 import axios from "axios";
-import {bikeCreateURL, carCreateURL, mobileCreateURL, productCreateURL} from "../store/constants";
+import {bikeCreateURL, brandListURL, carCreateURL, mobileCreateURL, productCreateURL} from "../store/constants";
 import Loader from 'react-loader-spinner';
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import {Link, withRouter} from "react-router-dom";
@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 class CreateProduct extends React.Component {
     state = {
         price: '',
+        brand: '',
         model: '',
         image: [],
         km: '',
@@ -19,30 +20,69 @@ class CreateProduct extends React.Component {
         loader: false,
         message: '',
         error: '',
-        type:'scooter',
-        fuel_type:'',
-        year:''
+        type: 'scooter',
+        fuel_type: 'petrol',
+        year: '',
+        brandList: [],
+        modelList: []
     };
 
     componentDidMount() {
         window.scrollTo(0, 0);
+        this.fetchBrand()
+    }
+
+    fetchBrand = () => {
+        let category = localStorage.getItem("category")
+        let productCategory = ''
+        const {type, brand} = this.state;
+        console.log(brand)
+        if (category == "bike") {
+            if (type == "scooter") {
+                productCategory = "Scooters"
+            }
+            if (type == "motorcycle") {
+                productCategory = "Bikes"
+            }
+        } else {
+            if (category == "car") {
+                productCategory = "Car"
+            }
+            if (category == "mobile") {
+                productCategory = "Mobile"
+            }
+        }
+        if (brand !== '') {
+            axios.post(brandListURL, {type: productCategory, brand_name: brand}).then(res => [
+                this.setState({
+                    modelList: res.data
+                })
+            ])
+        } else {
+            axios.post(brandListURL, {type: productCategory}).then(res => [
+                this.setState({
+                    brandList: res.data
+                })
+            ])
+        }
     }
 
     createProduct = (url, category) => {
-        const {price, model, images, km, color , fuel_type, type, year} = this.state;
+        const {price, model, images, km, color, fuel_type, type, year, brand} = this.state;
 
         if (images.length > 10) {
             return toast.error("You can not select more 10 images")
         }
         let form_data = new FormData();
         form_data.append('price', price);
+        form_data.append('brand', brand);
         form_data.append('model', model);
         form_data.append('color', color);
         form_data.append('year', year);
-        if(category === "car"){
+        if (category === "car") {
             form_data.append('fuel_type', fuel_type);
             form_data.append('km', km);
-        } else if (category === "bike"){
+        } else if (category === "bike") {
             form_data.append('type', type);
             form_data.append('km', km);
         }
@@ -70,9 +110,9 @@ class CreateProduct extends React.Component {
 
     submit = () => {
         const category = localStorage.getItem('category')
-        if(category === "car"){
+        if (category === "car") {
             this.createProduct(carCreateURL, category)
-        } else if (category === " mobile"){
+        } else if (category === "mobile") {
             this.createProduct(mobileCreateURL, category)
         } else {
             this.createProduct(bikeCreateURL, category)
@@ -80,7 +120,21 @@ class CreateProduct extends React.Component {
     };
 
     handleChange = (e) => {
-        this.setState(({[e.target.name]: e.target.value}))
+        let name = e.target.name;
+        if (name == "type") {
+            this.setState({
+                model: '',
+                brand: ''
+            })
+        }
+        this.setState(
+            {[e.target.name]: e.target.value},
+            () => {
+                if (name == "type" || name == "brand") {
+                    this.fetchBrand();
+                }
+            }
+        )
     };
 
     handleImage = (e) => {
@@ -126,10 +180,44 @@ class CreateProduct extends React.Component {
                             width={100}
                         /> :
                         <Form enctype="multipart/form-data" style={{marginTop: "100px"}} onSubmit={this.submit}>
+                            {
+                                category === "bike" ? <Form.Field>
+                                    <label>Vehicle Type</label>
+                                    <select onChange={this.handleChange} name="type"
+                                            className="form-control">
+                                        <option value="scooter">Scooter</option>
+                                        <option value="motorcycle">Motorcycle</option>
+                                    </select>
+                                </Form.Field> : ''
+                            }
                             <Form.Field>
-                                <label>Model</label>
-                                <input name='model' onChange={this.handleChange} placeholder='Model' required/>
+                                <label>Brand</label>
+                                <select onChange={this.handleChange} name="brand"
+                                        className="form-control">
+                                    <option>Select Brand</option>
+
+                                    {
+                                        this.state.brandList && this.state.brandList.map(city => {
+                                            return <option value={city.Brand}>{city.Brand}</option>
+                                        })
+                                    }
+                                </select>
                             </Form.Field>
+                            <Form.Field>
+
+                                <label>Model</label>
+                                <select onChange={this.handleChange} name="model"
+                                        className="form-control">
+                                    <option>Select Model</option>
+
+                                    {
+                                        this.state.modelList && this.state.modelList.map(city => {
+                                            return <option value={city.Model}>{city.Model}</option>
+                                        })
+                                    }
+                                </select>
+                            </Form.Field>
+
                             <Form.Field>
                                 <label>Price</label>
                                 <input type="number" name='price' onChange={this.handleChange} placeholder='Price'
@@ -144,16 +232,6 @@ class CreateProduct extends React.Component {
                                 category !== "mobile" ? <Form.Field>
                                     <label>Km</label>
                                     <input name='km' onChange={this.handleChange} placeholder='km' required/>
-                                </Form.Field> : ''
-                            }
-                            {
-                                category === "bike" ? <Form.Field>
-                                    <label>Vehicle Type</label>
-                                    <select onChange={this.handleChange} name="type"
-                                            className="form-control">
-                                        <option value="scooter">Scooter</option>
-                                        <option value="motorcycle">Motorcycle</option>
-                                    </select>
                                 </Form.Field> : ''
                             }
                             {

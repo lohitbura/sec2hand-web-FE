@@ -108,10 +108,10 @@ class ProductEdit extends React.Component {
                         <Message color='green'>Product create successful!</Message> : ''
                 }
                 <Form style={{marginTop: "100px"}} onSubmit={this.submit}>
-                    <Form.Field>
-                        <label>Model</label>
-                        <input value={model} name='model' onChange={this.handleChange} placeholder='Model' required/>
-                    </Form.Field>
+                    {/*<Form.Field>*/}
+                    {/*    <label>Model</label>*/}
+                    {/*    <input value={model} name='model' onChange={this.handleChange} placeholder='Model' required/>*/}
+                    {/*</Form.Field>*/}
                     <Form.Field>
                         <label>Price</label>
                         <input type="number" value={price} name='price' onChange={this.handleChange} placeholder='Price' required/>

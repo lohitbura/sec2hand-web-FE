@@ -137,7 +137,13 @@ class ProductDetail extends React.Component {
                                                 <strong className="pull-right">Used vehicle</strong>
                                             </div>
                                         </li>
+                                        <li className="list-group-item">
+                                            <div className="clearfix">
+                                                <span className="pull-left"> Brand</span>
 
+                                                <strong className="pull-right">{product.brand}</strong>
+                                            </div>
+                                        </li>
                                         <li className="list-group-item">
                                             <div className="clearfix">
                                                 <span className="pull-left"> Model</span>
@@ -145,6 +151,16 @@ class ProductDetail extends React.Component {
                                                 <strong className="pull-right">{product.model}</strong>
                                             </div>
                                         </li>
+                                        {
+                                            product.fuel_type ? <li className="list-group-item">
+                                                <div className="clearfix">
+                                                    <span className="pull-left"> Fuel Type</span>
+
+                                                    <strong className="pull-right">{product.fuel_type}</strong>
+                                                </div>
+                                            </li> : ''
+                                        }
+
 
                                         <li className="list-group-item">
                                             {
