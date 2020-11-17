@@ -63,20 +63,26 @@ class CustomLayout extends React.Component {
                             </button>
                             <div className="collapse navbar-collapse" id="navbarResponsive">
                                 <ul className="navbar-nav ml-auto">
-                                    <li onClick={() => this.setState({active: 1})}
+                                    <li className="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                                        aria-expanded="false" aria-label="Toggle navigation" onClick={() => this.setState({active: 1})}
                                         className={active === 1 ? "active nav-item" : 'nav-item'}>
                                         <Link className="nav-link" to="/">
                                             Home
                                         </Link>
                                     </li>
 
-                                    <li onClick={() => this.setState({active: 2})}
+                                    <li className="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                                        aria-expanded="false" aria-label="Toggle navigation" onClick={() => this.setState({active: 2})}
                                         className={active === 2 ? "active nav-item" : 'nav-item'}>
                                         <Link className="nav-link" to="/review">
                                             Review
                                         </Link>
                                     </li>
-                                    <li onClick={() => this.setState({active: 3})}
+                                    <li className="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                                        aria-expanded="false" aria-label="Toggle navigation" onClick={() => this.setState({active: 3})}
                                         className={active === 3 ? "active nav-item" : 'nav-item'}>
                                         <Link className="nav-link" to="/dealer">
                                             Find dealer
@@ -84,21 +90,27 @@ class CustomLayout extends React.Component {
                                     </li>
 
 
-                                    <li onClick={() => this.setState({active: 4})}
+                                    <li className="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                                        aria-expanded="false" aria-label="Toggle navigation" onClick={() => this.setState({active: 4})}
                                         className={active === 4 ? "active nav-item" : 'nav-item'}>
                                         <a className="nav-link" href="#about">
                                             About Us
                                         </a>
                                     </li>
 
-                                    <li onClick={() => this.setState({active: 5})}
+                                    <li className="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                                        aria-expanded="false" aria-label="Toggle navigation" onClick={() => this.setState({active: 5})}
                                         className={active === 5 ? "active nav-item" : 'nav-item'}>
                                         <a href="#contact" className="nav-link" >
                                             Contact Us
                                         </a>
                                     </li>
                                     {authenticated ? (
-                                        <li onClick={() => this.setState({active: 6})}
+                                        <li className="navbar-toggler" type="button" data-toggle="collapse"
+                                            data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                                            aria-expanded="false" aria-label="Toggle navigation" onClick={() => this.setState({active: 6})}
                                             className={active === 6 ? "active nav-item" : 'nav-item'}>
                                             <Link className="nav-link" to={`/profile/${username}`}>
                                                 My account
@@ -106,13 +118,17 @@ class CustomLayout extends React.Component {
                                         </li>
                                     ) : ''}
                                     {
-                                        authenticated ? <li
+                                        authenticated ? <li className="navbar-toggler" type="button" data-toggle="collapse"
+                                                            data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                                                            aria-expanded="false" aria-label="Toggle navigation"
                                             className='nav-item'>
                                             <Link to="" style={{cursor: "pointer"}} className="nav-link"
                                                onClick={() => this.props.logout()}>
                                                 Logout
                                             </Link>
-                                        </li> : <li className="nav-item dropdown">
+                                        </li> : <li className="navbar-toggler" type="button" data-toggle="collapse"
+                                                    data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                                                    aria-expanded="false" aria-label="Toggle navigation" className="nav-item dropdown">
                                             <a style={{cursor: "pointer"}} className="nav-link dropdown-toggle" data-toggle="dropdown"
                                                role="button" aria-haspopup="true" aria-expanded="false">Login</a>
 

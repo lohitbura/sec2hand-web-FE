@@ -24,7 +24,9 @@ class CreateProduct extends React.Component {
         fuel_type: 'petrol',
         year: '',
         brandList: [],
-        modelList: []
+        modelList: [],
+        checked: false,
+        checked1: false,
     };
 
     componentDidMount() {
@@ -151,6 +153,18 @@ class CreateProduct extends React.Component {
         })
     };
 
+    handleCheckbox = (e) => {
+        const {checked} = this.state;
+        this.setState({
+            checked: !checked
+        })
+    }
+    handleCheckbox1 = (e) => {
+        const {checked1} = this.state;
+        this.setState({
+            checked1: !checked1
+        })
+    }
     render() {
         const {loader, error, message} = this.state;
         const category = localStorage.getItem('category')
@@ -192,30 +206,46 @@ class CreateProduct extends React.Component {
                             }
                             <Form.Field>
                                 <label>Brand</label>
-                                <select onChange={this.handleChange} name="brand"
-                                        className="form-control">
-                                    <option>Select Brand</option>
+                                {
+                                    !this.state.checked1 ? <select onChange={this.handleChange} name="brand"
+                                                                   className="form-control">
+                                        <option>Select Brand</option>
 
-                                    {
-                                        this.state.brandList && this.state.brandList.map(city => {
-                                            return <option value={city.Brand}>{city.Brand}</option>
-                                        })
-                                    }
-                                </select>
+                                        {
+                                            this.state.brandList && this.state.brandList.map(city => {
+                                                return <option value={city.Brand}>{city.Brand}</option>
+                                            })
+                                        }
+                                    </select> : <input type="text" onChange={this.handleChange} name="brand" placeholder="Enter your product brand"/>
+                                }
+
+                            </Form.Field>
+                            <Form.Field>
+                                <span style={{marginRight:"10px"}}>Add Brand(if your model not present in the list)</span>
+                                <input type="checkbox" onChange={this.handleCheckbox1} checked={this.state.checked1}/>
+
                             </Form.Field>
                             <Form.Field>
 
                                 <label>Model</label>
-                                <select onChange={this.handleChange} name="model"
-                                        className="form-control">
-                                    <option>Select Model</option>
+                                {
+                                    !this.state.checked ? <select onChange={this.handleChange} name="model"
+                                                                  className="form-control">
+                                        <option>Select Model</option>
 
-                                    {
-                                        this.state.modelList && this.state.modelList.map(city => {
-                                            return <option value={city.Model}>{city.Model}</option>
-                                        })
-                                    }
-                                </select>
+                                        {
+                                            this.state.modelList && this.state.modelList.map(city => {
+                                                return <option value={city.Model}>{city.Model}</option>
+                                            })
+                                        }
+                                    </select> : <input type="text" name="model" onChange={this.handleChange} required placeholder="Enter your product model"/>
+                                }
+
+                            </Form.Field>
+                            <Form.Field>
+                                <span style={{marginRight:"10px"}}>Add Model(if your model not present in the list)</span>
+                                <input type="checkbox" onChange={this.handleCheckbox} checked={this.state.checked}/>
+
                             </Form.Field>
 
                             <Form.Field>
