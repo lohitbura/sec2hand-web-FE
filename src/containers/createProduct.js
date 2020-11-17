@@ -169,7 +169,7 @@ class CreateProduct extends React.Component {
         const {loader, error, message} = this.state;
         const category = localStorage.getItem('category')
         return (
-            <Container style={{'width': '40%', height: "100vh"}}>
+            <Container style={{'width': '40%', height: "100%"}}>
                 <ToastContainer position="bottom-right"/>
                 <div>
                     <div className="container">
