@@ -24,12 +24,16 @@ import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import axios from 'axios';
 
-import {dealerListURL, productListURL, URL} from "../store/constants";
+import {dealerListURL, productListURL, URL, productDetailURL,getUserProfileIdURL} from "../store/constants";
 // import Loader from "semantic-ui-react/dist/commonjs/elements/Loader";
 import Loader from 'react-loader-spinner';
 import {logout} from "../store/actions/auth";
 import {connect} from "react-redux";
 import {fetchCity} from "../store/actions/cityList";
+
+
+import 'react-toastify/dist/ReactToastify.css';
+
 
 class HomepageLayout extends React.Component {
 
@@ -57,6 +61,7 @@ class HomepageLayout extends React.Component {
         this.props.fetchCityList();
     }
 
+   
 
 
     check = () => {
@@ -199,9 +204,9 @@ class HomepageLayout extends React.Component {
     }
 
     loadProduct = () => {
-        const {limit, offset, products, productType, productCity} = this.state;
+        const {limit, offset, products, productType, productCity, productBrand} = this.state;
         this.setState({loading: true})
-        axios.get(productListURL(limit, offset, productType, productCity)).then(res => {
+        axios.get(productListURL(limit, offset, productType, productCity,productBrand)).then(res => {
             this.setState({
                 products: [...products, ...res.data.products],
                 loading: false,
@@ -209,16 +214,110 @@ class HomepageLayout extends React.Component {
                 has_more: res.data.has_more
             })
         })
+        
             .catch(err => {
                 console.log(err)
             })
     }
 
+    //    **************************product detail component copy pate here for practice
+    // componentDidMount() {
+    //     window.scrollTo(0, 0);
+    //     const {id} = this.props.match.params;
+    //     const token = localStorage.getItem('token')
+
+    //     axios.get(productDetailURL(id)).then(res => {
+    //         this.setState({product: res.data})
+    //     })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+
+    //     let header = {
+    //         Authorization: `Token ${token}`
+    //     };
+    //     axios.get(getUserProfileIdURL, {headers: header}).then(res => {
+    //         this.setState({username: res.data.user})
+    //     })
+    
+    // }
+      //    **************************product detail component copy paste here for practice
+
     onProductTypeChange = (e) => {
-        this.setState({
+       
+         this.setState({
             [e.target.name]: e.target.value
         })
+    //    ***** here we get value of product type and show its brand******************
+        this.productType=e.target.value
+                        if ( this.productType==="car") {
+                        this.brand= <div>
+                        <label>Brands:</label>
+                    
+                        <select onChange={this.onProductBrandChange} name="productBrand"
+                                className="form-control">
+                            
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="TATA">TATA</option>
+                            <option value="Maruti Suzuki">Maruti Suzuki</option>
+                            <option value="chevrolate">chevrolate</option>
+                        </select>
+                    </div>
+                    
+                        }if ( this.productType==="mobile") {
+                            this.brand= <div>
+                            <label>Brands:</label>
+                        
+                            <select onChange={this.onProductBrandChange} name="productBrand"
+                                    className="form-control">
+                                
+                                <option value="apple">Apple</option>
+                                <option value="samsung">Samsung</option>
+                                <option value="mi">MI</option>
+                                <option value="vivo">Vivo</option>
+                            </select>
+                        </div>
+                    
+                        }if ( this.productType==="motorcycle") {
+                            this.brand= <div>
+                            <label>Brands:</label>
+                        
+                            <select onChange={this.onProductBrandChange} name="productBrand"
+                                    className="form-control">
+                                
+                                <option value="honda">Honda</option>
+                                <option value="bajaj">Bajaj</option>
+                                <option value="suzuki"> Suzuki</option>
+                                <option value="royal-enfield">Royal Enfield</option>
+                            </select>
+                        </div>
+                    
+                        }if ( this.productType==="scooter") {
+                            this.brand= <div>
+                            <label>Brands:</label>
+                        
+                            <select onChange={this.onProductBrandChange} name="productBrand"
+                                    className="form-control">
+                                
+                                <option value="tvs">TVS</option>
+                                <option value="bajaj">Bajaj</option>
+                                <option value="suzuki">Suzuki</option>
+                                <option value="hero">Hero</option>
+                            </select>
+                        </div>
+                    
+         }
+          //    ***** here we get value of product type and show its brand******************
+        
     }
+      //    ***** here we get brnad value******************
+    onProductBrandChange = (e) => {
+        this.setState({
+            [e.target.brand]: e.target.value
+        })
+        
+    }
+         //    ***** here we get brnad value******************
 
     render() {
         const {products, dealers, loading, has_more} = this.state;
@@ -251,17 +350,17 @@ class HomepageLayout extends React.Component {
                             style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
                             src="/assets/images/slider1.jpg"
                             alt="First slide"/></Slide>
-                        }
+                        
                         <Slide index={2}><img
                             style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
                             src="/assets/images/slider2.jpg"
                             alt="First slide"/></Slide>
-                        }
+                        
                         <Slide index={3}><img
                             style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
                             src="/assets/images/slider3.jpg"
                             alt="First slide"/></Slide>
-                        }
+                        
                     </Slider>
                 </CarouselProvider>
                 <br/>
@@ -316,7 +415,7 @@ class HomepageLayout extends React.Component {
                                                     <div className="col-md-4">
                                                         <label>Category:</label>
 
-                                                        <select onChange={this.onProductTypeChange} name="productType"
+                                                        <select onChange={this.onProductTypeChange} name="productType" 
                                                                 className="form-control">
                                                             <option value="car">Car</option>
                                                             <option value="motorcycle">Motorcycles</option>
@@ -324,7 +423,21 @@ class HomepageLayout extends React.Component {
                                                             <option value="mobile">Mobile</option>
                                                         </select>
                                                     </div>
+
+                                                 <div className="col-md-4">
+                                                    {this.brand}
+
+                                                  </div>
+
                                                 </div>
+
+                                                
+
+
+                                         
+
+
+
                                                 {/*<input onChange={this.onChange} name="city" className="form-control" type="text"*/}
                                                 {/*       placeholder="search city"/>*/}
 
