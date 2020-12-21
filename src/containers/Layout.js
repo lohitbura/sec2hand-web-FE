@@ -50,7 +50,7 @@ class CustomLayout extends React.Component {
                 <header className="">
                     <nav className="navbar navbar-expand-lg">
                         <div className="container">
-                            <Link className="nav-link" to="/">
+                            <Link className="nav-link logoimg" to="/">
                                 <img style={{
                                     width: '69px',
                                     marginTop: '-21px'

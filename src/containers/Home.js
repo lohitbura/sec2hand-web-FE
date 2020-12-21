@@ -24,7 +24,7 @@ import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import axios from 'axios';
 
-import {dealerListURL, productListURL, URL, productDetailURL,getUserProfileIdURL} from "../store/constants";
+import {dealerListURL, productListURL, URL} from "../store/constants";
 // import Loader from "semantic-ui-react/dist/commonjs/elements/Loader";
 import Loader from 'react-loader-spinner';
 import {logout} from "../store/actions/auth";
@@ -33,7 +33,6 @@ import {fetchCity} from "../store/actions/cityList";
 
 
 import 'react-toastify/dist/ReactToastify.css';
-
 
 class HomepageLayout extends React.Component {
 
@@ -51,7 +50,6 @@ class HomepageLayout extends React.Component {
         city: '',
         area: '',
         category: '',
-
         productCity: '',
         productType: 'car'
     }
@@ -197,51 +195,33 @@ class HomepageLayout extends React.Component {
                 loading: false,
                 has_more: res.data.has_more
             })
+            
+            
         })
             .catch(err => {
                 console.log(err)
             })
+
+         
     }
 
     loadProduct = () => {
-        const {limit, offset, products, productType, productCity, productBrand} = this.state;
+        const {limit, offset, products, productType, productCity} = this.state;
         this.setState({loading: true})
-        axios.get(productListURL(limit, offset, productType, productCity,productBrand)).then(res => {
+        axios.get(productListURL(limit, offset, productType, productCity)).then(res => {
             this.setState({
                 products: [...products, ...res.data.products],
                 loading: false,
                 offset: limit + offset,
                 has_more: res.data.has_more
             })
+           
         })
         
             .catch(err => {
                 console.log(err)
             })
     }
-
-    //    **************************product detail component copy pate here for practice
-    // componentDidMount() {
-    //     window.scrollTo(0, 0);
-    //     const {id} = this.props.match.params;
-    //     const token = localStorage.getItem('token')
-
-    //     axios.get(productDetailURL(id)).then(res => {
-    //         this.setState({product: res.data})
-    //     })
-    //         .catch(err => {
-    //             console.log(err)
-    //         })
-
-    //     let header = {
-    //         Authorization: `Token ${token}`
-    //     };
-    //     axios.get(getUserProfileIdURL, {headers: header}).then(res => {
-    //         this.setState({username: res.data.user})
-    //     })
-    
-    // }
-      //    **************************product detail component copy paste here for practice
 
     onProductTypeChange = (e) => {
        
@@ -250,17 +230,29 @@ class HomepageLayout extends React.Component {
         })
     //    ***** here we get value of product type and show its brand******************
         this.productType=e.target.value
-                        if ( this.productType==="car") {
+                        if ( this.productType=="car") {
                         this.brand= <div>
                         <label>Brands:</label>
                     
                         <select onChange={this.onProductBrandChange} name="productBrand"
                                 className="form-control">
-                            
+                            <option value="Chevrolate">Chevrolate</option>
+                            <option value="Datsun">Datsun</option>
+                            <option value="Ford">Ford</option>
                             <option value="Hyundai">Hyundai</option>
-                            <option value="TATA">TATA</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Jeep">Jeep</option>
+                            <option value="KIA">KIA</option>
+                            <option value="Mahindra">Mahindra</option>
                             <option value="Maruti Suzuki">Maruti Suzuki</option>
-                            <option value="chevrolate">chevrolate</option>
+                            <option value="MG">MG</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="Renault">Renault</option>
+                            <option value="Skoda">Skoda </option>
+                            <option value="TATA">TATA</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Volkswagen">Volkswagen</option>
+                            
                         </select>
                     </div>
                     
@@ -271,10 +263,25 @@ class HomepageLayout extends React.Component {
                             <select onChange={this.onProductBrandChange} name="productBrand"
                                     className="form-control">
                                 
-                                <option value="apple">Apple</option>
-                                <option value="samsung">Samsung</option>
-                                <option value="mi">MI</option>
-                                <option value="vivo">Vivo</option>
+                                <option value="Apple">Apple</option>
+                                <option value="Asus">Asus</option>
+                                <option value="Celkon">Celkon</option>
+                                <option value="Coolpad">Coolpad</option>
+                                <option value="Gionee">Gionee</option>
+                                <option value="Google">Google</option>
+                                <option value="HTC">HTC</option>
+                                <option value="Honor">Honor</option>
+                                <option value="Infinix">Infinix</option>
+                                <option value="Intex">Intex</option>
+                                <option value="Micromax">Micromax</option>
+                                <option value="MI">MI</option>
+                                <option value="Motorola">Motorola</option>
+                                <option value="Nokia">Nokia</option>
+                                <option value="OnePlus">OnePlus</option>
+                                <option value="Oppo">Oppo</option>
+                                <option value="Realme">Realme</option>
+                                <option value="Samsung">Samsung</option>
+                                <option value="Vivo">Vivo</option>
                             </select>
                         </div>
                     
@@ -284,38 +291,49 @@ class HomepageLayout extends React.Component {
                         
                             <select onChange={this.onProductBrandChange} name="productBrand"
                                     className="form-control">
-                                
-                                <option value="honda">Honda</option>
-                                <option value="bajaj">Bajaj</option>
-                                <option value="suzuki"> Suzuki</option>
-                                <option value="royal-enfield">Royal Enfield</option>
+                                <option value="Bajaj">Bajaj</option>
+                                <option value="hero">Hero</option>
+                                <option value="Honda">Honda</option>
+                                <option value="Hero Honda">Hero Honda</option>
+                                <option value="KTM">KTM</option>
+                                <option value="Mahindra">Mahindra</option>
+                                <option value="Royal Enfield">Royal Enfield</option>
+                                <option value="Suzuki"> Suzuki</option>
+                                <option value="TVS"> TVS</option>
+                                <option value="Yamaha">Yamaha</option>
                             </select>
                         </div>
-                    
+                   
                         }if ( this.productType==="scooter") {
                             this.brand= <div>
                             <label>Brands:</label>
                         
                             <select onChange={this.onProductBrandChange} name="productBrand"
                                     className="form-control">
-                                
-                                <option value="tvs">TVS</option>
+                                <option value="Aprilia">Aprilia</option>
                                 <option value="bajaj">Bajaj</option>
-                                <option value="suzuki">Suzuki</option>
                                 <option value="hero">Hero</option>
+                                <option value="honda">Honda</option>
+                                <option value="Suzuki">Suzuki</option>
+                                <option value="Tvs">TVS</option>
+                                <option value="Vespa">Vespa</option>
+                                <option value="Yamaha">Yamaha</option>
                             </select>
                         </div>
                     
-         }
-          //    ***** here we get value of product type and show its brand******************
+                         }  
         
-    }
+          
+        
+  }
+            //    ***** here we get value of product type and show its brand******************
       //    ***** here we get brnad value******************
     onProductBrandChange = (e) => {
         this.setState({
-            [e.target.brand]: e.target.value
+            [e.target.name]: e.target.value
+            
         })
-        
+        this.brandname=e.target.value
     }
          //    ***** here we get brnad value******************
 
@@ -330,7 +348,7 @@ class HomepageLayout extends React.Component {
                                 <div className="text-content">
                                     <h4>
                                         <del></del>
-                                        <strong className="text-primary"></strong></h4>
+                                        <strong className="text-primary">Hello</strong></h4>
                                     <h2></h2>
                                 </div>
                             </div>
@@ -417,6 +435,7 @@ class HomepageLayout extends React.Component {
 
                                                         <select onChange={this.onProductTypeChange} name="productType" 
                                                                 className="form-control">
+                                                            <option>Select type</option>
                                                             <option value="car">Car</option>
                                                             <option value="motorcycle">Motorcycles</option>
                                                             <option value="scooter">Scooter</option>
@@ -426,16 +445,9 @@ class HomepageLayout extends React.Component {
 
                                                  <div className="col-md-4">
                                                     {this.brand}
-
                                                   </div>
 
                                                 </div>
-
-                                                
-
-
-                                         
-
 
 
                                                 {/*<input onChange={this.onChange} name="city" className="form-control" type="text"*/}
@@ -453,12 +465,11 @@ class HomepageLayout extends React.Component {
                                                 {/*    <option value="bike">Bike</option>*/}
                                                 {/*    <option value="mobile">Mobile</option>*/}
                                                 {/*</select>*/}
-                                                <div style={{width: "30%", margin: "auto"}}>
+                                                <div class="text-center">
                                                     <button onClick={(e) => this.productFilterSubmit(e)}
-                                                            className="filled-button btn-block">Search
+                                                            className="filled-button btn search">Search
                                                     </button>
                                                 </div>
-
                                             </form>
                                         </div>
                                     </div>
@@ -480,10 +491,67 @@ class HomepageLayout extends React.Component {
                                             /> : ''
                                         }
                                     </div>
+                  {/* *****************************************     from here products show***************************** */}
+
+                                 {products.map((product)=>{
+                                                    if(this.brandname==product.brand){
+                                                        return (
+                                                            <div className="col-lg-4 col-md-6 ">
+                                                              <div className="product-item ">
+                                                                  <Link to={`/product/${product.slug}`}>
+                                                                      {
+                                                                          product.images && product.images[0] !== undefined ?
+                                                                              <img style={{
+                                                                                  height: '232px',
+                                                                                  objectFit: 'cover'
+                                                                              }}
+                                                                                   src={`${URL}${product.images && product.images[0].image}`}
+                                                                                   alt=""/> : ''
+                                                                      }
+          
+                                                                  </Link>
+                                                                  <div className="down-content">
+                                                                      <h4>
+                                                                          <Link to={`/product/${product.slug}`}>
+                                                                              {product.model}
+                                                                          </Link>
+                                                                      </h4>
+          
+                                                                      <h6><small>
+                                                                      </small> ₹ {product.price}
+                                                                      </h6>
+          
+                                                                      {/*<p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used*/}
+                                                                      {/*    vehicle</p>*/}
+                                                                      
+                                                                      <small>
+                                                                          {
+                                                                              product.km === null ? '' : <strong title="Author"> <i
+                                                                                  className="fa fa-dashboard"></i> {product.km} Km
+                                                                              </strong>
+                                                                          }
+                                                                          &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                          <strong title="Author" ><i
+                                                                              className="fa fa-cube"> </i> {product.color}
+                                                                          </strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                          {/*<strong title="Views"><i*/}
+                                                                          {/*    className="fa fa-cog"></i> Manual</strong>*/}
+                                                                      </small>
+                                                                      
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      )
+                                                    }
+                                                   
+                                                    console.log(product.brand)
+                                                  
+                                                })}
+                                                {<br/>}
                                     {
                                         products.map(product => {
                                             return (
-                                                <div className="col-lg-4 col-md-6">
+                                                  <div className="col-lg-4 col-md-6">
                                                     <div className="product-item">
                                                         <Link to={`/product/${product.slug}`}>
                                                             {
@@ -499,7 +567,7 @@ class HomepageLayout extends React.Component {
                                                         </Link>
                                                         <div className="down-content">
                                                             <h4>
-                                                                <Link to={`/product/${product.id}`}>
+                                                                <Link to={`/product/${product.slug}`}>
                                                                     {product.model}
                                                                 </Link>
                                                             </h4>
@@ -510,29 +578,33 @@ class HomepageLayout extends React.Component {
 
                                                             {/*<p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used*/}
                                                             {/*    vehicle</p>*/}
-
+                                                        
+                                                          <div className="bottom-content">
                                                             <small>
                                                                 {
-                                                                    product.km === null ? '' : <strong title="Author"><i
-                                                                        className="fa fa-dashboard"></i>
-                                                                        {product.km}km
+                                                                    product.km === null ? '' : <strong title="Author" className="kilometer"><i
+                                                                        className="fa fa-dashboard"></i>&nbsp;{product.km}km
                                                                     </strong>
                                                                 }
                                                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <strong title="Author"><i
-                                                                    className="fa fa-cube"></i> {product.color}
+                                                                <strong title="Author" className="kilometer"><i
+                                                                    className="fa fa-cube"></i> &nbsp;{product.color}
                                                                 </strong>&nbsp;&nbsp;&nbsp;&nbsp;
                                                                 {/*<strong title="Views"><i*/}
                                                                 {/*    className="fa fa-cog"></i> Manual</strong>*/}
                                                             </small>
+                                                          </div>   
                                                         </div>
                                                     </div>
                                                 </div>
                                             )
                                         })
                                     }
+                                    
 
                                 </div>
+  {/* *****************************************     from here products show end***************************** */}
+
                                 <div style={{textAlign: "center", marginTop: "50px"}}>
                                     {
                                         !has_more ? "No more products" : <Button onClick={() => this.loadProduct()} color="red"
