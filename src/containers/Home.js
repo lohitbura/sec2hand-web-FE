@@ -348,7 +348,7 @@ class HomepageLayout extends React.Component {
                                 <div className="text-content">
                                     <h4>
                                         <del></del>
-                                        <strong className="text-primary">Hello</strong></h4>
+                                        <strong className="text-primary"></strong></h4>
                                     <h2></h2>
                                 </div>
                             </div>
@@ -356,7 +356,7 @@ class HomepageLayout extends React.Component {
                     </div>
                 </div>
 
-                <CarouselProvider style={{marginTop: "35px"}}
+                <CarouselProvider className="main-container"
                                   naturalSlideWidth={110}
                                   naturalSlideHeight={50}
                                   totalSlides={3}
@@ -385,7 +385,7 @@ class HomepageLayout extends React.Component {
                 <br/>
                 <div className="container" style={{marginTop: "50px"}}>
                     <div className="row">
-                        <div className="col-sm-4" style={{margin: 'auto'}}>
+                        <div className="col-sm-4 " style={{margin: 'auto'}}>
                             <div className="card">
                                 <img className="card-img-top" src="/assets/images/customer3.jpg" alt="Card image cap"/>
                                 <div className="card-body">
