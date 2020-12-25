@@ -16,6 +16,8 @@ import {logout} from "../store/actions/auth";
 import axios from "axios";
 import {getUserProfileIdURL} from "../store/constants";
 
+import Navigationbar from "./Navigationbar";
+
 class CustomLayout extends React.Component {
     state = {
         username: '',
@@ -34,6 +36,18 @@ class CustomLayout extends React.Component {
         }
     }
 
+/* 
+*****************************************************************************************************
+                            navbar start from here
+***************************************************************************************************** */
+
+    /*
+*****************************************************************************************************
+                            navbar start from here
+    ***************************************************************************************************** */
+
+
+
     render() {
         const {authenticated} = this.props;
         const {username, active} = this.state;
@@ -47,13 +61,17 @@ class CustomLayout extends React.Component {
                     </div>
                 </div>
 
+{/* 
+*****************************************************************************************************
+                            navbar start from here
+***************************************************************************************************** */}
                 <header className="">
-                    <nav className="navbar navbar-expand-lg">
+                    <nav className="navbar navbar-expand-lg firstHeader">
                         <div className="container">
                             <Link className="nav-link logoimg" to="/">
                                 <img style={{
                                     width: '69px',
-                                    marginTop: '-21px'
+                                    marginTop: '-12px'
                                 }} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
                             </Link>
                             <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -149,6 +167,20 @@ class CustomLayout extends React.Component {
                         </div>
                     </nav>
                 </header>
+
+{/* 
+*****************************************************************************************************
+                            navbar start from here
+***************************************************************************************************** */}
+            <div className="secondHeader ">
+             <Navigationbar/> 
+            
+            </div>
+
+{/* 
+*****************************************************************************************************
+                            nav start from here
+***************************************************************************************************** */}
                 {/*<Menu inverted>*/}
                 {/*    <Container>*/}
                 {/*        <Link to="/">*/}

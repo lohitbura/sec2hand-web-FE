@@ -279,8 +279,10 @@ a.filled-button:hover {
     opacity: 0;
   }
 }
-
-/* Header Style */
+/* ***************************************************************
+       Header styles start from here
+*********************************************************** */
+/*  */
 header {
   position: absolute;
   z-index: 99999;
@@ -294,6 +296,17 @@ header {
 }
 header .navbar {
   padding: 17px 0px;
+}
+/* ***************************************************************
+       Header styles end here
+*********************************************************** */
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap !important;
+  align-items: center;
+  justify-content: space-between !important;
+  padding: 0.5rem 1rem !important;
 }
 .background-header .navbar {
   padding: 17px 0px;
@@ -1211,3 +1224,26 @@ footer .inner-content p a {
 /* *************************************************************************************************
              bottom content of products style start here
 ***************************************************************************************** */
+.main-container {
+  margin-top: 50px !important;
+}
+@media (min-width: 992px) {
+  .secondHeader {
+    display: flex;
+    display: none !important;
+    z-index: 999999;
+    top: 0;
+  }
+}
+@media (max-width: 992px) {
+  .firstHeader {
+    display: flex;
+    display: none !important;
+  }
+  .background-header {
+    display: none;
+  }
+  .main-container {
+    margin-top: -24.4px !important;
+  }
+}
