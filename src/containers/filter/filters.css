@@ -1,0 +1,31 @@
+@media (max-width: 576px) {
+  .filterBtn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .filterBtn a {
+    padding: 5px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    border: 2px solid rgb(192, 10, 116);
+    border-radius: 20px;
+    color: rgb(192, 10, 116) !important;
+  }
+  .filterBtn a .iconF {
+    font-size: 18px !important;
+  }
+  .filterBar {
+    width: 100%;
+  }
+  .filterBar.active {
+    display: none;
+  }
+}
+@media (min-width: 576px) {
+  .filters {
+    display: none;
+  }
+}

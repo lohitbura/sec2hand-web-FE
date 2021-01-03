@@ -1223,7 +1223,7 @@ footer .inner-content p a {
              bottom content of products style start here
 ***************************************************************************************** */
 .main-container {
-  height: 50vh;
+  height: 60vh;
 }
 /*
 @media (min-width: 992px) {
@@ -1370,7 +1370,21 @@ footer .inner-content p a {
   .right-image img {
     height: 250px;
   }
+  .carouselImg {
+    height: 30vh;
+    overflow: hidden;
+  }
+  .featuredContainer {
+    margin-top: 10px !important;
+  }
+  .main-container {
+    height: 30vh;
+  }
+  .filterHider {
+    display: none;
+  }
 }
+
 /*        filter and features font style       */
 /* *************************************************************************************************
                          media query 

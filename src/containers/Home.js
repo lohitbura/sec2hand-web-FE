@@ -31,6 +31,8 @@ import {logout} from "../store/actions/auth";
 import {connect} from "react-redux";
 import {fetchCity} from "../store/actions/cityList";
 import * as ImIcons from "react-icons/im";
+import * as BiIcons from "react-icons/bi";
+
 import 'react-toastify/dist/ReactToastify.css';
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -42,6 +44,7 @@ import Slider from '@material-ui/core/Slider';
 import RangeSlider from "./slider/Rangeslider";
 import KmSlider from "./slider/KmSlider";
 import YearSlider from "./slider/YearSlider";
+import "./filter/filters.css";
 
 class HomepageLayout extends React.Component {
 
@@ -60,15 +63,31 @@ class HomepageLayout extends React.Component {
         area: '',
         category: '',
         productCity: '',
-        productType: 'car'
+        productType: 'car',
+        filterbar:false
+        
     }
+    // constructor(props) {
+    //     super(props)
+
+    //         this.showFilterbar = this.showFilterbar.bind(this);
+        
+    //     this.state = {
+    //         filterbar:false
+    //     }
+    // }
 
     componentDidMount() {
         this.loadProduct()
         this.props.fetchCityList();
     }
 
-   
+    showFilterbar=()=>{
+        
+        this.setState(currentState => ({
+           filterbar: !currentState.filterbar
+         }));
+    }
 
 
     check = () => {
@@ -524,8 +543,6 @@ class HomepageLayout extends React.Component {
                         
                     </Slider> */}
                 </div>
-                <br/>
-                <br/>
                 
                 {/* <div className="container" style={{marginTop: "35px"}}>
                     <div className="row">
@@ -550,10 +567,73 @@ class HomepageLayout extends React.Component {
                         </div>
                     </div>
                 </div> */}
+                <div className="container">
+                    <div className="filters">
+                        <div className="filterBtn" onClick={this.showFilterbar}> <a><BiIcons.BiFilter className="iconF"/> Filters</a> </div>
+                        <div  className={this.state.filterbar ? 'filterBar' : 'filterBar active'}> 
+                        
+                        <div className="section-heading">
+                                            <h2>Search by Filters</h2>
+                                        </div>
+                                                    <div className="catagory">
+                                                      
+                                                        <InputLabel id="label">City:</InputLabel>
+                                                        <Select labelId="label" id="select" onChange={this.onProductTypeChange} name="productCity">
+                                                            <MenuItem value="selectCity">Select city</MenuItem>
+                                                            {
+                                                                this.props.cityData && this.props.cityData.map(city => {
+                                                                    return <MenuItem value={city.name}>{city.name}</MenuItem>
+                                                                })
+                                                            }
+                                                        </Select>
+                                                    </div>
+                                                    <div>
+                                                    
+                                                    </div>
+                                                    <div className="catagory mt-5" >
+                                                      
+                                                        <InputLabel id="label">Category:</InputLabel>
+                                                        <Select labelId="label" id="select" onChange={this.onProductTypeChange} name="productType">
+                                                            <MenuItem value="selectType">Select type</MenuItem>
+                                                            <MenuItem value="car">Car</MenuItem>
+                                                            <MenuItem value="motorcycle">Motorcycles</MenuItem>
+                                                            <MenuItem value="scooter">Scooter</MenuItem>
+                                                            <MenuItem value="mobile">Mobile</MenuItem>
+                                                           
+                                                        </Select>
+                                                    </div>
 
-                <div className="container-fluid" style={{"marginTop": "30px",}}>
-                    <div className="row">
-                        <div className="col-lg-3 col-md-3">
+                                                 <div className="catagory mt-5">
+                                                    {this.brand}
+                                                  </div>
+                                                  <div className="catagory mt-5">
+                                                    {this.fuel}
+                                                  </div>
+                                                  <div className="mt-5 " >
+                                                  
+                                                       <RangeSlider/>
+                                                </div>
+                                                <div className=" mt-5" className={this.classD}>
+                                                  
+                                                      <KmSlider/>
+                                                </div>
+                                                <div style={{marginTop:"40px"}} className={this.classD}>
+                                                  
+                                                      <YearSlider/>
+                                                </div>
+                                               
+                                                  <div class="text-center mt-5">
+                                                        <button onClick={(e) => this.productFilterSubmit(e)}
+                                                                className="searchBtn">Search
+                                                        </button>
+                                                  </div>
+
+                        </div>
+                    </div>
+                </div>   
+                <div className="container-fluid" style={{"marginTop": "40px",}}>
+                    <div className="row featuredContainer">
+                        <div className="col-lg-3 col-md-3 filterHider">
                                       <div className="section-heading">
                                             <h2>Search by Filters</h2>
                                             {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
