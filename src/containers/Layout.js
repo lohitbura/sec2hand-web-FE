@@ -65,7 +65,7 @@ class CustomLayout extends React.Component {
 *****************************************************************************************************
                             navbar start from here
 ***************************************************************************************************** */}
-                <header className="">
+                {/* <header className="">
                     <nav className="navbar navbar-expand-lg firstHeader">
                         <div className="container">
                             <Link className="nav-link logoimg" to="/">
@@ -152,7 +152,7 @@ class CustomLayout extends React.Component {
 
                                             <div className="dropdown-menu">
                                                 {/*<a  href="blog.html">Blog</a>*/}
-                                                <Link className="dropdown-item" to="/dealer-login">
+                                                {/* <Link className="dropdown-item" to="/dealer-login">
                                                     Dealer
                                                 </Link>
                                                 <Link className="dropdown-item" to="/login">
@@ -165,8 +165,8 @@ class CustomLayout extends React.Component {
                                 </ul>
                             </div>
                         </div>
-                    </nav>
-                </header>
+                    </nav> 
+                </header>  */}
 
 {/* 
 *****************************************************************************************************

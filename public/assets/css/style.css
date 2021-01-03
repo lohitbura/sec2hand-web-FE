@@ -162,11 +162,11 @@ a.filled-button:hover {
 .section-heading {
   text-align: left;
   margin-bottom: 60px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 2px solid rgb(131, 17, 103);
 }
 
 .section-heading h2 {
-  font-size: 28px;
+  font-size: 25px;
   font-weight: 400;
   color: #1e1e1e;
   margin-bottom: 15px;
@@ -283,7 +283,7 @@ a.filled-button:hover {
        Header styles start from here
 *********************************************************** */
 /*  */
-header {
+/* header {
   position: absolute;
   z-index: 99999;
   width: 100%;
@@ -293,7 +293,7 @@ header {
   -moz-transition: all 0.3s ease-in-out 0s;
   -o-transition: all 0.3s ease-in-out 0s;
   transition: all 0.3s ease-in-out 0s;
-}
+} */
 header .navbar {
   padding: 17px 0px;
 }
@@ -308,15 +308,15 @@ header .navbar {
   justify-content: space-between !important;
   padding: 0.5rem 1rem !important;
 }
-.background-header .navbar {
+/* .background-header .navbar {
   padding: 17px 0px;
-}
-.background-header {
+} */
+/* .background-header {
   top: 0;
   position: fixed;
   background-color: #fff !important;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
-}
+} */
 .background-header .navbar-brand h2 {
   color: #121212 !important;
 }
@@ -429,7 +429,7 @@ header .navbar {
 }
 
 .banner .banner-item {
-  max-height: 600px;
+  max-height: 300px;
 }
 
 .banner .text-content {
@@ -476,14 +476,12 @@ header .navbar {
   height: 10px;
   border-radius: 50%;
   margin: 0 10px;
-  background-color: #fff;
+  background-color: #000;
   opacity: 0.5;
 }
-.owl-banner .owl-dots .owl-dot:focus {
-  outline: none;
-}
+
 .owl-banner .owl-dots .owl-dot.active {
-  background-color: #fff;
+  background-color: #000;
   opacity: 1;
 }
 
@@ -921,7 +919,7 @@ footer .inner-content p a {
 }
 
 .owl-clients button.owl-dot {
-  background: #f1f1f1 !important;
+  background: #000 !important;
   width: 10px !important;
   height: 10px !important;
   margin: 0 10px !important;
@@ -1156,7 +1154,7 @@ footer .inner-content p a {
 }
 
 @media (max-width: 992px) {
-  .navbar .navbar-brand {
+  /* .navbar .navbar-brand {
     position: absolute;
     left: 30px;
     top: 32px;
@@ -1195,7 +1193,7 @@ footer .inner-content p a {
     color: #f33f3f !important;
     border-bottom: none !important;
     padding-bottom: 15px;
-  }
+  } */
   .product-item .down-content h4 {
     margin-bottom: 10px;
   }
@@ -1225,8 +1223,9 @@ footer .inner-content p a {
              bottom content of products style start here
 ***************************************************************************************** */
 .main-container {
-  margin-top: 50px !important;
+  height: 50vh;
 }
+/*
 @media (min-width: 992px) {
   .secondHeader {
     display: flex;
@@ -1234,8 +1233,8 @@ footer .inner-content p a {
     z-index: 999999;
     top: 0;
   }
-}
-@media (max-width: 992px) {
+} */
+/* @media (max-width: 992px) {
   .firstHeader {
     display: flex;
     display: none !important;
@@ -1246,4 +1245,133 @@ footer .inner-content p a {
   .main-container {
     margin-top: -24.4px !important;
   }
+} */
+.firstHeader {
+  display: flex;
+  display: none !important;
 }
+/* *************************************************************************************************
+             carousel styles start here
+***************************************************************************************** */
+.carouselImg {
+  height: 350px;
+  overflow: hidden;
+}
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  display: none;
+}
+.carousel-indicators li.active {
+  background-color: #c90c6a;
+}
+.carousel-indicators li {
+  background-color: #c90c6a77;
+}
+/* *************************************************************************************************
+             carousel styles end here
+***************************************************************************************** */
+
+.catagory label {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 550;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  color: grey;
+}
+/* *************************************************************************************************
+             Filters styles start here
+***************************************************************************************** */
+
+.MuiInputBase-root {
+  width: 100%;
+  border-bottom: 1px solid rgb(131, 17, 103) !important;
+}
+
+.searchBtn {
+  padding: 10px 30px;
+  border: 2px solid rgb(131, 17, 103);
+  border-radius: 20px;
+  background-color: white;
+  color: rgb(131, 17, 103);
+  box-shadow: 0px 2px 10px rgba(131, 130, 130, 0.5),
+    1px 2px 5px rgba(133, 132, 132, 0.3), 4px 3px 10px rgba(175, 175, 190, 0.1);
+  font-size: 15px;
+  outline: none !important;
+  cursor: pointer;
+}
+/* *************************************************************************************************
+             Filters styles end here
+***************************************************************************************** */
+/* *************************************************************************************************
+             About styles end here
+***************************************************************************************** */
+.right-image img {
+  height: 450px;
+}
+
+.contactUs::placeholder {
+  color: rgb(136, 135, 135);
+}
+.contactUs {
+  border: 1px solid rgb(153, 153, 153) !important;
+  border-radius: 10px !important;
+}
+
+/* *************************************************************************************************
+                         media query 
+***************************************************************************************** */
+@media (max-width: 576px) {
+  .searchHider {
+    margin-top: 70px;
+    margin-bottom: 10px;
+  }
+  .searchBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid rgb(131, 17, 121);
+    border-radius: 20px;
+  }
+  .searchBar input {
+    text-align: center;
+    width: 100%;
+    font-size: 15px !important;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+  }
+  .searchBar button {
+    background: none;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    color: rgb(131, 17, 121);
+  }
+  .searchBar input::placeholder {
+    color: rgb(192, 10, 116);
+  }
+  /*        filter and features font style       */
+
+  .section-heading h2 {
+    font-size: 18px;
+  }
+  .catagory label {
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .searchBtn {
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  .right-image img {
+    height: 250px;
+  }
+}
+/*        filter and features font style       */
+/* *************************************************************************************************
+                         media query 
+***************************************************************************************** */

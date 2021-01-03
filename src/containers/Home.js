@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, {Component} from "react";
+import { Carousel } from 'react-bootstrap';
 import {
     Button,
     Container,
@@ -18,7 +19,6 @@ import {
 import {Link, withRouter} from "react-router-dom";
 
 
-import {CarouselProvider, Slider, Slide, ButtonBack, ButtonNext} from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
@@ -30,9 +30,18 @@ import Loader from 'react-loader-spinner';
 import {logout} from "../store/actions/auth";
 import {connect} from "react-redux";
 import {fetchCity} from "../store/actions/cityList";
-
-
+import * as ImIcons from "react-icons/im";
 import 'react-toastify/dist/ReactToastify.css';
+
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+import RangeSlider from "./slider/Rangeslider";
+import KmSlider from "./slider/KmSlider";
+import YearSlider from "./slider/YearSlider";
 
 class HomepageLayout extends React.Component {
 
@@ -231,10 +240,9 @@ class HomepageLayout extends React.Component {
     //    ***** here we get value of product type and show its brand******************
         this.productType=e.target.value
                         if ( this.productType=="car") {
-                        this.brand= <div>
-                        <label>Brands:</label>
+                        this.brand= <div className="catagory mt-5">
                     
-                        <select onChange={this.onProductBrandChange} name="productBrand"
+                        {/* <select onChange={this.onProductBrandChange} name="productBrand"
                                 className="form-control">
                             <option value="Chevrolate">Chevrolate</option>
                             <option value="Datsun">Datsun</option>
@@ -253,75 +261,185 @@ class HomepageLayout extends React.Component {
                             <option value="Toyota">Toyota</option>
                             <option value="Volkswagen">Volkswagen</option>
                             
-                        </select>
+                        </select> */}
+                        <InputLabel id="label">Brands :</InputLabel>
+                        <Select labelId="label" id="select"  onChange={this.onProductBrandChange} name="productBrand"
+                                >
+                            <MenuItem value="selectBrands">Select Brands</MenuItem>        
+                            <MenuItem value="Chevrolate">Chevrolate</MenuItem>
+                            <MenuItem value="Datsun">Datsun</MenuItem>
+                            <MenuItem value="Ford">Ford</MenuItem>
+                            <MenuItem value="Hyundai">Hyundai</MenuItem>
+                            <MenuItem value="Honda">Honda</MenuItem>
+                            <MenuItem value="Jeep">Jeep</MenuItem>
+                            <MenuItem value="KIA">KIA</MenuItem>
+                            <MenuItem value="Mahindra">Mahindra</MenuItem>
+                            <MenuItem value="Maruti Suzuki">Maruti Suzuki</MenuItem>
+                            <MenuItem value="MG">MG</MenuItem>
+                            <MenuItem value="Nissan">Nissan</MenuItem>
+                            <MenuItem value="Renault">Renault</MenuItem>
+                            <MenuItem value="Skoda">Skoda </MenuItem>
+                            <MenuItem value="TATA">TATA</MenuItem>
+                            <MenuItem value="Toyota">Toyota</MenuItem>
+                            <MenuItem value="Volkswagen">Volkswagen</MenuItem>
+                            
+                            
+                        </Select>
                     </div>
                     
                         }if ( this.productType==="mobile") {
-                            this.brand= <div>
-                            <label>Brands:</label>
+                            this.brand= <div className="catagory mt-5">
+                    
+                        <InputLabel id="label">Brands :</InputLabel>
+                        <Select labelId="label" id="select" onChange={this.onProductBrandChange} name="productBrand"
+                               >
+                            <MenuItem value="selectBrands">Select Brands</MenuItem>
+                            <MenuItem value="Apple">Apple</MenuItem>
+                            <MenuItem value="Asus">Asus</MenuItem>
+                            <MenuItem value="Celkon">Celkon</MenuItem>
+                            <MenuItem value="Coolpad">Coolpad</MenuItem>
+                            <MenuItem value="Gionee">Gionee</MenuItem>
+                            <MenuItem value="Google">Google</MenuItem>
+                            <MenuItem value="HTC">HTC</MenuItem>
+                            <MenuItem value="Honor">Honor</MenuItem>
+                            <MenuItem value="Infinix">Infinix</MenuItem>
+                                 <MenuItem value="Intex">Intex</MenuItem>
+                                 <MenuItem value="Micromax">Micromax</MenuItem>
+                                 <MenuItem value="MI">MI</MenuItem>
+                                 <MenuItem value="Motorola">Motorola</MenuItem>
+                                <MenuItem value="Nokia">Nokia</MenuItem>
+                                 <MenuItem value="OnePlus">OnePlus</MenuItem>
+                                 <MenuItem value="Oppo">Oppo</MenuItem>
+                                 <MenuItem value="Realme">Realme</MenuItem>
+                                 <MenuItem value="Samsung">Samsung</MenuItem>
+                                   <MenuItem value="Vivo">Vivo</MenuItem>        
+                            
+                        </Select>
+                    </div>
+                        //     this.brand= <div className="catagory" >
+                        //     <label>Brands:</label>
                         
-                            <select onChange={this.onProductBrandChange} name="productBrand"
-                                    className="form-control">
+                        //     <select onChange={this.onProductBrandChange} name="productBrand"
+                        //             className="form-control">
                                 
-                                <option value="Apple">Apple</option>
-                                <option value="Asus">Asus</option>
-                                <option value="Celkon">Celkon</option>
-                                <option value="Coolpad">Coolpad</option>
-                                <option value="Gionee">Gionee</option>
-                                <option value="Google">Google</option>
-                                <option value="HTC">HTC</option>
-                                <option value="Honor">Honor</option>
-                                <option value="Infinix">Infinix</option>
-                                <option value="Intex">Intex</option>
-                                <option value="Micromax">Micromax</option>
-                                <option value="MI">MI</option>
-                                <option value="Motorola">Motorola</option>
-                                <option value="Nokia">Nokia</option>
-                                <option value="OnePlus">OnePlus</option>
-                                <option value="Oppo">Oppo</option>
-                                <option value="Realme">Realme</option>
-                                <option value="Samsung">Samsung</option>
-                                <option value="Vivo">Vivo</option>
-                            </select>
-                        </div>
+                        //         <option value="Apple">Apple</option>
+                        //         <option value="Asus">Asus</option>
+                        //         <option value="Celkon">Celkon</option>
+                        //         <option value="Coolpad">Coolpad</option>
+                        //         <option value="Gionee">Gionee</option>
+                        //         <option value="Google">Google</option>
+                        //         <option value="HTC">HTC</option>
+                        //         <option value="Honor">Honor</option>
+                        //         <option value="Infinix">Infinix</option>
+                        //         <option value="Intex">Intex</option>
+                        //         <option value="Micromax">Micromax</option>
+                        //         <option value="MI">MI</option>
+                        //         <option value="Motorola">Motorola</option>
+                        //         <option value="Nokia">Nokia</option>
+                        //         <option value="OnePlus">OnePlus</option>
+                        //         <option value="Oppo">Oppo</option>
+                        //         <option value="Realme">Realme</option>
+                        //         <option value="Samsung">Samsung</option>
+                        //         <option value="Vivo">Vivo</option>
+                        //     </select>
+                        // </div>
                     
                         }if ( this.productType==="motorcycle") {
-                            this.brand= <div>
-                            <label>Brands:</label>
-                        
-                            <select onChange={this.onProductBrandChange} name="productBrand"
-                                    className="form-control">
-                                <option value="Bajaj">Bajaj</option>
-                                <option value="hero">Hero</option>
-                                <option value="Honda">Honda</option>
-                                <option value="Hero Honda">Hero Honda</option>
-                                <option value="KTM">KTM</option>
-                                <option value="Mahindra">Mahindra</option>
-                                <option value="Royal Enfield">Royal Enfield</option>
-                                <option value="Suzuki"> Suzuki</option>
-                                <option value="TVS"> TVS</option>
-                                <option value="Yamaha">Yamaha</option>
-                            </select>
+                            this.brand= <div className="catagory mt-5">
+                    
+                            <InputLabel id="label">Brands :</InputLabel>
+                            <Select labelId="label" id="select"  onChange={this.onProductBrandChange} name="productBrand"
+                                    >
+                                <MenuItem value="selectBrands">Select Brands</MenuItem>
+                                <MenuItem value="Bajaj">Bajaj</MenuItem>
+                                <MenuItem value="hero">Hero</MenuItem>
+                                <MenuItem value="Honda">Honda</MenuItem>
+                                <MenuItem value="Hero Honda">Hero Honda</MenuItem>
+                                <MenuItem value="KTM">KTM</MenuItem>
+                                <MenuItem value="Mahindra">Mahindra</MenuItem>
+                                <MenuItem value="Royal Enfield">Royal Enfield</MenuItem>
+                                <MenuItem value="Suzuki"> Suzuki</MenuItem>
+                                <MenuItem value="TVS"> TVS</MenuItem>
+                                <MenuItem value="Yamaha">Yamaha</MenuItem>
+                                
+                            </Select>
                         </div>
+
+                        //     this.brand= <div>
+                        //     <label>Brands:</label>
+                        
+                        //     <select onChange={this.onProductBrandChange} name="productBrand"
+                        //             className="form-control">
+                        //         <option value="Bajaj">Bajaj</option>
+                        //         <option value="hero">Hero</option>
+                        //         <option value="Honda">Honda</option>
+                        //         <option value="Hero Honda">Hero Honda</option>
+                        //         <option value="KTM">KTM</option>
+                        //         <option value="Mahindra">Mahindra</option>
+                        //         <option value="Royal Enfield">Royal Enfield</option>
+                        //         <option value="Suzuki"> Suzuki</option>
+                        //         <option value="TVS"> TVS</option>
+                        //         <option value="Yamaha">Yamaha</option>
+                        //     </select>
+                        // </div>
                    
                         }if ( this.productType==="scooter") {
-                            this.brand= <div>
-                            <label>Brands:</label>
-                        
-                            <select onChange={this.onProductBrandChange} name="productBrand"
-                                    className="form-control">
-                                <option value="Aprilia">Aprilia</option>
-                                <option value="bajaj">Bajaj</option>
-                                <option value="hero">Hero</option>
-                                <option value="honda">Honda</option>
-                                <option value="Suzuki">Suzuki</option>
-                                <option value="Tvs">TVS</option>
-                                <option value="Vespa">Vespa</option>
-                                <option value="Yamaha">Yamaha</option>
-                            </select>
-                        </div>
+                            this.brand= <div className="catagory mt-5">
                     
-                         }  
+                            <InputLabel id="label">Brands :</InputLabel>
+                            <Select labelId="label" id="select"  onChange={this.onProductBrandChange} name="productBrand"
+                                    >
+                                <MenuItem value="selectBrands">Select Brands</MenuItem>
+                                <MenuItem value="Aprilia">Aprilia</MenuItem>
+                                <MenuItem value="bajaj">Bajaj</MenuItem>
+                                <MenuItem value="hero">Hero</MenuItem>
+                                <MenuItem value="honda">Honda</MenuItem>
+                                <MenuItem value="Suzuki">Suzuki</MenuItem>
+                                <MenuItem value="Tvs">TVS</MenuItem>
+                                <MenuItem value="Vespa">Vespa</MenuItem>
+                                <MenuItem value="Yamaha">Yamaha</MenuItem>
+                                
+                            </Select>
+                        </div>
+
+                        //     this.brand= <div>
+                        //     <label>Brands:</label>
+                        
+                        //     <select onChange={this.onProductBrandChange} name="productBrand"
+                        //             className="form-control">
+                        //         <option value="Aprilia">Aprilia</option>
+                        //         <option value="bajaj">Bajaj</option>
+                        //         <option value="hero">Hero</option>
+                        //         <option value="honda">Honda</option>
+                        //         <option value="Suzuki">Suzuki</option>
+                        //         <option value="Tvs">TVS</option>
+                        //         <option value="Vespa">Vespa</option>
+                        //         <option value="Yamaha">Yamaha</option>
+                        //     </select>
+                        // </div>
+                    
+                         }  if ( this.productType=="car") {
+                            this.fuel= <div className="catagory mt-5">
+                        
+                            <InputLabel id="label">Fuel Type :</InputLabel>
+                            <Select labelId="label" id="select"  onChange={this.onProductFuelChange} name="productFuel"
+                                    >
+                                <MenuItem value="selectBrands">Select Fuel type</MenuItem>        
+                                <MenuItem value="Diesel">Diesel</MenuItem>
+                                <MenuItem value="Diesel">Petrol</MenuItem>    
+                            </Select>
+                        </div>
+                        
+                            }else{
+                                this.fuel=<div>
+                                       
+                                           </div>
+                            }
+                            if( this.productType=="mobile"){
+                                  this.classD="d-none"
+                            }else{
+                                this.classD=""
+                            }
         
           
         
@@ -355,43 +473,68 @@ class HomepageLayout extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="col-md-8 col-sm-8 text-center searchM">
+                <form class="d-flex searchBar searchHider">
+                        <input  type="search" placeholder="Find Cars, Mobiles, Bikes and More...... "/>
+                        <button class="btn" type="submit"><ImIcons.ImSearch className="icons"/></button>
+                 </form>
+                </div>
+                <div className="main-container">
+                            
+                    <Carousel>
+                        <Carousel.Item>
+                            <img
+                            className="d-block w-100 carouselImg"
+                            src="https://images.unsplash.com/photo-1509225770129-fbcf8a696c0b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1959&q=80"
+                            alt="First slide"
+                            />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                            className="d-block w-100 carouselImg"
+                            src="https://images.unsplash.com/photo-1513735539099-cf6e5d559d82?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1441&q=80"
+                            alt="Second slide"
+                            />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                            className="d-block w-100 carouselImg"
+                            src="https://images.unsplash.com/photo-1580117579193-ccc4066c8b18?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1784&q=80"
+                            alt="Third slide"
+                            />
 
-                <CarouselProvider className="main-container"
-                                  naturalSlideWidth={110}
-                                  naturalSlideHeight={50}
-                                  totalSlides={3}
-                                  isPlaying={true}
-                                  interval={3000}
-                >
-                    <Slider>
+                            
+                        </Carousel.Item>
+                        </Carousel>
+                    {/* <Slider>
                         <Slide index={1}><img
-                            style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
-                            src="/assets/images/slider1.jpg"
+                            style={{'objectFit': 'cover', 'height': '50%', 'width': '100%'}}
+                            src="https://images.unsplash.com/photo-1509225770129-fbcf8a696c0b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1959&q=80"
                             alt="First slide"/></Slide>
                         
                         <Slide index={2}><img
-                            style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
-                            src="/assets/images/slider2.jpg"
+                            style={{'objectFit': 'cover', 'height': '50%', 'width': '100%'}}
+                            src="https://images.unsplash.com/photo-1513735539099-cf6e5d559d82?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1441&q=80"
                             alt="First slide"/></Slide>
                         
                         <Slide index={3}><img
-                            style={{'objectFit': 'cover', 'height': '100%', 'width': '100%'}}
-                            src="/assets/images/slider3.jpg"
+                            style={{'objectFit': 'cover', 'height': '50%', 'width': '100%'}}
+                            src="https://images.unsplash.com/photo-1529984489975-079884dc3bc9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDB8fHBhbm9yYW1hfGVufDB8MHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                             alt="First slide"/></Slide>
                         
-                    </Slider>
-                </CarouselProvider>
+                    </Slider> */}
+                </div>
                 <br/>
                 <br/>
-                <div className="container" style={{marginTop: "50px"}}>
+                
+                {/* <div className="container" style={{marginTop: "35px"}}>
                     <div className="row">
                         <div className="col-sm-4 " style={{margin: 'auto'}}>
                             <div className="card">
                                 <img className="card-img-top" src="/assets/images/customer3.jpg" alt="Card image cap"/>
                                 <div className="card-body">
                                     <h5 className="card-title">We Know our customer need.</h5>
-                                    {/*<p className="card-text">We Know our customer need.</p>*/}
-                                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                                    
                                 </div>
                             </div>
                         </div>
@@ -401,24 +544,23 @@ class HomepageLayout extends React.Component {
                                      alt="Card image cap"/>
                                 <div className="card-body">
                                     <h5 className="card-title">Customer satisfaction is our top priority.</h5>
-                                    {/*<p className="card-text">Customer satisfaction is our top priority.</p>*/}
-                                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                                  
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                        <div className="latest-products">
-                            <div className="container">
+                </div> */}
 
-                                <div className="row">
-
-                                    <div className="col-md-12">
-                                        <div className="contact-form">
-                                            <form action="#">
-                                                <div className="row">
-                                                    <div className="col-md-4">
-                                                        <label>City:</label>
+                <div className="container-fluid" style={{"marginTop": "30px",}}>
+                    <div className="row">
+                        <div className="col-lg-3 col-md-3">
+                                      <div className="section-heading">
+                                            <h2>Search by Filters</h2>
+                                            {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
+                                            {/*    className="fa fa-angle-right"></i></p>*/}
+                                        </div>
+                                                    <div className="catagory">
+                                                        {/* <label>City:</label>
                                                         <select onChange={this.onProductTypeChange} name="productCity"
                                                                 className="form-control">
                                                             <option>Select city</option>
@@ -428,10 +570,22 @@ class HomepageLayout extends React.Component {
                                                                     return <option value={city.name}>{city.name}</option>
                                                                 })
                                                             }
-                                                        </select>
+                                                        </select> */}
+                                                        <InputLabel id="label">City:</InputLabel>
+                                                        <Select labelId="label" id="select" onChange={this.onProductTypeChange} name="productCity">
+                                                            <MenuItem value="selectCity">Select city</MenuItem>
+                                                            {
+                                                                this.props.cityData && this.props.cityData.map(city => {
+                                                                    return <MenuItem value={city.name}>{city.name}</MenuItem>
+                                                                })
+                                                            }
+                                                        </Select>
                                                     </div>
-                                                    <div className="col-md-4">
-                                                        <label>Category:</label>
+                                                    <div>
+                                                    
+                                                    </div>
+                                                    <div className="catagory mt-5" >
+                                                        {/* <label>Category:</label>
 
                                                         <select onChange={this.onProductTypeChange} name="productType" 
                                                                 className="form-control">
@@ -440,42 +594,48 @@ class HomepageLayout extends React.Component {
                                                             <option value="motorcycle">Motorcycles</option>
                                                             <option value="scooter">Scooter</option>
                                                             <option value="mobile">Mobile</option>
-                                                        </select>
+                                                        </select> */}
+                                                        <InputLabel id="label">Category:</InputLabel>
+                                                        <Select labelId="label" id="select" onChange={this.onProductTypeChange} name="productType">
+                                                            <MenuItem value="selectType">Select type</MenuItem>
+                                                            <MenuItem value="car">Car</MenuItem>
+                                                            <MenuItem value="motorcycle">Motorcycles</MenuItem>
+                                                            <MenuItem value="scooter">Scooter</MenuItem>
+                                                            <MenuItem value="mobile">Mobile</MenuItem>
+                                                           
+                                                        </Select>
                                                     </div>
 
-                                                 <div className="col-md-4">
+                                                 <div className="catagory mt-5">
                                                     {this.brand}
                                                   </div>
-
+                                                  <div className="catagory mt-5">
+                                                    {this.fuel}
+                                                  </div>
+                                                  <div className="mt-5 " >
+                                                  
+                                                       <RangeSlider/>
                                                 </div>
-
-
-                                                {/*<input onChange={this.onChange} name="city" className="form-control" type="text"*/}
-                                                {/*       placeholder="search city"/>*/}
-
-                                                {/*<label>Area:</label>*/}
-
-                                                {/*<input onChange={this.onChange} name="area" className="form-control" type="text"*/}
-                                                {/*       placeholder="search area"/>*/}
-                                                {/*<label>Category:</label>*/}
-
-                                                {/*<select onChange={this.onChange} name="category" className="form-control">*/}
-                                                {/*    <option>All</option>*/}
-                                                {/*    <option value="car">Car</option>*/}
-                                                {/*    <option value="bike">Bike</option>*/}
-                                                {/*    <option value="mobile">Mobile</option>*/}
-                                                {/*</select>*/}
-                                                <div class="text-center">
-                                                    <button onClick={(e) => this.productFilterSubmit(e)}
-                                                            className="filled-button btn search">Search
-                                                    </button>
+                                                <div className=" mt-5" className={this.classD}>
+                                                  
+                                                      <KmSlider/>
                                                 </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <br/>
-                                    <div className="col-md-12" style={{"marginTop": "40px"}}>
+                                                <div style={{marginTop:"40px"}} className={this.classD}>
+                                                  
+                                                      <YearSlider/>
+                                                </div>
+                                               
+                                                  <div class="text-center mt-5">
+                                                        <button onClick={(e) => this.productFilterSubmit(e)}
+                                                                className="searchBtn">Search
+                                                        </button>
+                                                  </div>
+
+                                               
+
+                        </div>
+                        <div className="col-lg-9 col-md-9">
+                            <div className="col-md-12">
                                         <div className="section-heading">
                                             <h2>Featured Products</h2>
                                             {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
@@ -491,63 +651,10 @@ class HomepageLayout extends React.Component {
                                             /> : ''
                                         }
                                     </div>
-                  {/* *****************************************     from here products show***************************** */}
+                          <div className="row">
+                              {/* *****************************************     from here products show***************************** */}
 
-                                 {products.map((product)=>{
-                                                    if(this.brandname==product.brand){
-                                                        return (
-                                                            <div className="col-lg-4 col-md-6 ">
-                                                              <div className="product-item ">
-                                                                  <Link to={`/product/${product.slug}`}>
-                                                                      {
-                                                                          product.images && product.images[0] !== undefined ?
-                                                                              <img style={{
-                                                                                  height: '232px',
-                                                                                  objectFit: 'cover'
-                                                                              }}
-                                                                                   src={`${URL}${product.images && product.images[0].image}`}
-                                                                                   alt=""/> : ''
-                                                                      }
-          
-                                                                  </Link>
-                                                                  <div className="down-content">
-                                                                      <h4>
-                                                                          <Link to={`/product/${product.slug}`}>
-                                                                              {product.model}
-                                                                          </Link>
-                                                                      </h4>
-          
-                                                                      <h6><small>
-                                                                      </small> ₹ {product.price}
-                                                                      </h6>
-          
-                                                                      {/*<p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used*/}
-                                                                      {/*    vehicle</p>*/}
-                                                                      
-                                                                      <small>
-                                                                          {
-                                                                              product.km === null ? '' : <strong title="Author"> <i
-                                                                                  className="fa fa-dashboard"></i> {product.km} Km
-                                                                              </strong>
-                                                                          }
-                                                                          &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                          <strong title="Author" ><i
-                                                                              className="fa fa-cube"> </i> {product.color}
-                                                                          </strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                          {/*<strong title="Views"><i*/}
-                                                                          {/*    className="fa fa-cog"></i> Manual</strong>*/}
-                                                                      </small>
-                                                                      
-                                                                  </div>
-                                                              </div>
-                                                          </div>
-                                                      )
-                                                    }
-                                                   
-                                                    console.log(product.brand)
-                                                  
-                                                })}
-                                                {<br/>}
+                              
                                     {
                                         products.map(product => {
                                             return (
@@ -605,23 +712,25 @@ class HomepageLayout extends React.Component {
                                 </div>
   {/* *****************************************     from here products show end***************************** */}
 
-                                <div style={{textAlign: "center", marginTop: "50px"}}>
-                                    {
-                                        !has_more ? "No more products" : <Button onClick={() => this.loadProduct()} color="red"
-                                        >View more</Button>
-                                    }
-
-
-                                </div>
+                                    <div style={{textAlign: "center", marginTop: "50px"}}>
+                                        {
+                                            !has_more ? "No more products" : <Button onClick={() => this.loadProduct()} color="red"
+                                            >View more</Button>
+                                        }
+                                    </div>
                             </div>
                         </div>
 
+                         
+                </div>
+               
+                       
                 <div className="best-features about-features">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12">
-                                <div className="section-heading">
-                                    <h2 id="about">About Sec2hand</h2>
+                                <div className="section-heading text-center">
+                                    <h2 id="about" style={{color:"grey", fontWeight:'600'}}>ABOUT SEC2HAND</h2>
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -663,42 +772,42 @@ class HomepageLayout extends React.Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-12">
-                                    <div className="section-heading">
+                                    <div className="section-heading text-center">
                                         <h2>Send us a Message</h2>
                                     </div>
                                 </div>
-                                <div className="col-md-8">
+                                <div className="col-md-8 col-lg-8 col-8 offset-2">
                                     <div className="contact-form">
                                         <form id="contact" action="" method="post">
                                             <div className="row">
-                                                <div className="col-lg-12 col-md-12 col-sm-12">
+                                                <div className="col-lg-12 col-md-12 col-sm-12 ">
                                                     <fieldset>
-                                                        <input name="name" type="text" className="form-control"
+                                                        <input name="name" type="text" className="form-control contactUs"
                                                                id="name"
                                                                placeholder="Full Name" required=""/>
                                                     </fieldset>
                                                 </div>
                                                 <div className="col-lg-12 col-md-12 col-sm-12">
                                                     <fieldset>
-                                                        <input name="email" type="text" className="form-control"
+                                                        <input name="email" type="text" className="form-control contactUs"
                                                                id="email"
                                                                placeholder="E-Mail Address" required=""/>
                                                     </fieldset>
                                                 </div>
                                                 <div className="col-lg-12 col-md-12 col-sm-12">
                                                     <fieldset>
-                                                        <input name="subject" type="text" className="form-control"
+                                                        <input name="subject" type="text" className="form-control contactUs"
                                                                id="subject" placeholder="Subject" required=""/>
                                                     </fieldset>
                                                 </div>
                                                 <div className="col-lg-12">
                                                     <fieldset>
-                                                    <textarea name="message" rows="6" className="form-control"
+                                                    <textarea name="message" rows="6" className="form-control contactUs"
                                                               id="message" placeholder="Your Message"
                                                               required=""/>
                                                     </fieldset>
                                                 </div>
-                                                <div className="col-lg-12">
+                                                <div className="col-lg-12 text-center">
                                                     <fieldset>
                                                         <button type="submit" id="form-submit"
                                                                 className="filled-button">Send Message

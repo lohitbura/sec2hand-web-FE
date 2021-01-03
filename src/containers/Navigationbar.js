@@ -5,13 +5,16 @@ import * as IoIcons from "react-icons/io";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
 import * as MdIcons from "react-icons/md";
+import * as ImIcons from "react-icons/im";
 import { Link, withRouter } from 'react-router-dom';
 
 import {connect} from "react-redux";
 import {logout} from "../store/actions/auth";
 import axios from "axios";
 import {getUserProfileIdURL} from "../store/constants";
-import "./nav.css/nav.css"
+import "./nav.css/nav.css";
+import Button from '@material-ui/core/Button';
+
 
 
 
@@ -24,6 +27,7 @@ class Navigationbar extends React.Component{
         this.onClickOutsideHandler = this.onClickOutsideHandler.bind(this);
 
         this.showSidebar = this.showSidebar.bind(this);
+        // this.useStyles=this.useStyles.bind(this);
         
         this.state = {
              sidebar:false,
@@ -70,25 +74,81 @@ class Navigationbar extends React.Component{
             })
         }
     }
-    
+    // ColorButton = withStyles((theme) => ({
+    //     root: {
+    //       color: theme.palette.getContrastText(purple[500]),
+    //       backgroundColor: purple[500],
+    //       '&:hover': {
+    //         backgroundColor: purple[700],
+    //       },
+    //     },
+    //   }))(Button);
+      
+    //    useStyles = makeStyles((theme) => ({
+    //     margin: {
+    //       margin: theme.spacing(1),
+    //     },
+    //   }));
+      
+    //    theme = createMuiTheme({
+    //     palette: {
+    //       primary: green,
+    //     },
+    //   });
+
         render(){
             const {authenticated} = this.props;
             const {username, activemenu} = this.state;
-            
-            
+           
              return (
             <>
             
             <div className='navBar' ref={this.toggleContainer}>
-                <Link to='#' className='menu-bars' >
-                  <FaIcons.FaBars onClick={this.showSidebar} />
-                </Link>
-                <Link className="logoimgNav" to="/">
-                                <img style={{
-                                    width: '69px',
-                                    marginTop: '-12px'
-                                }} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
-                </Link>
+                
+                <div className="logoimgNav">
+                        <Link  to="/">
+                                        <img style={{
+                                            width: '69px',
+                                            marginTop: '-12px'
+                                        }} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
+                        </Link>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-6">
+                 <form class="d-flex searchBar searchHide">
+                        <input  type="search" placeholder="Find Cars, Mobiles, Bikes and More...... "/>
+                        <button class="btn" type="submit"><ImIcons.ImSearch className="icons"/></button>
+                 </form>
+                </div>
+                <div>
+                {
+                                        authenticated ? <div className="hidden" type="button" >
+                                            <Link to="" style={{cursor: "pointer"}} className="nav-link"
+                                               onClick={() => this.props.logout()}>
+                                                Logout
+                                            </Link>
+                                        </div> : 
+                                            <div className="navbar-toggler hidden" type="button" className="nav-item dropdown">
+                                            <a  className=" dropdown-toggle hidden" data-toggle="dropdown"
+                                               role="button" aria-haspopup="true" aria-expanded="false">
+                                                   <Button varient="outlined">Login</Button></a>
+
+                                            <div className="dropdown-menu hidden">
+                                                {/*<a  href="blog.html">Blog</a>*/}
+                                                 <Link className="dropdown-item" to="/dealer-login">
+                                                    Dealer
+                                                </Link>
+                                                <Link className="dropdown-item hidden" to="/login">
+                                                    Customer
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    }
+                </div>
+                <div>
+                        <Link to='#' className='menu-bars' >
+                        <FaIcons.FaBars onClick={this.showSidebar} />
+                        </Link>
+                </div>
             </div>
             
             <nav className={this.state.sidebar ? 'nav-menu active' : 'nav-menu'} >
