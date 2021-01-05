@@ -17,6 +17,11 @@ import {getUserProfileIdURL, productDetailURL, URL} from "../store/constants";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './productDetail/product.css';
+import * as FcIcons from "react-icons/fc";
+import * as GrIcons from "react-icons/gr";
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
 
 
 class ProductDetail extends React.Component {
@@ -65,27 +70,18 @@ class ProductDetail extends React.Component {
         const {product, username} = this.state;
         return (
             <div>
-                <div className="page-heading about-heading header-text"
-                     style={{'backgroundImage': `url(${URL}${product.images && product.images[0].image})`}}>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="text-content">
-                                    <h4>
-                                        {/*<del>₹{product.price}</del>*/}
-                                        <strong className="text-primary">₹{product.price}</strong></h4>
-                                    <h2>{product.model}</h2>
-                                </div>
-                            </div>
+                <div className="">
+                    <div className="container-fluid">
+                        <div className="row">        
                         </div>
                     </div>
                 </div>
 
-                <div className="products">
-                    <ToastContainer position="bottom-right"/>
-                    <div className="container">
+                <div className="container-fluid products">
+                    <ToastContainer position="bottom-left"/>
+                    <div className="container-fluid ">
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-lg-9 col-md-9 col-sm-12 productCaraousel">
                                 {/*<div>*/}
                                 {/*    <img src={`${URL}${product.images && product.images[0].image}`} alt=""*/}
                                 {/*         className="img-fluid wc-image"/>*/}
@@ -109,7 +105,7 @@ class ProductDetail extends React.Component {
                                     naturalSlideHeight={300}
                                     hasMasterSpinner
                                 >
-                                    <Slider style={{maxWidth: '800px'}}>
+                                    <Slider style={{maxWidth: '900px',maxHeight:'80vh', borderRadius:'10px',marginTop:'-15px',backgound:'black'}}>
                                         {
                                             product.images && product.images.map(image => {
                                                 return (
@@ -122,21 +118,50 @@ class ProductDetail extends React.Component {
                                             })
                                         }
                                     </Slider>
-                                    <ButtonBack primary>Back</ButtonBack>
-                                    <ButtonNext>Next</ButtonNext>
+                                    <ButtonBack primary className="backBtn" ><GrIcons.GrPrevious className="iconNext"/></ButtonBack>
+                                    <ButtonNext className="nextBtn"><GrIcons.GrNext className="iconNext" /></ButtonNext>
                                 </CarouselProvider>
                             </div>
 
-                            <div className="col-md-6">
-                                <form action="#" method="post" className="form">
-                                    <ul className="list-group list-group-flush">
-                                        <li className="list-group-item">
-                                            <div className="clearfix">
-                                                <span className="pull-left">Type</span>
+                            <div className="col-lg-3 col-md-3 col-sm-12">
+                               
+                                <div className="product-Details">
+                                    <div className="container-fluid">
+                                        <div className="row basicDetails">
+                                            <div className="col-lg-12 col-md-12 text-center">
+                                                <div className="productName"><a>{product.brand} </a></div>
+                                                <div><strong className="priceText">₹{product.price}</strong></div>
+                                                <div className="productYear"><a>{product.year} Model </a></div>
+                                                <div className="productYear"><a>{product.km} km</a></div> 
+                                                <div className="productNo productNoHider">8257361585</div>
+                                            </div>        
+                                        </div>
+                                        <div className="row basicDetails dealerHider text-center mt-3">
+                                            <div><img src="../../assets/images/profile.png" style={{width:'65px',height:'65px' }}/></div>
+                                            <div className="upperContent">Dealer Details</div>
+                                            <div className="DealerName text-center">Name </div>
+                                            <div className="productNo">8257361585</div>
+                                            <div className="productAdd">address- jha bolo wha hajir </div>
+                                        </div>
 
-                                                <strong className="pull-right">Used vehicle</strong>
-                                            </div>
-                                        </li>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+<center>
+                
+                    <Tabs defaultActiveKey="Desc" id="uncontrolled-tab-example" className="descriptionUl">
+                        <Tab eventKey="Desc" title="Description">
+                        <div className="row mt-5 descriptiontab">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-8 offset-2 mt-8">
+                                  <form action="#" method="post" className="form">
+                                    <ul className="list-group list-group-flush">
+                                       
                                         <li className="list-group-item">
                                             <div className="clearfix">
                                                 <span className="pull-left"> Brand</span>
@@ -147,7 +172,6 @@ class ProductDetail extends React.Component {
                                         <li className="list-group-item">
                                             <div className="clearfix">
                                                 <span className="pull-left"> Model</span>
-
                                                 <strong className="pull-right">{product.model}</strong>
                                             </div>
                                         </li>
@@ -203,9 +227,9 @@ class ProductDetail extends React.Component {
                                             </div>
                                         </li>
                                     </ul>
-                                </form>
+                                </form> 
                                 <br/>
-                                {
+                                 {
                                     product.user === username ? <div>
                                         <Link to={`/productEdit/${product.slug}`}>
                                             <Button content='Edit' color="green"/>
@@ -213,13 +237,40 @@ class ProductDetail extends React.Component {
                                         <Button onClick={() => this.deleteProduct(product.slug)} content='Delete'
                                                 color="red"/>
                                     </div> : ''
-                                }
+                                } 
+                              </div>
+                           </div>
+                      </Tab>
+                            <Tab eventKey="Dealer" title="Dealer Details">
+                                <div className="row descriptionUl text-center">
+                                    
+                                        <div className="basicDetails text-center mt-3">
+                                                <div><img src="../../assets/images/profile.png" style={{width:'200px',height:'200px' }}/></div>
+                                                
+                                        </div>
+                                        <div className="dealerD">
+                                            <ul className="dealerList">
+                                                <li className="m-3">Name - Pankaj Verma </li>
+                                                <li className="m-3">Address - Jodhpur </li>
+                                                <li className="m-3">Phone- 982579216864 </li>
+                                                <li className="m-3">City- Jodhpur  </li>
+                                                <li className="m-3">No. of Total Products </li>
+                                            </ul>
+                                        </div>
+                                        <div className="dealerD">
+                                             <h4>Best Deals</h4>
+                                             <a>Here We can show Best Deals of this Dealer</a>
+                                        </div>
+                                   
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                                </div>
+                                <div className="descriptionUl" >
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14318.974570743832!2d73.00510519999999!3d26.20501635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1609847722242!5m2!1sen!2sin" width="100%" height="450" frameborder="0" style={{border:'0'}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                </div>
+                                
+                            </Tab>
+                </Tabs>
+                </center>
                 {/*<div className="section">*/}
                 {/*    <div className="container">*/}
                 {/*        <div className="row">*/}
