@@ -493,9 +493,9 @@ class HomepageLayout extends React.Component {
                     </div>
                 </div>
                 <div className="col-md-8 col-sm-8 text-center searchM">
-                <form class="d-flex searchBar searchHider">
+                <form className="d-flex searchBar searchHider">
                         <input  type="search" placeholder="Find Cars, Mobiles, Bikes and More...... "/>
-                        <button class="btn" type="submit"><ImIcons.ImSearch className="icons"/></button>
+                        <button className="btn" type="submit"><ImIcons.ImSearch className="icons"/></button>
                  </form>
                 </div>
                 <div className="main-container">
@@ -622,7 +622,8 @@ class HomepageLayout extends React.Component {
                                                       <YearSlider/>
                                                 </div>
                                                
-                                                  <div class="text-center mt-5">
+                                               
+                                                  <div className="text-center mt-5">
                                                         <button onClick={(e) => this.productFilterSubmit(e)}
                                                                 className="searchBtn">Search
                                                         </button>
@@ -705,7 +706,7 @@ class HomepageLayout extends React.Component {
                                                       <YearSlider/>
                                                 </div>
                                                
-                                                  <div class="text-center mt-5">
+                                                  <div className="text-center mt-5">
                                                         <button onClick={(e) => this.productFilterSubmit(e)}
                                                                 className="searchBtn">Search
                                                         </button>

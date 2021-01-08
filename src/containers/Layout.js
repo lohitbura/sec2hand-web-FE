@@ -54,7 +54,7 @@ class CustomLayout extends React.Component {
         return (
             <div>
                 <div id="preloader">
-                    <div classNameName="jumper">
+                    <div className="jumper">
                         <div></div>
                         <div></div>
                         <div></div>

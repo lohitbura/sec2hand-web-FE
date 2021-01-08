@@ -14,6 +14,7 @@ import axios from "axios";
 import {getUserProfileIdURL} from "../store/constants";
 import "./nav.css/nav.css";
 import Button from '@material-ui/core/Button';
+import { Modal } from 'react-bootstrap';
 
 
 
@@ -27,11 +28,14 @@ class Navigationbar extends React.Component{
         this.onClickOutsideHandler = this.onClickOutsideHandler.bind(this);
 
         this.showSidebar = this.showSidebar.bind(this);
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose= this.handleClose.bind(this);
         // this.useStyles=this.useStyles.bind(this);
         
         this.state = {
              sidebar:false,
              activemenu: 1,
+             showModals:false
         }
     }
     
@@ -60,9 +64,23 @@ class Navigationbar extends React.Component{
          this.setState(currentState => ({
             sidebar: !currentState.sidebar
           }));
+       
+         
+     }
+
+     handleShow(){
+         this.setState({
+             showModals:true
+         });
+         
      }
      
-    
+     handleClose(){
+         this.setState({
+             showModals:false
+         });
+         
+     }
 
      componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.token !== this.props.token) {
@@ -98,11 +116,42 @@ class Navigationbar extends React.Component{
 
         render(){
             const {authenticated} = this.props;
-            const {username, activemenu} = this.state;
+            const {username, activemenu, showModals} = this.state;
            
              return (
             <>
-            
+                                                    <Modal show={showModals} onHide={this.handleClose}>
+                                                        <Modal.Header closeButton>
+                                                        <Modal.Title>Login Yourself as</Modal.Title>
+                                                        </Modal.Header>
+                                                        <Modal.Body>
+                                                            <div className="row">
+                                                                <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                                                             <Link className="dropdown-item" to="/dealer-login" onClick={this.handleClose}>
+                                                                 <div className="dealer"> DEALER </div>
+                                                                 <div > <img src="../../assets/images/carDealer1.png" style={{width:'150px',height:'150px', marginBottom:'20px' }}/></div> 
+                                                             </Link>
+                                               
+                                                                </div>
+                                                                <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                                                                <Link className="dropdown-item hidden" to="/login" onClick={this.handleClose}>
+                                                                <div className="dealer"> CUSTOMER </div>
+                                                                 <div > <img src="../../assets/images/customer1.png" style={{width:'150px',height:'150px', marginBottom:'20px' }}/></div> 
+                                                              </Link>
+                                                                </div>
+                                                            </div>
+                                                        </Modal.Body>
+                                                        {/* <Modal.Footer>
+                                                        <Button variant="secondary" onClick={this.handleClose}>
+                                                            Close
+                                                        </Button>
+                                                        <Button variant="primary" onClick={this.handleClose}>
+                                                            Save Changes
+                                                        </Button>
+                                                        </Modal.Footer> */}
+                                                    </Modal>
+                                                  
+                                                  
             <div className='navBar' ref={this.toggleContainer}>
                 
                 <div className="logoimgNav">
@@ -114,9 +163,9 @@ class Navigationbar extends React.Component{
                         </Link>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-6">
-                 <form class="d-flex searchBar searchHide">
+                 <form className="d-flex searchBar searchHide">
                         <input  type="search" placeholder="Find Cars, Mobiles, Bikes and More...... "/>
-                        <button class="btn" type="submit"><ImIcons.ImSearch className="icons"/></button>
+                        <button className="btn" type="submit"><ImIcons.ImSearch className="icons"/></button>
                  </form>
                 </div>
                 <div>
@@ -127,23 +176,27 @@ class Navigationbar extends React.Component{
                                                 Logout
                                             </Link>
                                         </div> : 
-                                            <div className="navbar-toggler hidden" type="button" className="nav-item dropdown">
-                                            <a  className=" dropdown-toggle hidden" data-toggle="dropdown"
-                                               role="button" aria-haspopup="true" aria-expanded="false">
-                                                   <Button varient="outlined">Login</Button></a>
+                                            <div className="hidden" >
+                                            <a  className="  hidden" >
+                                                   <Button varient="outlined" onClick={this.handleShow} >
+                                                       Login
+                                                       </Button>
+                                            </a>
 
-                                            <div className="dropdown-menu hidden">
-                                                {/*<a  href="blog.html">Blog</a>*/}
+                                                 
+                                            {/* <div className="dropdown-menu hidden">
+                                                
                                                  <Link className="dropdown-item" to="/dealer-login">
                                                     Dealer
                                                 </Link>
                                                 <Link className="dropdown-item hidden" to="/login">
                                                     Customer
                                                 </Link>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     }
                 </div>
+
                 <div>
                         <Link to='#' className='menu-bars' >
                         <FaIcons.FaBars onClick={this.showSidebar} />
@@ -249,7 +302,9 @@ class Navigationbar extends React.Component{
                                     
 {/* **********************************Navbar menu list end here********************************************** */}
                 </ul>
-            </nav>
+             </nav>
+             <div>
+            </div>
          </>
         )
     }
