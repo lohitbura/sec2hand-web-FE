@@ -302,10 +302,27 @@ class HomepageLayout extends React.Component {
 
     onProductTypeChange = (e) => {
        
-         this.setState({
-            [e.target.name]: e.target.value
-        })
-       
+         
+        if((e.target.value=="cars")||(e.target.value=="Car")||(e.target.value=="Cars")||(e.target.value=="latest car")||(e.target.value=="4 wheeler")||(e.target.value=="4 wheeleres")||(e.target.value=="gadiya")||(e.target.value=="Honda cars")||(e.target.value=="tata")||(e.target.value=="maruti")||(e.target.value=="swift")||(e.target.value=="car")){
+            this.setState({
+                [e.target.name]: "car"
+            })
+        }
+        if((e.target.value=="motorcycle")||(e.target.value=="bike")||(e.target.value=="bikes")||(e.target.value=="Bike")||(e.target.value=="Bikes")||(e.target.value=="hero honda")||(e.target.value=="Motor")||(e.target.value=="Motorcycle")||(e.target.value=="hero")||(e.target.value=="Hero")||(e.target.value=="gadi")||(e.target.value=="motor")){
+            this.setState({
+                [e.target.name]: "motorcycle"
+            })
+        }
+        if((e.target.value=="mobile")||(e.target.value=="Mobile")||(e.target.value=="phone")||(e.target.value=="smartphones")||(e.target.value=="smartphones")||(e.target.value=="keypad")||(e.target.value=="redmi")||(e.target.value=="apple")||(e.target.value=="Apple")||(e.target.value=="samsung")||(e.target.value=="Samsung")){
+            this.setState({
+                [e.target.name]: "mobile"
+            })
+        }
+        if((e.target.value=="scooty")||(e.target.value=="scooter")||(e.target.value=="scoty")||(e.target.value=="activa")||(e.target.value=="Activa")||(e.target.value=="honda scoty")||(e.target.value=="Mopad")||(e.target.value=="mopad")||(e.target.value=="activa new model")||(e.target.value=="tvs scooty")||(e.target.value=="pept")||(e.target.value=="pept scoty")){
+            this.setState({
+                [e.target.name]: "scooter"
+            })
+        }
     //    ***** here we get value of product type and show its brand******************
         this.productType=e.target.value
                         if ( this.productType=="car") {
@@ -314,10 +331,7 @@ class HomepageLayout extends React.Component {
                         <InputLabel id="label">Brands :</InputLabel>
                         <Select labelId="label" id="select"  onChange={this.onProductBrandChange} name="productBrand"
                                 >
-                            <MenuItem value="selectBrands">Select Brands</MenuItem> 
-                            <MenuItem value="meme">Meme</MenuItem>
-                            <MenuItem value="legend">legend</MenuItem>
-                            <MenuItem value="bhoi">bhoi</MenuItem>       
+                            <MenuItem value="selectBrands">Select Brands</MenuItem>      
                             <MenuItem value="Chevrolate">Chevrolate</MenuItem>
                             <MenuItem value="Datsun">Datsun</MenuItem>
                             <MenuItem value="Ford">Ford</MenuItem>
@@ -482,7 +496,7 @@ class HomepageLayout extends React.Component {
                 </div>
                 <div className="col-md-8 col-sm-8 text-center searchM">
                 <form className="d-flex searchBar searchHider">
-                        <input  type="search" placeholder="Find car, mobile, motorcycle...... " onChange={this.onProductTypeChange} name="productType" />
+                        <input  type="search" placeholder="Find Cars, Mobile, Bikes and Many More...... " onChange={this.onProductTypeChange} name="productType" />
                         <button className="btn" type="submit" onClick={(e) => this.productFilterSubmit(e)} ><ImIcons.ImSearch className="icons"/></button>
                  </form>{
                  console.log('===================================='),
