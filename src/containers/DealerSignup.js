@@ -67,11 +67,11 @@ class DealerSignup extends React.Component {
 
                 <Grid
                     textAlign="center"
-                    style={{height: "100%", marginTop: "100px"}}
+                    style={{height: "100%", marginTop: "0px"}}
                     verticalAlign="middle"
                 >
 
-                    <Grid.Column style={{maxWidth: 450}}>
+                    <Grid.Column style={{maxWidth: 450, marginTop:'100px' }} >
                         <Header as="h2" color="teal" textAlign="center">
                             Signup as dealer
                         </Header>

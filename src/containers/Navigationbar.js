@@ -162,12 +162,12 @@ class Navigationbar extends React.Component{
                                         }} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
                         </Link>
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-6">
+                {/* <div className="col-lg-6 col-md-6 col-sm-6">
                  <form className="d-flex searchBar searchHide">
                         <input  type="search" placeholder="Find Cars, Mobiles, Bikes and More...... "/>
                         <button className="btn" type="submit"><ImIcons.ImSearch className="icons"/></button>
                  </form>
-                </div>
+                </div> */}
                 <div>
                 {
                                         authenticated ? <div className="hidden" type="button" >

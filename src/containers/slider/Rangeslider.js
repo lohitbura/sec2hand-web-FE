@@ -80,37 +80,88 @@ function AirbnbThumbComponent(props) {
   );
 }
 
-export default function RangeSlider() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState([200000, 600000]);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+// export default function RangeSlider() {
+//   const classes = useStyles();
+//   const [value, setValue] = React.useState([200000, 600000]);
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);
+//   };
  
 
-  return (
-      <>
-      <div>
-    <div className={classes.root}>
+//   return (
+//       <>
+//       <div>
+//     <div className={classes.root}>
      
-      <Typography gutterBottom>Select Price Range :</Typography>
-      <AirbnbSlider
-        ThumbComponent={AirbnbThumbComponent}
-        getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
-        defaultValue={value}
-        onChange={handleChange}
-        min={1000}
-        step={1000}
-        max={1000000}
-      />
-    </div>
-    <div className="priceDiv">
-    <div className="mr-3">{value[0] }Rs. </div> 
-    to
-    <div className="ml-3"> {value[1] }Rs.</div>
-    </div>
-    </div>
+//       <Typography gutterBottom>Select Price Range :</Typography>
+//       <AirbnbSlider
+//         ThumbComponent={AirbnbThumbComponent}
+//         getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
+//         defaultValue={value}
+//         onChange={handleChange}
+//         min={1000}
+//         step={1000}
+//         max={1000000}
+//       />
+//     </div>
+//     <div className="priceDiv">
+//     <div className="mr-3">{value[0] }Rs. </div> 
+//     to
+//     <div className="ml-3"> {value[1] }Rs.</div>
+//     </div>
+//     </div>
     
-    </>
-  );
+//     </>
+//   );
+// }
+export default class RangeSlider extends React.Component {
+
+  constructor(props) {
+    super(props)
+    
+    this.handleChange = this.handleChange.bind(this);
+  
+    this.state = {
+         value:[200000, 600000]
+    }
+}
+
+   handleChange(e , newValue){
+    this.setState({
+      value :newValue
+    });
+    this.props.parentCallback(newValue);
+    
+  }
+
+  render()
+  {
+    
+    const {value} = this.state;
+  
+          return (
+              <>
+            <div className="mt-5">
+                <div className={useStyles.root} >
+                
+                    <Typography gutterBottom>Select Price Range :</Typography>
+                    <AirbnbSlider
+                        ThumbComponent={AirbnbThumbComponent}
+                        getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
+                        defaultValue={value}
+                        onChange={this.handleChange}
+                        min={1000}
+                        step={1000}
+                        max={1000000}
+                    />
+                </div>
+                <div className="priceDiv">
+                <div className="mr-3">{value[0] } Rs. </div> 
+                to
+                <div className="ml-3"> {value[1] } Rs. </div>
+                </div>
+            </div>
+            </>
+          );
+  }
 }

@@ -24,7 +24,7 @@ import Card from "semantic-ui-react/dist/commonjs/views/Card";
 import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import axios from 'axios';
 
-import {dealerListURL, productListURL, URL} from "../store/constants";
+import {dealerListURL, productListURL, URL,productListURLS, URLS} from "../store/constants";
 // import Loader from "semantic-ui-react/dist/commonjs/elements/Loader";
 import Loader from 'react-loader-spinner';
 import {logout} from "../store/actions/auth";
@@ -64,18 +64,22 @@ class HomepageLayout extends React.Component {
         category: '',
         productCity: '',
         productType: 'car',
-        filterbar:false
-        
+        productBrand:'',
+        productModel:'',
+        productFuel:'',
+        productKmStart:'',
+        productKmend:'',
+        productPriceStart:'',
+        productPriceEnd:'',
+        productYearStart:'',
+        productYearEnd:'',
+        productOwner_state: '',
+        filterbar:'',
+        data1:[],
+        data2:[],
+        data3:[]
     }
-    // constructor(props) {
-    //     super(props)
-
-    //         this.showFilterbar = this.showFilterbar.bind(this);
-        
-    //     this.state = {
-    //         filterbar:false
-    //     }
-    // }
+    
 
     componentDidMount() {
         this.loadProduct()
@@ -88,7 +92,24 @@ class HomepageLayout extends React.Component {
            filterbar: !currentState.filterbar
          }));
     }
+    
+    handleCallbackFirst = (childData) =>{
+        this.setState({
+        data1:childData
+        });
+    }
 
+    handleCallbackSecond = (childData) =>{
+        this.setState({
+        data2:childData
+        })
+    }
+
+    handleCallbackThird = (childData) =>{
+        this.setState({
+        data3:childData
+        })
+    }
 
     check = () => {
         if (!this.props.authenticated) {
@@ -215,15 +236,22 @@ class HomepageLayout extends React.Component {
 
     productFilterSubmit = (e) => {
         e.preventDefault();
-        const {limit, offset2, products, productType, productCity} = this.state;
+        const {limit, offset2, products,data1,data2,data3 ,productType, productBrand, productModel, productFuel, productCity} = this.state;
+        var {productOwner_state,productKmStart, productKmend, productPriceStart, productPriceEnd ,productYearStart, productYearEnd}=this.state;
+        productYearStart=data3[0];
+        productYearEnd=data3[1];
+        productKmStart=data2[0];
+        productKmend=data2[1];
+        productPriceStart=data1[0];
+        productPriceEnd=data1[1];
+        
         this.setState({loading: true})
-        axios.get(productListURL(limit, offset2, productType, productCity)).then(res => {
+        axios.get(productListURL(limit, offset2, productType, productBrand, productModel, productFuel, productOwner_state, productCity, productKmStart, productKmend, productPriceStart, productPriceEnd, productYearStart, productYearEnd )).then(res => {
             this.setState({
                 products: res.data.products,
                 loading: false,
                 has_more: res.data.has_more
             })
-            
             
         })
             .catch(err => {
@@ -233,17 +261,36 @@ class HomepageLayout extends React.Component {
          
     }
 
+    // productSearchSubmit = (e) => {
+    //     e.preventDefault();
+    //     const {limit, offset2, products,productType} = this.state;
+        
+    //     this.setState({loading: true})
+    //     axios.get(productListURL(limit, offset2, productType )).then(res => {
+    //         this.setState({
+    //             products: res.data.products,
+    //             loading: false,
+    //             has_more: res.data.has_more
+    //         })
+            
+    //     })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+
+         
+    // }
+
     loadProduct = () => {
-        const {limit, offset, products, productType, productCity} = this.state;
+        const {limit, offset, products, productType, productBrand, productModel, productFuel, productOwner_state, productCity, productKmStart, productKmend, productPriceStart, productPriceEnd, productYearStart, productYearEnd} = this.state;
         this.setState({loading: true})
-        axios.get(productListURL(limit, offset, productType, productCity)).then(res => {
+        axios.get(productListURL(limit, offset, productType, productBrand, productModel, productFuel, productOwner_state, productCity, productKmStart, productKmend, productPriceStart, productPriceEnd, productYearStart, productYearEnd)).then(res => {
             this.setState({
                 products: [...products, ...res.data.products],
                 loading: false,
                 offset: limit + offset,
                 has_more: res.data.has_more
             })
-           
         })
         
             .catch(err => {
@@ -251,45 +298,31 @@ class HomepageLayout extends React.Component {
             })
     }
 
+
+
     onProductTypeChange = (e) => {
        
          this.setState({
             [e.target.name]: e.target.value
         })
+       
     //    ***** here we get value of product type and show its brand******************
         this.productType=e.target.value
                         if ( this.productType=="car") {
                         this.brand= <div className="catagory mt-5">
                     
-                        {/* <select onChange={this.onProductBrandChange} name="productBrand"
-                                className="form-control">
-                            <option value="Chevrolate">Chevrolate</option>
-                            <option value="Datsun">Datsun</option>
-                            <option value="Ford">Ford</option>
-                            <option value="Hyundai">Hyundai</option>
-                            <option value="Honda">Honda</option>
-                            <option value="Jeep">Jeep</option>
-                            <option value="KIA">KIA</option>
-                            <option value="Mahindra">Mahindra</option>
-                            <option value="Maruti Suzuki">Maruti Suzuki</option>
-                            <option value="MG">MG</option>
-                            <option value="Nissan">Nissan</option>
-                            <option value="Renault">Renault</option>
-                            <option value="Skoda">Skoda </option>
-                            <option value="TATA">TATA</option>
-                            <option value="Toyota">Toyota</option>
-                            <option value="Volkswagen">Volkswagen</option>
-                            
-                        </select> */}
                         <InputLabel id="label">Brands :</InputLabel>
                         <Select labelId="label" id="select"  onChange={this.onProductBrandChange} name="productBrand"
                                 >
-                            <MenuItem value="selectBrands">Select Brands</MenuItem>        
+                            <MenuItem value="selectBrands">Select Brands</MenuItem> 
+                            <MenuItem value="meme">Meme</MenuItem>
+                            <MenuItem value="legend">legend</MenuItem>
+                            <MenuItem value="bhoi">bhoi</MenuItem>       
                             <MenuItem value="Chevrolate">Chevrolate</MenuItem>
                             <MenuItem value="Datsun">Datsun</MenuItem>
                             <MenuItem value="Ford">Ford</MenuItem>
                             <MenuItem value="Hyundai">Hyundai</MenuItem>
-                            <MenuItem value="Honda">Honda</MenuItem>
+                            <MenuItem value="honda">Honda</MenuItem>
                             <MenuItem value="Jeep">Jeep</MenuItem>
                             <MenuItem value="KIA">KIA</MenuItem>
                             <MenuItem value="Mahindra">Mahindra</MenuItem>
@@ -335,33 +368,6 @@ class HomepageLayout extends React.Component {
                             
                         </Select>
                     </div>
-                        //     this.brand= <div className="catagory" >
-                        //     <label>Brands:</label>
-                        
-                        //     <select onChange={this.onProductBrandChange} name="productBrand"
-                        //             className="form-control">
-                                
-                        //         <option value="Apple">Apple</option>
-                        //         <option value="Asus">Asus</option>
-                        //         <option value="Celkon">Celkon</option>
-                        //         <option value="Coolpad">Coolpad</option>
-                        //         <option value="Gionee">Gionee</option>
-                        //         <option value="Google">Google</option>
-                        //         <option value="HTC">HTC</option>
-                        //         <option value="Honor">Honor</option>
-                        //         <option value="Infinix">Infinix</option>
-                        //         <option value="Intex">Intex</option>
-                        //         <option value="Micromax">Micromax</option>
-                        //         <option value="MI">MI</option>
-                        //         <option value="Motorola">Motorola</option>
-                        //         <option value="Nokia">Nokia</option>
-                        //         <option value="OnePlus">OnePlus</option>
-                        //         <option value="Oppo">Oppo</option>
-                        //         <option value="Realme">Realme</option>
-                        //         <option value="Samsung">Samsung</option>
-                        //         <option value="Vivo">Vivo</option>
-                        //     </select>
-                        // </div>
                     
                         }if ( this.productType==="motorcycle") {
                             this.brand= <div className="catagory mt-5">
@@ -372,7 +378,7 @@ class HomepageLayout extends React.Component {
                                 <MenuItem value="selectBrands">Select Brands</MenuItem>
                                 <MenuItem value="Bajaj">Bajaj</MenuItem>
                                 <MenuItem value="hero">Hero</MenuItem>
-                                <MenuItem value="Honda">Honda</MenuItem>
+                                <MenuItem value="honda">Honda</MenuItem>
                                 <MenuItem value="Hero Honda">Hero Honda</MenuItem>
                                 <MenuItem value="KTM">KTM</MenuItem>
                                 <MenuItem value="Mahindra">Mahindra</MenuItem>
@@ -384,23 +390,7 @@ class HomepageLayout extends React.Component {
                             </Select>
                         </div>
 
-                        //     this.brand= <div>
-                        //     <label>Brands:</label>
-                        
-                        //     <select onChange={this.onProductBrandChange} name="productBrand"
-                        //             className="form-control">
-                        //         <option value="Bajaj">Bajaj</option>
-                        //         <option value="hero">Hero</option>
-                        //         <option value="Honda">Honda</option>
-                        //         <option value="Hero Honda">Hero Honda</option>
-                        //         <option value="KTM">KTM</option>
-                        //         <option value="Mahindra">Mahindra</option>
-                        //         <option value="Royal Enfield">Royal Enfield</option>
-                        //         <option value="Suzuki"> Suzuki</option>
-                        //         <option value="TVS"> TVS</option>
-                        //         <option value="Yamaha">Yamaha</option>
-                        //     </select>
-                        // </div>
+                       
                    
                         }if ( this.productType==="scooter") {
                             this.brand= <div className="catagory mt-5">
@@ -421,21 +411,7 @@ class HomepageLayout extends React.Component {
                             </Select>
                         </div>
 
-                        //     this.brand= <div>
-                        //     <label>Brands:</label>
-                        
-                        //     <select onChange={this.onProductBrandChange} name="productBrand"
-                        //             className="form-control">
-                        //         <option value="Aprilia">Aprilia</option>
-                        //         <option value="bajaj">Bajaj</option>
-                        //         <option value="hero">Hero</option>
-                        //         <option value="honda">Honda</option>
-                        //         <option value="Suzuki">Suzuki</option>
-                        //         <option value="Tvs">TVS</option>
-                        //         <option value="Vespa">Vespa</option>
-                        //         <option value="Yamaha">Yamaha</option>
-                        //     </select>
-                        // </div>
+                      
                     
                          }  if ( this.productType=="car") {
                             this.fuel= <div className="catagory mt-5">
@@ -445,7 +421,7 @@ class HomepageLayout extends React.Component {
                                     >
                                 <MenuItem value="selectBrands">Select Fuel type</MenuItem>        
                                 <MenuItem value="Diesel">Diesel</MenuItem>
-                                <MenuItem value="Diesel">Petrol</MenuItem>    
+                                <MenuItem value="Petrol">Petrol</MenuItem>    
                             </Select>
                         </div>
                         
@@ -472,10 +448,22 @@ class HomepageLayout extends React.Component {
         })
         this.brandname=e.target.value
     }
+    onProductFuelChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+            
+        })
+    }
+    onProductCityChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+            
+        })
+    }
          //    ***** here we get brnad value******************
 
     render() {
-        const {products, dealers, loading, has_more} = this.state;
+        const {products ,loading, has_more} = this.state;
         return (
             <div>
                 <div>
@@ -494,9 +482,12 @@ class HomepageLayout extends React.Component {
                 </div>
                 <div className="col-md-8 col-sm-8 text-center searchM">
                 <form className="d-flex searchBar searchHider">
-                        <input  type="search" placeholder="Find Cars, Mobiles, Bikes and More...... "/>
-                        <button className="btn" type="submit"><ImIcons.ImSearch className="icons"/></button>
-                 </form>
+                        <input  type="search" placeholder="Find car, mobile, motorcycle...... " onChange={this.onProductTypeChange} name="productType" />
+                        <button className="btn" type="submit" onClick={(e) => this.productFilterSubmit(e)} ><ImIcons.ImSearch className="icons"/></button>
+                 </form>{
+                 console.log('===================================='),
+                 console.log(this.productType),
+                 console.log('====================================')}
                 </div>
                 <div className="main-container">
                             
@@ -504,26 +495,32 @@ class HomepageLayout extends React.Component {
                         <Carousel.Item>
                             <img
                             className="d-block w-100 carouselImg"
-                            src="https://images.unsplash.com/photo-1509225770129-fbcf8a696c0b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1959&q=80"
+                            src="../../assets/images/slider1.jpg"
                             alt="First slide"
                             />
                         </Carousel.Item>
                         <Carousel.Item>
                             <img
                             className="d-block w-100 carouselImg"
-                            src="https://images.unsplash.com/photo-1513735539099-cf6e5d559d82?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1441&q=80"
+                            src="../../assets/images/slider2.jpg"
                             alt="Second slide"
                             />
                         </Carousel.Item>
                         <Carousel.Item>
                             <img
                             className="d-block w-100 carouselImg"
-                            src="https://images.unsplash.com/photo-1580117579193-ccc4066c8b18?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1784&q=80"
+                            src="../../assets/images/slider3.jpg"
                             alt="Third slide"
                             />
-
-                            
                         </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                            className="d-block w-100 carouselImg"
+                            src="../../assets/images/slider4.jpg"
+                            alt="Third slide"
+                            />
+                        </Carousel.Item>
+
                         </Carousel>
                     {/* <Slider>
                         <Slide index={1}><img
@@ -567,6 +564,12 @@ class HomepageLayout extends React.Component {
                         </div>
                     </div>
                 </div> */}
+{/* 
+**********************************************************************************************
+                                 Filters
+************************************************************************************** */}
+
+
                 <div className="container">
                     <div className="filters">
                         <div className="filterBtn" onClick={this.showFilterbar}> <a><BiIcons.BiFilter className="iconF"/> Filters</a> </div>
@@ -575,10 +578,11 @@ class HomepageLayout extends React.Component {
                         <div className="section-heading">
                                             <h2>Search by Filters</h2>
                                         </div>
+                                        <form method="GET">
                                                     <div className="catagory">
                                                       
                                                         <InputLabel id="label">City:</InputLabel>
-                                                        <Select labelId="label" id="select" onChange={this.onProductTypeChange} name="productCity">
+                                                        <Select labelId="label" id="select" onChange={this.onProductCityChange} name="productCity">
                                                             <MenuItem value="selectCity">Select city</MenuItem>
                                                             {
                                                                 this.props.cityData && this.props.cityData.map(city => {
@@ -587,9 +591,7 @@ class HomepageLayout extends React.Component {
                                                             }
                                                         </Select>
                                                     </div>
-                                                    <div>
                                                     
-                                                    </div>
                                                     <div className="catagory mt-5" >
                                                       
                                                         <InputLabel id="label">Category:</InputLabel>
@@ -611,15 +613,18 @@ class HomepageLayout extends React.Component {
                                                   </div>
                                                   <div className="mt-5 " >
                                                   
-                                                       <RangeSlider/>
+                                                       <RangeSlider parentCallback = {this.handleCallbackFirst}/>
+                                                       
                                                 </div>
                                                 <div className=" mt-5" className={this.classD}>
                                                   
-                                                      <KmSlider/>
+                                                      <KmSlider parentCallback = {this.handleCallbackSecond}/>
+                                                      
                                                 </div>
                                                 <div style={{marginTop:"40px"}} className={this.classD}>
                                                   
-                                                      <YearSlider/>
+                                                      <YearSlider parentCallback = {this.handleCallbackThird}/>
+                                                      
                                                 </div>
                                                
                                                
@@ -628,6 +633,7 @@ class HomepageLayout extends React.Component {
                                                                 className="searchBtn">Search
                                                         </button>
                                                   </div>
+                                                  </form>
 
                         </div>
                     </div>
@@ -640,6 +646,7 @@ class HomepageLayout extends React.Component {
                                             {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
                                             {/*    className="fa fa-angle-right"></i></p>*/}
                                         </div>
+                                        <form method="GET">
                                                     <div className="catagory">
                                                         {/* <label>City:</label>
                                                         <select onChange={this.onProductTypeChange} name="productCity"
@@ -666,16 +673,7 @@ class HomepageLayout extends React.Component {
                                                     
                                                     </div>
                                                     <div className="catagory mt-5" >
-                                                        {/* <label>Category:</label>
-
-                                                        <select onChange={this.onProductTypeChange} name="productType" 
-                                                                className="form-control">
-                                                            <option>Select type</option>
-                                                            <option value="car">Car</option>
-                                                            <option value="motorcycle">Motorcycles</option>
-                                                            <option value="scooter">Scooter</option>
-                                                            <option value="mobile">Mobile</option>
-                                                        </select> */}
+                                                       
                                                         <InputLabel id="label">Category:</InputLabel>
                                                         <Select labelId="label" id="select" onChange={this.onProductTypeChange} name="productType">
                                                             <MenuItem value="selectType">Select type</MenuItem>
@@ -686,6 +684,7 @@ class HomepageLayout extends React.Component {
                                                            
                                                         </Select>
                                                     </div>
+                                                    
 
                                                  <div className="catagory mt-5">
                                                     {this.brand}
@@ -695,16 +694,19 @@ class HomepageLayout extends React.Component {
                                                   </div>
                                                   <div className="mt-5 " >
                                                   
-                                                       <RangeSlider/>
+                                                       <RangeSlider parentCallback = {this.handleCallbackFirst}/>
+                                                       
                                                 </div>
                                                 <div className=" mt-5" className={this.classD}>
                                                   
-                                                      <KmSlider/>
+                                                      <KmSlider parentCallback = {this.handleCallbackSecond}/>
                                                 </div>
                                                 <div style={{marginTop:"40px"}} className={this.classD}>
                                                   
-                                                      <YearSlider/>
+                                                      <YearSlider parentCallback = {this.handleCallbackThird}/>
+                                                      
                                                 </div>
+                                               
                                                
                                                   <div className="text-center mt-5">
                                                         <button onClick={(e) => this.productFilterSubmit(e)}
@@ -713,8 +715,13 @@ class HomepageLayout extends React.Component {
                                                   </div>
 
                                                
-
+                            </form>
                         </div>
+
+                        {/* 
+**********************************************************************************************
+                                 Filters end
+************************************************************************************** */}
                         <div className="col-lg-9 col-md-9">
                             <div className="col-md-12">
                                         <div className="section-heading">
@@ -788,6 +795,7 @@ class HomepageLayout extends React.Component {
                                             )
                                         })
                                     }
+                                    
                                     
 
                                 </div>

@@ -80,37 +80,91 @@ function AirbnbThumbComponent(props) {
   );
 }
 
-export default function YearSlider() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState([2015, 2018]);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+// export default function YearSlider() {
+//   const classes = useStyles();
+//   const [value, setValue] = React.useState([2015, 2018]);
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);
+//   };
  
 
-  return (
-      <>
-      <div>
-    <div className={classes.root}>
+//   return (
+//       <>
+//       <div>
+//     <div className={classes.root}>
      
-      <Typography gutterBottom>Select Year Range :</Typography>
-      <AirbnbSlider
-        ThumbComponent={AirbnbThumbComponent}
-        getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
-        defaultValue={value}
-        onChange={handleChange}
-        min={2010}
-        step={1}
-        max={2021}
-      />
-    </div>
-    <div className="priceDiv">
-    <div className="mr-3">{value[0] } </div> 
-    to
-    <div className="ml-3"> {value[1] }</div>
-    </div>
-    </div>
+//       <Typography gutterBottom>Select Year Range :</Typography>
+//       <AirbnbSlider
+//         ThumbComponent={AirbnbThumbComponent}
+//         getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
+//         defaultValue={value}
+//         onChange={handleChange}
+//         min={2010}
+//         step={1}
+//         max={2021}
+//       />
+//     </div>
+//     <div className="priceDiv">
+//     <div className="mr-3">{value[0] } </div> 
+//     to
+//     <div className="ml-3"> {value[1] }</div>
+//     </div>
+//     </div>
     
-    </>
-  );
+//     </>
+//   );
+// }
+export default class YearSlider extends React.Component {
+
+  constructor(props) {
+    super(props)
+    
+    this.handleChange = this.handleChange.bind(this);
+    // this.sendData = this.sendData.bind(this);
+  
+    this.state = {
+         value:[2015, 2018]
+    }
+}
+
+// sendData(){
+
+// }
+   handleChange(e , newValue){
+    this.setState({
+      value :newValue
+    });
+    this.props.parentCallback(newValue);
+  }
+
+  render()
+  {
+    
+    const {value} = this.state;
+  
+          return (
+              <>
+            <div className="mt-5">
+                <div className={useStyles.root} >
+                
+                    <Typography gutterBottom>Select Year Range :</Typography>
+                    <AirbnbSlider
+                        ThumbComponent={AirbnbThumbComponent}
+                        getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
+                        defaultValue={value}
+                        onChange={this.handleChange}
+                        min={2010}
+                        step={1}
+                        max={2021}
+                    />
+                </div>
+                <div className="priceDiv">
+                <div className="mr-3">{value[0] }  </div> 
+                to
+                <div className="ml-3"> {value[1] } </div>
+                </div>
+            </div>
+            </>
+          );
+  }
 }

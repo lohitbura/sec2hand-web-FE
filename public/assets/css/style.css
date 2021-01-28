@@ -4,6 +4,9 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 p {
   margin-bottom: 0px;
@@ -1262,10 +1265,10 @@ footer .inner-content p a {
   display: none;
 }
 .carousel-indicators li.active {
-  background-color: #c90c6a;
+  background-color: #f8f8f8;
 }
 .carousel-indicators li {
-  background-color: #c90c6a77;
+  background-color: #b9b5b777;
 }
 /* *************************************************************************************************
              carousel styles end here
@@ -1317,7 +1320,43 @@ footer .inner-content p a {
   border: 1px solid rgb(153, 153, 153) !important;
   border-radius: 10px !important;
 }
-
+@media (min-width: 576px) {
+  .main-container {
+    margin-top: 55px;
+  }
+  .searchBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin-left: 20%;
+    margin-top: -6px;
+    border: 2px solid rgb(131, 17, 121);
+    border-radius: 20px;
+    z-index: 999;
+    position: fixed;
+    overflow: hidden;
+  }
+  .searchBar input {
+    text-align: center;
+    width: 100%;
+    font-size: 15px !important;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+  }
+  .searchBar button {
+    background: none;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    color: rgb(131, 17, 121);
+  }
+  .searchBar input::placeholder {
+    color: rgb(192, 10, 116);
+  }
+}
 /* *************************************************************************************************
                          media query 
 ***************************************************************************************** */

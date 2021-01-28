@@ -80,36 +80,54 @@ function AirbnbThumbComponent(props) {
   );
 }
 
-export default function KmSlider() {
-  const classes = useStyles();
+export default class KmSlider extends React.Component {
 
-  const [km, setKm] = React.useState([20000, 60000]);
-  const handleChangeKm = (event, newkm) => {
-    setKm(newkm);
-  };
+  constructor(props) {
+    super(props)
+    
+    this.handleChangeKm = this.handleChangeKm.bind(this);
+  
+    this.state = {
+         km:[20000,60000]
+    }
+}
 
-  return (
-      <>
-    <div className="mt-5">
-        <div className={classes.root}>
-        
-            <Typography gutterBottom>Distance Driven Range :</Typography>
-            <AirbnbSlider
-                ThumbComponent={AirbnbThumbComponent}
-                getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
-                defaultValue={km}
-                onChange={handleChangeKm}
-                min={1000}
-                step={1000}
-                max={100000}
-            />
-        </div>
-        <div className="priceDiv">
-        <div className="mr-3">{km[0] } Km </div> 
-        to
-        <div className="ml-3"> {km[1] } Km</div>
-        </div>
-    </div>
-    </>
-  );
+   handleChangeKm(e , newKm){
+    this.setState({
+      km :newKm
+    });
+    this.props.parentCallback(newKm);
+    
+  }
+
+  render()
+  {
+    
+    const {km} = this.state;
+  
+          return (
+              <>
+            <div className="mt-5">
+                <div className={useStyles.root} >
+                
+                    <Typography gutterBottom>Distance Driven Range :</Typography>
+                    <AirbnbSlider
+                        ThumbComponent={AirbnbThumbComponent}
+                        getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
+                        defaultValue={km}
+                        onChange={this.handleChangeKm}
+                        min={1000}
+                        step={1000}
+                        max={100000}
+                    />
+                </div>
+                <div className="priceDiv">
+                <div className="mr-3">{km[0] } Km </div> 
+                to
+                <div className="ml-3"> {km[1] } Km</div>
+                </div>
+            </div>
+            </>
+          );
+  }
 }
