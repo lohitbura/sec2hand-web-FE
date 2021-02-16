@@ -55,7 +55,11 @@ class Profile extends React.Component {
         }
         this.setState({loader: true})
         axios.get(getUserProfileURL(username), {headers: headers}).then(res => {
-            this.setState({loader: false, profile: res.data, posts: res.data.posts})
+            this.setState({
+                loader: false, 
+                profile: res.data, 
+                posts: res.data.posts
+            })
             localStorage.setItem('category', res.data.category)
         })
             .catch(err => {
@@ -311,7 +315,7 @@ class Profile extends React.Component {
                                             <form action="#" method="post" className="form">
                                                 <ul className="list-group list-group-flush">
                                                     <li className="list-group-item">
-                                                        <div className="clearfix">
+                                                         <div className="clearfix">
                                                             <span className="pull-left"> Username</span>
 
                                                             <strong className="pull-right">{profile.user}</strong>

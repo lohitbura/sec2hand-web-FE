@@ -1,8 +1,10 @@
 // export const URL = "https://backend.sec2hand.com";
 export const URL = "https://hosting123.pythonanywhere.com";
+// export const URL= "https://priyanshu11.pythonanywhere.com";
 // export const URL = "http://127.0.0.1:8000";
 
 const apiURL = '/api';
+
 
 export const endpoint = `${URL}${apiURL}`;
 
@@ -13,8 +15,11 @@ export const dealerRegisterURL = `${endpoint}/dealer-register`;
 export const customerLoginURL = `${endpoint}/customer-login`;
 export const dealerLoginURL = `${endpoint}/dealer-login`;
 
+// export const productListURLS = (limit, offset, type,brands,,models, city) => `${endpoints}/product-list?limit=${limit}&offset=${offset}&category=${type}&brand=${brands}&model=${models}&city=${city}`;
 
-export const productListURL = (limit, offset, type, city) => `${endpoint}/product-list?limit=${limit}&offset=${offset}&category=${type}&city=${city}`;
+export const productListURL = (limit, offset, type,brands,models,p_fuel,owner_state,city,km_begin,km_end,price_begin,price_end, year_begin,year_end) => `${endpoint}/product-list?limit=${limit}&offset=${offset}&category=${type}&brand=${brands}&model=${models}&fuel_type=${p_fuel}&ownership_state=${owner_state}&city=${city}&km_begin=${km_begin}&km_end=${km_end}&price_begin=${price_begin}&price_end=${price_end}&year_begin=${year_begin}&year_end=${year_end}`;
+// export const productListURL = (limit, offset, type, brands ,models, fuel, owner_state, city, km_begin, km_end, price_begin, price_end, year_begin, year_end ) => `${endpoint}/product-list?limit=${limit}&offset=${offset}&category=${type}&brand=${brands}&model=${models}&fuel_type=${fuel}&ownership_state=${owner_state}&city=${city}&km_begin=${km_begin}&km_end=${km_end}&price_begin=${price_begin}&price_end=${price_end}&year_begin=${year_begin}&year_end=${year_end}`;
+
 export const productCreateURL = `${endpoint}/product-create`;
 
 export const carCreateURL = `${endpoint}/car-create`;

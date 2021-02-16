@@ -17,7 +17,7 @@ jQuery( document ).ready(function( $ ) {
 
 
 
-            $("header").addClass("background-header");
+            // $("header").addClass("background-header");
 
 
         if ($('.owl-clients').length) {

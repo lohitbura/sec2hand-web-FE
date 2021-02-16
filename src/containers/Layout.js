@@ -16,6 +16,8 @@ import {logout} from "../store/actions/auth";
 import axios from "axios";
 import {getUserProfileIdURL} from "../store/constants";
 
+import Navigationbar from "./Navigationbar";
+
 class CustomLayout extends React.Component {
     state = {
         username: '',
@@ -34,26 +36,42 @@ class CustomLayout extends React.Component {
         }
     }
 
+/* 
+*****************************************************************************************************
+                            navbar start from here
+***************************************************************************************************** */
+
+    /*
+*****************************************************************************************************
+                            navbar start from here
+    ***************************************************************************************************** */
+
+
+
     render() {
         const {authenticated} = this.props;
         const {username, active} = this.state;
         return (
             <div>
                 <div id="preloader">
-                    <div classNameName="jumper">
+                    <div className="jumper">
                         <div></div>
                         <div></div>
                         <div></div>
                     </div>
                 </div>
 
-                <header className="">
-                    <nav className="navbar navbar-expand-lg">
+{/* 
+*****************************************************************************************************
+                            navbar start from here
+***************************************************************************************************** */}
+                {/* <header className="">
+                    <nav className="navbar navbar-expand-lg firstHeader">
                         <div className="container">
-                            <Link className="nav-link" to="/">
+                            <Link className="nav-link logoimg" to="/">
                                 <img style={{
                                     width: '69px',
-                                    marginTop: '-21px'
+                                    marginTop: '-12px'
                                 }} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
                             </Link>
                             <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -134,7 +152,7 @@ class CustomLayout extends React.Component {
 
                                             <div className="dropdown-menu">
                                                 {/*<a  href="blog.html">Blog</a>*/}
-                                                <Link className="dropdown-item" to="/dealer-login">
+                                                {/* <Link className="dropdown-item" to="/dealer-login">
                                                     Dealer
                                                 </Link>
                                                 <Link className="dropdown-item" to="/login">
@@ -147,8 +165,22 @@ class CustomLayout extends React.Component {
                                 </ul>
                             </div>
                         </div>
-                    </nav>
-                </header>
+                    </nav> 
+                </header>  */}
+
+{/* 
+*****************************************************************************************************
+                            navbar start from here
+***************************************************************************************************** */}
+            <div className="secondHeader ">
+             <Navigationbar/> 
+            
+            </div>
+
+{/* 
+*****************************************************************************************************
+                            nav start from here
+***************************************************************************************************** */}
                 {/*<Menu inverted>*/}
                 {/*    <Container>*/}
                 {/*        <Link to="/">*/}

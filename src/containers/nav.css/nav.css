@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navBar {
+  background-color: #fff;
+  color: white;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: fixed;
+  box-shadow: 0px 0.6px 5px rgba(10, 10, 10, 0.74);
+  z-index: 99;
+  width: 100%;
+}
+.menu-bars {
+  margin-left: auto;
+  font-size: 1.5rem;
+  background: none;
+  color: rgb(131, 17, 121);
+  margin-right: 50px;
+  outline: none;
+}
+.menu-bars:hover {
+  color: #000;
+}
+.nav-menu {
+  background-color: #fff;
+  z-index: 9999999999;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+  box-shadow: 2px 1px 5px black;
+}
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+.nav-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000 !important;
+  padding: 8px 0 8px 16px;
+  list-style: none;
+  height: 60px;
+}
+.nav-text a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+.nav-text a:hover {
+  border-left: 4px solid rgb(131, 17, 121);
+  color: rgb(131, 17, 121);
+}
+.navText.activemenu {
+  border-left: 4px solid rgb(131, 17, 121);
+  border-right: 4px solid rgb(131, 17, 121);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0 8px 16px;
+  list-style: none;
+  height: 60px;
+}
+.navText.activemenu a {
+  text-decoration: none;
+  color: rgb(131, 17, 121);
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+.nav-menu-items {
+  width: 100%;
+}
+.navBar-toggle {
+  background-color: #fff;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.closebtn {
+  color: rgb(131, 17, 121) !important;
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+}
+.closebtn:hover {
+  color: rgb(131, 17, 121) !important;
+  border-radius: 10px;
+}
+.icons,
+li a .icons {
+  font-size: 16px;
+  margin-right: 10px;
+}
+.logoimgNav {
+  display: flex;
+  transition: all 2s;
+  margin-left: 50px;
+  margin-right: auto;
+}
+
+.logoimgNav:hover {
+  transform: rotateY(360deg);
+}
+.spLogin:hover {
+  color: #c90c6a !important;
+}
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid rgb(131, 17, 121);
+  border-radius: 20px;
+}
+.searchBar input {
+  text-align: center;
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+}
+.searchBar button {
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 50px;
+  color: rgb(131, 17, 121);
+}
+.searchBar input::placeholder {
+  color: rgb(192, 10, 116);
+}
+
+.MuiButton-root {
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+  background: linear-gradient(110deg, rgb(224, 16, 138), rgb(238, 236, 236));
+  /* border: 2px solid rgb(131, 17, 121) !important; */
+  box-shadow: 0 3px 1px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
+  background-color: white;
+  font-weight: 600 !important;
+}
+.MuiButton-text {
+  color: #fff !important;
+  /* color: #000; */
+  /* color: rgb(192, 10, 116) !important; */
+  padding: 5px 28px !important;
+  font-size: 15px !important;
+  text-transform: capitalize !important;
+  border-radius: 20px !important;
+
+  outline: none !important;
+}
+
+.dealer {
+  font-size: 20px;
+  font-weight: 550;
+  color: black;
+  margin: 20px;
+}
+/* ***************************************************************************************************
+                          media queries
+************************************************************************************************** */
+@media (max-width: 768px) {
+  .hidden {
+    display: none !important;
+  }
+}
+@media (max-width: 576px) {
+  .searchHide {
+    display: none !important;
+  }
+}
+
+/* ***************************************************************************************************
+                          media queries
+************************************************************************************************** */
