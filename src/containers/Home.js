@@ -238,12 +238,12 @@ class HomepageLayout extends React.Component {
         e.preventDefault();
         const {limit, offset2, products,data1,data2,data3 ,productType, productBrand, productModel, productFuel, productCity} = this.state;
         var {productOwner_state,productKmStart, productKmend, productPriceStart, productPriceEnd ,productYearStart, productYearEnd}=this.state;
-        productYearStart=data3[0];
-        productYearEnd=data3[1];
-        productKmStart=data2[0];
-        productKmend=data2[1];
-        productPriceStart=data1[0];
-        productPriceEnd=data1[1];
+        productYearStart=data3[0]?data3[0]:'2005';
+        productYearEnd=data3[1]?data3[1]:'2021';
+        productKmStart=data2[0]?data2[0]:'1000';
+        productKmend=data2[1]?data2[1]:'150000';
+        productPriceStart=data1[0]?data1[0]:'1000';
+        productPriceEnd=data1[1]?data1[1]:'15000000';
         
         this.setState({loading: true})
         axios.get(productListURL(limit, offset2, productType, productBrand, productModel, productFuel, productOwner_state, productCity, productKmStart, productKmend, productPriceStart, productPriceEnd, productYearStart, productYearEnd )).then(res => {
@@ -307,17 +307,17 @@ class HomepageLayout extends React.Component {
             this.setState({
                 [e.target.name]: "car"
             })
-        }
+        }else
         if((e.target.value=="motorcycle")||(e.target.value=="bike")||(e.target.value=="bikes")||(e.target.value=="Bike")||(e.target.value=="Bikes")||(e.target.value=="hero honda")||(e.target.value=="Motor")||(e.target.value=="Motorcycle")||(e.target.value=="hero")||(e.target.value=="Hero")||(e.target.value=="gadi")||(e.target.value=="motor")){
             this.setState({
                 [e.target.name]: "motorcycle"
             })
-        }
+        }else
         if((e.target.value=="mobile")||(e.target.value=="Mobile")||(e.target.value=="phone")||(e.target.value=="smartphones")||(e.target.value=="smartphones")||(e.target.value=="keypad")||(e.target.value=="redmi")||(e.target.value=="apple")||(e.target.value=="Apple")||(e.target.value=="samsung")||(e.target.value=="Samsung")){
             this.setState({
                 [e.target.name]: "mobile"
             })
-        }
+        }else
         if((e.target.value=="scooty")||(e.target.value=="scooter")||(e.target.value=="scoty")||(e.target.value=="activa")||(e.target.value=="Activa")||(e.target.value=="honda scoty")||(e.target.value=="Mopad")||(e.target.value=="mopad")||(e.target.value=="activa new model")||(e.target.value=="tvs scooty")||(e.target.value=="pept")||(e.target.value=="pept scoty")){
             this.setState({
                 [e.target.name]: "scooter"
@@ -760,53 +760,76 @@ class HomepageLayout extends React.Component {
                                     {
                                         products.map(product => {
                                             return (
-                                                  <div className="col-lg-4 col-md-6">
-                                                    <div className="product-item">
-                                                        <Link to={`/product/${product.slug}`}>
-                                                            {
-                                                                product.images && product.images[0] !== undefined ?
-                                                                    <img style={{
-                                                                        height: '232px',
-                                                                        objectFit: 'cover'
-                                                                    }}
-                                                                         src={`${URL}${product.images && product.images[0].image}`}
-                                                                         alt=""/> : ''
-                                                            }
+                                              <div className="col-lg-4 col-md-6">
+                                                <div className="product-item">
+                                                  <Link
+                                                    to={`/product/${product.slug}`}
+                                                  >
+                                                    {product.images &&
+                                                    product.images[0] !==
+                                                      undefined ? (
+                                                      <img
+                                                        style={{
+                                                          height: "232px",
+                                                          objectFit: "cover",
+                                                        }}
+                                                        src={`${URL}${
+                                                          product.images &&
+                                                          product.images[0]
+                                                            .image
+                                                        }`}
+                                                        alt=""
+                                                      />
+                                                    ) : (
+                                                      ""
+                                                    )}
+                                                  </Link>
+                                                  <div className="down-content">
+                                                    <Link
+                                                      to={`/product/${product.slug}`}
+                                                    >
+                                                      <h4 className="productModelName">
+                                                        {product.model}
+                                                      </h4>
+                                                    </Link>
+                                                    <h6>
+                                                      <small></small> ₹{" "}
+                                                      {product.price}
+                                                    </h6>
 
-                                                        </Link>
-                                                        <div className="down-content">
-                                                            <h4>
-                                                                <Link to={`/product/${product.slug}`}>
-                                                                    {product.model}
-                                                                </Link>
-                                                            </h4>
+                                                    {/*<p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used*/}
+                                                    {/*    vehicle</p>*/}
 
-                                                            <h6><small>
-                                                            </small> ₹ {product.price}
-                                                            </h6>
-
-                                                            {/*<p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used*/}
-                                                            {/*    vehicle</p>*/}
-                                                        
-                                                          <div className="bottom-content">
-                                                            <small>
-                                                                {
-                                                                    product.km === null ? '' : <strong title="Author" className="kilometer"><i
-                                                                        className="fa fa-dashboard"></i>&nbsp;{product.km}km
-                                                                    </strong>
-                                                                }
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <strong title="Author" className="kilometer"><i
-                                                                    className="fa fa-cube"></i> &nbsp;{product.color}
-                                                                </strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                {/*<strong title="Views"><i*/}
-                                                                {/*    className="fa fa-cog"></i> Manual</strong>*/}
-                                                            </small>
-                                                          </div>   
-                                                        </div>
+                                                    <div className="bottom-content">
+                                                      <small>
+                                                        {product.km === null ? (
+                                                          ""
+                                                        ) : (
+                                                          <strong
+                                                            title="Author"
+                                                            className="kilometer"
+                                                          >
+                                                            <i className="fa fa-dashboard"></i>
+                                                            &nbsp;{product.km}km
+                                                          </strong>
+                                                        )}
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <strong
+                                                          title="Author"
+                                                          className="kilometer"
+                                                        >
+                                                          <i className="fa fa-cube"></i>{" "}
+                                                          &nbsp;{product.color}
+                                                        </strong>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        {/*<strong title="Views"><i*/}
+                                                        {/*    className="fa fa-cog"></i> Manual</strong>*/}
+                                                      </small>
                                                     </div>
+                                                  </div>
                                                 </div>
-                                            )
+                                              </div>
+                                            );
                                         })
                                     }
                                     
