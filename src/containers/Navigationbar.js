@@ -221,14 +221,14 @@ class Navigationbar extends React.Component{
                                         </Link>
                                     </li>
 
-                                    <li  onClick={() => this.setState({activemenu:2})}
+                                    {/* <li  onClick={() => this.setState({activemenu:2})}
                                         className={activemenu === 2 ? "navText activemenu  " : 'nav-text'}>
                                         <Link  to="/review">
                                         <BsIcons.BsFillEyeFill className="icons"/>
                                         
                                             Review
                                         </Link>
-                                    </li>
+                                    </li> */}
                                     <li  onClick={() => this.setState({activemenu: 3})}
                                         className={activemenu === 3 ? "navText activemenu " : 'nav-text'}>
                                         <Link  to="/dealer">

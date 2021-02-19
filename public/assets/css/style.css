@@ -1435,6 +1435,7 @@ footer .inner-content p a {
 
 .product-item{
   transition: all 0.2s ease-in-out;
+  border-radius: 10px;
 }
 
 .product-item:hover{
