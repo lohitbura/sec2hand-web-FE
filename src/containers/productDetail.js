@@ -186,7 +186,7 @@ class ProductDetail extends React.Component {
                     >
                       <Slider
                         style={{
-                          maxWidth: "900px",
+                          maxWidth: "1920px",
                           maxHeight: "80vh",
                           borderRadius: "10px",
                           marginTop: "-15px",

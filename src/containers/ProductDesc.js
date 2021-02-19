@@ -6,17 +6,9 @@ import Rating from "@material-ui/lab/Rating";
 
 
 function ProductDesc({ product, category, usernames }) {
-    const [products, setProducts] = useState("{}")
+    // const [screen, setScreen] = uSeState(initialState)
+  var screenSize = parseFloat(product.screen_size).toFixed(2);
     
-    // useEffect(() => {
-    //   // generate the special stripe secret which allows us to charge a customer
-    //   const getProducts = () => {
-    //       setProducts({ product });
-    //   };
-
-    //   getProducts();
-    // }, [products]);
-    console.log({ category });
     const renderElements = () => {
        
         return (
@@ -153,7 +145,7 @@ function ProductDesc({ product, category, usernames }) {
                           <span className="pull-left"> Screen Size</span>
 
                           <strong className="pull-right">
-                            {product.screen_size}
+                            {screenSize}
                           </strong>
                         </div>
                       </li>
