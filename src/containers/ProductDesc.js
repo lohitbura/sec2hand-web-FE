@@ -65,7 +65,7 @@ function ProductDesc({ product, category, usernames }) {
                         <div className="clearfix">
                           <span className="pull-left"> Distance</span>
 
-                          <strong className="pull-right">{product.km}</strong>
+                          <strong className="pull-right">{product.km} KM </strong>
                         </div>
                       </li>
                     ) : (
@@ -96,7 +96,7 @@ function ProductDesc({ product, category, usernames }) {
                         <div className="clearfix">
                           <span className="pull-left"> Ram</span>
 
-                          <strong className="pull-right">{product.ram}</strong>
+                          <strong className="pull-right">{product.ram}GB</strong>
                         </div>
                       </li>
                     ) : (
@@ -107,7 +107,7 @@ function ProductDesc({ product, category, usernames }) {
                         <div className="clearfix">
                           <span className="pull-left"> Rom</span>
 
-                          <strong className="pull-right">{product.rom}</strong>
+                          <strong className="pull-right">{product.rom} GB</strong>
                         </div>
                       </li>
                     ) : (
@@ -119,7 +119,7 @@ function ProductDesc({ product, category, usernames }) {
                           <span className="pull-left"> Camera</span>
 
                           <strong className="pull-right">
-                            {product.camera}
+                            {product.camera} MP
                           </strong>
                         </div>
                       </li>
@@ -145,7 +145,7 @@ function ProductDesc({ product, category, usernames }) {
                           <span className="pull-left"> Screen Size</span>
 
                           <strong className="pull-right">
-                            {screenSize}
+                            {screenSize} inch
                           </strong>
                         </div>
                       </li>
@@ -158,7 +158,7 @@ function ProductDesc({ product, category, usernames }) {
                           <span className="pull-left">Battery Capacity</span>
 
                           <strong className="pull-right">
-                            {product.battery}
+                            {product.battery} mah
                           </strong>
                         </div>
                       </li>
@@ -184,7 +184,7 @@ function ProductDesc({ product, category, usernames }) {
                           <span className="pull-left">Usage duration</span>
 
                           <strong className="pull-right">
-                            {product.usage_duration}
+                            {product.usage_duration} hrs
                           </strong>
                         </div>
                       </li>
