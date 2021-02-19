@@ -335,9 +335,9 @@ class ProductDetail extends React.Component {
                           City-
                           <strong>{profile.city}</strong>
                         </li>
-                        <li className="m-3">
+                        {/* <li className="m-3">
                           Area- <strong>{profile.area}</strong>
-                        </li>
+                        </li> */}
                         <li className="m-3">
                           No. of Total Products :
                           <strong>
@@ -415,7 +415,7 @@ class ProductDetail extends React.Component {
                     </div>
                   </div>
                   <div className="descriptionUl" >
-                                <MapContainer lat={profile.latitude} long={ profile.longitude}/>    
+                                {/* <MapContainer lat={profile.latitude} long={ profile.longitude}/>     */}
                             </div>
                   <div>
                     <div className="container productsDetails">

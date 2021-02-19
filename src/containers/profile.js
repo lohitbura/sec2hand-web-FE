@@ -347,7 +347,7 @@ class Profile extends React.Component {
                                                             <strong className="pull-right">{profile.city}</strong>
                                                         </div>
                                                     </li>
-                                                    {
+                                                    {/* {
                                                         profile.is_dealer ? <li className="list-group-item">
                                                             <div className="clearfix">
                                                                 <span className="pull-left"> Area</span>
@@ -355,7 +355,7 @@ class Profile extends React.Component {
                                                                 <strong className="pull-right">{profile.area}</strong>
                                                             </div>
                                                         </li> : ''
-                                                    }
+                                                    } */}
                                                 </ul>
                                                 <br/>
                                                 {

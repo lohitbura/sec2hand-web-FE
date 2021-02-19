@@ -294,32 +294,8 @@ function ProductDesc({ product, category, usernames }) {
                     ) : (
                       ""
                     )}
-                    {product.created ? (
-                      <li className="list-group-item">
-                        <div className="clearfix">
-                          <span className="pull-left">Posted at</span>
-
-                          <strong className="pull-right">
-                            {product.created}
-                          </strong>
-                        </div>
-                      </li>
-                    ) : (
-                      ""
-                    )}
-                    {product.updated ? (
-                      <li className="list-group-item">
-                        <div className="clearfix">
-                          <span className="pull-left">Updated a</span>
-
-                          <strong className="pull-right">
-                            {product.updated}
-                          </strong>
-                        </div>
-                      </li>
-                    ) : (
-                      ""
-                    )}
+                   
+                    
                     {product.camera_rate ? (
                       <li className="list-group-item">
                         <div className="clearfix">
