@@ -6,11 +6,28 @@
 .productCaraousel {
   position: relative;
 }
+.carouselSlider{
+  
+  text-align: center;
+  background-color: #000;
+  overflow-y: hidden;
+  border-radius: 10px;
+}
 
-.nextBtn {
+.carouselImageProduct div{
+  height: 80vh;
+  object-fit: contain;
+  background-size: contain!important;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-color: #000;
+}
+
+
+ .nextBtn {
   position: absolute;
   top: 50%;
-  left: 90%;
+  left: 95%;
   transform: translate(-50%, -50%);
   background: rgba(247, 245, 245, 0.432);
   border: none;
@@ -37,7 +54,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} 
 
 .priceText {
   font-size: 28px;
@@ -63,11 +80,9 @@
 }
 .basicDetails {
   border-radius: 10px;
-  border: 1px solid black;
   padding: 30px 20px;
-  box-shadow: 0 2px 10px rgba(212, 212, 212, 0.699),
-    0 2px 10px rgba(212, 210, 255, 0.699), 0 3px 10px rgba(200, 195, 220, 0.6),
-    0 3px 10px rgba(200, 195, 220, 0.6);
+  box-shadow: 0 2px 10px rgba(240, 240, 240, 0.699),
+    0 2px 10px rgba(241, 241, 243, 0.699), 0 3px 10px rgba(216, 216, 219, 0.6);
   display: flex;
   flex-direction: column;
 }
@@ -104,7 +119,9 @@
   margin-top: 50px;
   display: flex;
   flex-direction: row;
+  /* border-bottom: 2px solid black; */
 }
+
 .descriptiontab {
   width: 100%;
   padding: 20px 20px;
@@ -121,8 +138,21 @@
   line-height: 18px;
   list-style: none;
   padding: 10px 10px;
+  text-align: left;
+  
 }
-
+.productsDetails{
+  border-top: 2px solid black;
+  margin-top: 3rem;
+  padding-top: 3rem;
+}
+.dealerProfileProductName{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: gray;
+  border-bottom: 1px solid gray;
+  padding: 0px 20px ;
+}
 /* *******************************************************************
               Media query
 ****************************************************************** */
@@ -208,9 +238,36 @@
     justify-content: center;
     align-items: center;
   }
+  .carouselImageProduct div{
+  height: 50vh;
+}
 }
 @media (min-width: 768px) {
   .productNoHider {
     display: none;
   }
+}
+
+
+ /* star rating style */
+
+ :root {
+  --star-size: 60px;
+  --star-color: #fff;
+  --star-background: #fc0;
+}
+
+.Stars {
+  --percent: calc(var(--rating) / 5 * 100%);
+  display: inline-block;
+  font-size: var(--star-size);
+  font-family: Times;
+  line-height: 1;
+}
+.Stars::before {
+  content: "★★★★★";
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+  
+  -webkit-text-fill-color: transparent;
 }

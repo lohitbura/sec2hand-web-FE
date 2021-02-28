@@ -35,26 +35,26 @@ ValueLabelComponent.propTypes = {
 
 const AirbnbSlider = withStyles({
   root: {
-    color: '#3a8589',
+    color: "#c90c6a",
     height: 3,
-    padding: '13px 0',
+    padding: "13px 0",
   },
   thumb: {
     height: 27,
     width: 27,
-    backgroundColor: '#fff',
-    border: '1px solid currentColor',
+    backgroundColor: "#fff",
+    border: "1px solid currentColor",
     marginTop: -12,
     marginLeft: -13,
-    boxShadow: '#ebebeb 0 2px 2px',
-    '&:focus, &:hover, &$active': {
-      boxShadow: '#ccc 0 2px 3px 1px',
+    boxShadow: "#ebebeb 0 2px 2px",
+    "&:focus, &:hover, &$active": {
+      boxShadow: "#ccc 0 2px 3px 1px",
     },
-    '& .bar': {
+    "& .bar": {
       // display: inline-block !important;
       height: 9,
       width: 1,
-      backgroundColor: 'currentColor',
+      backgroundColor: "currentColor",
       marginLeft: 1,
       marginRight: 1,
     },
@@ -64,7 +64,7 @@ const AirbnbSlider = withStyles({
     height: 3,
   },
   rail: {
-    color: '#d8d8d8',
+    color: "#d8d8d8",
     opacity: 1,
     height: 3,
   },
@@ -123,7 +123,7 @@ export default class YearSlider extends React.Component {
     // this.sendData = this.sendData.bind(this);
   
     this.state = {
-         value:[2015, 2018]
+         value:[2005, 2021]
     }
 }
 
@@ -153,7 +153,7 @@ export default class YearSlider extends React.Component {
                         getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
                         defaultValue={value}
                         onChange={this.handleChange}
-                        min={2010}
+                        min={2005}
                         step={1}
                         max={2021}
                     />

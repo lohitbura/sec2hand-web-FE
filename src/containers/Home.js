@@ -238,12 +238,12 @@ class HomepageLayout extends React.Component {
         e.preventDefault();
         const {limit, offset2, products,data1,data2,data3 ,productType, productBrand, productModel, productFuel, productCity} = this.state;
         var {productOwner_state,productKmStart, productKmend, productPriceStart, productPriceEnd ,productYearStart, productYearEnd}=this.state;
-        productYearStart=data3[0];
-        productYearEnd=data3[1];
-        productKmStart=data2[0];
-        productKmend=data2[1];
-        productPriceStart=data1[0];
-        productPriceEnd=data1[1];
+        productYearStart=data3[0]?data3[0]:'2005';
+        productYearEnd=data3[1]?data3[1]:'2021';
+        productKmStart=data2[0]?data2[0]:'1000';
+        productKmend=data2[1]?data2[1]:'150000';
+        productPriceStart=data1[0]?data1[0]:'1000';
+        productPriceEnd=data1[1]?data1[1]:'15000000';
         
         this.setState({loading: true})
         axios.get(productListURL(limit, offset2, productType, productBrand, productModel, productFuel, productOwner_state, productCity, productKmStart, productKmend, productPriceStart, productPriceEnd, productYearStart, productYearEnd )).then(res => {
@@ -307,17 +307,17 @@ class HomepageLayout extends React.Component {
             this.setState({
                 [e.target.name]: "car"
             })
-        }
+        }else
         if((e.target.value=="motorcycle")||(e.target.value=="bike")||(e.target.value=="bikes")||(e.target.value=="Bike")||(e.target.value=="Bikes")||(e.target.value=="hero honda")||(e.target.value=="Motor")||(e.target.value=="Motorcycle")||(e.target.value=="hero")||(e.target.value=="Hero")||(e.target.value=="gadi")||(e.target.value=="motor")){
             this.setState({
                 [e.target.name]: "motorcycle"
             })
-        }
+        }else
         if((e.target.value=="mobile")||(e.target.value=="Mobile")||(e.target.value=="phone")||(e.target.value=="smartphones")||(e.target.value=="smartphones")||(e.target.value=="keypad")||(e.target.value=="redmi")||(e.target.value=="apple")||(e.target.value=="Apple")||(e.target.value=="samsung")||(e.target.value=="Samsung")){
             this.setState({
                 [e.target.name]: "mobile"
             })
-        }
+        }else
         if((e.target.value=="scooty")||(e.target.value=="scooter")||(e.target.value=="scoty")||(e.target.value=="activa")||(e.target.value=="Activa")||(e.target.value=="honda scoty")||(e.target.value=="Mopad")||(e.target.value=="mopad")||(e.target.value=="activa new model")||(e.target.value=="tvs scooty")||(e.target.value=="pept")||(e.target.value=="pept scoty")){
             this.setState({
                 [e.target.name]: "scooter"
@@ -477,66 +477,78 @@ class HomepageLayout extends React.Component {
          //    ***** here we get brnad value******************
 
     render() {
-        const {products ,loading, has_more} = this.state;
+        const {products ,loading, has_more, productType, productCity} = this.state;
         return (
+          <div>
             <div>
-                <div>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="text-content">
-                                    <h4>
-                                        <del></del>
-                                        <strong className="text-primary"></strong></h4>
-                                    <h2></h2>
-                                </div>
-                            </div>
-                        </div>
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="text-content">
+                      <h4>
+                        <del></del>
+                        <strong className="text-primary"></strong>
+                      </h4>
+                      <h2></h2>
                     </div>
+                  </div>
                 </div>
-                <div className="col-md-8 col-sm-8 text-center searchM">
-                <form className="d-flex searchBar searchHider">
-                        <input  type="search" placeholder="Find Cars, Mobile, Bikes and Many More...... " onChange={this.onProductTypeChange} name="productType" />
-                        <button className="btn" type="submit" onClick={(e) => this.productFilterSubmit(e)} ><ImIcons.ImSearch className="icons"/></button>
-                 </form>{
-                 console.log('===================================='),
-                 console.log(this.productType),
-                 console.log('====================================')}
-                </div>
-                <div className="main-container">
-                            
-                    <Carousel>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100 carouselImg"
-                            src="../../assets/images/slider1.jpg"
-                            alt="First slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100 carouselImg"
-                            src="../../assets/images/slider2.jpg"
-                            alt="Second slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100 carouselImg"
-                            src="../../assets/images/slider3.jpg"
-                            alt="Third slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100 carouselImg"
-                            src="../../assets/images/slider4.jpg"
-                            alt="Third slide"
-                            />
-                        </Carousel.Item>
-
-                        </Carousel>
-                    {/* <Slider>
+              </div>
+            </div>
+            <div className="col-md-8 col-sm-8 text-center searchM">
+              <form className="d-flex searchBar searchHider">
+                <input
+                  type="search"
+                  placeholder="Find Cars, Mobile, Bikes and Many More...... "
+                  onChange={this.onProductTypeChange}
+                  name="productType"
+                />
+                <button
+                  className="btn"
+                  type="submit"
+                  onClick={(e) => this.productFilterSubmit(e)}
+                >
+                  <ImIcons.ImSearch className="icons" />
+                </button>
+              </form>
+              {
+                (console.log("===================================="),
+                console.log(this.productType),
+                console.log("===================================="))
+              }
+            </div>
+            <div className="main-container">
+              <Carousel>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100 carouselImg"
+                    src="../../assets/images/slider1.jpg"
+                    alt="First slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100 carouselImg"
+                    src="../../assets/images/slider2.jpg"
+                    alt="Second slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100 carouselImg"
+                    src="../../assets/images/slider3.jpg"
+                    alt="Third slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    className="d-block w-100 carouselImg"
+                    src="../../assets/images/slider4.jpg"
+                    alt="Third slide"
+                  />
+                </Carousel.Item>
+              </Carousel>
+              {/* <Slider>
                         <Slide index={1}><img
                             style={{'objectFit': 'cover', 'height': '50%', 'width': '100%'}}
                             src="https://images.unsplash.com/photo-1509225770129-fbcf8a696c0b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1959&q=80"
@@ -553,9 +565,9 @@ class HomepageLayout extends React.Component {
                             alt="First slide"/></Slide>
                         
                     </Slider> */}
-                </div>
-                
-                {/* <div className="container" style={{marginTop: "35px"}}>
+            </div>
+
+            {/* <div className="container" style={{marginTop: "35px"}}>
                     <div className="row">
                         <div className="col-sm-4 " style={{margin: 'auto'}}>
                             <div className="card">
@@ -578,91 +590,99 @@ class HomepageLayout extends React.Component {
                         </div>
                     </div>
                 </div> */}
-{/* 
+            {/* 
 **********************************************************************************************
                                  Filters
 ************************************************************************************** */}
 
-
-                <div className="container">
-                    <div className="filters">
-                        <div className="filterBtn" onClick={this.showFilterbar}> <a><BiIcons.BiFilter className="iconF"/> Filters</a> </div>
-                        <div  className={this.state.filterbar ? 'filterBar' : 'filterBar active'}> 
-                        
-                        <div className="section-heading">
-                                            <h2>Search by Filters</h2>
-                                        </div>
-                                        <form method="GET">
-                                                    <div className="catagory">
-                                                      
-                                                        <InputLabel id="label">City:</InputLabel>
-                                                        <Select labelId="label" id="select" onChange={this.onProductCityChange} name="productCity">
-                                                            <MenuItem value="selectCity">Select city</MenuItem>
-                                                            {
-                                                                this.props.cityData && this.props.cityData.map(city => {
-                                                                    return <MenuItem value={city.name}>{city.name}</MenuItem>
-                                                                })
-                                                            }
-                                                        </Select>
-                                                    </div>
-                                                    
-                                                    <div className="catagory mt-5" >
-                                                      
-                                                        <InputLabel id="label">Category:</InputLabel>
-                                                        <Select labelId="label" id="select" onChange={this.onProductTypeChange} name="productType">
-                                                            <MenuItem value="selectType">Select type</MenuItem>
-                                                            <MenuItem value="car">Car</MenuItem>
-                                                            <MenuItem value="motorcycle">Motorcycles</MenuItem>
-                                                            <MenuItem value="scooter">Scooter</MenuItem>
-                                                            <MenuItem value="mobile">Mobile</MenuItem>
-                                                           
-                                                        </Select>
-                                                    </div>
-
-                                                 <div className="catagory mt-5">
-                                                    {this.brand}
-                                                  </div>
-                                                  <div className="catagory mt-5">
-                                                    {this.fuel}
-                                                  </div>
-                                                  <div className="mt-5 " >
-                                                  
-                                                       <RangeSlider parentCallback = {this.handleCallbackFirst}/>
-                                                       
-                                                </div>
-                                                <div className=" mt-5" className={this.classD}>
-                                                  
-                                                      <KmSlider parentCallback = {this.handleCallbackSecond}/>
-                                                      
-                                                </div>
-                                                <div style={{marginTop:"40px"}} className={this.classD}>
-                                                  
-                                                      <YearSlider parentCallback = {this.handleCallbackThird}/>
-                                                      
-                                                </div>
-                                               
-                                               
-                                                  <div className="text-center mt-5">
-                                                        <button onClick={(e) => this.productFilterSubmit(e)}
-                                                                className="searchBtn">Search
-                                                        </button>
-                                                  </div>
-                                                  </form>
-
-                        </div>
+            <div className="container">
+              <div className="filters">
+                <div className="filterBtn" onClick={this.showFilterbar}>
+                  {" "}
+                  <a>
+                    <BiIcons.BiFilter className="iconF" /> Filters
+                  </a>{" "}
+                </div>
+                <div
+                  className={
+                    this.state.filterbar ? "filterBar" : "filterBar active"
+                  }
+                >
+                  <div className="section-heading">
+                    <h2>Search by Filters</h2>
+                  </div>
+                  <form method="GET">
+                    <div className="catagory">
+                      <InputLabel id="label">City:</InputLabel>
+                      <Select
+                        labelId="label"
+                        id="select"
+                        onChange={this.onProductCityChange}
+                        name="productCity"
+                        value={productCity}
+                      >
+                        <MenuItem value="selectCity">Select city</MenuItem>
+                        {this.props.cityData &&
+                          this.props.cityData.map((city) => {
+                            return (
+                              <MenuItem value={city.name}>{city.name}</MenuItem>
+                            );
+                          })}
+                      </Select>
                     </div>
-                </div>   
-                <div className="container-fluid" style={{"marginTop": "40px",}}>
-                    <div className="row featuredContainer">
-                        <div className="col-lg-3 col-md-3 filterHider">
-                                      <div className="section-heading">
-                                            <h2>Search by Filters</h2>
-                                            {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
-                                            {/*    className="fa fa-angle-right"></i></p>*/}
-                                        </div>
-                                        <form method="GET">
-                                                    <div className="catagory">
-                                                        {/* <label>City:</label>
+
+                    <div className="catagory mt-5">
+                      <InputLabel id="label">Category:</InputLabel>
+                      <Select
+                        labelId="label"
+                        id="select"
+                        onChange={this.onProductTypeChange}
+                        name="productType"
+                        value={productType}
+                      >
+                        <MenuItem value="selectType">Select type</MenuItem>
+                        <MenuItem value="car">Car</MenuItem>
+                        <MenuItem value="motorcycle">Motorcycles</MenuItem>
+                        <MenuItem value="scooter">Scooter</MenuItem>
+                        <MenuItem value="mobile">Mobile</MenuItem>
+                      </Select>
+                    </div>
+
+                    <div className="catagory mt-5">{this.brand}</div>
+                    <div className="catagory mt-5">{this.fuel}</div>
+                    <div className="mt-5 ">
+                      <RangeSlider parentCallback={this.handleCallbackFirst} />
+                    </div>
+                    <div className=" mt-5" className={this.classD}>
+                      <KmSlider parentCallback={this.handleCallbackSecond} />
+                    </div>
+                    <div style={{ marginTop: "40px" }} className={this.classD}>
+                      <YearSlider parentCallback={this.handleCallbackThird} />
+                    </div>
+
+                    <div className="text-center mt-5">
+                      <button
+                        onClick={(e) => this.productFilterSubmit(e)}
+                        className="searchBtn"
+                      >
+                        Search
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div className="container-fluid" style={{ marginTop: "40px" }}>
+              <div className="row featuredContainer">
+                <div className="col-lg-3 col-md-3 filterHider">
+                  <div className="section-heading">
+                    <h2>Search by Filters</h2>
+                    {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
+                    {/*    className="fa fa-angle-right"></i></p>*/}
+                  </div>
+                  <form method="GET">
+                    <div className="catagory">
+                      {/* <label>City:</label>
                                                         <select onChange={this.onProductTypeChange} name="productCity"
                                                                 className="form-control">
                                                             <option>Select city</option>
@@ -673,263 +693,317 @@ class HomepageLayout extends React.Component {
                                                                 })
                                                             }
                                                         </select> */}
-                                                        <InputLabel id="label">City:</InputLabel>
-                                                        <Select labelId="label" id="select" onChange={this.onProductTypeChange} name="productCity">
-                                                            <MenuItem value="selectCity">Select city</MenuItem>
-                                                            {
-                                                                this.props.cityData && this.props.cityData.map(city => {
-                                                                    return <MenuItem value={city.name}>{city.name}</MenuItem>
-                                                                })
-                                                            }
-                                                        </Select>
-                                                    </div>
-                                                    <div>
-                                                    
-                                                    </div>
-                                                    <div className="catagory mt-5" >
-                                                       
-                                                        <InputLabel id="label">Category:</InputLabel>
-                                                        <Select labelId="label" id="select" onChange={this.onProductTypeChange} name="productType">
-                                                            <MenuItem value="selectType">Select type</MenuItem>
-                                                            <MenuItem value="car">Car</MenuItem>
-                                                            <MenuItem value="motorcycle">Motorcycles</MenuItem>
-                                                            <MenuItem value="scooter">Scooter</MenuItem>
-                                                            <MenuItem value="mobile">Mobile</MenuItem>
-                                                           
-                                                        </Select>
-                                                    </div>
-                                                    
+                      <InputLabel id="label">City:</InputLabel>
+                      <Select
+                        labelId="label"
+                        id="select"
+                        onChange={this.onProductTypeChange}
+                        name="productCity"
+                        value={productCity}
+                      >
+                        <MenuItem value="selectCity">Select city</MenuItem>
+                        {this.props.cityData &&
+                          this.props.cityData.map((city) => {
+                            return (
+                              <MenuItem value={city.name}>{city.name}</MenuItem>
+                            );
+                          })}
+                      </Select>
+                    </div>
+                    <div></div>
+                    <div className="catagory mt-5">
+                      <InputLabel id="label">Category:</InputLabel>
+                      <Select
+                        labelId="label"
+                        id="select"
+                        onChange={this.onProductTypeChange}
+                        name="productType"
+                        value={productType}
+                      >
+                        <MenuItem value="selectType">Select type</MenuItem>
+                        <MenuItem value="car">Car</MenuItem>
+                        <MenuItem value="motorcycle">Motorcycles</MenuItem>
+                        <MenuItem value="scooter">Scooter</MenuItem>
+                        <MenuItem value="mobile">Mobile</MenuItem>
+                      </Select>
+                    </div>
 
-                                                 <div className="catagory mt-5">
-                                                    {this.brand}
-                                                  </div>
-                                                  <div className="catagory mt-5">
-                                                    {this.fuel}
-                                                  </div>
-                                                  <div className="mt-5 " >
-                                                  
-                                                       <RangeSlider parentCallback = {this.handleCallbackFirst}/>
-                                                       
-                                                </div>
-                                                <div className=" mt-5" className={this.classD}>
-                                                  
-                                                      <KmSlider parentCallback = {this.handleCallbackSecond}/>
-                                                </div>
-                                                <div style={{marginTop:"40px"}} className={this.classD}>
-                                                  
-                                                      <YearSlider parentCallback = {this.handleCallbackThird}/>
-                                                      
-                                                </div>
-                                               
-                                               
-                                                  <div className="text-center mt-5">
-                                                        <button onClick={(e) => this.productFilterSubmit(e)}
-                                                                className="searchBtn">Search
-                                                        </button>
-                                                  </div>
+                    <div className="catagory mt-5">{this.brand}</div>
+                    <div className="catagory mt-5">{this.fuel}</div>
+                    <div className="mt-5 ">
+                      <RangeSlider parentCallback={this.handleCallbackFirst} />
+                    </div>
+                    <div className=" mt-5" className={this.classD}>
+                      <KmSlider parentCallback={this.handleCallbackSecond} />
+                    </div>
+                    <div style={{ marginTop: "40px" }} className={this.classD}>
+                      <YearSlider parentCallback={this.handleCallbackThird} />
+                    </div>
 
-                                               
-                            </form>
-                        </div>
+                    <div className="text-center mt-5">
+                      <button
+                        onClick={(e) => this.productFilterSubmit(e)}
+                        className="searchBtn"
+                      >
+                        Search
+                      </button>
+                    </div>
+                  </form>
+                </div>
 
-                        {/* 
+                {/* 
 **********************************************************************************************
                                  Filters end
 ************************************************************************************** */}
-                        <div className="col-lg-9 col-md-9">
-                            <div className="col-md-12">
-                                        <div className="section-heading">
-                                            <h2>Featured Products</h2>
-                                            {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
-                                            {/*    className="fa fa-angle-right"></i></p>*/}
-                                        </div>
-                                        {
-                                            loading ? <Loader
-                                                style={{marginTop: "100px", textAlign: 'center'}}
-                                                type="Rings"
-                                                color="red"
-                                                height={100}
-                                                width={100}
-                                            /> : ''
-                                        }
-                                    </div>
-                          <div className="row">
-                              {/* *****************************************     from here products show***************************** */}
-
-                              
-                                    {
-                                        products.map(product => {
-                                            return (
-                                                  <div className="col-lg-4 col-md-6">
-                                                    <div className="product-item">
-                                                        <Link to={`/product/${product.slug}`}>
-                                                            {
-                                                                product.images && product.images[0] !== undefined ?
-                                                                    <img style={{
-                                                                        height: '232px',
-                                                                        objectFit: 'cover'
-                                                                    }}
-                                                                         src={`${URL}${product.images && product.images[0].image}`}
-                                                                         alt=""/> : ''
-                                                            }
-
-                                                        </Link>
-                                                        <div className="down-content">
-                                                            <h4>
-                                                                <Link to={`/product/${product.slug}`}>
-                                                                    {product.model}
-                                                                </Link>
-                                                            </h4>
-
-                                                            <h6><small>
-                                                            </small> ₹ {product.price}
-                                                            </h6>
-
-                                                            {/*<p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used*/}
-                                                            {/*    vehicle</p>*/}
-                                                        
-                                                          <div className="bottom-content">
-                                                            <small>
-                                                                {
-                                                                    product.km === null ? '' : <strong title="Author" className="kilometer"><i
-                                                                        className="fa fa-dashboard"></i>&nbsp;{product.km}km
-                                                                    </strong>
-                                                                }
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <strong title="Author" className="kilometer"><i
-                                                                    className="fa fa-cube"></i> &nbsp;{product.color}
-                                                                </strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                {/*<strong title="Views"><i*/}
-                                                                {/*    className="fa fa-cog"></i> Manual</strong>*/}
-                                                            </small>
-                                                          </div>   
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                    
-                                    
-
-                                </div>
-  {/* *****************************************     from here products show end***************************** */}
-
-                                    <div style={{textAlign: "center", marginTop: "50px"}}>
-                                        {
-                                            !has_more ? "No more products" : <Button onClick={() => this.loadProduct()} color="red"
-                                            >View more</Button>
-                                        }
-                                    </div>
-                            </div>
-                        </div>
-
-                         
-                </div>
-               
-                       
-                <div className="best-features about-features">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="section-heading text-center">
-                                    <h2 id="about" style={{color:"grey", fontWeight:'600'}}>ABOUT SEC2HAND</h2>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="right-image">
-                                    <img style={{
-                                        marginTop: '-61px',
-                                        // width: '402px',
-                                    }} src="/assets/images/Sec2Hand_Logo_3.png" alt=""/>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="left-content">
-                                    <h4>About us</h4>
-                                    <p>Sec2Hand is a leading e-commerce platform. which offers you the service to buy
-                                        and sell second hand Bikes, Cars and Mobiles with trusted Dealers.
-                                        Sec2hand works in C2B & B2C Market place.</p>
-                                </div>
-                                <br/>
-                                <div className="left-content">
-                                    <h4>Vision & Mission</h4>
-                                    <p>We provide you with quality Second hand products.
-                                        We are with you 24*7.</p>
-                                    <ul className="social-icons">
-                                        <li><a href="https://www.facebook.com/Sec2Hand-360972987823797/"><i
-                                            className="fa fa-facebook"></i></a></li>
-                                        <li><a
-                                            href="https://www.instagram.com/invites/contact/?i=14qq181cy3b1b&utm_content=eghzw47 "><i
-                                            className="fa fa-instagram"></i></a></li>
-                                        <li><a href="https://www.youtube.com/c/Sec2hand"><i
-                                            className="fa fa-youtube"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                <div className="col-lg-9 col-md-9">
+                  <div className="col-md-12">
+                    <div className="section-heading">
+                      <h2>Featured Products</h2>
+                      {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
+                      {/*    className="fa fa-angle-right"></i></p>*/}
                     </div>
-                </div>
-                <div id="contact">
-                    <div className="send-message">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div className="section-heading text-center">
-                                        <h2>Send us a Message</h2>
-                                    </div>
-                                </div>
-                                <div className="col-md-8 col-lg-8 col-8 offset-2">
-                                    <div className="contact-form">
-                                        <form id="contact" action="" method="post">
-                                            <div className="row">
-                                                <div className="col-lg-12 col-md-12 col-sm-12 ">
-                                                    <fieldset>
-                                                        <input name="name" type="text" className="form-control contactUs"
-                                                               id="name"
-                                                               placeholder="Full Name" required=""/>
-                                                    </fieldset>
-                                                </div>
-                                                <div className="col-lg-12 col-md-12 col-sm-12">
-                                                    <fieldset>
-                                                        <input name="email" type="text" className="form-control contactUs"
-                                                               id="email"
-                                                               placeholder="E-Mail Address" required=""/>
-                                                    </fieldset>
-                                                </div>
-                                                <div className="col-lg-12 col-md-12 col-sm-12">
-                                                    <fieldset>
-                                                        <input name="subject" type="text" className="form-control contactUs"
-                                                               id="subject" placeholder="Subject" required=""/>
-                                                    </fieldset>
-                                                </div>
-                                                <div className="col-lg-12">
-                                                    <fieldset>
-                                                    <textarea name="message" rows="6" className="form-control contactUs"
-                                                              id="message" placeholder="Your Message"
-                                                              required=""/>
-                                                    </fieldset>
-                                                </div>
-                                                <div className="col-lg-12 text-center">
-                                                    <fieldset>
-                                                        <button type="submit" id="form-submit"
-                                                                className="filled-button">Send Message
-                                                        </button>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                {/*<div className="col-md-4">*/}
-                                {/*    <img src="/assets/images/Sec2Hand_Logo_3.png" className="img-fluid" alt=""/>*/}
-                                {/*</div>*/}
+                    {loading ? (
+                      <Loader
+                        style={{ marginTop: "100px", textAlign: "center" }}
+                        type="Rings"
+                        color="red"
+                        height={100}
+                        width={100}
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="row">
+                    {/* *****************************************     from here products show***************************** */}
+
+                    {products.map((product) => {
+                      return (
+                        <div className="col-lg-4 col-md-6">
+                          <div className="product-item">
+                            <Link to={`/product/${product.slug}`}>
+                              {product.images &&
+                              product.images[0] !== undefined ? (
+                                <img
+                                  style={{
+                                    height: "232px",
+                                    objectFit: "cover",
+                                  }}
+                                  src={`${URL}${
+                                    product.images && product.images[0].image
+                                  }`}
+                                  alt=""
+                                />
+                              ) : (
+                                ""
+                              )}
+                            </Link>
+                            <div className="down-content">
+                              <Link to={`/product/${product.slug}`}>
+                                <h4 className="productModelName">
+                                  {product.model}
+                                </h4>
+                              </Link>
+                              <h6>
+                                <small></small> ₹ {product.price}
+                              </h6>
+
+                              {/*<p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used*/}
+                              {/*    vehicle</p>*/}
+
+                              <div className="bottom-content">
+                                <small>
+                                  {product.km === null ? (
+                                    ""
+                                  ) : (
+                                    <strong
+                                      title="Author"
+                                      className="kilometer"
+                                    >
+                                      <i className="fa fa-dashboard"></i>
+                                      &nbsp;{product.km}km
+                                    </strong>
+                                  )}
+                                  &nbsp;&nbsp;&nbsp;&nbsp;
+                                  <strong title="Author" className="kilometer">
+                                    <i className="fa fa-cube"></i> &nbsp;
+                                    {product.color}
+                                  </strong>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;
+                                  {/*<strong title="Views"><i*/}
+                                  {/*    className="fa fa-cog"></i> Manual</strong>*/}
+                                </small>
+                              </div>
                             </div>
+                          </div>
                         </div>
-                    </div>
+                      );
+                    })}
+                  </div>
+                  {/* *****************************************     from here products show end***************************** */}
+
+                  <div style={{ textAlign: "center", marginTop: "50px" }}>
+                    {!has_more ? (
+                      "No more products"
+                    ) : (
+                      <Button onClick={() => this.loadProduct()} color="red">
+                        View more
+                      </Button>
+                    )}
+                  </div>
                 </div>
+              </div>
             </div>
-        )
+
+            <div className="best-features about-features">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="section-heading text-center">
+                      <h2
+                        id="about"
+                        style={{ color: "grey", fontWeight: "600" }}
+                      >
+                        ABOUT SEC2HAND
+                      </h2>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="right-image">
+                      <img
+                        style={{
+                          marginTop: "-61px",
+                          // width: '402px',
+                        }}
+                        src="/assets/images/Sec2Hand_Logo_3.png"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="left-content">
+                      <h4>About us</h4>
+                      <p>
+                        Sec2Hand is a leading e-commerce platform. which offers
+                        you the service to buy and sell second hand Bikes, Cars
+                        and Mobiles with trusted Dealers. Sec2hand works in C2B
+                        & B2C Market place.
+                      </p>
+                    </div>
+                    <br />
+                    <div className="left-content">
+                      <h4>Vision & Mission</h4>
+                      <p>
+                        We provide you with quality Second hand products. We are
+                        with you 24*7.
+                      </p>
+                      <ul className="social-icons">
+                        <li>
+                          <a href="https://www.facebook.com/Sec2Hand-360972987823797/">
+                            <i className="fa fa-facebook"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.instagram.com/invites/contact/?i=14qq181cy3b1b&utm_content=eghzw47 ">
+                            <i className="fa fa-instagram"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.youtube.com/c/Sec2hand">
+                            <i className="fa fa-youtube"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="contact">
+              <div className="send-message">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="section-heading text-center">
+                        <h2>Send us a Message</h2>
+                      </div>
+                    </div>
+                    <div className="col-md-8 col-lg-8 col-8 offset-2">
+                      <div className="contact-form">
+                        <form id="contact" action="" method="post">
+                          <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12 ">
+                              <fieldset>
+                                <input
+                                  name="name"
+                                  type="text"
+                                  className="form-control contactUs"
+                                  id="name"
+                                  placeholder="Full Name"
+                                  required=""
+                                />
+                              </fieldset>
+                            </div>
+                            <div className="col-lg-12 col-md-12 col-sm-12">
+                              <fieldset>
+                                <input
+                                  name="email"
+                                  type="text"
+                                  className="form-control contactUs"
+                                  id="email"
+                                  placeholder="E-Mail Address"
+                                  required=""
+                                />
+                              </fieldset>
+                            </div>
+                            <div className="col-lg-12 col-md-12 col-sm-12">
+                              <fieldset>
+                                <input
+                                  name="subject"
+                                  type="text"
+                                  className="form-control contactUs"
+                                  id="subject"
+                                  placeholder="Subject"
+                                  required=""
+                                />
+                              </fieldset>
+                            </div>
+                            <div className="col-lg-12">
+                              <fieldset>
+                                <textarea
+                                  name="message"
+                                  rows="6"
+                                  className="form-control contactUs"
+                                  id="message"
+                                  placeholder="Your Message"
+                                  required=""
+                                />
+                              </fieldset>
+                            </div>
+                            <div className="col-lg-12 text-center">
+                              <fieldset>
+                                <button
+                                  type="submit"
+                                  id="form-submit"
+                                  className="filled-button"
+                                >
+                                  Send Message
+                                </button>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    {/*<div className="col-md-4">*/}
+                    {/*    <img src="/assets/images/Sec2Hand_Logo_3.png" className="img-fluid" alt=""/>*/}
+                    {/*</div>*/}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
     }
 }
 
