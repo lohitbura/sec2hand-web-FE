@@ -301,7 +301,7 @@ class HomepageLayout extends React.Component {
 
 
     onProductTypeChange = (e) => {
-       
+       console.log(e.target.value, e.target.name)
          
         if((e.target.value=="cars")||(e.target.value=="Car")||(e.target.value=="Cars")||(e.target.value=="latest car")||(e.target.value=="4 wheeler")||(e.target.value=="4 wheeleres")||(e.target.value=="gadiya")||(e.target.value=="Honda cars")||(e.target.value=="tata")||(e.target.value=="maruti")||(e.target.value=="swift")||(e.target.value=="car")){
             this.setState({
@@ -469,6 +469,7 @@ class HomepageLayout extends React.Component {
         })
     }
     onProductCityChange = (e) => {
+      console.log(e.target.name, e.target.value)
         this.setState({
             [e.target.name]: e.target.value
             
@@ -697,7 +698,7 @@ class HomepageLayout extends React.Component {
                       <Select
                         labelId="label"
                         id="select"
-                        onChange={this.onProductTypeChange}
+                        onChange={this.onProductCityChange}
                         name="productCity"
                         value={productCity}
                       >

@@ -126,14 +126,14 @@ class Navigationbar extends React.Component{
                                                         </Modal.Header>
                                                         <Modal.Body>
                                                             <div className="row">
-                                                                <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                                                                {/* <div className="col-lg-6 col-md-6 col-sm-6 text-center">
                                                              <Link className="dropdown-item" to="/dealer-login" onClick={this.handleClose}>
                                                                  <div className="dealer"> DEALER </div>
                                                                  <div > <img src="../../assets/images/carDealer1.png" style={{width:'150px',height:'150px', marginBottom:'20px' }}/></div> 
                                                              </Link>
                                                
-                                                                </div>
-                                                                <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                                                                </div> */}
+                                                                <div className="col-lg-12 col-md-12 col-sm-12 text-center">
                                                                 <Link className="dropdown-item hidden" to="/login" onClick={this.handleClose}>
                                                                 <div className="dealer"> CUSTOMER </div>
                                                                  <div > <img src="../../assets/images/customer1.png" style={{width:'150px',height:'150px', marginBottom:'20px' }}/></div> 
@@ -178,9 +178,13 @@ class Navigationbar extends React.Component{
                                         </div> : 
                                             <div className="hidden" >
                                             <a  className="  hidden" >
-                                                   <Button varient="outlined" onClick={this.handleShow} >
-                                                       Login
+                                                   
+                                                       <Link to="/login">
+                                                       <Button varient="outlined">
+                                                            Login
                                                        </Button>
+
+                                                       </Link> 
                                             </a>
 
                                                  
@@ -274,7 +278,7 @@ class Navigationbar extends React.Component{
                                                                                             display: 'flex',
                                                                                             padding: '8px 0 8px 16px',
                                                                                             textAlign:'center'}}>
-                                            <a className="dropdown-toggle spLogin mt-3" data-toggle="dropdown"
+                                            <Link className="dropdown-toggle spLogin mt-3" to="/login"
                                                role="button" aria-haspopup="true" aria-expanded="false" style={{display:'flex',
                                                                                                                 alignItems:'center',
                                                                                                                 textDecoration:'none',
@@ -286,13 +290,13 @@ class Navigationbar extends React.Component{
                                                                                                                 border:'2px solid',
                                                                                                                 marginRight:'40%'}}>
                                                    <BiIcons.BiLogIn style={{fontSize:'16px', marginRight : '10px'}} className="icons" />
-                                                   Login</a>
+                                                   Login</Link>
 
                                             <div className="dropdown-menu ">
                                                 {/*<a  href="blog.html">Blog</a>*/}
-                                                <Link className="dropdown-item" to="/dealer-login">
+                                                {/* <Link className="dropdown-item" to="/dealer-login">
                                                     Dealer
-                                                </Link>
+                                                </Link> */}
                                                 <Link className="dropdown-item" to="/login">
                                                     Customer
                                                 </Link>
