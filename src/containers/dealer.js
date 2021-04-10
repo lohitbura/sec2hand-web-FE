@@ -70,9 +70,9 @@ class Dealer extends React.Component {
     }
 
     loadDealers = () => {
-        const {limit, offset, dealers} = this.state;
+        const {limit, offset, dealers, city} = this.state;
         this.setState({loading: true})
-        axios.post(dealerListURL, {limit: limit, offset: offset}).then(res => {
+        axios.post(dealerListURL, {limit: limit, offset: offset, city}).then(res => {
             this.setState({
                 dealers: [...dealers, ...res.data.dealers],
                 loading: false,
