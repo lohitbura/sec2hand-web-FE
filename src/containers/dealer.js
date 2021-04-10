@@ -72,7 +72,7 @@ class Dealer extends React.Component {
     loadDealers = () => {
         const {limit, offset, dealers, city} = this.state;
         this.setState({loading: true})
-        axios.post(dealerListURL, {limit: limit, offset: offset, city}).then(res => {
+        axios.post(dealerListURL, {limit: limit, offset: offset, city:city}).then(res => {
             this.setState({
                 dealers: [...dealers, ...res.data.dealers],
                 loading: false,
@@ -92,12 +92,12 @@ class Dealer extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        const {dealers, city, area, category, limit1, offset1} = this.state;
+        const {dealers, city, area, category, limit, offset} = this.state;
 
 
         let form_data = new FormData();
-        form_data.append('limit', limit1)
-        form_data.append('offset', offset1)
+        form_data.append('limit', limit)
+        form_data.append('offset', 0)
         if (city) {
             form_data.append('city', city)
         }
@@ -115,21 +115,14 @@ class Dealer extends React.Component {
 
         this.setState({loading: true})
         axios.post(dealerListURL, form_data).then(res => {
-            if (offset1 === 0) {
-                console.log(res.data.dealers)
+            
                 this.setState({
-                    dealers: res.data.dealers,
+                    dealers:res.data.dealers,
                     loading: false,
+                    offset: limit + 0,
                     has_more: res.data.has_more
                 })
-            } else {
-                this.setState({
-                    dealers: [...dealers, ...res.data.dealers],
-                    loading: false,
-                    offset1: limit1 + offset1,
-                    has_more: res.data.has_more
-                })
-            }
+            
 
         })
             .catch(err => {
@@ -165,7 +158,7 @@ class Dealer extends React.Component {
                                         <label>City:</label>
                                         <select onChange={this.onChange} name="city"
                                                 className="form-control">
-                                            <option>Select city</option>
+                                            <option value="">Select city</option>
 
                                             {
                                                 this.props.cityData && this.props.cityData.map(city => {
