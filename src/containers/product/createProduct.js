@@ -2,7 +2,7 @@ import React from 'react';
 import {Container} from "semantic-ui-react";
 import {Button, Checkbox, Form, TextArea} from 'semantic-ui-react'
 import axios from "axios";
-import {bikeCreateURL, brandListURL, carCreateURL, mobileCreateURL, productCreateURL} from "../store/constants";
+import {bikeCreateURL, brandListURL, carCreateURL, mobileCreateURL, productCreateURL} from "../../store/constants";
 import Loader from 'react-loader-spinner';
 import Message from "semantic-ui-react/dist/commonjs/collections/Message";
 import {Link, withRouter} from "react-router-dom";

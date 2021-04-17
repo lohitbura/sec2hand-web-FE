@@ -25,7 +25,7 @@ import * as FcIcons from "react-icons/fc";
 import * as GrIcons from "react-icons/gr";
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
-import ProductDesc from '../ProductDesc';
+import ProductDesc from './ProductDesc';
 import {
   Magnifier,
   GlassMagnifier,

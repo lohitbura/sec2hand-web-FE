@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./productDetail/product.css";
+import "./product.css";
 import { Link, withRouter } from "react-router-dom";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import Rating from "@material-ui/lab/Rating";
