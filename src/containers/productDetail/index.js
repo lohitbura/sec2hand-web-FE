@@ -16,16 +16,16 @@ import {
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import {Link, withRouter} from "react-router-dom";
 import axios from 'axios';
-import {getUserProfileIdURL, getUserProfileURL ,productDetailURL, postLikeURL, URL} from "../store/constants";
+import {getUserProfileIdURL, getUserProfileURL ,productDetailURL, postLikeURL, URL} from "../../store/constants";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './productDetail/product.css';
+import './product.css';
 import * as FcIcons from "react-icons/fc";
 import * as GrIcons from "react-icons/gr";
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
-import ProductDesc from './ProductDesc';
+import ProductDesc from '../ProductDesc';
 import {
   Magnifier,
   GlassMagnifier,
@@ -34,7 +34,7 @@ import {
   MOUSE_ACTIVATION,
   TOUCH_ACTIVATION,
 } from "react-image-magnifiers";
-import { MapContainer } from './MapContainer';
+import { MapContainer } from '../MapContainer';
 
 
 
