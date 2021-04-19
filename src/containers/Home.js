@@ -1,21 +1,6 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React from "react";
 import { Carousel } from "react-bootstrap";
-import {
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  List,
-  Menu,
-  Responsive,
-  Segment,
-  Sidebar,
-  Visibility,
-} from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { Link, withRouter } from "react-router-dom";
 
 import "pure-react-carousel/dist/react-carousel.es.css";
@@ -654,74 +639,13 @@ class HomepageLayout extends React.Component {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src="../../assets/images/slider1.jpg"
+                src="../../assets/images/slider1.png"
                 alt="First slide"
               />
             </Carousel.Item>
-            {/* <Carousel.Item>
-                  <img
-                    className="d-block w-100 carouselImg"
-                    src="../../assets/images/slider2.jpg"
-                    alt="Second slide"
-                  />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img
-                    className="d-block w-100 carouselImg"
-                    src="../../assets/images/slider3.jpg"
-                    alt="Third slide"
-                  />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img
-                    className="d-block w-100 carouselImg"
-                    src="../../assets/images/slider4.jpg"
-                    alt="Third slide"
-                  />
-                </Carousel.Item> */}
           </Carousel>
-          {/* <Slider>
-                        <Slide index={1}><img
-                            style={{'objectFit': 'cover', 'height': '50%', 'width': '100%'}}
-                            src="https://images.unsplash.com/photo-1509225770129-fbcf8a696c0b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1959&q=80"
-                            alt="First slide"/></Slide>
-                        
-                        <Slide index={2}><img
-                            style={{'objectFit': 'cover', 'height': '50%', 'width': '100%'}}
-                            src="https://images.unsplash.com/photo-1513735539099-cf6e5d559d82?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1441&q=80"
-                            alt="First slide"/></Slide>
-                        
-                        <Slide index={3}><img
-                            style={{'objectFit': 'cover', 'height': '50%', 'width': '100%'}}
-                            src="https://images.unsplash.com/photo-1529984489975-079884dc3bc9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDB8fHBhbm9yYW1hfGVufDB8MHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                            alt="First slide"/></Slide>
-                        
-                    </Slider> */}
         </div>
 
-        {/* <div className="container" style={{marginTop: "35px"}}>
-                    <div className="row">
-                        <div className="col-sm-4 " style={{margin: 'auto'}}>
-                            <div className="card">
-                                <img className="card-img-top" src="/assets/images/customer3.jpg" alt="Card image cap"/>
-                                <div className="card-body">
-                                    <h5 className="card-title">We Know our customer need.</h5>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-4" style={{margin: 'auto'}}>
-                            <div className="card">
-                                <img className="card-img-top" src="/assets/images/customer-satisfaction.jpg"
-                                     alt="Card image cap"/>
-                                <div className="card-body">
-                                    <h5 className="card-title">Customer satisfaction is our top priority.</h5>
-                                  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
         {/* 
 **********************************************************************************************
                                  Filters
@@ -814,17 +738,6 @@ class HomepageLayout extends React.Component {
               </div>
               <form method="GET">
                 <div className="catagory">
-                  {/* <label>City:</label>
-                                                        <select onChange={this.onProductTypeChange} name="productCity"
-                                                                className="form-control">
-                                                            <option>Select city</option>
-
-                                                            {
-                                                                this.props.cityData && this.props.cityData.map(city => {
-                                                                    return <option value={city.name}>{city.name}</option>
-                                                                })
-                                                            }
-                                                        </select> */}
                   <InputLabel id="label">City:</InputLabel>
                   <Select
                     labelId="label"
@@ -993,18 +906,7 @@ class HomepageLayout extends React.Component {
                   </h2>
                 </div>
               </div>
-              {/* <div className="col-md-6">
-                    <div className="right-image">
-                      <img
-                        style={{
-                          marginTop: "-61px",
-                          // width: '402px',
-                        }}
-                        src="/assets/images/Sec2Hand_Logo_3.png"
-                        alt=""
-                      />
-                    </div>
-                  </div> */}
+
               <div className="col-md-12">
                 <div className="left-content">
                   <h4>About us</h4>
@@ -1043,6 +945,46 @@ class HomepageLayout extends React.Component {
             </div>
           </div>
         </div>
+
+        <div className="best-features about-features">
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-md-12">
+                <div className="section-heading text-center">
+                  <h2 id="about" style={{ color: "grey", fontWeight: "600" }}>
+                    Keep in touch
+                  </h2>
+                </div>
+              </div>
+
+              <div className="col-md-4 text-center">
+                <i
+                  style={{ fontSize: 50, color: "#ba0d6d" }}
+                  className="fa fa-phone"
+                ></i>
+                <h5>Contact - 7073264533, 7425054434</h5>
+              </div>
+              <div className="col-md-4 text-center">
+                <i
+                  style={{ fontSize: 50, color: "#ba0d6d" }}
+                  class="fa fa-envelope"
+                ></i>
+                <h5>support@sec2hand.com</h5>
+              </div>
+              <div className="col-md-4 text-center">
+                <i
+                  style={{ fontSize: 50, color: "#ba0d6d" }}
+                  class="fa fa-map-marker"
+                ></i>
+                <h5>
+                  Startup cell, CS department, Near Ayyappa Temple, Ratanada,
+                  Jodhpur (Raj.) - 342001
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="contact">
           <div className="send-message">
             <div className="container">
@@ -1121,10 +1063,10 @@ class HomepageLayout extends React.Component {
                 </div>
                 <div className="col-md-6">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.710943430008!2d73.03370331548273!3d26.271043243741016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39418c9000000001%3A0x8519ed8608a5e675!2sSree%20Ayyappa%20Seva%20Sangham!5e0!3m2!1sen!2sin!4v1618672371866!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.7002531017847!2d73.03288331503141!3d26.27139008340809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDE2JzE3LjAiTiA3M8KwMDInMDYuMyJF!5e0!3m2!1sen!2sin!4v1618844168824!5m2!1sen!2sin"
                     width="600"
                     height="450"
-                    style={{border:0}}
+                    style={{ border: 0 }}
                     allowfullscreen=""
                     loading="lazy"
                   ></iframe>
