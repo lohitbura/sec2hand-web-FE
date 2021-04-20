@@ -939,6 +939,16 @@ class HomepageLayout extends React.Component {
                         <i className="fa fa-youtube"></i>
                       </a>
                     </li>
+                    <li>
+                      <a href="https://twitter.com/sec2hand?s=08">
+                        <i className="fa fa-twitter"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/company/sec2hand-business-solutions-private-limited">
+                        <i style={{color: 'black'}} className="fa fa-linkedin"></i>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
