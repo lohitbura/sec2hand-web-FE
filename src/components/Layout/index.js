@@ -67,6 +67,19 @@ class CustomLayout extends React.Component {
                     <i style={{ color: "white" }} className="fa fa-youtube"></i>
                   </a>
                 </li>
+                <li>
+                  <a href="https://twitter.com/sec2hand?s=08">
+                    <i style={{ color: "white" }} className="fa fa-twitter"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/company/sec2hand-business-solutions-private-limited">
+                    <i
+                      style={{ color: "white" }}
+                      className="fa fa-linkedin"
+                    ></i>
+                  </a>
+                </li>
               </ul>
               <br />
               <a
