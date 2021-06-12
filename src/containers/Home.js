@@ -730,11 +730,10 @@ class HomepageLayout extends React.Component {
         </div>
         <div className="container-fluid" style={{ marginTop: "40px" }}>
           <div className="row featuredContainer">
-            <div className="col-lg-3 col-md-3 filterHider">
+            {/* <div className="col-lg-3 col-md-3 filterHider">
               <div className="section-heading">
                 <h2>Search by Filters</h2>
-                {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
-                {/*    className="fa fa-angle-right"></i></p>*/}
+             
               </div>
               <form method="GET">
                 <div className="catagory">
@@ -794,13 +793,13 @@ class HomepageLayout extends React.Component {
                   </button>
                 </div>
               </form>
-            </div>
+            </div> */}
 
             {/* 
 **********************************************************************************************
                                  Filters end
 ************************************************************************************** */}
-            <div className="col-lg-9 col-md-9">
+            <div className="col-lg-12 col-md-12">
               <div className="col-md-12">
                 <div className="section-heading">
                   <h2>Featured Products</h2>

@@ -25,6 +25,7 @@ import CustomerVerifyOtp from "./containers/customerVerifyOtp";
 import SendOtp from "./containers/Forgot password/sendOtp";
 import VerifyOtp from "./containers/Forgot password/verifyOtp";
 import ChangePassword from "./containers/Forgot password/changePassword";
+import HomeScreen from "./containers/Home/index";
 
 const BaseRouter = () => (
   <Hoc>
@@ -46,7 +47,7 @@ const BaseRouter = () => (
     <Route path="/about" component={AboutUs} />
     <Route path="/contact" component={ContactUs} />
     <Route path="/privacy" component={Privacy} />
-    <Route exact path="/" component={HomepageLayout} />
+    <Route exact path="/" component={HomeScreen} />
     <Route exact path="/customer-verify-otp" component={CustomerVerifyOtp} />
     <Route exact path="/send-otp" component={SendOtp} />
     <Route exact path="/verify-otp" component={VerifyOtp} />
