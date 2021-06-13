@@ -8,8 +8,9 @@ import Loader from "react-loader-spinner";
 import AboutUs from "../../components/Home/AboutUs";
 import HomeBanner from "../../components/Home/HomeBanner";
 import ProductBox from "../../components/Home/ProductBox";
+import { connect } from "react-redux";
 
-export default function HomeScreen() {
+const HomeScreen = ({ selectedCity }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(false);
@@ -28,10 +29,20 @@ export default function HomeScreen() {
     };
   }, []);
 
-  const fetchProducts = (value) => {
-    fetchFeaturedProductListAPI(value).then((res) => {
+  useEffect(() => {
+    if (selectedCity !== "") {
+      fetchProducts(0, true);
+    }
+  }, [selectedCity]);
+
+  const fetchProducts = (value, isCity = false) => {
+    fetchFeaturedProductListAPI(value, selectedCity).then((res) => {
       setLoading(false);
-      setProducts([...products, ...res.data]);
+      if (isCity) {
+        setProducts(res.data);
+      } else {
+        setProducts([...products, ...res.data]);
+      }
       setHasMore(res.has_more);
     });
   };
@@ -87,4 +98,12 @@ export default function HomeScreen() {
       <AboutUs />
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    selectedCity: state.selectedCity.data,
+  };
+};
+
+export default connect(mapStateToProps, null)(HomeScreen);

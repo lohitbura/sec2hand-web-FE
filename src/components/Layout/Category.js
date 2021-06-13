@@ -7,7 +7,6 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 export default function Category() {
   const history = useHistory();
   const [categoryActive, setCategoryActive] = useState("");
-  const [parentActive, setParentActive] = useState("");
 
   const handleClick = (item) => {
     if (!item.parent) {
@@ -67,6 +66,7 @@ const styles = {
     marginRight: 10,
     fontWeight: "bold",
     minWidth: 85,
+    minHeight: 44,
     textAlign: "center",
     cursor: "pointer",
     borderRadius: 10,

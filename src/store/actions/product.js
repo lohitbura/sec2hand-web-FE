@@ -2,10 +2,10 @@ import axios from "axios";
 import * as API_URL from "../constants";
 import { header } from "../utility";
 
-export const fetchFeaturedProductListAPI = async (offset) => {
+export const fetchFeaturedProductListAPI = async (offset, city) => {
   try {
     let response = await axios.get(
-      API_URL.fetchFeaturedProductListURL(offset),
+      API_URL.fetchFeaturedProductListURL(offset, city),
       header()
     );
     if (response.status == 200) {
@@ -30,10 +30,11 @@ export const fetchFeaturedProductListAPI = async (offset) => {
   }
 };
 
-export const fetchProductListAPI = async (limit, offset, category) => {
+export const fetchProductListAPI = async (data) => {
   try {
     let response = await axios.get(
-      API_URL.productListURL(limit, offset, category),
+      API_URL.productListURL(),
+      { params: data },
       header()
     );
     if (response.status == 200) {

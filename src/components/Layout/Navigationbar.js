@@ -15,6 +15,7 @@ import { getUserProfileIdURL } from "../../store/constants";
 import "./nav.css/nav.css";
 import Button from "@material-ui/core/Button";
 import { Modal } from "react-bootstrap";
+import CityFilter from "./CityFilter";
 
 class Navigationbar extends React.Component {
   constructor(props) {
@@ -134,9 +135,10 @@ class Navigationbar extends React.Component {
               />
             </Link>
           </div>
+          <CityFilter />
 
           {/* search */}
-          <div className="col-md-8 col-sm-8 text-center searchM">
+          <div className="col-md-6 text-center searchM">
             <form className="d-flex searchBar searchHider">
               <input
                 type="search"

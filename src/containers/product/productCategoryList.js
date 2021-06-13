@@ -7,8 +7,11 @@ import { fetchProductListAPI } from "../../store/actions/product";
 import Loader from "react-loader-spinner";
 import { useParams } from "react-router-dom";
 import ProductBox from "../../components/Home/ProductBox";
+import MultiTypeFilter from "../../components/Product/MultiTypeFilter";
+import PriceRangeFilter from "../../components/Product/PriceRangeFilter";
+import { connect } from "react-redux";
 
-export default function ProductCategoryList() {
+const ProductCategoryList = ({ selectedCity }) => {
   const params = useParams();
 
   const [products, setProducts] = useState([]);
@@ -18,24 +21,44 @@ export default function ProductCategoryList() {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    let isActive = true;
+    fetchProducts(7, 0, params.category, true);
+  }, [params.category, selectedCity]);
 
-    setLoading(true);
-    if (isActive) {
-      fetchProducts(7, 0, params.category);
+  const fetchProducts = (
+    limit,
+    offset,
+    category,
+    is_params = false,
+    filterData
+  ) => {
+    let data = {};
+    data["limit"] = limit;
+    data["offset"] = offset;
+    data["category"] = category;
+    if (filterData && filterData.price !== undefined) {
+      data["price_begin"] = filterData.price[0];
+      data["price_end"] = filterData.price[1];
+    }
+    if (filterData && filterData.distance !== undefined) {
+      data["km_begin"] = filterData.distance[0];
+      data["km_end"] = filterData.distance[1];
+    }
+    if (filterData && filterData.year !== undefined) {
+      data["year_begin"] = filterData.year[0];
+      data["year_end"] = filterData.year[1];
+    }
+    if (filterData && filterData.brand !== undefined) {
+      data["brand"] = filterData.brand;
     }
 
-    return () => {
-      isActive = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    fetchProducts(7, 0, params.category, true);
-  }, [params.category]);
-
-  const fetchProducts = (limit, offset, category, is_params = false) => {
-    fetchProductListAPI(limit, offset, category).then((res) => {
+    if (
+      selectedCity !== null ||
+      selectedCity !== undefined ||
+      selectedCity !== ""
+    ) {
+      data["city"] = selectedCity;
+    }
+    fetchProductListAPI(data).then((res) => {
       setLoading(false);
       if (is_params) {
         setProducts(res.data);
@@ -56,29 +79,53 @@ export default function ProductCategoryList() {
     setOffset(offset + 7);
   };
 
+  const handleMultiFilter = (data) => {
+    if (
+      data.price !== undefined ||
+      data.distance !== undefined ||
+      data.brand !== undefined ||
+      data.year !== undefined
+    ) {
+      fetchProducts(limit, 0, params.category, true, data);
+    }
+  };
+
   return (
     <div className="container-fluid" style={{ marginTop: "40px" }}>
       <div className="row featuredContainer">
-        <div className="col-lg-12 col-md-12">
-          <div className="col-md-12">
-            <div className="section-heading">
-              <h2>{params.category}</h2>
-              {/*<p onClick={() => this.check} style={{cursor: 'pointer'}}>view more <i*/}
-              {/*    className="fa fa-angle-right"></i></p>*/}
-            </div>
-            {loading ? (
-              <Loader
-                style={{ marginTop: "100px", textAlign: "center" }}
-                type="Rings"
-                color="red"
-                height={100}
-                width={100}
-              />
-            ) : (
-              ""
-            )}
+        <div className="col-lg-3 col-md-12">
+          {params.category == "car" ||
+          params.category == "bike" ||
+          params.category == "scooter" ||
+          params.category == "modified" ||
+          params.category == "motorcycle" ||
+          params.category == "mobile" ? (
+            <MultiTypeFilter onChange={handleMultiFilter} />
+          ) : (
+            <PriceRangeFilter onChange={handleMultiFilter} />
+          )}
+        </div>
+        <div className="col-lg-9 col-md-12">
+          <div className="section-heading">
+            <h2>
+              {params.category.charAt(0).toUpperCase() +
+                params.category.slice(1)}{" "}
+              {selectedCity ? `in ${selectedCity}` : null}
+            </h2>
           </div>
+
           <ProductBox products={products} isCategory={true} />
+          {loading ? (
+            <Loader
+              style={{ marginTop: "100px", textAlign: "center" }}
+              type="Rings"
+              color="red"
+              height={100}
+              width={100}
+            />
+          ) : (
+            ""
+          )}
           <div style={{ textAlign: "center", marginTop: "50px" }}>
             {!hasMore ? (
               "No more products"
@@ -92,4 +139,12 @@ export default function ProductCategoryList() {
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    selectedCity: state.selectedCity.data,
+  };
+};
+
+export default connect(mapStateToProps, null)(ProductCategoryList);

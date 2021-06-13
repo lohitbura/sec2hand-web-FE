@@ -730,10 +730,9 @@ class HomepageLayout extends React.Component {
         </div>
         <div className="container-fluid" style={{ marginTop: "40px" }}>
           <div className="row featuredContainer">
-            {/* <div className="col-lg-3 col-md-3 filterHider">
+            <div className="col-lg-3 col-md-3 filterHider">
               <div className="section-heading">
                 <h2>Search by Filters</h2>
-             
               </div>
               <form method="GET">
                 <div className="catagory">
@@ -793,7 +792,7 @@ class HomepageLayout extends React.Component {
                   </button>
                 </div>
               </form>
-            </div> */}
+            </div>
 
             {/* 
 **********************************************************************************************
@@ -945,7 +944,10 @@ class HomepageLayout extends React.Component {
                     </li>
                     <li>
                       <a href="https://www.linkedin.com/company/sec2hand-business-solutions-private-limited">
-                        <i style={{color: 'black'}} className="fa fa-linkedin"></i>
+                        <i
+                          style={{ color: "black" }}
+                          className="fa fa-linkedin"
+                        ></i>
                       </a>
                     </li>
                   </ul>

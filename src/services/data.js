@@ -88,3 +88,57 @@ export const CATEGORY_TYPE = [
     value: "property",
   },
 ];
+
+export const CAR_BRANDS = [
+  "Chevrolate",
+  "Datsun",
+  "Ford",
+  "Hyundai",
+  "honda",
+  "Jeep",
+  "KIA",
+  "Mahindra",
+  "Maruti",
+  "MG",
+  "Nissan",
+  "Renault",
+  "Skoda",
+  "TATA",
+  "Toyota",
+  "Volkswagen",
+];
+
+export const MOBILE_BRANDS = [
+  "Apple",
+  "Asus",
+  "Celkon",
+  "Coolpad",
+  "Gionee",
+  "Google",
+  "HTC",
+  "Honor",
+  "Infinix",
+  "Intex",
+  "Micromax",
+  "MI",
+  "Motorola",
+  "Nokia",
+  "OnePlus",
+  "Oppo",
+  "Realme",
+  "Samsung",
+  "Vivo",
+];
+
+export const BIKE_BRANDS = [
+  "Bajaj",
+  "hero",
+  "honda",
+  "Hero",
+  "KTM",
+  "Mahindra",
+  "Royal",
+  "Suzuki",
+  "TVS",
+  "Yamaha",
+];
