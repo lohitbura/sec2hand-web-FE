@@ -1340,7 +1340,7 @@ footer .inner-content p a {
     border: 2px solid rgb(131, 17, 121);
     border-radius: 20px;
     z-index: 999;
-    position: fixed;
+    /* position: fixed; */
     overflow: hidden;
   }
   .searchBar input {

@@ -134,6 +134,27 @@ class Navigationbar extends React.Component {
               />
             </Link>
           </div>
+
+          {/* search */}
+          <div className="col-md-8 col-sm-8 text-center searchM">
+            <form className="d-flex searchBar searchHider">
+              <input
+                type="search"
+                placeholder="Find Cars, Mobile, Bikes and Many More...... "
+                //   onChange={this.onProductTypeChange}
+                name="productType"
+              />
+              <button
+                className="btn"
+                type="submit"
+                //   onClick={(e) => this.productFilterSubmit(e)}
+              >
+                <ImIcons.ImSearch className="icons" />
+              </button>
+            </form>
+          </div>
+
+          {/* search end */}
           <div>
             {authenticated ? (
               <div className="hidden" type="button">

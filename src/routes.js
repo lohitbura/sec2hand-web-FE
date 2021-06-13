@@ -26,10 +26,11 @@ import SendOtp from "./containers/Forgot password/sendOtp";
 import VerifyOtp from "./containers/Forgot password/verifyOtp";
 import ChangePassword from "./containers/Forgot password/changePassword";
 import HomeScreen from "./containers/Home/index";
+import ProductCategoryList from "./containers/product/productCategoryList";
 
 const BaseRouter = () => (
   <Hoc>
-      <ReactToast/>
+    <ReactToast />
     <Route path="/login" component={Login} />
     <Route path="/signup" component={Signup} />
     <Route path="/dealer-login" component={DealerLogin} />
@@ -45,6 +46,7 @@ const BaseRouter = () => (
     <Route path="/postEdit/:id" component={PostEdit} />
     <Route path="/post/:id" component={PostDetail} />
     <Route path="/about" component={AboutUs} />
+    <Route path="/product-list/:category" component={ProductCategoryList} />
     <Route path="/contact" component={ContactUs} />
     <Route path="/privacy" component={Privacy} />
     <Route exact path="/" component={HomeScreen} />

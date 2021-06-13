@@ -29,3 +29,20 @@ export const fetchFeaturedProductListAPI = async (offset) => {
     throw err;
   }
 };
+
+export const fetchProductListAPI = async (limit, offset, category) => {
+  try {
+    let response = await axios.get(
+      API_URL.productListURL(limit, offset, category),
+      header()
+    );
+    if (response.status == 200) {
+      return {
+        data: response.data.products,
+        has_more: response.data.has_more,
+      };
+    }
+  } catch (err) {
+    throw err;
+  }
+};

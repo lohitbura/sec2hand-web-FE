@@ -6,6 +6,7 @@ import axios from "axios";
 import { getUserProfileIdURL } from "../../store/constants";
 
 import Navigationbar from "./Navigationbar";
+import Category from "./Category";
 
 class CustomLayout extends React.Component {
   state = {
@@ -38,10 +39,13 @@ class CustomLayout extends React.Component {
           </div>
         </div>
 
-        <div className="secondHeader ">
+        <div className="secondHeader">
           <Navigationbar />
+          <Category />
         </div>
+
         {this.props.children}
+
         <footer style={{ background: "black", marginTop: "50px" }}>
           <div className="row" style={{ width: "70%" }}>
             <div className="col-md-6" style={{ marginTop: 70 }}>

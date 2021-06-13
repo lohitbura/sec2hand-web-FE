@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { URL } from "../../store/constants";
 
-export default function ProductBox({ products }) {
+export default function ProductBox({ products, isCategory = false }) {
   return (
     <div className="row">
       {products.map((product) => {
         return (
-          <div className="col-lg-4 col-md-6">
+          <div className="col-lg-3 col-md-6">
             <div className="product-item">
               <Link to={`/product/${product.slug}`}>
                 {product.images && product.images[0] !== undefined ? (
@@ -15,7 +16,11 @@ export default function ProductBox({ products }) {
                       height: "232px",
                       objectFit: "cover",
                     }}
-                    src={`${product.images && product.images[0].image}`}
+                    src={`${
+                      isCategory
+                        ? URL + product.images[0].image
+                        : product.images && product.images[0].image
+                    }`}
                     alt=""
                   />
                 ) : (
@@ -48,7 +53,7 @@ export default function ProductBox({ products }) {
                         <i className="fa fa-dashboard"></i>
                         &nbsp;
                         {product.category == "car" || product.category == "bike"
-                          ? product.km + 'km'
+                          ? product.km + "km"
                           : product.description}
                       </strong>
                     )}
