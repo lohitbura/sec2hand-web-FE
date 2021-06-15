@@ -29,7 +29,7 @@ export default function Category() {
     <>
       <div style={{ paddingTop: 100 }}></div>
       <div style={{ margin: "0 50px" }}>
-        <div style={{ display: "flex", alignItems: "start" }}>
+        <div style={{ display: "flex", justifyContent: 'space-between' }}>
           {CATEGORY_TYPE.map((item) => {
             return (
               <div onClick={() => handleClick(item)} style={styles.box}>
@@ -65,7 +65,7 @@ const styles = {
     border: "1px solid black",
     marginRight: 10,
     fontWeight: "bold",
-    minWidth: 85,
+    minWidth: 130,
     minHeight: 44,
     textAlign: "center",
     cursor: "pointer",

@@ -11,11 +11,11 @@ import { postCity } from "../../store/actions/city";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 170,
+    // margin: theme.spacing(1),
+    minWidth: 260,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    // marginTop: theme.spacing(2),
   },
 }));
 

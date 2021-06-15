@@ -30,36 +30,7 @@ export default function AboutUs() {
                   We are here to make organized second hand market. We are with
                   you 24*7.
                 </p>
-                <ul className="social-icons">
-                  <li>
-                    <a href="https://www.facebook.com/Sec2Hand-360972987823797/">
-                      <i className="fa fa-facebook"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.instagram.com/invites/contact/?i=14qq181cy3b1b&utm_content=eghzw47 ">
-                      <i className="fa fa-instagram"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.youtube.com/c/Sec2hand">
-                      <i className="fa fa-youtube"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://twitter.com/sec2hand?s=08">
-                      <i className="fa fa-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.linkedin.com/company/sec2hand-business-solutions-private-limited">
-                      <i
-                        style={{ color: "black" }}
-                        className="fa fa-linkedin"
-                      ></i>
-                    </a>
-                  </li>
-                </ul>
+                
               </div>
             </div>
           </div>

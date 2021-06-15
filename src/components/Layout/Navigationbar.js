@@ -142,7 +142,7 @@ class Navigationbar extends React.Component {
             <form className="d-flex searchBar searchHider">
               <input
                 type="search"
-                placeholder="Find Cars, Mobile, Bikes and Many More...... "
+                placeholder="Find Cars, Mobile, Bikes and more...... "
                 //   onChange={this.onProductTypeChange}
                 name="productType"
               />
@@ -180,11 +180,11 @@ class Navigationbar extends React.Component {
             )}
           </div>
 
-          <div>
+          {/* <div>
             <Link to="#" className="menu-bars">
               <FaIcons.FaBars onClick={this.showSidebar} />
             </Link>
-          </div>
+          </div> */}
         </div>
 
         <nav className={this.state.sidebar ? "nav-menu active" : "nav-menu"}>
