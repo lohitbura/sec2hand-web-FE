@@ -45,6 +45,17 @@ h6 {
   padding: 18.5px 14px !important
 }
 
+.MuiCardActions-root {
+  justify-content: center;
+}
+
+.lines-clap {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 /* ***************************************************************
        social icons syles start from here
 *********************************************************** */

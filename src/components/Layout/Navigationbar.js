@@ -138,7 +138,7 @@ class Navigationbar extends React.Component {
           <CityFilter />
 
           {/* search */}
-          <div className="col-md-6 text-center searchM">
+          <div className="col-md-5 text-center searchM">
             <form className="d-flex searchBar searchHider">
               <input
                 type="search"
@@ -155,27 +155,41 @@ class Navigationbar extends React.Component {
               </button>
             </form>
           </div>
-
+          <div style={{marginRight: -40}} className="hidden">
+            <a className="hidden">
+              <Link to="/donate">
+                <Button varient="outlined">Donate</Button>
+              </Link>
+            </a>
+          </div>
           {/* search end */}
           <div>
             {authenticated ? (
-              <div className="hidden" type="button">
-                <Link
-                  to=""
-                  style={{ cursor: "pointer" }}
-                  className="nav-link"
-                  onClick={() => this.props.logout()}
-                >
-                  Logout
-                </Link>
-              </div>
-            ) : (
-              <div className="hidden">
-                <a className="  hidden">
-                  <Link to="/login">
-                    <Button varient="outlined">Login</Button>
+              <div
+                style={{ marginRight: -20 }}
+                className="hidden"
+                type="button"
+              >
+                <a className="hidden">
+                  <Link
+                    to=""
+                    style={{ cursor: "pointer" }}
+                    className="nav-link"
+                    onClick={() => this.props.logout()}
+                  >
+                    <Button varient="outlined">Logout</Button>
                   </Link>
                 </a>
+              </div>
+            ) : (
+              <div style={{ display: "flex" }}>
+                <div style={{ marginRight: -20 }} className="hidden">
+                  <a className="hidden">
+                    <Link to="/login">
+                      <Button varient="outlined">Login</Button>
+                    </Link>
+                  </a>
+                </div>
               </div>
             )}
           </div>

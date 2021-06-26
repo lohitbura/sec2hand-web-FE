@@ -27,6 +27,7 @@ import VerifyOtp from "./containers/Forgot password/verifyOtp";
 import ChangePassword from "./containers/Forgot password/changePassword";
 import HomeScreen from "./containers/Home/index";
 import ProductCategoryList from "./containers/product/productCategoryList";
+import Donate from "./containers/Donate";
 
 const BaseRouter = () => (
   <Hoc>
@@ -54,6 +55,7 @@ const BaseRouter = () => (
     <Route exact path="/send-otp" component={SendOtp} />
     <Route exact path="/verify-otp" component={VerifyOtp} />
     <Route exact path="/change-password" component={ChangePassword} />
+    <Route exact path="/donate" component={Donate} />
   </Hoc>
 );
 

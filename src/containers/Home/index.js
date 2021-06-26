@@ -9,6 +9,7 @@ import AboutUs from "../../components/Home/AboutUs";
 import HomeBanner from "../../components/Home/HomeBanner";
 import ProductBox from "../../components/Home/ProductBox";
 import { connect } from "react-redux";
+import BlogList from "../Blog/BlogList";
 
 const HomeScreen = ({ selectedCity }) => {
   const [products, setProducts] = useState([]);
@@ -95,6 +96,7 @@ const HomeScreen = ({ selectedCity }) => {
           </div>
         </div>
       </div>
+      <BlogList />
       <AboutUs />
     </div>
   );
