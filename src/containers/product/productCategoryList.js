@@ -10,6 +10,8 @@ import ProductBox from "../../components/Home/ProductBox";
 import MultiTypeFilter from "../../components/Product/MultiTypeFilter";
 import PriceRangeFilter from "../../components/Product/PriceRangeFilter";
 import { connect } from "react-redux";
+import PropertyFilter from "../../components/Product/PropertyFilter";
+import LaptopFilter from "../../components/Product/LaptopFilter";
 
 const ProductCategoryList = ({ selectedCity }) => {
   const params = useParams();
@@ -51,6 +53,45 @@ const ProductCategoryList = ({ selectedCity }) => {
       data["brand"] = filterData.brand;
     }
 
+    if (filterData && filterData.property_type !== undefined) {
+      data["property_type"] = filterData.property_type;
+    }
+
+    if (filterData && filterData.bed_room !== undefined) {
+      data["bed_room"] = filterData.bed_room;
+    }
+
+    if (filterData && filterData.bathroom !== undefined) {
+      data["bathroom"] = filterData.bathroom;
+    }
+    if (filterData && filterData.furnishing !== undefined) {
+      data["furnishing"] = filterData.furnishing;
+    }
+
+    if (filterData && filterData.company !== undefined) {
+      data["company"] = filterData.company;
+    }
+
+    if (filterData && filterData.ram !== undefined) {
+      data["ram"] = filterData.ram;
+    }
+
+    if (filterData && filterData.processor !== undefined) {
+      data["processor"] = filterData.processor;
+    }
+
+    if (filterData && filterData.ssd !== undefined) {
+      data["ssd"] = filterData.ssd;
+    }
+
+    if (filterData && filterData.body_type !== undefined) {
+      data["body_type"] = filterData.body_type;
+    }
+
+    if (filterData && filterData.screen_type !== undefined) {
+      data["screen_type"] = filterData.screen_type;
+    }
+
     if (
       selectedCity !== null ||
       selectedCity !== undefined ||
@@ -84,7 +125,17 @@ const ProductCategoryList = ({ selectedCity }) => {
       data.price !== undefined ||
       data.distance !== undefined ||
       data.brand !== undefined ||
-      data.year !== undefined
+      data.year !== undefined ||
+      data.property_type !== undefined ||
+      data.bed_room !== undefined ||
+      data.bathroom !== undefined ||
+      data.furnishing !== undefined ||
+      data.company !== undefined ||
+      data.processor !== undefined ||
+      data.ssd !== undefined ||
+      data.body_type !== undefined ||
+      data.screen_type !== undefined ||
+      data.ram !== undefined
     ) {
       fetchProducts(limit, 0, params.category, true, data);
     }
@@ -101,9 +152,17 @@ const ProductCategoryList = ({ selectedCity }) => {
           params.category == "motorcycle" ||
           params.category == "mobile" ? (
             <MultiTypeFilter onChange={handleMultiFilter} />
-          ) : (
+          ) : params.category !== "property" && params.category !== "laptop" ? (
             <PriceRangeFilter onChange={handleMultiFilter} />
-          )}
+          ) : null}
+
+          {params.category == "property" ? (
+            <PropertyFilter onChange={handleMultiFilter} />
+          ) : null}
+
+          {params.category == "laptop" ? (
+            <LaptopFilter onChange={handleMultiFilter} />
+          ) : null}
         </div>
         <div className="col-lg-9 col-md-12">
           <div className="section-heading">

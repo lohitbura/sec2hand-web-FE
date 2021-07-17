@@ -44,6 +44,7 @@ export const changePassword = `${endpoint}/change-password`;
 
 export const cityListURL = `${endpoint}/city-list`;
 export const brandListURL = `${endpoint}/brand-list`;
+export const laptopCompanyListURL = `${endpoint}/laptop-company-list`;
 export const createDonationURL = `${endpoint}/create-donate`;
 export const fetchBlogURL = `${endpoint}/blog-list`;
 export const fetchFeaturedProductListURL = (offset, city) =>

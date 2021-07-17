@@ -286,6 +286,58 @@ function ProductDesc({ product, category, usernames }) {
                 ) : (
                   ""
                 )}
+                {product.body_type ? (
+                  <li className="list-group-item">
+                    <div className="clearfix">
+                      <span className="pull-left">Body Type</span>
+
+                      <strong className="pull-right">
+                        {product.body_type}
+                      </strong>
+                    </div>
+                  </li>
+                ) : (
+                  ""
+                )}
+                {product.screen_type ? (
+                  <li className="list-group-item">
+                    <div className="clearfix">
+                      <span className="pull-left">Screen Type</span>
+
+                      <strong className="pull-right">
+                        {product.screen_type}
+                      </strong>
+                    </div>
+                  </li>
+                ) : (
+                  ""
+                )}
+                {product.battery_duration ? (
+                  <li className="list-group-item">
+                    <div className="clearfix">
+                      <span className="pull-left">Battery Duration</span>
+
+                      <strong className="pull-right">
+                        {product.battery_duration}
+                      </strong>
+                    </div>
+                  </li>
+                ) : (
+                  ""
+                )}
+                {product.ssd ? (
+                  <li className="list-group-item">
+                    <div className="clearfix">
+                      <span className="pull-left">Storage</span>
+
+                      <strong className="pull-right">
+                        {product.ssd ? "SSD" : "HDD"}
+                      </strong>
+                    </div>
+                  </li>
+                ) : (
+                  ""
+                )}
                 {product.usage_duration ? (
                   <li className="list-group-item">
                     <div className="clearfix">

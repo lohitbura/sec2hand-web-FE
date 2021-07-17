@@ -142,3 +142,13 @@ export const BIKE_BRANDS = [
   "TVS",
   "Yamaha",
 ];
+
+export const PROCESSOR_TYPE = [
+  "intel i3",
+  "intel i5",
+  "intel i7",
+  "intel i9",
+  "intel celeron",
+  "intel dual core",
+  "Ryzen"
+];
