@@ -29,31 +29,41 @@ export default function Category() {
     <>
       <div style={{ paddingTop: 100 }}></div>
       <div style={{ margin: "0 50px" }}>
-        <div style={{ display: "flex", justifyContent: 'space-between' }}>
+        <div className="row">
           {CATEGORY_TYPE.map((item) => {
             return (
-              <div onClick={() => handleClick(item)} style={styles.box}>
-                {item.title}{" "}
-                {item.value == categoryActive.value && categoryActive.parent ? (
-                  <ArrowDropUpIcon />
-                ) : item.parent ? (
-                  <ArrowDropDownIcon />
-                ) : null}
+              <div className="col-sm">
+                <div onClick={() => handleClick(item)} style={styles.box}>
+                  {item.title}{" "}
+                  {item.value == categoryActive.value &&
+                  categoryActive.parent ? (
+                    <ArrowDropUpIcon />
+                  ) : item.parent ? (
+                    <ArrowDropDownIcon />
+                  ) : null}
+                </div>
               </div>
             );
           })}
         </div>
-        {categoryActive.parent ? (
-          <div style={{ display: "flex", alignItems: "start", marginTop: 10 }}>
-            {categoryActive.category.map((item) => {
-              return (
-                <div onClick={() => handleSubCategory(item)} style={styles.box}>
-                  {item.title}
-                </div>
-              );
-            })}
-          </div>
-        ) : null}
+        <div style={{ marginTop: 10 }}>
+          {categoryActive.parent ? (
+            <div className="row">
+              {categoryActive.category.map((item) => {
+                return (
+                  <div className="col-sm">
+                    <div
+                      onClick={() => handleSubCategory(item)}
+                      style={styles.box}
+                    >
+                      {item.title}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
       </div>
     </>
   );
@@ -65,7 +75,7 @@ const styles = {
     border: "1px solid black",
     marginRight: 10,
     fontWeight: "bold",
-    minWidth: 130,
+    minWidth: 100,
     minHeight: 44,
     textAlign: "center",
     cursor: "pointer",

@@ -47,4 +47,4 @@ export const brandListURL = `${endpoint}/brand-list`;
 export const createDonationURL = `${endpoint}/create-donate`;
 export const fetchBlogURL = `${endpoint}/blog-list`;
 export const fetchFeaturedProductListURL = (offset, city) =>
-  `${endpoint}/featured-product-list?offset=${offset}&city=${city}`;
+  `${endpoint}/featured-product-list?offset=${offset}&city=${city}&limit=3`;

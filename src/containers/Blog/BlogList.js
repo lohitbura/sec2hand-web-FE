@@ -11,6 +11,10 @@ export default function BlogList() {
     });
   }, []);
 
+  if (blogList.length == 0) {
+    return null;
+  }
+
   return (
     <div style={{ marginTop: 100 }}>
       <div className="container">

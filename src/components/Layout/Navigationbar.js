@@ -139,7 +139,7 @@ class Navigationbar extends React.Component {
 
           {/* search */}
           <div className="col-md-5 text-center searchM">
-            <form className="d-flex searchBar searchHider">
+            <form className="d-flex searchBar searchHide">
               <input
                 type="search"
                 placeholder="Find Cars, Mobile, Bikes and more...... "

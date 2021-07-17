@@ -4,6 +4,7 @@ import { Button, TextField } from "@material-ui/core";
 import { createDonationAPI } from "../../store/actions/donation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import DonateImage from "../../../public/assets/images/donation_image.png";
 
 export default function Donate() {
   const [images, setImages] = useState([]);
@@ -41,6 +42,7 @@ export default function Donate() {
     <div>
       <h1></h1>
       <ToastContainer position="bottom-right" />
+      <image src="../../../public/assets/images/donation_image.png" />
 
       <div className="container">
         <div className="row">

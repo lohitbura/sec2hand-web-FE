@@ -85,7 +85,7 @@ export default function AboutUs() {
                   <h2>Send us a Message</h2>
                 </div>
               </div>
-              <div className="col-md-6 col-lg-6 col-6">
+              <div className="col-md-6">
                 <div className="contact-form">
                   <form id="contact" action="" method="post">
                     <div className="row">
@@ -152,10 +152,10 @@ export default function AboutUs() {
                   </form>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="container col-md-6">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.7002531017847!2d73.03288331503141!3d26.27139008340809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDE2JzE3LjAiTiA3M8KwMDInMDYuMyJF!5e0!3m2!1sen!2sin!4v1618844168824!5m2!1sen!2sin"
-                  width="600"
+                  width="100%"
                   height="450"
                   style={{ border: 0 }}
                   allowfullscreen=""
