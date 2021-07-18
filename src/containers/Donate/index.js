@@ -4,7 +4,7 @@ import { Button, TextField } from "@material-ui/core";
 import { createDonationAPI } from "../../store/actions/donation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import DonateImage from "../../../public/assets/images/donation_image.png";
+import DonationImage from "../../assets/images/donation_image.png";
 
 export default function Donate() {
   const [images, setImages] = useState([]);
@@ -42,131 +42,132 @@ export default function Donate() {
     <div>
       <h1></h1>
       <ToastContainer position="bottom-right" />
-      <image src="../../../public/assets/images/donation_image.png" />
+      <img style={{ width: "100%" }} src={DonationImage} />
+      <div style={{marginTop: 50, display: 'flex', justifyContent: 'center'}}>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <Formik
+                initialValues={{
+                  name: "",
+                  address: "",
+                  pincode: "",
+                  contact: "",
+                  description: "",
+                }}
+                validate={(values) => {
+                  const errors = {};
+                  if (!values.name) {
+                    errors.name = "This Field is required";
+                  }
+                  if (!values.address) {
+                    errors.address = "This Field is required";
+                  }
+                  if (!values.pincode) {
+                    errors.pincode = "This Field is required";
+                  }
+                  if (!values.contact) {
+                    errors.contact = "This Field is required";
+                  }
+                  if (!values.description) {
+                    errors.description = "This Field is required";
+                  }
+                  return errors;
+                }}
+                onSubmit={(values) => {
+                  submitForm(values);
+                }}
+              >
+                {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                }) => (
+                  <form>
+                    <TextField
+                      variant="outlined"
+                      name="name"
+                      label="Name"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.name}
+                      fullWidth
+                      style={styles.inputStyle}
+                    />
+                    {errors.name && touched.name && errors.name}
+                    <TextField
+                      variant="outlined"
+                      name="address"
+                      label="Address"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.address}
+                      fullWidth
+                      style={styles.inputStyle}
+                    />
+                    {errors.address && touched.address && errors.address}
+                    <TextField
+                      variant="outlined"
+                      name="pincode"
+                      label="Pincode"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.pincode}
+                      fullWidth
+                      style={styles.inputStyle}
+                    />
+                    {errors.pincode && touched.pincode && errors.pincode}
+                    <TextField
+                      variant="outlined"
+                      name="contact"
+                      label="Contact"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.contact}
+                      fullWidth
+                      style={styles.inputStyle}
+                    />
+                    {errors.contact && touched.contact && errors.contact}
+                    <TextField
+                      variant="outlined"
+                      name="description"
+                      label="Description"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.description}
+                      fullWidth
+                      style={styles.inputStyle}
+                    />
+                    {errors.description &&
+                      touched.description &&
+                      errors.description}
 
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <Formik
-              initialValues={{
-                name: "",
-                address: "",
-                pincode: "",
-                contact: "",
-                description: "",
-              }}
-              validate={(values) => {
-                const errors = {};
-                if (!values.name) {
-                  errors.name = "This Field is required";
-                }
-                if (!values.address) {
-                  errors.address = "This Field is required";
-                }
-                if (!values.pincode) {
-                  errors.pincode = "This Field is required";
-                }
-                if (!values.contact) {
-                  errors.contact = "This Field is required";
-                }
-                if (!values.description) {
-                  errors.description = "This Field is required";
-                }
-                return errors;
-              }}
-              onSubmit={(values) => {
-                submitForm(values);
-              }}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-              }) => (
-                <form>
-                  <TextField
-                    variant="outlined"
-                    name="name"
-                    label="Name"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.name}
-                    fullWidth
-                    style={styles.inputStyle}
-                  />
-                  {errors.name && touched.name && errors.name}
-                  <TextField
-                    variant="outlined"
-                    name="address"
-                    label="Address"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.address}
-                    fullWidth
-                    style={styles.inputStyle}
-                  />
-                  {errors.address && touched.address && errors.address}
-                  <TextField
-                    variant="outlined"
-                    name="pincode"
-                    label="Pincode"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.pincode}
-                    fullWidth
-                    style={styles.inputStyle}
-                  />
-                  {errors.pincode && touched.pincode && errors.pincode}
-                  <TextField
-                    variant="outlined"
-                    name="contact"
-                    label="Contact"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.contact}
-                    fullWidth
-                    style={styles.inputStyle}
-                  />
-                  {errors.contact && touched.contact && errors.contact}
-                  <TextField
-                    variant="outlined"
-                    name="description"
-                    label="Description"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.description}
-                    fullWidth
-                    style={styles.inputStyle}
-                  />
-                  {errors.description &&
-                    touched.description &&
-                    errors.description}
-
-                  <input
-                    type="file"
-                    name="image"
-                    multiple
-                    onChange={handleImage}
-                    required
-                  />
-                  <br></br>
-                  <div style={{ textAlign: "center" }}>
-                    <Button
-                      size="large"
-                      onClick={handleSubmit}
-                      variant="contained"
-                      color="secondary"
-                      style={{ marginTop: 20, width: 156 }}
-                    >
-                      Submit
-                    </Button>
-                  </div>
-                </form>
-              )}
-            </Formik>
+                    <input
+                      type="file"
+                      name="image"
+                      multiple
+                      onChange={handleImage}
+                      required
+                    />
+                    <br></br>
+                    <div style={{ textAlign: "center" }}>
+                      <Button
+                        size="large"
+                        onClick={handleSubmit}
+                        variant="contained"
+                        color="secondary"
+                        style={{ marginTop: 20, width: 156 }}
+                      >
+                        Submit
+                      </Button>
+                    </div>
+                  </form>
+                )}
+              </Formik>
+            </div>
           </div>
         </div>
       </div>
