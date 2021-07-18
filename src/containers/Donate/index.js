@@ -43,9 +43,15 @@ export default function Donate() {
       <h1></h1>
       <ToastContainer position="bottom-right" />
       <img style={{ width: "100%" }} src={DonationImage} />
-      <div style={{marginTop: 50, display: 'flex', justifyContent: 'center'}}>
+      <div style={{ marginTop: 50, display: "flex", justifyContent: "center" }}>
         <div className="container">
           <div className="row">
+            <div className="col-md-6">
+              <div style={{ textAlign: "center" }}>
+                <h2>Donate your products here</h2>
+                <h2>with HI foundation</h2>
+              </div>
+            </div>
             <div className="col-md-6">
               <Formik
                 initialValues={{
