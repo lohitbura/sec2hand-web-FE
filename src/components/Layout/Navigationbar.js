@@ -194,11 +194,11 @@ class Navigationbar extends React.Component {
             )}
           </div>
 
-          {/* <div>
+          <div>
             <Link to="#" className="menu-bars">
               <FaIcons.FaBars onClick={this.showSidebar} />
             </Link>
-          </div> */}
+          </div>
         </div>
 
         <nav className={this.state.sidebar ? "nav-menu active" : "nav-menu"}>
@@ -223,9 +223,9 @@ class Navigationbar extends React.Component {
               onClick={() => this.setState({ activemenu: 3 })}
               className={activemenu === 3 ? "navText activemenu " : "nav-text"}
             >
-              <Link to="/dealer">
-                <BsIcons.BsSearch className="icons" />
-                Find dealer
+              <Link to="/donate">
+                <FaIcons.FaDonate className="icons" />
+                Donate
               </Link>
             </li>
 

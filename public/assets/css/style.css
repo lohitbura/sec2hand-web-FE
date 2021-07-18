@@ -1412,6 +1412,10 @@ footer .inner-content p a {
     margin-top: 55px;
   }
 
+  .menu-bars {
+    display: none;
+  }
+
   .searchBar {
     display: flex;
     justify-content: center;
