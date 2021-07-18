@@ -13,3 +13,14 @@ export const fetchBlogAPI = async () => {
     throw err;
   }
 };
+
+export const blogDetailAPI = async (id) => {
+  try {
+    let response = await axios.get(API_URL.fetchBlogDetailURL(id), header());
+    if (response.status == 200) {
+      return response.data;
+    }
+  } catch (err) {
+    throw err;
+  }
+};

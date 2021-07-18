@@ -10,6 +10,7 @@ import HomeBanner from "../../components/Home/HomeBanner";
 import ProductBox from "../../components/Home/ProductBox";
 import { connect } from "react-redux";
 import BlogList from "../Blog/BlogList";
+import CustomerReview from "./CustomerReview";
 
 const HomeScreen = ({ selectedCity }) => {
   const [products, setProducts] = useState([]);
@@ -96,6 +97,7 @@ const HomeScreen = ({ selectedCity }) => {
           </div>
         </div>
       </div>
+      <CustomerReview />
       <BlogList />
       <AboutUs />
     </div>

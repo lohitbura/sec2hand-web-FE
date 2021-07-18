@@ -23,15 +23,18 @@
     "react-image-magnifiers": "^1.4.0",
     "react-image-magnify": "^2.1.1",
     "react-loader-spinner": "^3.1.14",
+    "react-multi-carousel": "^2.6.3",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.1",
+    "react-slick": "^0.28.1",
     "react-toastify": "^6.0.8",
     "react-touch-carousel": "^0.9.4",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.2",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.1"
   },
   "scripts": {

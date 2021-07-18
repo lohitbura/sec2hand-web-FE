@@ -47,5 +47,7 @@ export const brandListURL = `${endpoint}/brand-list`;
 export const laptopCompanyListURL = `${endpoint}/laptop-company-list`;
 export const createDonationURL = `${endpoint}/create-donate`;
 export const fetchBlogURL = `${endpoint}/blog-list`;
+export const fetchCustomerReviewURL = `${endpoint}/customer-review`;
+export const fetchBlogDetailURL = (id) => `${endpoint}/blog/${id}`;
 export const fetchFeaturedProductListURL = (offset, city) =>
   `${endpoint}/featured-product-list?offset=${offset}&city=${city}&limit=3`;
