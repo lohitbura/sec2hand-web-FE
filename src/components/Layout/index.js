@@ -47,7 +47,7 @@ class CustomLayout extends React.Component {
         {this.props.children}
 
         <footer style={{ background: "black", marginTop: "50px" }}>
-          <div className="row" style={{ width: "70%" }}>
+          <div className="row">
             <div className="col-md-6" style={{ marginTop: 70 }}>
               <ul className="social-icons">
                 <li>
@@ -107,6 +107,7 @@ class CustomLayout extends React.Component {
                 />
               </a>
             </div>
+
             <div className="col-md-6">
               <div className="inner-content">
                 <p>About our office</p>
