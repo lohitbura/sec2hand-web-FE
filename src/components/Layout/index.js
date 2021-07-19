@@ -7,6 +7,7 @@ import { getUserProfileIdURL } from "../../store/constants";
 
 import Navigationbar from "./Navigationbar";
 import Category from "./Category";
+import { PRIMARY_COLOR } from "../../services/data";
 
 class CustomLayout extends React.Component {
   state = {
@@ -124,7 +125,7 @@ class CustomLayout extends React.Component {
                   </Link>
                 </p>
                 <p style={{ color: "white" }}>
-                  Copyright © 2020 Company Name : <a href="">Sec2Hand</a>
+                  Copyright © 2020 Company Name : <a style={{color: PRIMARY_COLOR}}>Sec2Hand</a>
                 </p>
               </div>
             </div>

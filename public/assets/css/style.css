@@ -1377,10 +1377,10 @@ footer .inner-content p a {
 
 .searchBtn {
   padding: 10px 30px;
-  border: 2px solid rgb(131, 17, 103);
+  border: 2px solid linear-gradient(110deg, #d07953, #e6b05b );
   border-radius: 20px;
   background-color: white;
-  color: rgb(131, 17, 103);
+  color: linear-gradient(110deg, #d07953, #e6b05b );
   box-shadow: 0px 2px 10px rgba(131, 130, 130, 0.5),
     1px 2px 5px rgba(133, 132, 132, 0.3), 4px 3px 10px rgba(175, 175, 190, 0.1);
   font-size: 15px;

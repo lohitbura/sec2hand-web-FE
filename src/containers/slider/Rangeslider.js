@@ -5,6 +5,7 @@ import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import "./rangeslider.css";
+import { PRIMARY_COLOR } from "../../services/data";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -30,7 +31,7 @@ ValueLabelComponent.propTypes = {
 
 const AirbnbSlider = withStyles({
   root: {
-    color: "#c90c6a",
+    color: PRIMARY_COLOR,
     height: 3,
     padding: "13px 0",
   },
