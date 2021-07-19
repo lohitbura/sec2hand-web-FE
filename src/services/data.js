@@ -1,3 +1,5 @@
+export const PRIMARY_COLOR = '#e6b05b'
+
 export const CATEGORY_TYPE = [
   {
     title: "Electronic",

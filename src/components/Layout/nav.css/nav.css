@@ -17,7 +17,7 @@
   margin-left: auto;
   font-size: 1.5rem;
   background: none;
-  color: rgb(131, 17, 121);
+  color: #e6b05b;
   margin-right: 80px;
   outline: none;
 }
@@ -63,12 +63,12 @@
   border-radius: 4px;
 }
 .nav-text a:hover {
-  border-left: 4px solid rgb(131, 17, 121);
-  color: rgb(131, 17, 121);
+  border-left: 4px solid #d07953;
+  color: #d07953;
 }
 .navText.activemenu {
-  border-left: 4px solid rgb(131, 17, 121);
-  border-right: 4px solid rgb(131, 17, 121);
+  border-left: 4px solid #d07953;
+  border-right: 4px solid #d07953;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +78,7 @@
 }
 .navText.activemenu a {
   text-decoration: none;
-  color: rgb(131, 17, 121);
+  color: #d07953;
   font-size: 16px;
   font-weight: 600;
   width: 100%;
@@ -100,13 +100,13 @@
   align-items: center;
 }
 .closebtn {
-  color: rgb(131, 17, 121) !important;
+  color: #d07953 !important;
   margin-left: 2rem;
   font-size: 2rem;
   background: none;
 }
 .closebtn:hover {
-  color: rgb(131, 17, 121) !important;
+  color: #d07953 !important;
   border-radius: 10px;
 }
 .icons,
@@ -158,8 +158,7 @@ li a .icons {
 .MuiButton-root {
   margin-left: 30px !important;
   margin-right: 30px !important;
-  background: linear-gradient(110deg, rgb(131, 17, 121), #c90c6a );
-  /* border: 2px solid rgb(131, 17, 121) !important; */
+  background: linear-gradient(110deg, #d07953, #e6b05b );
   box-shadow: 0 3px 1px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(0, 0, 0, 0.02);
   background-color: white;

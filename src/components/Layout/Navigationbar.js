@@ -130,7 +130,7 @@ class Navigationbar extends React.Component {
                   width: "69px",
                   marginTop: "-12px",
                 }}
-                src="/assets/images/Sec2Hand_Logo_3.png"
+                src="/assets/images/sec2hand_logo.png"
                 alt=""
               />
             </Link>

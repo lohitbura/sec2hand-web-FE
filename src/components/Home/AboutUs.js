@@ -1,5 +1,5 @@
 import React from "react";
-
+import Button from "@material-ui/core/Button";
 export default function AboutUs() {
   return (
     <div>
@@ -30,7 +30,6 @@ export default function AboutUs() {
                   We are here to make organized second hand market. We are with
                   you 24*7.
                 </p>
-                
               </div>
             </div>
           </div>
@@ -50,21 +49,21 @@ export default function AboutUs() {
 
             <div className="col-md-4 text-center">
               <i
-                style={{ fontSize: 50, color: "#ba0d6d" }}
+                style={{ fontSize: 50, color: "#e6b05b" }}
                 className="fa fa-phone"
               ></i>
               <h5>Contact - 7073264533, 7425054434</h5>
             </div>
             <div className="col-md-4 text-center">
               <i
-                style={{ fontSize: 50, color: "#ba0d6d" }}
+                style={{ fontSize: 50, color: "#e6b05b" }}
                 class="fa fa-envelope"
               ></i>
               <h5>support@sec2hand.com</h5>
             </div>
             <div className="col-md-4 text-center">
               <i
-                style={{ fontSize: 50, color: "#ba0d6d" }}
+                style={{ fontSize: 50, color: "#e6b05b" }}
                 class="fa fa-map-marker"
               ></i>
               <h5>
@@ -139,13 +138,9 @@ export default function AboutUs() {
                       </div>
                       <div className="col-lg-12 text-center">
                         <fieldset>
-                          <button
-                            type="submit"
-                            id="form-submit"
-                            className="filled-button"
-                          >
-                            Send Message
-                          </button>
+                          <Button size="small" color="primary">
+                            Send message
+                          </Button>
                         </fieldset>
                       </div>
                     </div>
