@@ -128,7 +128,6 @@ class Navigationbar extends React.Component {
               <img
                 style={{
                   width: "69px",
-                  marginTop: "-12px",
                 }}
                 src="/assets/images/sec2hand_logo.png"
                 alt=""
