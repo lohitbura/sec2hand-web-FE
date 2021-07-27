@@ -29,6 +29,7 @@ import HomeScreen from "./containers/Home/index";
 import ProductCategoryList from "./containers/product/productCategoryList";
 import Donate from "./containers/Donate";
 import BlogDetail from "./containers/Blog/BlogDetail";
+import DealerPolicy from "./containers/dealer_policy";
 
 const BaseRouter = () => (
   <Hoc>
@@ -58,6 +59,7 @@ const BaseRouter = () => (
     <Route exact path="/change-password" component={ChangePassword} />
     <Route exact path="/donate" component={Donate} />
     <Route exact path="/blog/:id" component={BlogDetail} />
+    <Route exact path="/dealer-policy" component={DealerPolicy} />
   </Hoc>
 );
 
