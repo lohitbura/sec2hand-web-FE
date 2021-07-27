@@ -15,6 +15,7 @@ import { getUserProfileIdURL } from "../../store/constants";
 import "./nav.css/nav.css";
 import Button from "@material-ui/core/Button";
 import { Modal } from "react-bootstrap";
+import CityFilter from "./CityFilter";
 
 class Navigationbar extends React.Component {
   constructor(props) {
@@ -127,32 +128,67 @@ class Navigationbar extends React.Component {
               <img
                 style={{
                   width: "69px",
-                  marginTop: "-12px",
                 }}
-                src="/assets/images/Sec2Hand_Logo_3.png"
+                src="/assets/images/sec2hand_logo.png"
                 alt=""
               />
             </Link>
           </div>
+          <CityFilter />
+
+          {/* search */}
+          <div className="col-md-5 text-center searchM">
+            <form className="d-flex searchBar searchHide">
+              <input
+                type="search"
+                placeholder="Find Cars, Mobile, Bikes and more...... "
+                //   onChange={this.onProductTypeChange}
+                name="productType"
+              />
+              <button
+                className="btn"
+                type="submit"
+                //   onClick={(e) => this.productFilterSubmit(e)}
+              >
+                <ImIcons.ImSearch className="icons" />
+              </button>
+            </form>
+          </div>
+          <div style={{marginRight: -40}} className="hidden">
+            <a className="hidden">
+              <Link to="/donate">
+                <Button varient="outlined">Donate</Button>
+              </Link>
+            </a>
+          </div>
+          {/* search end */}
           <div>
             {authenticated ? (
-              <div className="hidden" type="button">
-                <Link
-                  to=""
-                  style={{ cursor: "pointer" }}
-                  className="nav-link"
-                  onClick={() => this.props.logout()}
-                >
-                  Logout
-                </Link>
-              </div>
-            ) : (
-              <div className="hidden">
-                <a className="  hidden">
-                  <Link to="/login">
-                    <Button varient="outlined">Login</Button>
+              <div
+                style={{ marginRight: -20 }}
+                className="hidden"
+                type="button"
+              >
+                <a className="hidden">
+                  <Link
+                    to=""
+                    style={{ cursor: "pointer" }}
+                    className="nav-link"
+                    onClick={() => this.props.logout()}
+                  >
+                    <Button varient="outlined">Logout</Button>
                   </Link>
                 </a>
+              </div>
+            ) : (
+              <div style={{ display: "flex" }}>
+                <div style={{ marginRight: -20 }} className="hidden">
+                  <a className="hidden">
+                    <Link to="/login">
+                      <Button varient="outlined">Login</Button>
+                    </Link>
+                  </a>
+                </div>
               </div>
             )}
           </div>
@@ -186,9 +222,9 @@ class Navigationbar extends React.Component {
               onClick={() => this.setState({ activemenu: 3 })}
               className={activemenu === 3 ? "navText activemenu " : "nav-text"}
             >
-              <Link to="/dealer">
-                <BsIcons.BsSearch className="icons" />
-                Find dealer
+              <Link to="/donate">
+                <FaIcons.FaDonate className="icons" />
+                Donate
               </Link>
             </li>
 

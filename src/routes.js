@@ -25,10 +25,15 @@ import CustomerVerifyOtp from "./containers/customerVerifyOtp";
 import SendOtp from "./containers/Forgot password/sendOtp";
 import VerifyOtp from "./containers/Forgot password/verifyOtp";
 import ChangePassword from "./containers/Forgot password/changePassword";
+import HomeScreen from "./containers/Home/index";
+import ProductCategoryList from "./containers/product/productCategoryList";
+import Donate from "./containers/Donate";
+import BlogDetail from "./containers/Blog/BlogDetail";
+import DealerPolicy from "./containers/dealer_policy";
 
 const BaseRouter = () => (
   <Hoc>
-      <ReactToast/>
+    <ReactToast />
     <Route path="/login" component={Login} />
     <Route path="/signup" component={Signup} />
     <Route path="/dealer-login" component={DealerLogin} />
@@ -44,13 +49,17 @@ const BaseRouter = () => (
     <Route path="/postEdit/:id" component={PostEdit} />
     <Route path="/post/:id" component={PostDetail} />
     <Route path="/about" component={AboutUs} />
+    <Route path="/product-list/:category" component={ProductCategoryList} />
     <Route path="/contact" component={ContactUs} />
     <Route path="/privacy" component={Privacy} />
-    <Route exact path="/" component={HomepageLayout} />
+    <Route exact path="/" component={HomeScreen} />
     <Route exact path="/customer-verify-otp" component={CustomerVerifyOtp} />
     <Route exact path="/send-otp" component={SendOtp} />
     <Route exact path="/verify-otp" component={VerifyOtp} />
     <Route exact path="/change-password" component={ChangePassword} />
+    <Route exact path="/donate" component={Donate} />
+    <Route exact path="/blog/:id" component={BlogDetail} />
+    <Route exact path="/dealer-policy" component={DealerPolicy} />
   </Hoc>
 );
 

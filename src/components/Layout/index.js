@@ -6,6 +6,8 @@ import axios from "axios";
 import { getUserProfileIdURL } from "../../store/constants";
 
 import Navigationbar from "./Navigationbar";
+import Category from "./Category";
+import { PRIMARY_COLOR } from "../../services/data";
 
 class CustomLayout extends React.Component {
   state = {
@@ -38,12 +40,15 @@ class CustomLayout extends React.Component {
           </div>
         </div>
 
-        <div className="secondHeader ">
+        <div className="secondHeader">
           <Navigationbar />
+          <Category />
         </div>
+
         {this.props.children}
+
         <footer style={{ background: "black", marginTop: "50px" }}>
-          <div className="row" style={{ width: "70%" }}>
+          <div className="row">
             <div className="col-md-6" style={{ marginTop: 70 }}>
               <ul className="social-icons">
                 <li>
@@ -103,6 +108,7 @@ class CustomLayout extends React.Component {
                 />
               </a>
             </div>
+
             <div className="col-md-6">
               <div className="inner-content">
                 <p>About our office</p>
@@ -119,7 +125,7 @@ class CustomLayout extends React.Component {
                   </Link>
                 </p>
                 <p style={{ color: "white" }}>
-                  Copyright © 2020 Company Name : <a href="">Sec2Hand</a>
+                  Copyright © 2020 Company Name : <a style={{color: PRIMARY_COLOR}}>Sec2Hand</a>
                 </p>
               </div>
             </div>

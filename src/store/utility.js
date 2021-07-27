@@ -1,6 +1,15 @@
 export const updateObject = (oldObject, updatedProperties) => {
   return {
     ...oldObject,
-    ...updatedProperties
+    ...updatedProperties,
+  };
+};
+
+export const header = () => {
+  const token = localStorage.getItem("token");
+  return {
+    header: {
+      Authorization: `Token ${token}`,
+    },
   };
 };
