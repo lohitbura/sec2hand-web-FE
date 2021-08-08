@@ -1,7 +1,7 @@
 // export const URL = "https://backend.sec2hand.com";
-export const URL = "https://harsh9671.pythonanywhere.com";
+// export const URL = "https://harsh9671.pythonanywhere.com";
 // export const URL= "https://priyanshu11.pythonanywhere.com";
-// export const URL = "http://localhost:8000";
+export const URL = "http://localhost:8000";
 
 const apiURL = "/api";
 

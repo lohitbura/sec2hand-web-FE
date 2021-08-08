@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { blogDetailAPI } from "../../store/actions/blog";
 import { useParams } from "react-router-dom";
+import ReactHtmlParser from "react-html-parser";
 
 export default function BlogDetail() {
   const params = useParams();
@@ -14,15 +15,18 @@ export default function BlogDetail() {
   }, []);
 
   return (
-    <div style={{marginTop: 50}}>
+    <div style={{ marginTop: 50 }}>
       <div className="container">
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div>
           <div>
             <h1>{blog.title}</h1>
-            <img style={{width: "70%", height: "70%"}} src={`${blog.image && blog.image[0].image}`} />
-            <p style={{marginTop: 20, fontSize: 15}}>
-                {blog.description}
-            </p>
+            <img
+              style={{ width: "70%", height: "30%" }}
+              src={`${blog.image && blog.image[0].image}`}
+            />
+            <div style={{ marginTop: 20, display: "block" }}>
+              {ReactHtmlParser(blog.description)}
+            </div>
           </div>
         </div>
       </div>
