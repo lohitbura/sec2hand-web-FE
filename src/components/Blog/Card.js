@@ -7,6 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import ReactHtmlParser from "react-html-parser";
+
 
 const useStyles = makeStyles({
   root: {
@@ -31,7 +33,7 @@ export default function CardContainer({ data }) {
             {data.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            <p className="lines-clap">{data.description}</p>
+            <p className="lines-clap">{ReactHtmlParser(data.description)}</p>
           </Typography>
         </CardContent>
       </CardActionArea>
