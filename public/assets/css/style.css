@@ -41,6 +41,7 @@ h6 {
   border-radius: 50px !important;
 }
 
+
 .MuiOutlinedInput-input {
   padding: 18.5px 14px !important
 }
@@ -1423,7 +1424,7 @@ footer .inner-content p a {
     width: 50%;
     margin-left: 20%;
     margin-top: 0px;
-    border: 1px solid grey !important;
+    /* border: 1px solid grey !important; */
     border-radius: 40px m !important;
     z-index: 999;
     padding: 6.5px 3px !important;
@@ -1454,6 +1455,7 @@ footer .inner-content p a {
   }
 }
 
+
 /* *************************************************************************************************
                          media query 
 ***************************************************************************************** */
@@ -1468,8 +1470,8 @@ footer .inner-content p a {
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 2px solid rgb(131, 17, 121);
-    border-radius: 20px;
+   /*  border: 2px solid rgb(131, 17, 121);
+    border-radius: 20px; */
   }
 
   .searchBar input {

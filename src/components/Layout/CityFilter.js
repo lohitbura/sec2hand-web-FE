@@ -41,11 +41,11 @@ const CityFilter = ({ cityData, fetchCityList, postCity }) => {
   }, []);
 
   return (
-    <div>
-      <FormControl variant="outlined" className={classes.formControl}>
+    <div style={{width:150,backgroundColor:'#fff',borderRadius:50,}}>
+      {/* <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">
           Search place
-        </InputLabel>
+        </InputLabel> */}
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
@@ -58,7 +58,7 @@ const CityFilter = ({ cityData, fetchCityList, postCity }) => {
               return <MenuItem value={item.name}>{item.name}</MenuItem>;
             })}
         </Select>
-      </FormControl>
+     {/*  </FormControl> */}
     </div>
   );
 };

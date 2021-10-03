@@ -18,17 +18,20 @@ export default function AboutUs() {
               <div className="left-content">
                 <h4>About us</h4>
                 <p>
-                  Sec2Hand is a leading e-commerce platform. which offers you
-                  the service to buy and sell second hand Bikes, Cars and
-                  Mobiles with trusted Dealers.
+                  Sec2hand is a leading e-commerce platform for
+                  second hand products,
+                  which offers you the service to buy and sell second hand products.
+                  The main purpose of this website is to make your life more convenient.
+                  We are proud to introduce you all kinds of used products.
                 </p>
               </div>
               <br />
               <div className="left-content">
                 <h4>Vision & Mission</h4>
                 <p>
-                  We are here to make organized second hand market. We are with
-                  you 24*7.
+                Our aim is to provide an easy way for users to get access to the best brands by 
+                offering real reviews for each product.
+                 We are here to make organized second hand market.
                 </p>
               </div>
             </div>

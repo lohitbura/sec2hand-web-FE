@@ -25,10 +25,44 @@ export default function Category() {
     history.replace(`/product-list/${item.value}`);
   };
 
+  const data =[
+    {name:'CATEGORIES',title:true},
+    {name:'CARS'},
+    {name:'BIKES',value:'bike'},
+    {name:'MOBILES',value:'bike'},
+    {name:'ELECTRONICS',value:'bike'},
+    {name:'FURNITURE',value:'bike'},
+    {name:'PROPERTY',value:'bike'},
+    {name:'BOOKS',value:'bike'},
+    {name:'SPORTS',value:'bike'}
+  ]
+
   return (
     <>
-      <div style={{ paddingTop: 100 }}></div>
-      <div style={{ margin: "0 50px" }}>
+      <div style={{ paddingTop: 70 }}>
+      <div className="row" style={{padding:8,backgroundColor:'#5B1C03'}}>
+          {CATEGORY_TYPE.map((item) => (
+             <div className="col-sm"
+             onClick={() => handleClick(item)}
+              style={!item.title1?{fontSize:17,fontWeight:'bold',color:'#fff'}:{fontSize:22,marginRight:24,fontWeight:'bold',color:'#fff'}}>
+             {item.title} 
+             {item && item.category ? (
+                     <ArrowDropDownIcon />
+                  ) : item.parent && !item.title1 ? (
+                    <ArrowDropUpIcon />
+                  ) : null}
+           </div>
+          )
+            
+          )}
+          
+
+      </div>
+         
+      </div>
+
+
+     {/*  <div style={{ margin: "0 50px" }}>
         <div className="row">
           {CATEGORY_TYPE.map((item) => {
             return (
@@ -65,7 +99,7 @@ export default function Category() {
           ) : null}
         </div>
       </div>
-    </>
+   */}  </>
   );
 }
 
