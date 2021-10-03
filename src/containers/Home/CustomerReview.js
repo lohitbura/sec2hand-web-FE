@@ -89,8 +89,14 @@ export default function CustomerReview() {
           {data.map((item) => {
             return (
               <div style={{ width: 345 }}>
-                <div class="block-text rel zmin">
-                  <a title="" href="#">
+                <div class="block-text rel zmin" style={{    background: '#fff',
+    border: '1px solid transparent',
+    boxShadow: '0 2px 5px 1px rgb(64 60 67 / 16%)',}}>
+                <img
+                    style={{ width: 50 }}
+                    src="https://www.striata.com/wp-content/uploads/2017/10/User-access-1-b-1.png"
+                  />
+                  <a title="" href="#" style={{marginLeft:24}}>
                     {item.review_title}
                   </a>
                   <div class="mark">
@@ -109,16 +115,16 @@ export default function CustomerReview() {
                     </div>
                   </div>
                   <p>{item.review_description}</p>
-                  <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                  {/* <ins class="ab zmin sprite sprite-i-triangle block"></ins> */}
                 </div>
-                <div class="person-text rel">
+               {/*  <div class="person-text rel">
                   <img
                     style={{ width: 50 }}
                     src="https://www.striata.com/wp-content/uploads/2017/10/User-access-1-b-1.png"
                   />
                   <a>{item.customer_name}</a>
                   <i>from Glasgow, Scotland</i>
-                </div>
+                </div> */}
               </div>
             );
           })}
