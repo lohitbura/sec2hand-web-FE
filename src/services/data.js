@@ -2,14 +2,8 @@ export const PRIMARY_COLOR = '#e6b05b'
 
 export const CATEGORY_TYPE = [
   {
-    title: "CATEGORIES",
-    title1:true,
-    parent: true,
-    //value: "mobile",
-  },
-  {
     title: "Electronic",
-    parent: false,
+    parent: true,
     value: "electronic",
     category: [
       {
@@ -44,7 +38,7 @@ export const CATEGORY_TYPE = [
   },
   {
     title: "Bike",
-    parent: false,
+    parent: true,
     value: "bike",
     category: [
       {

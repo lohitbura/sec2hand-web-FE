@@ -17,6 +17,7 @@ import Button from "@material-ui/core/Button";
 import { Modal } from "react-bootstrap";
 import CityFilter from "./CityFilter";
 import Sec2hand from '../../assets/images/sec2handlogo.png'
+import background from '../../assets/images/background-top.png'
 class Navigationbar extends React.Component {
   constructor(props) {
     super(props);
@@ -91,7 +92,7 @@ class Navigationbar extends React.Component {
     const { username, activemenu, showModals } = this.state;
 
     return (
-      <>
+      <div >
         <Modal show={showModals} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Login Yourself as</Modal.Title>
@@ -122,7 +123,7 @@ class Navigationbar extends React.Component {
           </Modal.Body>
         </Modal>
 
-        <div className="navBar" ref={this.toggleContainer}>
+        <div style={{backgroundImage: `url(${background})`}} className="navBar" ref={this.toggleContainer}>
           <div className="logoimgNav">
             <Link to="/">
               <img
@@ -325,7 +326,7 @@ class Navigationbar extends React.Component {
             )}
           </ul>
         </nav>
-      </>
+      </div>
     );
   }
 }
