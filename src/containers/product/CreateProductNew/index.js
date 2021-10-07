@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, TextArea } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import CarForm from "./carForm";
 import BikeForm from "./bikeForm";
 import BookForm from "./bookForm";
 import MobileForm from "./mobileForm";
+import FurnitureForm from "./furnitureForm";
+import SportForm from "./sportForm";
+import PropertyForm from "./propertyForm";
+import ElectronicForm from "./electronicForm";
 
 export default function CreateProductNew() {
   const [selectedCategory, setSelectedCategory] = useState("car");
@@ -20,6 +24,14 @@ export default function CreateProductNew() {
         return <BookForm />;
       case "mobile":
         return <MobileForm />;
+      case "furniture":
+        return <FurnitureForm />;
+      case "sport":
+        return <SportForm />;
+      case "property":
+        return <PropertyForm />;
+      case "electronic":
+        return <ElectronicForm />;
     }
   };
 

@@ -6,7 +6,7 @@ import { fetchBrandListAPI } from "../../../store/actions/brands";
 import { createNewProductAPI } from "../../../store/actions/product";
 import { Description } from "@material-ui/icons";
 
-export default function FurnitureForm() {
+export default function ElectronicForm() {
   const [images, setimages] = useState();
 
   const handleImage = (e) => {
@@ -36,7 +36,7 @@ export default function FurnitureForm() {
       form_data.append("images", images[i]);
     }
 
-    createNewProductAPI("furniture", form_data);
+    createNewProductAPI("electronic", form_data);
   };
 
   return (
@@ -58,9 +58,14 @@ export default function FurnitureForm() {
                 required
               >
                 <option></option>
-                <option value="bed_wardrobe">Bed wardrobe</option>
-                <option value="sofa_dining">Sofa dining</option>
-                <option value="other_home_product">Other home product</option>
+                <option value="laptop">Laptop</option>
+                <option value="camera">Camera</option>
+                <option value="games">Games</option>
+                <option value="fridge">Fridget</option>
+                <option value="ac">Ac</option>
+                <option value="washing-machine">Washing machine</option>
+                <option value="printer">Printer</option>
+                <option value="tv">Tv</option>
               </select>
             </Form.Field>
             <Form.Field>

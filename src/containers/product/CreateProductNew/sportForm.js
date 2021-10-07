@@ -6,7 +6,7 @@ import { fetchBrandListAPI } from "../../../store/actions/brands";
 import { createNewProductAPI } from "../../../store/actions/product";
 import { Description } from "@material-ui/icons";
 
-export default function FurnitureForm() {
+export default function SportForm() {
   const [images, setimages] = useState();
 
   const handleImage = (e) => {
@@ -30,13 +30,13 @@ export default function FurnitureForm() {
     form_data.append("price", values.price);
     form_data.append("title", values.title);
     form_data.append("description", values.description);
-    form_data.append("type", values.type);
+    form_data.append("mobile_number", values.mobile_number);
 
     for (let i = 0; i < images.length; i++) {
       form_data.append("images", images[i]);
     }
 
-    createNewProductAPI("furniture", form_data);
+    createNewProductAPI("sport", form_data);
   };
 
   return (
@@ -49,20 +49,6 @@ export default function FurnitureForm() {
       >
         {({ values, setFieldValue, handleChange, handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
-            <Form.Field>
-              <label>Type</label>
-              <select
-                onChange={handleChange}
-                name="type"
-                className="form-control"
-                required
-              >
-                <option></option>
-                <option value="bed_wardrobe">Bed wardrobe</option>
-                <option value="sofa_dining">Sofa dining</option>
-                <option value="other_home_product">Other home product</option>
-              </select>
-            </Form.Field>
             <Form.Field>
               <label>Price</label>
               <input
@@ -92,6 +78,16 @@ export default function FurnitureForm() {
                 name="description"
                 onChange={handleChange}
                 placeholder="Description"
+                required
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Mobile number</label>
+              <input
+                type="text"
+                name="mobile_number"
+                onChange={handleChange}
+                placeholder="Mobile number"
                 required
               />
             </Form.Field>
