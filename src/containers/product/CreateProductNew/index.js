@@ -8,6 +8,8 @@ import FurnitureForm from "./furnitureForm";
 import SportForm from "./sportForm";
 import PropertyForm from "./propertyForm";
 import ElectronicForm from "./electronicForm";
+import { isAuthenticated } from "../../../store/utility";
+import { Redirect } from "react-router";
 
 export default function CreateProductNew() {
   const [selectedCategory, setSelectedCategory] = useState("car");
@@ -34,6 +36,10 @@ export default function CreateProductNew() {
         return <ElectronicForm />;
     }
   };
+
+  if (!isAuthenticated()) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div style={{ width: "40%", margin: "auto", marginTop: 50 }}>

@@ -6,8 +6,7 @@ import { header } from "../utility";
 export const fetchFeaturedProductListAPI = async (offset, city) => {
   try {
     let response = await axios.get(
-      API_URL.fetchFeaturedProductListURL(offset, city),
-      header()
+      API_URL.fetchFeaturedProductListURL(offset, city)
     );
     if (response.status == 200) {
       let data = response.data.results;
@@ -33,11 +32,7 @@ export const fetchFeaturedProductListAPI = async (offset, city) => {
 
 export const fetchProductListAPI = async (data) => {
   try {
-    let response = await axios.get(
-      API_URL.productListURL(),
-      { params: data },
-      header()
-    );
+    let response = await axios.get(API_URL.productListURL(), { params: data });
     if (response.status == 200) {
       return {
         data: response.data.products,
@@ -72,7 +67,7 @@ const fetchProductUrl = (type) => {
 
 export const createNewProductAPI = async (type, data) => {
   try {
-    let response = await axios.post(fetchProductUrl(type), data, header());
+    let response = await axios.post(fetchProductUrl(type), data);
     if (response.status == 201) {
       toast.success("Product submit");
     }

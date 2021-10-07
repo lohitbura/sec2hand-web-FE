@@ -5,9 +5,10 @@ import * as ImIcons from "react-icons/im";
 import { Grid } from "@material-ui/core";
 import Uncle from "../../assets/images/uncle1.png";
 import background from "../../assets/images/background-top.png";
+import { Link } from "react-router-dom";
 export default function HomeBanner() {
   return (
-    <div style={{backgroundImage: `url(${background})`,height: '100vh'}}>
+    <div style={{ backgroundImage: `url(${background})`, height: "100vh" }}>
       <Grid container spacing={0}>
         <Grid lg={6} xs={12} item>
           <div style={{ padding: "14% 23%" }}>
@@ -36,6 +37,7 @@ export default function HomeBanner() {
             <p style={{ fontSize: 50, color: "#5B1C03", fontWeight: "600" }}>
               SEC2HAND
             </p>
+
             <button
               style={{
                 padding: "6px 22px",
@@ -49,20 +51,23 @@ export default function HomeBanner() {
             >
               BUY
             </button>
-            <button
-              style={{
-                padding: "6px 22px",
-                backgroundColor: "#5B1C03",
-                color: "#E6B05B",
-                borderRadius: 20,
-                fontSize: 20,
-                border: "none",
-                fontWeight: "bold",
-                marginLeft: 24,
-              }}
-            >
-              SELL
-            </button>
+
+            <Link to="/product-create">
+              <button
+                style={{
+                  padding: "6px 22px",
+                  backgroundColor: "#5B1C03",
+                  color: "#E6B05B",
+                  borderRadius: 20,
+                  fontSize: 20,
+                  border: "none",
+                  fontWeight: "bold",
+                  marginLeft: 24,
+                }}
+              >
+                SELL
+              </button>
+            </Link>
           </div>
         </Grid>
 
