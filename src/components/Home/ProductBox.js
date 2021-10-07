@@ -50,18 +50,16 @@ export default function ProductBox({ products, isCategory = false }) {
                       ""
                     ) : (
                       <strong title="Author" className="kilometer">
-                        <i className="fa fa-dashboard"></i>
+                        {/* <i className="fa fa-dashboard"></i> */}
                         &nbsp;
-                        {product.category == "car" || product.category == "bike"
-                          ? product.km + "km"
-                          : product.description}
+                        { product.description}
                       </strong>
                     )}
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <strong title="Author" className="kilometer">
+                    {/* <strong title="Author" className="kilometer">
                       <i className="fa fa-cube"></i> &nbsp;
                       {product.color}
-                    </strong>
+                    </strong> */}
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     {/*<strong title="Views"><i*/}
                     {/*    className="fa fa-cog"></i> Manual</strong>*/}

@@ -657,9 +657,9 @@ function ProductDesc({ product, category, usernames }) {
                 <li className="list-group-item">
                   <div className="clearfix">
                     <span className="pull-left">Dealer profile</span>
-                    <Link to={`/profile/${product.user}`}>
+                    {/* <Link to={`/profile/${product.user}`}> */}
                       <strong className="pull-right">{product.user}</strong>
-                    </Link>
+                    {/* </Link> */}
                   </div>
                 </li>
               </ul>

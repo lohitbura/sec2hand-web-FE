@@ -8,8 +8,16 @@ export const updateObject = (oldObject, updatedProperties) => {
 export const header = () => {
   const token = localStorage.getItem("token");
   return {
-    header: {
+    headers: {
       Authorization: `Token ${token}`,
     },
   };
+};
+
+export const isAuthenticated = () => {
+  const token = localStorage.getItem("token");
+  if (token == null || token == " ") {
+    return false;
+  }
+  return true;
 };

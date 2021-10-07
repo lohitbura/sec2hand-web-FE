@@ -31,6 +31,8 @@ import Donate from "./containers/Donate";
 import BlogDetail from "./containers/Blog/BlogDetail";
 import DealerPolicy from "./containers/dealer_policy";
 
+import CreateProductNew from './containers/product/CreateProductNew'
+
 const BaseRouter = () => (
   <Hoc>
     <ReactToast />
@@ -42,6 +44,7 @@ const BaseRouter = () => (
     <Route path="/dealer" component={Dealer} />
     <Route path="/profile/:username" component={Profile} />
     <Route path="/product-create" component={CreateProduct} />
+    <Route path="/product-create1" component={CreateProductNew} />
     <Route path="/post-create" component={CreatePost} />
     <Route path="/profile-edit" component={EditProfile} />
     <Route path="/product/:id" component={ProductDetail} />

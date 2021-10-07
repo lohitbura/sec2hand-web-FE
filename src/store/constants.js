@@ -51,3 +51,12 @@ export const fetchCustomerReviewURL = `${endpoint}/customer-review`;
 export const fetchBlogDetailURL = (id) => `${endpoint}/blog/${id}`;
 export const fetchFeaturedProductListURL = (offset, city) =>
   `${endpoint}/featured-product-list?offset=${offset}&city=${city}&limit=3`;
+
+export const createCarProductURL = `${endpoint}/car-product-create`;
+export const createBikeProductURL = `${endpoint}/bike-product-create`;
+export const createMobileProductURL = `${endpoint}/mobile-product-create`;
+export const createSportProductURL = `${endpoint}/sport-product-create`;
+export const createElectronicProductURL = `${endpoint}/electronic-product-create`;
+export const createPropertyProductURL = `${endpoint}/property-product-create`;
+export const createBookProductURL = `${endpoint}/book-product-create`;
+export const createFurnitureProductURL = `${endpoint}/furniture-product-create`;

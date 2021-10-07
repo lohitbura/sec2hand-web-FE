@@ -32,6 +32,7 @@ import * as GrIcons from "react-icons/gr";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import ProductDesc from "./ProductDesc";
+import { isAuthenticated } from "../../store/utility";
 
 class ProductDetail extends React.Component {
   state = {
@@ -237,14 +238,24 @@ class ProductDetail extends React.Component {
                         )}
                       </div>
                       <div className="upperContent">Dealer Details</div>
-                      <div className="DealerName text-center">
-                        Name-{profile.user}{" "}
-                      </div>
-                      <div className="productNo">{profile.phone}</div>
-                      <div className="productAdd">
-                        address- {profile.address}
-                        {this.uname}{" "}
-                      </div>
+                      {isAuthenticated() ? (
+                        <div>
+                          <div className="DealerName text-center">
+                            Name-{profile.user}{" "}
+                          </div>
+                          <div className="productNo">{profile.phone}</div>
+                          <div className="productAdd">
+                            address- {profile.address}
+                            {this.uname}{" "}
+                          </div>
+                        </div>
+                      ) : (
+                        <div style={{ marginTop: 20 }}>
+                          <Link to="/login">
+                            <Button>Login to see dealer details</Button>
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -266,123 +277,131 @@ class ProductDetail extends React.Component {
                 usernames={username}
               />
             </Tab>
-            <Tab eventKey="Dealer" title="Dealer Details">
-              <div className="row descriptionUl text-center">
-                <div className=" text-center mt-3">
-                  <div className="basicDetails">
-                    {profile.image ? (
-                      <img
-                        src={`${profile.image}`}
-                        alt="profile image"
-                        style={{ width: "200px", height: "200px" }}
-                      />
-                    ) : (
-                      <img
-                        src="../../assets/images/profile.png"
-                        alt="profile image"
-                        style={{ width: "200px", height: "200px" }}
-                      />
-                    )}
-                  </div>
-                </div>
-                <div className="dealerD">
-                  <ul className="dealerList">
-                    <li className="m-3">
-                      Name -<strong>{profile.user}</strong>
-                    </li>
-                    <li className="m-3">
-                      Address-
-                      <strong>{profile.address}</strong>
-                    </li>
-                    <li className="m-3">
-                      Phone-
-                      <strong>{profile.phone}</strong>
-                    </li>
-                    <li className="m-3">
-                      Shop Name-
-                      <strong>{profile.shop_name}</strong>
-                    </li>
-                    <li className="m-3">
-                      City-
-                      <strong>{profile.city}</strong>
-                    </li>
 
-                    <li className="m-3">
-                      No. of Total Products :
-                      <strong>
-                        {profile.products && profile.products.length}
-                      </strong>
-                    </li>
-                  </ul>
-                </div>
-                <div className="dealerD">
-                  <h4>Best Deals</h4>
-                  {profile.posts &&
-                    profile.posts.map((post) => {
-                      return (
-                        <div>
-                          <div className="product-item">
-                            <Link
-                              to={`/post/${post.id}`}
-                              style={{ decoration: "none" }}
-                            >
-                              <img
-                                style={{
-                                  height: "232px",
-                                  objectFit: "cover",
-                                }}
-                                src={`${post.image}`}
-                                alt=""
-                              />
-                            </Link>
-                            <div className="down-content">
-                              <a href="car-details.html">
-                                <h5 style={{ marginBottom: "5px" }}>
-                                  <Link
-                                    style={{ color: "black" }}
-                                    to={`/post/${post.id}`}
-                                  >
-                                    {post.description}
+            <Tab eventKey="Dealer" title="Dealer Details">
+              {!isAuthenticated() ? (
+                <Link to="/login">
+                  <Button>Login to see dealer details</Button>
+                </Link>
+              ) : (
+                <div className="row descriptionUl text-center">
+                  <div className=" text-center mt-3">
+                    <div className="basicDetails">
+                      {profile.image ? (
+                        <img
+                          src={`${profile.image}`}
+                          alt="profile image"
+                          style={{ width: "200px", height: "200px" }}
+                        />
+                      ) : (
+                        <img
+                          src="../../assets/images/profile.png"
+                          alt="profile image"
+                          style={{ width: "200px", height: "200px" }}
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <div className="dealerD">
+                    <ul className="dealerList">
+                      <li className="m-3">
+                        Name -<strong>{profile.user}</strong>
+                      </li>
+                      <li className="m-3">
+                        Address-
+                        <strong>{profile.address}</strong>
+                      </li>
+                      <li className="m-3">
+                        Phone-
+                        <strong>{profile.phone}</strong>
+                      </li>
+                      <li className="m-3">
+                        Shop Name-
+                        <strong>{profile.shop_name}</strong>
+                      </li>
+                      <li className="m-3">
+                        City-
+                        <strong>{profile.city}</strong>
+                      </li>
+
+                      <li className="m-3">
+                        No. of Total Products :
+                        <strong>
+                          {profile.products && profile.products.length}
+                        </strong>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="dealerD">
+                    <h4>Best Deals</h4>
+                    {profile.posts &&
+                      profile.posts.map((post) => {
+                        return (
+                          <div>
+                            <div className="product-item">
+                              <Link
+                                to={`/post/${post.id}`}
+                                style={{ decoration: "none" }}
+                              >
+                                <img
+                                  style={{
+                                    height: "232px",
+                                    objectFit: "cover",
+                                  }}
+                                  src={`${post.image}`}
+                                  alt=""
+                                />
+                              </Link>
+                              <div className="down-content">
+                                <a href="car-details.html">
+                                  <h5 style={{ marginBottom: "5px" }}>
+                                    <Link
+                                      style={{ color: "black" }}
+                                      to={`/post/${post.id}`}
+                                    >
+                                      {post.description}
+                                    </Link>
+                                  </h5>
+                                </a>
+                                <strong>
+                                  <i>Author:</i>
+                                  <Link to={`/profile/${post.user}`}>
+                                    {post.user}
                                   </Link>
-                                </h5>
-                              </a>
-                              <strong>
-                                <i>Author:</i>
-                                <Link to={`/profile/${post.user}`}>
-                                  {post.user}
-                                </Link>
-                              </strong>
-                              <br />
-                              <br />
-                              <Grid columns={2}>
-                                <Grid.Column style={{ color: "red" }}>
-                                  {post.is_like && post.is_like ? (
-                                    <Icon
-                                      onClick={() => this.likes(post.id)}
-                                      name="heart"
-                                      size="large"
-                                    />
-                                  ) : (
-                                    <Icon
-                                      size="large"
-                                      onClick={() => this.likes(post.id)}
-                                      name="heart outline"
-                                    />
-                                  )}
-                                  {post.likes_count} likes
-                                </Grid.Column>
-                                <Grid.Column>
-                                  <Icon name="comments" />
-                                  {post.comments_counts} comments
-                                </Grid.Column>
-                              </Grid>
+                                </strong>
+                                <br />
+                                <br />
+                                <Grid columns={2}>
+                                  <Grid.Column style={{ color: "red" }}>
+                                    {post.is_like && post.is_like ? (
+                                      <Icon
+                                        onClick={() => this.likes(post.id)}
+                                        name="heart"
+                                        size="large"
+                                      />
+                                    ) : (
+                                      <Icon
+                                        size="large"
+                                        onClick={() => this.likes(post.id)}
+                                        name="heart outline"
+                                      />
+                                    )}
+                                    {post.likes_count} likes
+                                  </Grid.Column>
+                                  <Grid.Column>
+                                    <Icon name="comments" />
+                                    {post.comments_counts} comments
+                                  </Grid.Column>
+                                </Grid>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                  </div>
                 </div>
-              </div>
+              )}
+
               <div className="descriptionUl"></div>
               <div>
                 <div className="container productsDetails">

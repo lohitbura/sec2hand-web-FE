@@ -8,11 +8,11 @@ import { getUserProfileIdURL } from "../../store/constants";
 import Navigationbar from "./Navigationbar";
 import Category from "./Category";
 import { PRIMARY_COLOR } from "../../services/data";
-import InstagramIcon from '@material-ui/icons/Instagram';
-import YouTubeIcon from '@material-ui/icons/YouTube';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import TwitterIcon from '@material-ui/icons/Twitter';
+import InstagramIcon from "@material-ui/icons/Instagram";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import TwitterIcon from "@material-ui/icons/Twitter";
 
 class CustomLayout extends React.Component {
   state = {
@@ -52,30 +52,82 @@ class CustomLayout extends React.Component {
 
         {this.props.children}
 
-        <footer style={{ backgroundColor:'#E6B05B', marginTop: "50px" }}>
-        <div>
-          <p style={{backgroundColor:'#5B1C03',color:'#E6B05B',fontSize:26}}>Follow us</p>
-<div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',padding:'1px 16px',height:130}}>
-<div style={{display:'flex',flexDirection:'row',}}>
-<InstagramIcon style={{fontSize:40,marginRight:5,color:'#8a3ab9'}} />
-<YouTubeIcon style={{fontSize:40,marginRight:5,color:'#c4302b'}} />
-<FacebookIcon style={{fontSize:40,marginRight:5,color:'#3b5998'}} />
-<TwitterIcon style={{fontSize:40,marginRight:5,color:'#1DA1F2'}}/>
-<LinkedInIcon style={{fontSize:40,marginRight:5,color:'#0e76a8'}}/>
-</div>
-<div style={{width:400}}>
-<p style={{fontSize:22,fontWeight:'500',color:'#5B1C03',height:14,textAlign:'left'}}>Privacy policy</p>
-<p style={{fontSize:14,fontWeight:'500',color:'#5B1C03',height:8,textAlign:'left'}}>All rights reserved</p>
-<p style={{fontSize:22,fontWeight:'500',color:'#5B1C03',height:15,textAlign:'left' }}>Copyright © 2021 SEC2HAND</p>
-</div>
-</div>
-        </div>
+        <footer style={{ backgroundColor: "#E6B05B", marginTop: "50px" }}>
+          <div>
+            <p
+              style={{
+                backgroundColor: "#5B1C03",
+                color: "#E6B05B",
+                fontSize: 26,
+              }}
+            >
+              Follow us
+            </p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                padding: "1px 16px",
+                height: 130,
+              }}
+            >
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <InstagramIcon
+                  style={{ fontSize: 40, marginRight: 5, color: "#8a3ab9" }}
+                />
+                <YouTubeIcon
+                  style={{ fontSize: 40, marginRight: 5, color: "#c4302b" }}
+                />
+                <FacebookIcon
+                  style={{ fontSize: 40, marginRight: 5, color: "#3b5998" }}
+                />
+                <TwitterIcon
+                  style={{ fontSize: 40, marginRight: 5, color: "#1DA1F2" }}
+                />
+                <LinkedInIcon
+                  style={{ fontSize: 40, marginRight: 5, color: "#0e76a8" }}
+                />
+              </div>
+              <div style={{ width: 400 }}>
+                <p
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "500",
+                    color: "#5B1C03",
+                    height: 14,
+                    textAlign: "left",
+                  }}
+                >
+                  Privacy policy
+                </p>
+                <p
+                  style={{
+                    fontSize: 14,
+                    fontWeight: "500",
+                    color: "#5B1C03",
+                    height: 8,
+                    textAlign: "left",
+                  }}
+                >
+                  All rights reserved
+                </p>
+                <p
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "500",
+                    color: "#5B1C03",
+                    height: 15,
+                    textAlign: "left",
+                  }}
+                >
+                  Copyright © 2021 SEC2HAND
+                </p>
+              </div>
+            </div>
+          </div>
 
-
-
-
-
-       {/*    <div className="row">
+          {/*    <div className="row">
             <div className="col-md-6" style={{ marginTop: 70 }}>
               <ul className="social-icons">
                 <li>
