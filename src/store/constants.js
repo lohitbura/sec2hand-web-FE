@@ -1,7 +1,7 @@
-export const URL = "https://backend.sec2hand.com";
+// export const URL = "https://backend.sec2hand.com";
 // export const URL = "https://harsh9671.pythonanywhere.com";
 // export const URL= "https://priyanshu11.pythonanywhere.com";
-// export const URL = "http://localhost:8000";
+export const URL = "http://localhost:8000";
 
 const apiURL = "/api";
 
@@ -48,6 +48,7 @@ export const laptopCompanyListURL = `${endpoint}/laptop-company-list`;
 export const createDonationURL = `${endpoint}/create-donate`;
 export const fetchBlogURL = `${endpoint}/blog-list`;
 export const fetchCustomerReviewURL = `${endpoint}/customer-review`;
+export const createCustomerMessageURL = `${endpoint}/customer-message`;
 export const fetchBlogDetailURL = (id) => `${endpoint}/blog/${id}`;
 export const fetchFeaturedProductListURL = (offset, city) =>
   `${endpoint}/featured-product-list?offset=${offset}&city=${city}&limit=3`;

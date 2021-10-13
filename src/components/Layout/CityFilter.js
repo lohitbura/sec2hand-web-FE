@@ -12,7 +12,7 @@ import { postCity } from "../../store/actions/city";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     // margin: theme.spacing(1),
-    minWidth: 260,
+    minWidth: 200
   },
   selectEmpty: {
     // marginTop: theme.spacing(2),
@@ -41,12 +41,14 @@ const CityFilter = ({ cityData, fetchCityList, postCity }) => {
   }, []);
 
   return (
-    <div style={{width:150,backgroundColor:'#fff',borderRadius:50,}}>
-      {/* <FormControl variant="outlined" className={classes.formControl}>
+    <div style={{ backgroundColor: "#fff", borderRadius: 50 }}>
+      <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">
           Search place
-        </InputLabel> */}
+        </InputLabel>
         <Select
+        // style={{height:}}
+        // style={{padding: '2px 3px'}}
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={place}
@@ -58,7 +60,7 @@ const CityFilter = ({ cityData, fetchCityList, postCity }) => {
               return <MenuItem value={item.name}>{item.name}</MenuItem>;
             })}
         </Select>
-     {/*  </FormControl> */}
+      </FormControl>
     </div>
   );
 };

@@ -181,7 +181,7 @@ export default function CarForm() {
             <Form.Field>
               <label>Plate number</label>
               <input
-                type="number"
+                type="text"
                 name="plate_number"
                 onChange={handleChange}
                 placeholder="Plate number"

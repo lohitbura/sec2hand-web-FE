@@ -7,9 +7,10 @@ export const updateObject = (oldObject, updatedProperties) => {
 
 export const header = () => {
   const token = localStorage.getItem("token");
+  const token_type = localStorage.getItem("token_type");
   return {
     headers: {
-      Authorization: `Token ${token}`,
+      Authorization: `${token_type === "bearer" ? "Bearer" : "Token"} ${token}`,
     },
   };
 };

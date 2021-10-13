@@ -16,8 +16,8 @@ import "./nav.css/nav.css";
 import Button from "@material-ui/core/Button";
 import { Modal } from "react-bootstrap";
 import CityFilter from "./CityFilter";
-import Sec2hand from '../../assets/images/sec2handlogo.png'
-import background from '../../assets/images/background-top.png'
+import Sec2hand from "../../assets/images/sec2handlogo.png";
+import background from "../../assets/images/background-top.png";
 class Navigationbar extends React.Component {
   constructor(props) {
     super(props);
@@ -92,7 +92,7 @@ class Navigationbar extends React.Component {
     const { username, activemenu, showModals } = this.state;
 
     return (
-      <div >
+      <div>
         <Modal show={showModals} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Login Yourself as</Modal.Title>
@@ -123,7 +123,11 @@ class Navigationbar extends React.Component {
           </Modal.Body>
         </Modal>
 
-        <div style={{backgroundImage: `url(${background})`}} className="navBar" ref={this.toggleContainer}>
+        <div
+          style={{ backgroundImage: `url(${background})` }}
+          className="navBar"
+          ref={this.toggleContainer}
+        >
           <div className="logoimgNav">
             <Link to="/">
               <img
@@ -145,7 +149,7 @@ class Navigationbar extends React.Component {
                 placeholder="Find Cars, Mobile, Bikes and more...... "
                 //   onChange={this.onProductTypeChange}
                 name="productType"
-                style={{height:30}}
+                style={{ height: 30 }}
               />
               <button
                 className="btn"
@@ -156,7 +160,7 @@ class Navigationbar extends React.Component {
               </button>
             </form>
           </div>
-          <div style={{marginRight: -40}} className="hidden">
+          <div style={{ marginRight: -40 }} className="hidden">
             <a className="hidden">
               <Link to="/donate">
                 <Button>DONATE</Button>
@@ -191,15 +195,18 @@ class Navigationbar extends React.Component {
                     </Link>
                   </a>
                 </div>
-                <div  className="hidden">
-            <a className="hidden">
-              <Link to="/product-create">
-                <Button varient="outlined" style={{backgroundColor:'#fff'}}>SELL</Button>
-              </Link>
-            </a>
-          </div>
               </div>
             )}
+          </div>
+
+          <div className="hidden">
+            <a className="hidden">
+              <Link to="/product-create">
+                <Button varient="outlined" style={{ backgroundColor: "#fff" }}>
+                  SELL
+                </Button>
+              </Link>
+            </a>
           </div>
 
           <div>

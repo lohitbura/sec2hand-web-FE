@@ -42,12 +42,16 @@ h6 {
 }
 
 
-.MuiOutlinedInput-input {
-  padding: 18.5px 14px !important
-}
+/* .MuiOutlinedInput-input {
+  padding: 14px 14px !important
+} */
 
 .MuiCardActions-root {
   justify-content: center;
+}
+
+.MuiSelect-outlined{
+  padding: 16px 14px 16px 14px !important
 }
 
 .lines-clap {

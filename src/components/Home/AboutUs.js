@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Banner from "../../assets/images/banner.jpeg";
+import { createCustomerMessageAPI } from "../../store/actions/customerReview";
 
 export default function AboutUs() {
+  const [message, setMessage] = useState();
+
+  const formSubmit = () => {
+    createCustomerMessageAPI({ message: message }).then(() => {
+      setMessage("");
+    });
+  };
+
   return (
     <div>
       <div>
@@ -68,6 +77,8 @@ export default function AboutUs() {
                             id="message"
                             placeholder="Your Message"
                             required=""
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
                           />
                         </fieldset>
                       </div>
@@ -76,6 +87,7 @@ export default function AboutUs() {
                           <Button
                             size="small"
                             style={{ background: "#e6b05b", color: "white" }}
+                            onClick={formSubmit}
                           >
                             Send message
                           </Button>
@@ -85,7 +97,7 @@ export default function AboutUs() {
                   </form>
                 </div>
               </div>
-              <div style={{marginTop: -100}} className="container col-md-6">
+              <div style={{ marginTop: -100 }} className="container col-md-6">
                 <div className="best-features about-features">
                   <div className="container">
                     <div className="row justify-content-center">
