@@ -44,6 +44,22 @@ export const fetchProductListAPI = async (data) => {
   }
 };
 
+export const searchProductListAPI = async (query) => {
+  try {
+    let response = await axios.get(
+      `${API_URL.productListURL()}?search=${query}`
+    );
+    if (response.status == 200) {
+      return {
+        data: response.data.products,
+        has_more: response.data.has_more,
+      };
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
 const fetchProductUrl = (type) => {
   switch (type) {
     case "car":

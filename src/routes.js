@@ -31,7 +31,8 @@ import Donate from "./containers/Donate";
 import BlogDetail from "./containers/Blog/BlogDetail";
 import DealerPolicy from "./containers/dealer_policy";
 
-import CreateProductNew from './containers/product/CreateProductNew'
+import CreateProductNew from "./containers/product/CreateProductNew";
+import SearchProductComponent from "./containers/product/SearchProduct";
 
 const BaseRouter = () => (
   <Hoc>
@@ -53,6 +54,7 @@ const BaseRouter = () => (
     <Route path="/post/:id" component={PostDetail} />
     <Route path="/about" component={AboutUs} />
     <Route path="/product-list/:category" component={ProductCategoryList} />
+    <Route path="/product-search/:query" component={SearchProductComponent} />
     <Route path="/contact" component={ContactUs} />
     <Route path="/privacy" component={Privacy} />
     <Route exact path="/" component={HomeScreen} />

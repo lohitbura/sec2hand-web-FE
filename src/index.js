@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import authReducer from "./store/reducers/auth";
 import fetchCityList from "./store/reducers/cityList";
 import fetchSelectedCity from "./store/reducers/city";
+import fetchSearchQuery from "./store/reducers/search";
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -16,6 +17,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   cityList: fetchCityList,
   selectedCity: fetchSelectedCity,
+  selectedCity: fetchSelectedCity,
+  query: fetchSearchQuery,
 });
 
 const store = createStore(rootReducer, composeEnhances(applyMiddleware(thunk)));

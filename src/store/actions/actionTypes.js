@@ -5,3 +5,4 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const FETCH_CITY_LIST = "FETCH_CITY_LIST";
 export const FETCH_SELECTED_CITY = "FETCH_SELECTED_CITY";
+export const FETCH_PRODUCT = "FETCH_PRODUCT";

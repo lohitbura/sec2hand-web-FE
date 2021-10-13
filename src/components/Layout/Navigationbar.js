@@ -5,7 +5,6 @@ import * as IoIcons from "react-icons/io";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
 import * as MdIcons from "react-icons/md";
-import * as ImIcons from "react-icons/im";
 import { Link, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -18,6 +17,8 @@ import { Modal } from "react-bootstrap";
 import CityFilter from "./CityFilter";
 import Sec2hand from "../../assets/images/sec2handlogo.png";
 import background from "../../assets/images/background-top.png";
+import Search from "./Search";
+
 class Navigationbar extends React.Component {
   constructor(props) {
     super(props);
@@ -142,24 +143,8 @@ class Navigationbar extends React.Component {
           <CityFilter />
 
           {/* search */}
-          <div className="col-sm-4 text-center searchM">
-            <form className="d-flex searchBar searchHide">
-              <input
-                type="search"
-                placeholder="Find Cars, Mobile, Bikes and more...... "
-                //   onChange={this.onProductTypeChange}
-                name="productType"
-                style={{ height: 30 }}
-              />
-              <button
-                className="btn"
-                type="submit"
-                //   onClick={(e) => this.productFilterSubmit(e)}
-              >
-                <ImIcons.ImSearch className="icons" />
-              </button>
-            </form>
-          </div>
+          <Search />
+          
           <div style={{ marginRight: -40 }} className="hidden">
             <a className="hidden">
               <Link to="/donate">
