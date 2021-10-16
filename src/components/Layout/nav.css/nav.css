@@ -217,6 +217,10 @@ li a .icons {
     display: none !important;
   }
 
+  /* .navbar{
+    display: block !important;
+  } */
+
   .makeStyles-formControl-1 {
     min-width: 197px !important;
   }

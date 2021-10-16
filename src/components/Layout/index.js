@@ -73,21 +73,31 @@ class CustomLayout extends React.Component {
               }}
             >
               <div style={{ display: "flex", flexDirection: "row" }}>
-                <InstagramIcon
-                  style={{ fontSize: 40, marginRight: 5, color: "#8a3ab9" }}
-                />
-                <YouTubeIcon
-                  style={{ fontSize: 40, marginRight: 5, color: "#c4302b" }}
-                />
-                <FacebookIcon
-                  style={{ fontSize: 40, marginRight: 5, color: "#3b5998" }}
-                />
-                <TwitterIcon
-                  style={{ fontSize: 40, marginRight: 5, color: "#1DA1F2" }}
-                />
-                <LinkedInIcon
-                  style={{ fontSize: 40, marginRight: 5, color: "#0e76a8" }}
-                />
+                <a href="https://www.instagram.com/invites/contact/?i=14qq181cy3b1b&utm_content=eghzw47">
+                  <InstagramIcon
+                    style={{ fontSize: 40, marginRight: 5, color: "#8a3ab9" }}
+                  />
+                </a>
+                <a href="https://www.youtube.com/c/Sec2hand">
+                  <YouTubeIcon
+                    style={{ fontSize: 40, marginRight: 5, color: "#c4302b" }}
+                  />
+                </a>
+                <a href="https://www.facebook.com/Sec2Hand-360972987823797/">
+                  <FacebookIcon
+                    style={{ fontSize: 40, marginRight: 5, color: "#3b5998" }}
+                  />
+                </a>
+                <a href="https://twitter.com/sec2hand?s=08">
+                  <TwitterIcon
+                    style={{ fontSize: 40, marginRight: 5, color: "#1DA1F2" }}
+                  />
+                </a>
+                <a href="https://www.linkedin.com/company/sec2hand-business-solutions-private-limited">
+                  <LinkedInIcon
+                    style={{ fontSize: 40, marginRight: 5, color: "#0e76a8" }}
+                  />
+                </a>
               </div>
               <div style={{ width: 400 }}>
                 <p
@@ -99,8 +109,9 @@ class CustomLayout extends React.Component {
                     textAlign: "left",
                   }}
                 >
-                  Privacy policy
+                  <Link to="/privacy" style={{color: "#5B1C03"}}>Privacy policy</Link>
                 </p>
+
                 <p
                   style={{
                     fontSize: 14,

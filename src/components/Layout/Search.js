@@ -13,14 +13,14 @@ function Search({ searchProduct }) {
   const history = useHistory()
 
   return (
-    <div className="col-sm-4 text-center searchM">
-      <div className="d-flex searchBar searchHide">
+    <div className="">
+      <div className=" searchBar searchHide">
         <input
           type="search"
           placeholder="Find Cars, Mobile, Bikes and more...... "
           onChange={(e) => setQuery(e.target.value)}
           name="productType"
-          style={{ height: 30 }}
+          style={{ height: 45 }}
         />
         <button
           className="btn"

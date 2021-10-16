@@ -18,7 +18,7 @@ export default function SearchProductComponent() {
     });
   }, [params.query]);
   return (
-    <div className="container-fluid" style={{ marginTop: "40px", height: '100vh' }}>
+    <div className="container-fluid" style={{ marginTop: "40px" }}>
       <div className="row featuredContainer">
         <div className="col-lg-12 col-md-12">
           <div className="col-md-12">

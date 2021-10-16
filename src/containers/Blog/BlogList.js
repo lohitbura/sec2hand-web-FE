@@ -43,7 +43,7 @@ export default function BlogList() {
   }
 
   return (
-    <div style={{ marginTop: 100 }}>
+    <div style={{ marginTop: 100, marginBottom: 100 }}>
       <div className="container">
         <h3>Recent Blogs</h3>
 
