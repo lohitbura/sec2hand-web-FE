@@ -109,7 +109,7 @@ class CustomLayout extends React.Component {
                     textAlign: "left",
                   }}
                 >
-                  <Link to="/privacy" style={{color: "#5B1C03"}}>Privacy policy</Link>
+                  <a href="privacy.html" style={{color: "#5B1C03"}}>Privacy policy</a>
                 </p>
 
                 <p
