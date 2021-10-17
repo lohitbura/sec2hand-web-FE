@@ -148,17 +148,20 @@ class Navigationbar extends React.Component {
           <div className="searchHide">
             <Search />
           </div>
-          <div style={{ marginRight: -40 }} className="hidden" type="button">
-            <a className="hidden">
-              <Link
-                to={`/profile/${username}`}
-                style={{ cursor: "pointer" }}
-                className="nav-link"
-              >
-                <Button varient="outlined">PROFILE</Button>
-              </Link>
-            </a>
-          </div>
+          {authenticated ? (
+            <div style={{ marginRight: -40 }} className="hidden" type="button">
+              <a className="hidden">
+                <Link
+                  to={`/profile/${username}`}
+                  style={{ cursor: "pointer" }}
+                  className="nav-link"
+                >
+                  <Button varient="outlined">PROFILE</Button>
+                </Link>
+              </a>
+            </div>
+          ) : null}
+
           <div style={{ marginRight: -40 }} className="hidden">
             <a className="hidden">
               <Link to="/donate">
