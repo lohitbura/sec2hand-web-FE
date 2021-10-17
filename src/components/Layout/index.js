@@ -52,7 +52,7 @@ class CustomLayout extends React.Component {
 
         {this.props.children}
 
-        <footer style={{ backgroundColor: "#E6B05B", marginTop: "50px" }}>
+        <footer style={{ backgroundColor: "#E6B05B", marginTop: "50px", paddingBottom: 30 }}>
           <div>
             <p
               style={{
@@ -68,7 +68,7 @@ class CustomLayout extends React.Component {
               justifyContent="space-between"
               style={{
                 padding: "1px 16px",
-                height: 130,
+                // height: 130,
               }}
             >
               <Grid item>
@@ -131,7 +131,6 @@ class CustomLayout extends React.Component {
                     fontSize: 22,
                     fontWeight: "500",
                     color: "#5B1C03",
-                    height: 15,
                     textAlign: "left",
                   }}
                 >

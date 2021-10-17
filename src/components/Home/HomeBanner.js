@@ -11,7 +11,7 @@ export default function HomeBanner() {
     <div style={{ backgroundImage: `url(${background})`, height: "100vh" }}>
       <Grid container spacing={0}>
         <Grid lg={6} xs={12} item>
-          <div style={{ padding: "14% 16%" }}>
+          <div className="bannerPadding" style={{ padding: "14% 16%" }}>
             <p
               style={{
                 fontSize: '300%',
@@ -72,7 +72,7 @@ export default function HomeBanner() {
         </Grid>
 
         <Grid lg={6} xs={12} item>
-          <img src={Uncle} style={{ width: "100%", height: "100%" }} />
+          <img className="bannerImageWidth" src={Uncle} style={{ width: "100%", height: "100%" }} />
         </Grid>
       </Grid>
 
