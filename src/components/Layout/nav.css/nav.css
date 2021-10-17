@@ -16,13 +16,13 @@
   margin-left: auto;
   font-size: 1.5rem;
   background: none;
-  color: #e6b05b;
+  color: maroon;
   margin-right: 80px;
   outline: none;
 }
 
 .menu-bars:hover {
-  color: #000;
+  color: maroon;
 }
 
 .nav-menu {

@@ -50,7 +50,7 @@ h6 {
   justify-content: center;
 }
 
-.MuiSelect-outlined{
+.MuiSelect-outlined {
   padding: 16px 14px 16px 14px !important
 }
 
@@ -360,7 +360,7 @@ header .navbar {
   align-items: center;
   justify-content: space-between !important;
   padding: 0.5rem 1rem !important;
-  
+
 }
 
 /* .background-header .navbar {
@@ -1383,10 +1383,10 @@ footer .inner-content p a {
 
 .searchBtn {
   padding: 10px 30px;
-  border: 2px solid linear-gradient(110deg, #d07953, #e6b05b );
+  border: 2px solid linear-gradient(110deg, #d07953, #e6b05b);
   border-radius: 20px;
   background-color: white;
-  color: linear-gradient(110deg, #d07953, #e6b05b );
+  color: linear-gradient(110deg, #d07953, #e6b05b);
   box-shadow: 0px 2px 10px rgba(131, 130, 130, 0.5),
     1px 2px 5px rgba(133, 132, 132, 0.3), 4px 3px 10px rgba(175, 175, 190, 0.1);
   font-size: 15px;
@@ -1417,6 +1417,12 @@ footer .inner-content p a {
   .main-container {
     margin-top: 55px;
   }
+
+  .categoryTopHide {
+    display: none;
+  }
+
+
 
   .menu-bars {
     display: none;
@@ -1470,12 +1476,20 @@ footer .inner-content p a {
     margin-bottom: 10px;
   }
 
+  .smallWidth {
+    width: 223px
+  }
+
+  .MuiInputBase-root {
+    width: 223px !important
+  }
+
   .searchBar {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-   /*  border: 2px solid rgb(131, 17, 121);
+    /*  border: 2px solid rgb(131, 17, 121);
     border-radius: 20px; */
   }
 

@@ -140,10 +140,14 @@ class Navigationbar extends React.Component {
               />
             </Link>
           </div>
-          <CityFilter />
 
           {/* search */}
-          <Search />
+          <div className="searchHide">
+            <CityFilter />
+          </div>
+          <div className="searchHide">
+            <Search />
+          </div>
           <div style={{ marginRight: -40 }} className="hidden" type="button">
             <a className="hidden">
               <Link

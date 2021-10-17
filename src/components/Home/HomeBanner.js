@@ -11,10 +11,10 @@ export default function HomeBanner() {
     <div style={{ backgroundImage: `url(${background})`, height: "100vh" }}>
       <Grid container spacing={0}>
         <Grid lg={6} xs={12} item>
-          <div style={{ padding: "14% 23%" }}>
+          <div style={{ padding: "14% 16%" }}>
             <p
               style={{
-                fontSize: 50,
+                fontSize: '300%',
                 color: "#5B1C03",
                 fontWeight: "600",
                 height: 18,

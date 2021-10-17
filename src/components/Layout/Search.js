@@ -5,16 +5,16 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { postCity } from "../../store/actions/city";
 import { searchProduct } from "../../store/actions/search";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 function Search({ searchProduct }) {
   const [query, setQuery] = useState("");
 
-  const history = useHistory()
+  const history = useHistory();
 
   return (
     <div className="">
-      <div className=" searchBar searchHide">
+      <div className=" searchBar">
         <input
           type="search"
           placeholder="Find Cars, Mobile, Bikes and more...... "

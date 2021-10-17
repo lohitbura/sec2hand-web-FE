@@ -41,7 +41,7 @@ const CityFilter = ({ cityData, fetchCityList, postCity }) => {
   }, []);
 
   return (
-    <div style={{ backgroundColor: "#fff", borderRadius: 50 }}>
+    <div className="smallWidth" style={{ backgroundColor: "#fff", borderRadius: 50 }}>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">
           Search place

@@ -13,6 +13,7 @@ import YouTubeIcon from "@material-ui/icons/YouTube";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import TwitterIcon from "@material-ui/icons/Twitter";
+import Grid from "@material-ui/core/Grid";
 
 class CustomLayout extends React.Component {
   state = {
@@ -63,43 +64,44 @@ class CustomLayout extends React.Component {
             >
               Follow us
             </p>
-            <div
+            <Grid
+              container
+              justifyContent="space-between"
               style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
                 padding: "1px 16px",
                 height: 130,
               }}
             >
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <a href="https://www.instagram.com/invites/contact/?i=14qq181cy3b1b&utm_content=eghzw47">
-                  <InstagramIcon
-                    style={{ fontSize: 40, marginRight: 5, color: "#8a3ab9" }}
-                  />
-                </a>
-                <a href="https://www.youtube.com/c/Sec2hand">
-                  <YouTubeIcon
-                    style={{ fontSize: 40, marginRight: 5, color: "#c4302b" }}
-                  />
-                </a>
-                <a href="https://www.facebook.com/Sec2Hand-360972987823797/">
-                  <FacebookIcon
-                    style={{ fontSize: 40, marginRight: 5, color: "#3b5998" }}
-                  />
-                </a>
-                <a href="https://twitter.com/sec2hand?s=08">
-                  <TwitterIcon
-                    style={{ fontSize: 40, marginRight: 5, color: "#1DA1F2" }}
-                  />
-                </a>
-                <a href="https://www.linkedin.com/company/sec2hand-business-solutions-private-limited">
-                  <LinkedInIcon
-                    style={{ fontSize: 40, marginRight: 5, color: "#0e76a8" }}
-                  />
-                </a>
-              </div>
-              <div style={{ width: 400 }}>
+              <Grid item>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <a href="https://www.instagram.com/invites/contact/?i=14qq181cy3b1b&utm_content=eghzw47">
+                    <InstagramIcon
+                      style={{ fontSize: 40, marginRight: 5, color: "#8a3ab9" }}
+                    />
+                  </a>
+                  <a href="https://www.youtube.com/c/Sec2hand">
+                    <YouTubeIcon
+                      style={{ fontSize: 40, marginRight: 5, color: "#c4302b" }}
+                    />
+                  </a>
+                  <a href="https://www.facebook.com/Sec2Hand-360972987823797/">
+                    <FacebookIcon
+                      style={{ fontSize: 40, marginRight: 5, color: "#3b5998" }}
+                    />
+                  </a>
+                  <a href="https://twitter.com/sec2hand?s=08">
+                    <TwitterIcon
+                      style={{ fontSize: 40, marginRight: 5, color: "#1DA1F2" }}
+                    />
+                  </a>
+                  <a href="https://www.linkedin.com/company/sec2hand-business-solutions-private-limited">
+                    <LinkedInIcon
+                      style={{ fontSize: 40, marginRight: 5, color: "#0e76a8" }}
+                    />
+                  </a>
+                </div>
+              </Grid>
+              <Grid item style={{ width: 400 }}>
                 <p
                   style={{
                     fontSize: 22,
@@ -109,7 +111,9 @@ class CustomLayout extends React.Component {
                     textAlign: "left",
                   }}
                 >
-                  <a href="privacy.html" style={{color: "#5B1C03"}}>Privacy policy</a>
+                  <a href="privacy.html" style={{ color: "#5B1C03" }}>
+                    Privacy policy
+                  </a>
                 </p>
 
                 <p
@@ -134,8 +138,8 @@ class CustomLayout extends React.Component {
                 >
                   Copyright © 2021 SEC2HAND
                 </p>
-              </div>
-            </div>
+              </Grid>
+            </Grid>
           </div>
 
           {/*    <div className="row">

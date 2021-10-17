@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import { CATEGORY_TYPE } from "../../services/data";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import Search from "./Search";
+import CityFilter from "./CityFilter";
 
 export default function Category() {
   const history = useHistory();
@@ -26,8 +28,19 @@ export default function Category() {
   };
 
   return (
-    <>
-      <div style={{ paddingTop: 60 }}>
+    <div style={{ paddingTop: 60 }}>
+      <div
+        className="categoryTopHide"
+        style={{ padding: 8, backgroundColor: "#5B1C03" }}
+      >
+        <div>
+          <div style={{ marginBottom: 20 }}>
+            <Search />
+          </div>
+          <CityFilter />
+        </div>
+      </div>
+      <div>
         <div className="row" style={{ padding: 8, backgroundColor: "#5B1C03" }}>
           {CATEGORY_TYPE.map((item) => (
             <div
@@ -84,7 +97,7 @@ export default function Category() {
           ) : null}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
