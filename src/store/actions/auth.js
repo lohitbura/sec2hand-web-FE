@@ -88,9 +88,9 @@ export const facebookLogin = (accesstoken, history) => {
         token: accesstoken,
         backend: "facebook",
         grant_type: "convert_token",
-        client_id: "LAYEmsj5pB7TVtjMSHb9WUTCZA2SPECFrgdcUgJl",
+        client_id: "AU5UWy5hw6mW8NRggWaoeWrs8Df6ycTwmLffGjfn",
         client_secret:
-          "uzvdXwS2zVnLM96eI16Im2RMclfMRw0zCEMK5dMwV2uuwrON4x8SKqNjUbmleSa1Y4lkzgBXPd4Bl3nq1CfTnhdqD9jbEqT4L2SYbzRGE2gFqrVx7vKmmt0WJmQbcTOS",
+          "HZsJVKeEJAEBLkNDfDRqIP0bP01uegssCqxVvGnYygW0E22R1YYGGrCf1eYuTQvaVqit3S8GgIaS4NibcQVuHHJ26ZAmDJbWu47w2oG4Z2dNOC8IbCGF2qT166VTKwOE",
       })
       .then((res) => {
         const expirationDate = new Date(

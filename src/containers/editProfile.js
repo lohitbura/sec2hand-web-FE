@@ -18,6 +18,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { header } from '../store/utility';
 
 
 class EditProfile extends React.Component {
@@ -40,7 +41,7 @@ class EditProfile extends React.Component {
             let headers = {
                 Authorization: `Token ${localStorage.getItem('token')}`
             };
-            axios.get(getUserProfileIdURL, {headers: headers}).then(res => {
+            axios.get(getUserProfileIdURL, header()).then(res => {
                 this.setState({username: res.data.user})
             })
         }
@@ -53,7 +54,7 @@ class EditProfile extends React.Component {
             Authorization: `Token ${localStorage.getItem('token')}`
         };
         this.setState({loader: true})
-        axios.get(getUserProfileURL(username), {headers: headers}).then(res => {
+        axios.get(getUserProfileURL(username), header()).then(res => {
             console.log(res.data)
             this.setState({
                 loader: false,
@@ -96,7 +97,7 @@ class EditProfile extends React.Component {
                 Authorization: `Token ${localStorage.getItem('token')}`
             };
             this.setState({loader: true})
-            axios.post(dealerProfileEditURL, form_data, {headers: headers}).then(res => {
+            axios.post(dealerProfileEditURL, form_data, header()).then(res => {
                 console.log(res.data)
                 this.setState({loader: false, message: res.data.message})
                 toast.success("Profile update successful!")
@@ -119,7 +120,7 @@ class EditProfile extends React.Component {
                 Authorization: `Token ${localStorage.getItem('token')}`
             };
             this.setState({loader: true})
-            axios.post(customerProfileEditURL, form_data, {headers: headers}).then(res => {
+            axios.post(customerProfileEditURL, form_data, header()).then(res => {
                 console.log(res.data)
                 this.setState({loader: false, message: res.data.message})
                 toast.success("Profile update successful!")

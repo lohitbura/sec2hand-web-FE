@@ -14,6 +14,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import Grid from "@material-ui/core/Grid";
+import { header } from "../../store/utility";
 
 class CustomLayout extends React.Component {
   state = {
@@ -24,10 +25,8 @@ class CustomLayout extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.token !== this.props.token) {
-      let headers = {
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      };
-      axios.get(getUserProfileIdURL, { headers: headers }).then((res) => {
+      
+      axios.get(getUserProfileIdURL, header()).then((res) => {
         this.setState({ username: res.data.user });
       });
     }

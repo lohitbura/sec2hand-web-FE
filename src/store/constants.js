@@ -33,7 +33,7 @@ export const postCommentListURl = `${endpoint}/post-comment-list`;
 export const dealerListURL = `${endpoint}/dealer-filter`;
 
 export const getUserProfileURL = (username) =>
-  `${endpoint}/profile?username=${username}`;
+  `${endpoint}/profile`;
 export const getUserProfileIdURL = `${endpoint}/profile`;
 export const dealerProfileEditURL = `${endpoint}/profile-edit`;
 export const customerProfileEditURL = `${endpoint}/customer-profile-edit`;

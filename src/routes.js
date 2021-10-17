@@ -43,7 +43,7 @@ const BaseRouter = () => (
     <Route path="/dealer-signup" component={DealerSignup} />
     <Route path="/review" component={Review} />
     <Route path="/dealer" component={Dealer} />
-    <Route path="/profile/:username" component={Profile} />
+    <Route path="/profile" component={Profile} />
     {/* <Route path="/product-create" component={CreateProduct} /> */}
     <Route path="/product-create" component={CreateProductNew} />
     <Route path="/post-create" component={CreatePost} />

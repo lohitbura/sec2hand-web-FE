@@ -83,7 +83,7 @@ const fetchProductUrl = (type) => {
 
 export const createNewProductAPI = async (type, data) => {
   try {
-    let response = await axios.post(fetchProductUrl(type), data);
+    let response = await axios.post(fetchProductUrl(type), data, header());
     if (response.status == 201) {
       toast.success("Product submit");
     }

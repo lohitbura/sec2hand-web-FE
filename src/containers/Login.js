@@ -92,11 +92,11 @@ class LoginForm extends React.Component {
               <Message>
                 New to us? <NavLink to="/signup">Sign Up</NavLink>
               </Message>
-              {/* <FbLogin
+              <FbLogin
                 appId="239018761503961"
                 fields="name,email,picture"
                 callback={(res) => this.responseFacebook(res)}
-              /> */}
+              />
             </React.Fragment>
           </Grid.Column>
         </Grid>

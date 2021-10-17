@@ -18,6 +18,7 @@ import Pagination from "semantic-ui-react/dist/commonjs/addons/Pagination";
 import Loader from "react-loader-spinner";
 import { logout } from "../store/actions/auth";
 import { connect } from "react-redux";
+import { header } from "../store/utility";
 
 class Profile extends React.Component {
   state = {
@@ -37,11 +38,9 @@ class Profile extends React.Component {
     this.fetchProfile();
     const token = localStorage.getItem("token");
 
-    let header = {
-      Authorization: `Token ${token}`,
-    };
+    
 
-    axios.get(getUserProfileIdURL, { headers: header }).then((res) => {
+    axios.get(getUserProfileIdURL, header()).then((res) => {
       this.setState({ username: res.data.user });
     });
   }
@@ -59,7 +58,7 @@ class Profile extends React.Component {
     }
     this.setState({ loader: true });
     axios
-      .get(getUserProfileURL(username), { headers: headers })
+      .get(getUserProfileURL(), header())
       .then((res) => {
         this.setState({
           loader: false,

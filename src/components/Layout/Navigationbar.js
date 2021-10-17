@@ -18,6 +18,7 @@ import CityFilter from "./CityFilter";
 import Sec2hand from "../../assets/images/sec2handlogo.png";
 import background from "../../assets/images/background-top.png";
 import Search from "./Search";
+import { header } from "../../store/utility";
 
 class Navigationbar extends React.Component {
   constructor(props) {
@@ -79,10 +80,8 @@ class Navigationbar extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.token !== this.props.token) {
-      let headers = {
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      };
-      axios.get(getUserProfileIdURL, { headers: headers }).then((res) => {
+      
+      axios.get(getUserProfileIdURL, header()).then((res) => {
         this.setState({ username: res.data.user });
       });
     }
@@ -152,7 +151,7 @@ class Navigationbar extends React.Component {
             <div style={{ marginRight: -40 }} className="hidden" type="button">
               <a className="hidden">
                 <Link
-                  to={`/profile/${username}`}
+                  to={`/profile`}
                   style={{ cursor: "pointer" }}
                   className="nav-link"
                 >
@@ -267,7 +266,7 @@ class Navigationbar extends React.Component {
             </li>
             {authenticated ? (
               <li className="nav-text">
-                <Link className="nav-link" to={`/profile/${username}`}>
+                <Link className="nav-link" to={`/profile`}>
                   <BsIcons.BsFillPersonFill className="icons" />
                   My account
                 </Link>
