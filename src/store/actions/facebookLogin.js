@@ -7,9 +7,9 @@ const facebookLogin = (accesstoken) => {
       token: accesstoken,
       backend: "facebook",
       grant_type: "convert_token",
-      client_id: "LAYEmsj5pB7TVtjMSHb9WUTCZA2SPECFrgdcUgJl",
+      client_id: "M2B69qBgBPqPKWucddyvv2Vc73EmtGGCgkKV78g5",
       client_secret:
-        "uzvdXwS2zVnLM96eI16Im2RMclfMRw0zCEMK5dMwV2uuwrON4x8SKqNjUbmleSa1Y4lkzgBXPd4Bl3nq1CfTnhdqD9jbEqT4L2SYbzRGE2gFqrVx7vKmmt0WJmQbcTOS",
+        "wXzhqlo8mCnH573GTE6guvvaKDiDEtBzxFFtJ0LeAX3572xi6uertqsjvvsFJOazytdD00uGr3lw65xqIOUKwNkktMqFhJDlFhNVS9J3pOCweSMCo92LZLMmuXSmaxus",
     })
     .then((res) => {
       localStorage.setItem("token", res.data.access_token);

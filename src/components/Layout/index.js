@@ -52,7 +52,7 @@ class CustomLayout extends React.Component {
 
         {this.props.children}
 
-        <footer style={{ backgroundColor: "#E6B05B", marginTop: "50px", paddingBottom: 30 }}>
+        <footer style={{ backgroundColor: "#E6B05B", paddingBottom: 30 }}>
           <div>
             <p
               style={{

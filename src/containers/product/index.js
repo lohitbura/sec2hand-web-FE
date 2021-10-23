@@ -23,6 +23,7 @@ import {
   productDetailURL,
   postLikeURL,
   URL,
+  getDealerProfileURL,
 } from "../../store/constants";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import { ToastContainer, toast } from "react-toastify";
@@ -32,7 +33,7 @@ import * as GrIcons from "react-icons/gr";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import ProductDesc from "./ProductDesc";
-import { isAuthenticated } from "../../store/utility";
+import { isAuthenticated, header } from "../../store/utility";
 
 class ProductDetail extends React.Component {
   state = {
@@ -57,7 +58,7 @@ class ProductDetail extends React.Component {
         usernames = res.data.user;
         this.setState({ loader: true });
         axios
-          .get(getUserProfileURL(usernames))
+          .get(getDealerProfileURL(usernames))
           .then((res) => {
             this.setState({
               loader: false,
@@ -75,10 +76,7 @@ class ProductDetail extends React.Component {
         console.log(err);
       });
 
-    let header = {
-      Authorization: `Token ${token}`,
-    };
-    axios.get(getUserProfileIdURL, { headers: header }).then((res) => {
+    axios.get(getUserProfileIdURL, header()).then((res) => {
       this.setState({
         username: res.data.user,
       });
@@ -122,7 +120,7 @@ class ProductDetail extends React.Component {
       Authorization: `Token ${localStorage.getItem("token")}`,
     };
     axios
-      .delete(productDetailURL(id), { headers: headers })
+      .delete(productDetailURL(id), header())
       .then((res) => {
         console.log(res.data);
         toast.success("Product has been deleted!");

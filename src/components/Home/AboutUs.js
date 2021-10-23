@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
-import Banner from "../../assets/images/banner.jpeg";
+import Banner from "../../assets/images/banner.png";
 import { createCustomerMessageAPI } from "../../store/actions/customerReview";
 
 export default function AboutUs() {
@@ -15,7 +15,9 @@ export default function AboutUs() {
   return (
     <div>
       <div>
-        <img style={{ width: "100%" }} src={Banner} />
+        <a href="https://play.google.com/store/apps/details?id=com.lohitbura.sec2hand&hl=en&gl=US">
+          <img style={{ width: "100%" }} src={Banner} />
+        </a>
       </div>
       <div className="best-features about-features">
         <div className="container">

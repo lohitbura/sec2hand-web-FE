@@ -9,6 +9,14 @@ body {
   padding: 0;
 }
 
+.ui.fluid.button {
+  background: #5b1c03;
+  color: wheat;
+}
+
+.kep-login-facebook {
+  padding: calc(.34435vw + 8.38843px) calc(5.34435vw + 20.38843px) !important;
+}
 
 
 p {

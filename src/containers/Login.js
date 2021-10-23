@@ -47,47 +47,54 @@ class LoginForm extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <div>
+      <div
+        style={{ paddingTop: "100px", background: "#e6b05b", height: "100vh" }}
+      >
         <ToastContainer position="bottom-right" />
 
-        <Grid
-          textAlign="center"
-          style={{ height: "100vh", marginTop: "0px" }}
-          verticalAlign="middle"
-        >
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h2" color="teal" textAlign="center">
-              Log-in as customer
+        <Grid textAlign="center">
+          <Grid.Column
+            style={{
+              maxWidth: 450,
+              background: "#f6f6f6",
+              borderRadius: 40,
+              height: 400,
+            }}
+          >
+            <Header
+              as="h2"
+              style={{ color: "#5b1c03", marginTop: 40 }}
+              textAlign="center"
+            >
+              LOGIN VIA OTP
             </Header>
             {error && <p>{this.props.error.message}</p>}
 
             <React.Fragment>
               <Form size="large" onSubmit={this.handleSubmit}>
-                <Segment stacked>
-                  <Form.Input
-                    onChange={this.handleChange}
-                    value={username}
-                    name="username"
-                    fluid
-                    icon="user"
-                    iconPosition="left"
-                    type="number"
-                    onInput={(e) =>
-                      (e.target.value = e.target.value.slice(0, 10))
-                    }
-                    placeholder="Enter 10 digit mobile number"
-                    required
-                  />
-                  <Button
-                    color="teal"
-                    fluid
-                    size="large"
-                    loading={loading}
-                    disabled={loading}
-                  >
-                    Login
-                  </Button>
-                </Segment>
+                <Form.Input
+                  onChange={this.handleChange}
+                  value={username}
+                  name="username"
+                  fluid
+                  // icon="user"
+                  // iconPosition="left"
+                  type="number"
+                  onInput={(e) =>
+                    (e.target.value = e.target.value.slice(0, 10))
+                  }
+                  placeholder="Enter 10 digit mobile number"
+                  required
+                />
+                <Button
+                  color="#5b1c03"
+                  fluid
+                  size="large"
+                  loading={loading}
+                  disabled={loading}
+                >
+                  Send OTP
+                </Button>
               </Form>
               <Message>
                 New to us? <NavLink to="/signup">Sign Up</NavLink>
@@ -96,7 +103,19 @@ class LoginForm extends React.Component {
                 appId="239018761503961"
                 fields="name,email,picture"
                 callback={(res) => this.responseFacebook(res)}
+                icon="fa-facebook"
               />
+              <p
+                style={{ color: "#5b1c03", marginTop: 100, fontWeight: "bold" }}
+              >
+                WE WILL NOT DISCLOSE YOUR PERSONAL INFORMATION TO ANYONE
+              </p>{" "}
+              <p
+                style={{ color: "#5b1c03", marginTop: 20, fontWeight: "bold" }}
+              >
+                IF YOU LOGIN OR SIGNUP YOU ARE ACCEPTING SEC2HAND TERMS &
+                CONDITIONS AND PRIVACY POLICY
+              </p>
             </React.Fragment>
           </Grid.Column>
         </Grid>
@@ -104,7 +123,6 @@ class LoginForm extends React.Component {
     );
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {
