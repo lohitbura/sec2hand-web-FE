@@ -134,8 +134,8 @@ export default function AboutUs() {
                           class="fa fa-map-marker"
                         ></i>
                         <h5>
-                          Startup cell, CS department, Near Ayyappa Temple,
-                          Ratanada, Jodhpur (Raj.) - 342001
+                          Manohar Building CYB -6 RIICO Cyber Park, near Saras
+                          Dairy, HI Area Phase II, Jodhpur, Rajasthan 342006
                         </h5>
                       </div>
                     </div>
