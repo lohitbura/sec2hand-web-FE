@@ -30,6 +30,7 @@ class LoginForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
     const { username } = this.state;
     this.props.login(username, this.props.history);
   };
@@ -41,6 +42,7 @@ class LoginForm extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     const { error, loading, token } = this.props;
     const { username, password } = this.state;
     if (token) {
@@ -57,7 +59,7 @@ class LoginForm extends React.Component {
             style={{
               maxWidth: 450,
               background: "#f6f6f6",
-              borderRadius: 40,
+              borderRadius: 10,
               height: 400,
             }}
           >

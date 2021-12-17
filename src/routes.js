@@ -33,6 +33,7 @@ import DealerPolicy from "./containers/dealer_policy";
 
 import CreateProductNew from "./containers/product/CreateProductNew";
 import SearchProductComponent from "./containers/product/SearchProduct";
+import DealerProperty from "./containers/DealerProperty";
 
 const BaseRouter = () => (
   <Hoc>
@@ -44,6 +45,7 @@ const BaseRouter = () => (
     <Route path="/review" component={Review} />
     <Route path="/dealer" component={Dealer} />
     <Route path="/profile" component={Profile} />
+
     {/* <Route path="/product-create" component={CreateProduct} /> */}
     <Route path="/product-create" component={CreateProductNew} />
     <Route path="/post-create" component={CreatePost} />
@@ -65,6 +67,10 @@ const BaseRouter = () => (
     <Route exact path="/donate" component={Donate} />
     <Route exact path="/blog/:id" component={BlogDetail} />
     <Route exact path="/dealer-policy" component={DealerPolicy} />
+
+    {/*======================= dealer property=================== */}
+    <Route exact path="/dealer-property" component={DealerProperty} />
+    {/*======================= dealer property=================== */}
   </Hoc>
 );
 

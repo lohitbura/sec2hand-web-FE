@@ -29,7 +29,7 @@ class Navigationbar extends React.Component {
 
     this.showSidebar = this.showSidebar.bind(this);
     this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    // this.handleClose = this.handleClose.bind(this);
     // this.useStyles=this.useStyles.bind(this);
 
     this.state = {
@@ -67,20 +67,13 @@ class Navigationbar extends React.Component {
   }
 
   handleShow() {
-    this.setState({
-      showModals: true,
-    });
-  }
-
-  handleClose() {
-    this.setState({
-      showModals: false,
-    });
+    this.setState((currentState) => ({
+      showModals: !currentState.showModals,
+    }));
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.token !== this.props.token) {
-      
       axios.get(getUserProfileIdURL, header()).then((res) => {
         this.setState({ username: res.data.user });
       });
@@ -93,13 +86,13 @@ class Navigationbar extends React.Component {
 
     return (
       <div>
-        <Modal show={showModals} onHide={this.handleClose}>
+        <Modal show={showModals} onHide={this.handleShow}>
           <Modal.Header closeButton>
             <Modal.Title>Login Yourself as</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
-              <div className="col-lg-12 col-md-12 col-sm-12 text-center">
+              <div className="col-lg-6 col-md-6 col-sm-6 text-center">
                 <Link
                   className="dropdown-item hidden"
                   to="/login"
@@ -110,6 +103,26 @@ class Navigationbar extends React.Component {
                     {" "}
                     <img
                       src="../../assets/images/customer1.png"
+                      style={{
+                        width: "150px",
+                        height: "150px",
+                        marginBottom: "20px",
+                      }}
+                    />
+                  </div>
+                </Link>
+              </div>
+              <div className="col-lg-6 col-md-6 col-sm-6 text-center">
+                <Link
+                  className="dropdown-item hidden"
+                  to="/dealer-login"
+                  onClick={this.handleShow}
+                >
+                  <div className="dealer"> Dealer </div>
+                  <div>
+                    {" "}
+                    <img
+                      src="../../assets/images/carDealer1.png"
                       style={{
                         width: "150px",
                         height: "150px",
@@ -191,9 +204,11 @@ class Navigationbar extends React.Component {
               <div style={{ display: "flex" }}>
                 <div style={{ marginRight: -20 }} className="hidden">
                   <a className="hidden">
-                    <Link to="/login">
-                      <Button varient="outlined">LOGIN</Button>
-                    </Link>
+                    {/* <Link to="/login"> */}
+                    <Button onClick={this.handleShow} varient="outlined">
+                      LOGIN
+                    </Button>
+                    {/* </Link> */}
                   </a>
                 </div>
               </div>
