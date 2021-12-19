@@ -3,6 +3,7 @@ import * as FaIcons from "react-icons/fa";
 
 import Button from "@material-ui/core/Button";
 import { styled, TextField } from "@material-ui/core";
+import DealerPropertyComponents from "./components/DealerPropertyComponents";
 
 const ColorButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#5b1c03",
@@ -85,14 +86,65 @@ function DealerProfile() {
             className="dealer_edit_input"
           />
           <label htmlFor="#dealer_Add">Address</label>
-          <input
-            type="text"
-            id="dealer_Add"
-            placeholder="Address"
-            className="dealer_edit_input"
-          />
+          <input type="text" id="dealer_Add" placeholder="Address" />
           <SaveButton variant="contained">Save</SaveButton>
         </form>
+      </div>
+      <div className="dealer_products_div">
+        <div className="dealer_product">
+          <DealerPropertyComponents
+            id="1"
+            name="product name"
+            price="350"
+            details="i am details"
+            image="../assets/images/product-2-370x270.jpg"
+          />
+        </div>
+        <div className="dealer_product">
+          <DealerPropertyComponents
+            id="1"
+            name="product name"
+            price="350"
+            details="i am details"
+            image="../assets/images/product-2-370x270.jpg"
+          />
+        </div>
+        <div className="dealer_product">
+          <DealerPropertyComponents
+            id="1"
+            name="product name"
+            price="350"
+            details="i am details"
+            image="../assets/images/product-2-370x270.jpg"
+          />
+        </div>
+        <div className="dealer_product">
+          <DealerPropertyComponents
+            id="1"
+            name="product name"
+            price="350"
+            details="i am details"
+            image="../assets/images/product-2-370x270.jpg"
+          />
+        </div>
+        <div className="dealer_product">
+          <DealerPropertyComponents
+            id="1"
+            name="product name"
+            price="350"
+            details="i am details"
+            image="../assets/images/product-2-370x270.jpg"
+          />
+        </div>
+        <div className="dealer_product">
+          <DealerPropertyComponents
+            id="1"
+            name="product name"
+            price="350"
+            details="i am details"
+            image="../assets/images/product-2-370x270.jpg"
+          />
+        </div>
       </div>
     </div>
   );

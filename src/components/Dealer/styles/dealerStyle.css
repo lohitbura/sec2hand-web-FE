@@ -24,13 +24,23 @@
   transition: all 0.5s ease-in-out;
   margin-left: -10%;
   height: 90vh;
+  overflow-y: scroll;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 411px) {
   .dealer_right_div_active {
     margin-left: -40%;
   }
 }
-
+@media screen and (max-width: 499px) and (min-width: 412px) {
+  .dealer_right_div_active {
+    margin-left: -35%;
+  }
+}
+@media screen and (max-width: 767px) and (min-width: 500px) {
+  .dealer_right_div_active {
+    margin-left: -25%;
+  }
+}
 .dealer_right_div {
   flex: 80%;
   height: 90vh;
@@ -156,11 +166,13 @@
 .dealer_profile_edit_div_hide {
   height: 0;
 }
-.dealer_profile_edit_div form {
+.dealer_profile_edit_div form,
+.dealer_sell_edit_div form {
   display: flex;
   flex-direction: column;
 }
-.dealer_profile_edit_div form label {
+.dealer_profile_edit_div form label,
+.dealer_sell_edit_div form label {
   margin: 1rem 0rem 0.4rem 0.6rem;
 }
 /* .dealer_profile_edit_div form {
@@ -175,6 +187,95 @@
 .dealer_edit_input::placeholder {
   color: #5b1c03bb;
 }
+
+.dealer_products_div {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding: 0.5rem;
+}
+.dealer_product {
+  flex: 30%;
+  margin: 1rem 1rem;
+  max-width: 30%;
+}
+@media only screen and (max-width: 1023px) {
+  .dealer_product {
+    flex: 45%;
+    max-width: 45%;
+    margin: 0.5rem;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .dealer_product {
+    flex: 90%;
+    max-width: 90%;
+    margin: 0.5rem;
+  }
+}
+.dealer_per_product {
+  border-radius: 10px;
+  color: #5b1c03;
+  box-shadow: 0px 0px 20px #d6700aaf;
+}
+.dealer_product_image_div {
+  width: 100%;
+  border-radius: 10px;
+}
+.dealer_product_image_div img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: contain;
+}
+.product_inner_div {
+  padding: 1rem;
+  font-size: 18px;
+  font-weight: 550;
+}
+.product_inner_div p {
+  color: #5b1c03;
+  font-size: 18px;
+}
 /* ======================================
        dealer profile page style end
+============================================ */
+
+/* ======================================
+       dealer sell page style start
+============================================ */
+.dealer_sell_main_div {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+.dealer_sell_edit_div {
+  font-size: 1.4rem;
+  font-weight: 550;
+  border-color: #5b1c03;
+  box-shadow: 0px 0px 20px #d6700aaf;
+  border-radius: 10px;
+  margin: 1rem auto;
+  padding: 1rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.increment_div {
+  display: flex;
+  font-size: 22px;
+  margin: 0 0.5rem;
+}
+.increment_div button {
+  font-size: 22px;
+  border: none;
+  outline: none;
+  padding: 0.4rem 1rem;
+  background-color: #5b1c03;
+  color: #fff;
+}
+
+/* ======================================
+       dealer sell page style end
 ============================================ */
