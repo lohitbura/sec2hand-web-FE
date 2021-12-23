@@ -167,13 +167,13 @@ class ProductDetail extends React.Component {
                       backgound: "black",
                     }}
                   >
-                    {product.images &&
-                      product.images.map((image) => {
+                    {product?.images &&
+                      product?.images?.map((image) => {
                         return (
-                          <Slide index={image.id}>
+                          <Slide index={image?.id}>
                             <ImageWithZoom
                               className="carouselImageProduct"
-                              src={`${URL}${image.image}`}
+                              src={`${URL}${image?.image}`}
                             />
                           </Slide>
                         );
@@ -194,18 +194,18 @@ class ProductDetail extends React.Component {
                     <div className="row basicDetails">
                       <div className="col-lg-12 col-md-12 text-center">
                         <div className="productName">
-                          <a>{product.brand} </a>
+                          <a>{product?.brand} </a>
                         </div>
                         <div>
                           <strong className="priceText">
-                            ₹{product.price}
+                            ₹{product?.price}
                           </strong>
                         </div>
                         <div className="productYear">
-                          <a>{product.year} Model </a>
+                          <a>{product?.year} Model </a>
                         </div>
                         <div className="productYear">
-                          <a>{product.km} km</a>
+                          <a>{product?.km} km</a>
                         </div>
                         <div className="productNo productNoHider">
                           8257361585

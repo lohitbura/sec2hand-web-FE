@@ -44,7 +44,7 @@ const BaseRouter = () => (
     <Route path="/dealer-signup" component={DealerSignup} />
     <Route path="/review" component={Review} />
     <Route path="/dealer" component={Dealer} />
-    <Route path="/profile" component={Profile} />
+    {/* <Route path="/profile" component={Profile} /> */}
 
     {/* <Route path="/product-create" component={CreateProduct} /> */}
     <Route path="/product-create" component={CreateProductNew} />
@@ -69,7 +69,8 @@ const BaseRouter = () => (
     <Route exact path="/dealer-policy" component={DealerPolicy} />
 
     {/*======================= dealer property=================== */}
-    <Route exact path="/dealer-property" component={DealerProperty} />
+    <Route path="/profile" component={DealerProperty} />
+    {/* <Route exact path="/dealer-property" component={DealerProperty} /> */}
     {/*======================= dealer property=================== */}
   </Hoc>
 );

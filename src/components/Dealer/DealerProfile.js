@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as FaIcons from "react-icons/fa";
 
 import Button from "@material-ui/core/Button";
 import { styled, TextField } from "@material-ui/core";
 import DealerPropertyComponents from "./components/DealerPropertyComponents";
+import { getUserProfileURL } from "../../store/constants";
+import { header } from "../../store/utility";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ColorButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#5b1c03",
@@ -24,16 +28,52 @@ const SaveButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-function DealerProfile() {
+function DealerProfile({ dealer }) {
   const [editDiv, setEditDiv] = useState(false);
+  const [userCat, setUserCat] = useState("user");
+  const [profile, setProfile] = useState({});
+  const [loader, setLoader] = useState(false);
 
+  const fetchProfile = () => {
+    const token = localStorage.getItem("token");
+    let headers;
+    if (token) {
+      headers = {
+        Authorization: `Token ${token}`,
+      };
+    } else {
+      headers = {};
+    }
+    setLoader(true);
+
+    axios
+      .get(getUserProfileURL(), header())
+      .then((res) => {
+        console.log("i am profile ", res);
+        setProfile(res.data);
+        setLoader(false);
+        localStorage.setItem("category", res.data.category);
+        setUserCat(res.data.category);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoader(false);
+      });
+  };
+
+  useEffect(() => {
+    setUserCat(localStorage.getItem("category"));
+    fetchProfile();
+    return () => {};
+  }, []);
+  console.log(userCat);
   return (
     <div className="dealer_profile_main_div">
       <div className="profile_pic_div">
         <div>
           <img
-            src="../assets/images/customer1.png"
-            alt="dealer profile"
+            src={profile?.image}
+            alt={profile?.user}
             className="profile_pic_image"
           />
         </div>
@@ -41,22 +81,30 @@ function DealerProfile() {
       <div className="dealer_profile_details_div">
         <div className="dealer_phone_div">
           <FaIcons.FaUserAlt className="dealer_phone_icon" />{" "}
-          <h2>Dealer Name</h2>
+          <h2>{profile?.user} </h2>
         </div>
 
         <div className="dealer_phone_div">
           <FaIcons.FaPhoneAlt className="dealer_phone_icon" />{" "}
-          <h2>Dealer phone</h2>
+          <h2> {profile?.phone} </h2>
         </div>
-        <div className="dealer_address_div">
-          <FaIcons.FaMapMarkerAlt className="dealer_phone_icon" />{" "}
-          <h3>Dealer Address</h3>
-        </div>
+        {dealer && (
+          <div className="dealer_address_div">
+            <FaIcons.FaMapMarkerAlt className="dealer_phone_icon" />{" "}
+            <h3> {profile?.address} </h3>
+          </div>
+        )}
+
         <div className="dealer_button_div">
           <FaIcons.FaEdit className="dealer_phone_icon" />{" "}
-          <ColorButton variant="contained" onClick={() => setEditDiv(!editDiv)}>
-            Edit Info
-          </ColorButton>
+          <Link to="/profile-edit">
+            <ColorButton
+              variant="contained"
+              // onClick={() => setEditDiv(!editDiv)}
+            >
+              Edit Info
+            </ColorButton>
+          </Link>
         </div>
       </div>
       <div
@@ -86,65 +134,30 @@ function DealerProfile() {
             className="dealer_edit_input"
           />
           <label htmlFor="#dealer_Add">Address</label>
-          <input type="text" id="dealer_Add" placeholder="Address" />
+          <input
+            type="text"
+            id="dealer_Add"
+            placeholder="Address"
+            className="dealer_edit_input"
+          />
           <SaveButton variant="contained">Save</SaveButton>
         </form>
       </div>
       <div className="dealer_products_div">
-        <div className="dealer_product">
-          <DealerPropertyComponents
-            id="1"
-            name="product name"
-            price="350"
-            details="i am details"
-            image="../assets/images/product-2-370x270.jpg"
-          />
-        </div>
-        <div className="dealer_product">
-          <DealerPropertyComponents
-            id="1"
-            name="product name"
-            price="350"
-            details="i am details"
-            image="../assets/images/product-2-370x270.jpg"
-          />
-        </div>
-        <div className="dealer_product">
-          <DealerPropertyComponents
-            id="1"
-            name="product name"
-            price="350"
-            details="i am details"
-            image="../assets/images/product-2-370x270.jpg"
-          />
-        </div>
-        <div className="dealer_product">
-          <DealerPropertyComponents
-            id="1"
-            name="product name"
-            price="350"
-            details="i am details"
-            image="../assets/images/product-2-370x270.jpg"
-          />
-        </div>
-        <div className="dealer_product">
-          <DealerPropertyComponents
-            id="1"
-            name="product name"
-            price="350"
-            details="i am details"
-            image="../assets/images/product-2-370x270.jpg"
-          />
-        </div>
-        <div className="dealer_product">
-          <DealerPropertyComponents
-            id="1"
-            name="product name"
-            price="350"
-            details="i am details"
-            image="../assets/images/product-2-370x270.jpg"
-          />
-        </div>
+        {userCat == "property" && dealer
+          ? profile?.products?.map((product) => (
+              <div className="dealer_product">
+                <DealerPropertyComponents
+                  id={product?.id}
+                  slug={product?.slug}
+                  name={product?.title}
+                  price={product?.price}
+                  details={product?.description}
+                  image={product?.images[0]?.image}
+                />
+              </div>
+            ))
+          : ""}
       </div>
     </div>
   );

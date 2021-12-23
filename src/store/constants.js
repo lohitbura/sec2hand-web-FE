@@ -33,7 +33,8 @@ export const postCommentListURl = `${endpoint}/post-comment-list`;
 export const dealerListURL = `${endpoint}/dealer-filter`;
 
 export const getUserProfileURL = (username) => `${endpoint}/profile`;
-export const getDealerProfileURL = (username) => `${endpoint}/profile?username=${username}`;
+export const getDealerProfileURL = (username) =>
+  `${endpoint}/profile?username=${username}`;
 export const getUserProfileIdURL = `${endpoint}/profile`;
 export const dealerProfileEditURL = `${endpoint}/profile-edit`;
 export const customerProfileEditURL = `${endpoint}/customer-profile-edit`;
@@ -61,3 +62,7 @@ export const createElectronicProductURL = `${endpoint}/electronic-product-create
 export const createPropertyProductURL = `${endpoint}/property-product-create`;
 export const createBookProductURL = `${endpoint}/book-product-create`;
 export const createFurnitureProductURL = `${endpoint}/furniture-product-create`;
+
+//pankaj verma new property url
+
+export const createNewPropertyUrl = `${endpoint}/product-create`;

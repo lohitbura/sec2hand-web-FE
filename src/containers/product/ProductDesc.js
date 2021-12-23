@@ -1,13 +1,34 @@
 import React, { useEffect, useState } from "react";
 import "./product.css";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import Rating from "@material-ui/lab/Rating";
+import { header } from "../../store/utility";
+import { productDetailURL } from "../../store/constants";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 function ProductDesc({ product, category, usernames }) {
   // const [screen, setScreen] = uSeState(initialState)
   var screenSize = parseFloat(product.screen_size).toFixed(2);
-
+  const history = useHistory();
+  const deleteProduct = (id) => {
+    let headers = {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    };
+    axios
+      .delete(productDetailURL(id), header())
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Product has been deleted!");
+        setTimeout(() => {
+          history.goBack();
+        }, 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const renderElements = () => {
     return (
       <div>
@@ -47,7 +68,9 @@ function ProductDesc({ product, category, usernames }) {
                     <div className="clearfix">
                       <span className="pull-left">Property Type</span>
 
-                      <strong className="pull-right">{product.property_type}</strong>
+                      <strong className="pull-right">
+                        {product.property_type}
+                      </strong>
                     </div>
                   </li>
                 ) : null}
@@ -74,7 +97,9 @@ function ProductDesc({ product, category, usernames }) {
                     <div className="clearfix">
                       <span className="pull-left">Furnishing</span>
 
-                      <strong className="pull-right">{product.furnishing}</strong>
+                      <strong className="pull-right">
+                        {product.furnishing}
+                      </strong>
                     </div>
                   </li>
                 ) : null}
@@ -83,7 +108,9 @@ function ProductDesc({ product, category, usernames }) {
                     <div className="clearfix">
                       <span className="pull-left">Construction status</span>
 
-                      <strong className="pull-right">{product.construction_status}</strong>
+                      <strong className="pull-right">
+                        {product.construction_status}
+                      </strong>
                     </div>
                   </li>
                 ) : null}
@@ -92,7 +119,9 @@ function ProductDesc({ product, category, usernames }) {
                     <div className="clearfix">
                       <span className="pull-left">Super area</span>
 
-                      <strong className="pull-right">{product.super_area}</strong>
+                      <strong className="pull-right">
+                        {product.super_area}
+                      </strong>
                     </div>
                   </li>
                 ) : null}
@@ -101,7 +130,9 @@ function ProductDesc({ product, category, usernames }) {
                     <div className="clearfix">
                       <span className="pull-left">Carpet area</span>
 
-                      <strong className="pull-right">{product.carpet_area}</strong>
+                      <strong className="pull-right">
+                        {product.carpet_area}
+                      </strong>
                     </div>
                   </li>
                 ) : null}
@@ -110,7 +141,9 @@ function ProductDesc({ product, category, usernames }) {
                     <div className="clearfix">
                       <span className="pull-left">Car parking</span>
 
-                      <strong className="pull-right">{product.car_parking}</strong>
+                      <strong className="pull-right">
+                        {product.car_parking}
+                      </strong>
                     </div>
                   </li>
                 ) : null}
@@ -119,7 +152,9 @@ function ProductDesc({ product, category, usernames }) {
                     <div className="clearfix">
                       <span className="pull-left">Car parking</span>
 
-                      <strong className="pull-right">{product.car_parking}</strong>
+                      <strong className="pull-right">
+                        {product.car_parking}
+                      </strong>
                     </div>
                   </li>
                 ) : null}
@@ -658,7 +693,7 @@ function ProductDesc({ product, category, usernames }) {
                   <div className="clearfix">
                     <span className="pull-left">Dealer profile</span>
                     {/* <Link to={`/profile/${product.user}`}> */}
-                      <strong className="pull-right">{product.user}</strong>
+                    <strong className="pull-right">{product.user}</strong>
                     {/* </Link> */}
                   </div>
                 </li>
@@ -671,7 +706,7 @@ function ProductDesc({ product, category, usernames }) {
                   <Button content="Edit" color="green" />
                 </Link>
                 <Button
-                  onClick={() => this.deleteProduct(product.slug)}
+                  onClick={() => deleteProduct(product.slug)}
                   content="Delete"
                   color="red"
                 />

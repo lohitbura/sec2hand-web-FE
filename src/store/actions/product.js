@@ -85,6 +85,7 @@ export const createNewProductAPI = async (type, data) => {
   try {
     let response = await axios.post(fetchProductUrl(type), data, header());
     if (response.status == 201) {
+      console.log(response);
       toast.success("Product submit");
     }
   } catch (err) {
