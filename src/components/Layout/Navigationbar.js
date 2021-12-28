@@ -204,11 +204,9 @@ class Navigationbar extends React.Component {
               <div style={{ display: "flex" }}>
                 <div style={{ marginRight: -20 }} className="hidden">
                   <a className="hidden">
-                    {/* <Link to="/login"> */}
-                    <Button onClick={this.handleShow} varient="outlined">
-                      LOGIN
-                    </Button>
-                    {/* </Link> */}
+                    <Link to="/login">
+                      <Button varient="outlined">LOGIN</Button>
+                    </Link>
                   </a>
                 </div>
               </div>

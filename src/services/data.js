@@ -1,4 +1,4 @@
-export const PRIMARY_COLOR = '#e6b05b'
+export const PRIMARY_COLOR = "#e6b05b";
 
 export const CATEGORY_TYPE = [
   {
@@ -152,5 +152,5 @@ export const PROCESSOR_TYPE = [
   "intel i9",
   "intel celeron",
   "intel dual core",
-  "Ryzen"
+  "Ryzen",
 ];
