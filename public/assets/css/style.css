@@ -1491,14 +1491,14 @@ footer .inner-content p a {
   .smallWidth {
     width: 223px;
   }
-
+  /* 
   .bannerPadding {
     padding: 14% 9% !important;
   }
 
   .bannerImageWidth {
     width: 80% !important;
-  }
+  } */
 
   .MuiInputBase-root {
     width: 223px !important;
